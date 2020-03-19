@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(schema = "LOZM", name = "USER")
-public class User {
+public class User extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "USER_ID")

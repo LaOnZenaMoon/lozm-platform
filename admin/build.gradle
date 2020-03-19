@@ -30,7 +30,7 @@ ext {
 }
 
 dependencies {
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.hateoas:spring-hateoas'
     // QueryDSL
@@ -39,7 +39,9 @@ dependencies {
 
     compile files('src/libs/ojdbc6.jar')
 
-    compileOnly 'org.projectlombok:lombok'
+//    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'

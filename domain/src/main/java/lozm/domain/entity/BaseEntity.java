@@ -19,4 +19,7 @@ public class BaseEntity {
     @Column(name = "MODIFY_BY")
     private String modifiedBy;
 
+    @Column(name = "FLAG")
+    private int flag;
+
 }

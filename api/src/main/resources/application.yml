@@ -10,14 +10,12 @@ spring:
     jpa:
         database-platform: org.hibernate.dialect.Oracle10gDialect
         hibernate:
-            ddl-auto: none
+            ddl-auto: create
         properties:
             hibernate:
                 jdbc:
                     batch_size: 100
                     order_inserts: true
-
-#                default_batch_fetch_size: 100
             format_sql: true
         show-sql: true
 

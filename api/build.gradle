@@ -1,0 +1,25 @@
+bootJar { enabled = true }
+jar { enabled = true }
+
+dependencies {
+//    compile project(':core')
+//    compile project(':domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.hateoas:spring-hateoas'
+    // QueryDSL
+    implementation("com.querydsl:querydsl-jpa")
+    implementation("com.querydsl:querydsl-apt")
+
+    compile files('src/libs/ojdbc6.jar')
+
+//        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // Spring REST Docs
+    testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
+}

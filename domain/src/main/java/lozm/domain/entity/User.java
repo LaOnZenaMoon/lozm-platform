@@ -1,12 +1,13 @@
 package lozm.domain.entity;
 
 import lombok.Getter;
+import lozm.domain.code.UserType;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-@Table(schema = "LOZM", name = "USER")
+@Table(schema = "LOZM", name = "USERS")
 public class User extends BaseEntity {
 
     @Id @GeneratedValue
@@ -21,5 +22,8 @@ public class User extends BaseEntity {
 
     @Column(name = "PASSWORD")
     private String password;
+
+    @Column(name = "TYPE")
+    private UserType type;
 
 }

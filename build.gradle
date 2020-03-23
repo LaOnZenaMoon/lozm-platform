@@ -44,6 +44,24 @@ subprojects {
     dependencies {
         implementation 'org.projectlombok:lombok'
 
-        testCompile group: 'junit', name: 'junit', version: '4.12'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+        //testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+}
+
+project(':api') {
+    dependencies {
+        compile project(':core')
+        compile project(':domain')
+    }
+
+}
+
+project(':domain') {
+    dependencies {
+        compile project(':core')
     }
 }

@@ -43,6 +43,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public void update(PutUserDto.Request reqDto) throws Exception {
         Optional<User> findUser = userRepository.findById(reqDto.getId());
         findUser.orElseThrow(() -> new NoSuchElementException());

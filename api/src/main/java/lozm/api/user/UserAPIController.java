@@ -41,6 +41,7 @@ public class UserAPIController {
             userService.save(reqDto);
             resDto.setSuccess(true);
         } catch (Exception e) {
+            e.printStackTrace();
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
         }

@@ -11,10 +11,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT U FROM User U WHERE U.identifier = :identifier AND U.name = :name")
-    List<User> findByIdentifier(
-            @Param("identifier") String identifier,
-            @Param("name") String name
-    );
+    @Query("SELECT U FROM User U WHERE U.identifier = :identifier")
+    List<User> findByIdentifier(@Param("identifier") String identifier);
 
 }

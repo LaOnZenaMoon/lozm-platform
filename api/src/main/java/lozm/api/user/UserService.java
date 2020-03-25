@@ -34,7 +34,10 @@ public class UserService {
         User user = new User();
         user.insertUser(reqDto);
 
-        userRepository.save(user);
+        List<User> findUsers = userRepository.findByIdentifier(user.getIdentifier(), user.getName());
+        if(findUsers.isEmpty()) userRepository.save(user);
+
+        throw new Exception();
     }
 
     public void update(PutUserDto.Request reqDto) throws Exception {

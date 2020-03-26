@@ -27,7 +27,7 @@ public class UserService {
         List<User> userList = userRepository.findAll();
 
         return userList.stream()
-                .map(u -> new GetUserDto.Response())
+                .map(u -> new GetUserDto.Response(u.getName(), u.getIdentifier(), u.getType()))
                 .collect(Collectors.toList());
     }
 
@@ -46,7 +46,7 @@ public class UserService {
     @Transactional
     public void update(PutUserDto.Request reqDto) throws Exception {
         Optional<User> findUser = userRepository.findById(reqDto.getId());
-        findUser.orElseThrow(() -> new NoSuchElementException());
+        findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
         findUser.get().updateUser(reqDto);
     }
 

@@ -3,7 +3,7 @@ package lozm.domain.entity;
 import lombok.Getter;
 import lozm.core.dto.PostUserDto;
 import lozm.core.dto.PutUserDto;
-import lozm.core.code.UserType;
+import lozm.core.dto.UserType;
 
 import javax.persistence.*;
 
@@ -32,6 +32,7 @@ public class User extends BaseEntity {
         this.name = postUserDto.getName();
         this.identifier = postUserDto.getIdentifier();
         this.password = postUserDto.getPassword();
+        this.type = postUserDto.getType();
     }
 
     public void updateUser(PutUserDto.Request putUserDto) {

@@ -51,11 +51,12 @@ public class UserAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putUser(@RequestBody PutUserDto.Request reqDto) {
+    public APIResponseDto putUser(@RequestBody @Valid PutUserDto.Request reqDto) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
             userService.update(reqDto);
+            resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());

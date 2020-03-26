@@ -19,7 +19,7 @@ public class PostUserDto {
         private String password;
 
         @NotEmpty
-        private UserType type;
+        private String type;
     }
 
     @Getter

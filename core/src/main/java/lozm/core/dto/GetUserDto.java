@@ -2,6 +2,7 @@ package lozm.core.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lozm.core.code.UserType;
 
 
 public class GetUserDto {

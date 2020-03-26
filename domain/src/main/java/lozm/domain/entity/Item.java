@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Table(schema = "LOZM", name = "ITEM")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "type")
 public class Item extends BaseEntity {
 
     @Id @GeneratedValue

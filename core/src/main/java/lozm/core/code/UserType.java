@@ -1,4 +1,4 @@
-package lozm.domain.code;
+package lozm.core.code;
 
 public enum UserType {
     ADMIN

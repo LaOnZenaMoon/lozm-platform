@@ -3,6 +3,7 @@ package lozm.core.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+
 public class GetUserDto {
 
     @Getter
@@ -13,7 +14,9 @@ public class GetUserDto {
     @Getter
     @Setter
     public static class Response {
-
+        private String name;
+        private String identifier;
+//        private UserType type;
     }
 
 }

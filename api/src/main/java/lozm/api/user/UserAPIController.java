@@ -7,6 +7,7 @@ import lozm.core.dto.PostUserDto;
 import lozm.core.dto.PutUserDto;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "/api/user")
@@ -34,7 +35,7 @@ public class UserAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postUser(@RequestBody PostUserDto.Request reqDto) {
+    public APIResponseDto postUser(@RequestBody @Valid PostUserDto.Request reqDto) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {

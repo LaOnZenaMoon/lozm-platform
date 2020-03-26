@@ -6,6 +6,7 @@ import lozm.core.dto.PutUserDto;
 import lozm.core.code.UserType;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +28,10 @@ public class User extends BaseEntity {
 
     @Column(name = "TYPE")
     private UserType type;
+
+    @OneToMany(mappedBy = "user")
+    private List<Orders> orders;
+
 
     public void insertUser(PostUserDto.Request postUserDto) {
         this.name = postUserDto.getName();

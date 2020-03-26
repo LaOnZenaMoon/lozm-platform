@@ -14,13 +14,13 @@ public class BaseEntity {
     private LocalDateTime createdDt = LocalDateTime.now();
 
     @Column(name = "MODIFIED_DT")
-    private LocalDateTime modifiedDt = LocalDateTime.now();
+    private LocalDateTime modifiedDt;
 
     @Column(name = "CREATED_BY")
     private String createdBy = UserType.API_SYSTEM.toString();
 
     @Column(name = "MODIFY_BY")
-    private String modifiedBy = UserType.API_SYSTEM.toString();
+    private String modifiedBy;
 
     @Column(name = "FLAG")
     private int flag = 1;

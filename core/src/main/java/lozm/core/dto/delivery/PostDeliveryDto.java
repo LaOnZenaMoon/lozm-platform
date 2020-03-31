@@ -25,7 +25,7 @@ public class PostDeliveryDto {
 
         private String etc;
 
-        private DeliveryStatus status;
+        private String status;
     }
 
     @Getter

@@ -29,13 +29,39 @@ GRANT UNLIMITED TABLESPACE TO SYSTEM;
 	"name": "검정 더블코트",
 	"price": 140000,
 	"quantity": 10,
-	"type": "OUTER"
+	"type": "OUTER",
+    "contents": "겨울코트",
+    "size": "M"
 }
 
 {
 	"name": "베이지 싱글코트",
 	"price": 90000,
 	"quantity": 5,
-	"type": "OUTER"
+	"type": "OUTER",
+	"contents": "겨울코트",
+	"size": "L"
 }
+### PUT
+
+## 3. Delivery
+### POST
+{
+	"country": "South Korea",
+	"zipCode": "144250",
+	"city": "Seoul",
+	"street": "Jangmunro 45 gil",
+	"etc": "303",
+	"status": ""
+}
+
+{
+	"country": "USA",
+	"zipCode": "552982",
+	"city": "LA",
+	"street": "South Hamton",
+	"etc": "",
+	"status": ""
+}
+
 ### PUT

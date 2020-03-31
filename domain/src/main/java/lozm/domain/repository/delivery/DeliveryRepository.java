@@ -1,4 +1,4 @@
-package lozm.domain.repository;
+package lozm.domain.repository.delivery;
 
 import lozm.domain.entity.Delivery;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -7,7 +7,7 @@ import lozm.core.dto.delivery.PostDeliveryDto;
 import lozm.core.dto.delivery.PutDeliveryDto;
 import lozm.core.exception.APIException;
 import lozm.domain.entity.Delivery;
-import lozm.domain.repository.DeliveryRepository;
+import lozm.domain.repository.delivery.DeliveryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

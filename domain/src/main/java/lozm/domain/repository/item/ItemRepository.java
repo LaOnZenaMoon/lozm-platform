@@ -1,5 +1,6 @@
-package lozm.domain.repository;
+package lozm.domain.repository.item;
 
+import lozm.domain.entity.Item;
 import lozm.domain.entity.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,9 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface OrdersRepository extends JpaRepository<Orders, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    @Query("SELECT O FROM Orders O JOIN FETCH O.user")
-    List<Orders> findAllByUserId();
+
 
 }

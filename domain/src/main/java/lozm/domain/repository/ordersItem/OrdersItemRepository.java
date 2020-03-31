@@ -1,4 +1,4 @@
-package lozm.domain.repository;
+package lozm.domain.repository.ordersItem;
 
 import lozm.domain.entity.OrdersItem;
 import org.springframework.data.jpa.repository.JpaRepository;

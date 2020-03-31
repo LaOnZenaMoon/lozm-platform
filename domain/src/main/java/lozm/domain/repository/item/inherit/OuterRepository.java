@@ -1,4 +1,4 @@
-package lozm.domain.repository;
+package lozm.domain.repository.item.inherit;
 
 import lozm.domain.entity.inheritance.Outer;
 import org.springframework.data.jpa.repository.JpaRepository;

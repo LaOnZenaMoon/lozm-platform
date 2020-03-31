@@ -28,4 +28,12 @@ public class OrdersItem extends BaseEntity {
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
+
+    public void insertOrdersItem(Long orderedPrice, int count, Orders orders, Item item) {
+        this.orderedPrice = orderedPrice;
+        this.count = count;
+        this.orders = orders;
+        this.item = item;
+    }
+
 }

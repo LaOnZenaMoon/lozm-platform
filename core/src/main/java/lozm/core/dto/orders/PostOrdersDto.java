@@ -9,14 +9,18 @@ public class PostOrdersDto {
 
     @Getter
     public static class Request {
-        @NotEmpty
-        private String userId;
+        private Long orderedPrice;
+
+        private int count;
 
         @NotEmpty
-        private String itemId;
+        private Long userId;
 
         @NotEmpty
-        private String deliveryId;
+        private Long itemId;
+
+        @NotEmpty
+        private Long deliveryId;
     }
 
     @Getter

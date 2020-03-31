@@ -1,12 +1,16 @@
 package lozm.api.orders;
 
 import lombok.RequiredArgsConstructor;
+import lozm.core.dto.APIResponseDto;
 import lozm.core.dto.orders.GetOrdersDto;
 import lozm.core.dto.orders.PostOrdersDto;
 import lozm.core.dto.orders.PutOrdersDto;
 import lozm.core.exception.APIException;
-import lozm.domain.entity.Orders;
+import lozm.domain.entity.*;
+import lozm.domain.repository.DeliveryRepository;
+import lozm.domain.repository.ItemRepository;
 import lozm.domain.repository.OrdersRepository;
+import lozm.domain.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +25,9 @@ import static java.util.stream.Collectors.toList;
 public class OrdersService {
 
     private final OrdersRepository ordersRepository;
+    private final DeliveryRepository deliveryRepository;
+    private final ItemRepository itemRepository;
+    private final UserRepository userRepository;
 
 
     public List<GetOrdersDto.Response> findAllOrders() {
@@ -32,12 +39,22 @@ public class OrdersService {
 
     @Transactional
     public void save(PostOrdersDto.Request reqDto) throws Exception {
-        Orders orders = new Orders();
-        orders.insertOrders(reqDto);
-
         //TODO Orders 연관 엔티티 삽입 로직 추가
+        Orders orders = new Orders();
 
+        Optional<User> findUser = userRepository.findById(reqDto.getUserId());
+        findUser.orElseThrow(() -> new APIException("ORDERS_SAVE_USER", "User doesn't exist."));
 
+        Optional<Item> findItem = itemRepository.findById(reqDto.getItemId());
+        findItem.orElseThrow(() -> new APIException("ORDERS_SAVE_ITEM", "Item doesn't exist."));
+
+        Optional<Delivery> findDelivery = deliveryRepository.findById(reqDto.getDeliveryId());
+        findDelivery.orElseThrow(() -> new APIException("ORDERS_SAVE_DELI", "Delivery doesn't exist."));
+
+        orders.insertOrders(reqDto, findUser.get(), findDelivery.get());
+
+        OrdersItem ordersItem = new OrdersItem();
+        ordersItem.insertOrdersItem(reqDto.getOrderedPrice(), reqDto.getCount(), orders, findItem.get());
     }
 
     @Transactional

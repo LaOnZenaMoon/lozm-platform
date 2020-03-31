@@ -4,14 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lozm.core.dto.item.GetItemDto;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
-import lozm.core.dto.orders.GetOrdersDto;
-import lozm.core.dto.orders.PostOrdersDto;
-import lozm.core.dto.orders.PutOrdersDto;
 import lozm.core.exception.APIException;
 import lozm.domain.entity.Item;
-import lozm.domain.entity.Orders;
 import lozm.domain.repository.ItemRepository;
-import lozm.domain.repository.OrdersRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +34,8 @@ public class ItemService {
     public void save(PostItemDto.Request reqDto) throws Exception {
         Item item = new Item();
         item.insertItem(reqDto);
+
+        //TODO @Inheritance 분기 처리 추가 필요.
     }
 
     @Transactional

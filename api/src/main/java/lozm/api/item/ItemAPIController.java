@@ -5,9 +5,6 @@ import lozm.core.dto.APIResponseDto;
 import lozm.core.dto.item.GetItemDto;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
-import lozm.core.dto.orders.GetOrdersDto;
-import lozm.core.dto.orders.PostOrdersDto;
-import lozm.core.dto.orders.PutOrdersDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

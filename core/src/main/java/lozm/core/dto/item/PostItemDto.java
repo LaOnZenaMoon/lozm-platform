@@ -18,6 +18,9 @@ public class PostItemDto {
 
         @NotNull
         private Long quantity;
+
+        @NotEmpty
+        private String type;
     }
 
     @Getter

@@ -24,10 +24,18 @@ public class DeliveryService {
     private final DeliveryRepository DeliveryRepository;
 
 
-    public List<GetDeliveryDto.Response> findAllDeliverys() {
-        List<Delivery> DeliveryList = DeliveryRepository.findAll();
+    public List<GetDeliveryDto.Response> findAllDeliveries() {
+        List<Delivery> deliveryList = DeliveryRepository.findAll();
 
-        return DeliveryList.stream().map(o -> new GetDeliveryDto.Response(o.getId(), o.getName(), o.getPrice(), o.getQuantity()))
+        return deliveryList.stream().map(d -> new GetDeliveryDto.Response(
+                    d.getId(),
+                    d.getStatus(),
+                    d.getAddress().getCountry(),
+                    d.getAddress().getZipCode(),
+                    d.getAddress().getCity(),
+                    d.getAddress().getStreet(),
+                    d.getAddress().getEtc()
+                ))
                 .collect(toList());
     }
 
@@ -40,7 +48,7 @@ public class DeliveryService {
     @Transactional
     public void update(PutDeliveryDto.Request reqDto) throws Exception {
         Optional<Delivery> findDelivery = DeliveryRepository.findById(reqDto.getId());
-        findDelivery.orElseThrow(() -> new APIException("Delivery_0002", "Delivery doesn't exist."));
+        findDelivery.orElseThrow(() -> new APIException("DELIVERY_0002", "Delivery doesn't exist."));
         findDelivery.get().updateDelivery(reqDto);
     }
     

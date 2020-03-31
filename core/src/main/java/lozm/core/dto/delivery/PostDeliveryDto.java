@@ -2,6 +2,7 @@ package lozm.core.dto.delivery;
 
 import lombok.Getter;
 import lombok.Setter;
+import lozm.core.code.DeliveryStatus;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,16 +12,20 @@ public class PostDeliveryDto {
     @Getter
     public static class Request {
         @NotEmpty
-        private String name;
-
-        @NotNull
-        private Long price;
-
-        @NotNull
-        private Long quantity;
+        private String country;
 
         @NotEmpty
-        private String type;
+        private String zipCode;
+
+        @NotEmpty
+        private String city;
+
+        @NotEmpty
+        private String street;
+
+        private String etc;
+
+        private DeliveryStatus status;
     }
 
     @Getter

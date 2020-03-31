@@ -2,6 +2,7 @@ package lozm.core.dto.item;
 
 import lombok.Getter;
 import lombok.Setter;
+import lozm.core.code.ItemType;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,12 @@ public class PostItemDto {
 
         @NotEmpty
         private String type;
+
+        @NotEmpty
+        private String contents;
+
+        @NotEmpty
+        private String size;
     }
 
     @Getter

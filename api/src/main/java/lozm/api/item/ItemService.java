@@ -7,7 +7,12 @@ import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
 import lozm.core.exception.APIException;
 import lozm.domain.entity.Item;
+import lozm.domain.entity.inheritance.Bottom;
+import lozm.domain.entity.inheritance.Outer;
+import lozm.domain.entity.inheritance.Shoes;
+import lozm.domain.entity.inheritance.Top;
 import lozm.domain.repository.ItemRepository;
+import lozm.domain.repository.OuterRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +27,7 @@ import static java.util.stream.Collectors.toList;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final OuterRepository outerRepository;
 
 
     public List<GetItemDto.Response> findAllItems() {
@@ -34,24 +40,31 @@ public class ItemService {
     @Transactional
     public void save(PostItemDto.Request reqDto) throws Exception {
         //TODO @Inheritance 분기 처리 추가 필요.
-
         String itemType = reqDto.getType();
-        if(ItemType.OUTER.equals(itemType)) {
-
-        } else if(ItemType.TOP.equals(itemType)) {
-
-        } else if(ItemType.BOTTOM.equals(itemType)) {
-
-        } else if(ItemType.SHOES.equals(itemType)) {
-
+        if(ItemType.OUTER.toString().equals(itemType)) {
+            Outer outer = new Outer();
+            outer.insertOuter(reqDto);
+            outerRepository.save(outer);
+        } else if(ItemType.TOP.toString().equals(itemType)) {
+            Top top = new Top();
+            top.insertTop(reqDto);
+            itemRepository.save(top);
+        } else if(ItemType.BOTTOM.toString().equals(itemType)) {
+            Bottom bottom = new Bottom();
+            bottom.insertBottom(reqDto);
+            itemRepository.save(bottom);
+        } else if(ItemType.SHOES.toString().equals(itemType)) {
+            Shoes shoes = new Shoes();
+            shoes.insertShoes(reqDto);
+            itemRepository.save(shoes);
         } else {
             throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
         }
 
-        Item item = new Item();
-        item.insertItem(reqDto);
-
-        itemRepository.save(item);
+//        Item item = new Item();
+//        item.insertItem(reqDto);
+//
+//        itemRepository.save(item);
     }
 
     @Transactional

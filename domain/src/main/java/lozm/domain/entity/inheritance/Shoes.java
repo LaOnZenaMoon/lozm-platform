@@ -11,13 +11,13 @@ import javax.persistence.Entity;
 
 @Entity
 @Getter
-@DiscriminatorValue("OUTER")
-public class Outer extends Item {
+@DiscriminatorValue("SHOES")
+public class Shoes extends Item {
 
     @Embedded
     private Clothing clothing;
 
-    public void insertOuter(PostItemDto.Request reqDto) {
+    public void insertShoes(PostItemDto.Request reqDto) {
         insertItem(reqDto);
         clothing = new Clothing();
         clothing.setClothing(reqDto.getContents(), reqDto.getSize());

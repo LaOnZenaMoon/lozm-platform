@@ -1,5 +1,7 @@
 package lozm.domain.entity.inheritance;
 
+import lombok.Getter;
+import lozm.core.dto.item.PostItemDto;
 import lozm.domain.entity.Item;
 import lozm.domain.entity.embedded.Clothing;
 
@@ -8,10 +10,17 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("OUTER")
+@Getter
+@DiscriminatorValue("BOTTOM")
 public class Bottom extends Item {
 
     @Embedded
     private Clothing clothing;
+
+    public void insertBottom(PostItemDto.Request reqDto) {
+        insertItem(reqDto);
+        clothing = new Clothing();
+        clothing.setClothing(reqDto.getContents(), reqDto.getSize());
+    }
 
 }

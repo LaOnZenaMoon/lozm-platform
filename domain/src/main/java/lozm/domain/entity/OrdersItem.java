@@ -17,8 +17,8 @@ public class OrdersItem extends BaseEntity {
     @Column(name = "ORDERED_PRICE")
     private Long orderedPrice;
 
-    @Column(name = "COUNT")
-    private int count;
+    @Column(name = "QUANTITY")
+    private Long quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDERS_ID")
@@ -29,9 +29,9 @@ public class OrdersItem extends BaseEntity {
     private Item item;
 
 
-    public void insertOrdersItem(Long orderedPrice, int count, Orders orders, Item item) {
+    public void insertOrdersItem(Long orderedPrice, Long quantity, Orders orders, Item item) {
         this.orderedPrice = orderedPrice;
-        this.count = count;
+        this.quantity = quantity;
         this.orders = orders;
         this.item = item;
     }

@@ -3,24 +3,23 @@ package lozm.core.dto.orders;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class PostOrdersDto {
 
     @Getter
     public static class Request {
+        @NotNull
         private Long orderedPrice;
 
-        private int count;
+        @NotNull
+        private Long quantity;
 
-        @NotEmpty
+        @NotNull
         private Long userId;
 
-        @NotEmpty
+        @NotNull
         private Long itemId;
-
-        @NotEmpty
-        private Long deliveryId;
     }
 
     @Getter

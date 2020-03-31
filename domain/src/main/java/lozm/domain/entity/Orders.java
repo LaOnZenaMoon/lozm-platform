@@ -35,11 +35,11 @@ public class Orders extends BaseEntity {
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    public void insertOrders(PostOrdersDto.Request reqDto, User user, Delivery delivery) {
+    public void insertOrders(PostOrdersDto.Request reqDto, User user) {
         this.orderDt = LocalDateTime.now();
         this.status = OrderStatus.PREPARATION;
         this.user = user;
-        this.delivery = delivery;
+//        this.delivery = delivery;
     }
 
     public void updateOrders(PutOrdersDto.Request reqDto) {

@@ -3,6 +3,7 @@ package lozm.domain.entity;
 import lombok.Getter;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
+import lozm.core.exception.APIException;
 
 import javax.persistence.*;
 
@@ -37,6 +38,11 @@ public class Item extends BaseEntity {
         this.price = reqDto.getPrice();
         this.quantity = reqDto.getQuantity();
         this.setBaseEntity("", 1);
+    }
+
+    public void decreaseItemQuantity(Long quantity) throws Exception {
+        this.quantity -= 1;
+        if(this.quantity < 0) throw new APIException("ORDERS_SAVE_ITEM_NO_QUANTITY", "Item quantity is insufficient.");
     }
 
 }

@@ -33,17 +33,17 @@ public class User extends BaseEntity {
     private List<Orders> orders;
 
 
-    public void insertUser(PostUserDto.Request postUserDto) {
-        this.name = postUserDto.getName();
-        this.identifier = postUserDto.getIdentifier();
-        this.password = postUserDto.getPassword();
-        this.type = UserType.valueOf(postUserDto.getType());
+    public void insertUser(PostUserDto.Request reqDto) {
+        this.name = reqDto.getName();
+        this.identifier = reqDto.getIdentifier();
+        this.password = reqDto.getPassword();
+        this.type = UserType.valueOf(reqDto.getType());
     }
 
-    public void updateUser(PutUserDto.Request putUserDto) {
-        this.name = putUserDto.getName();
-        this.password = putUserDto.getPassword();
-        this.setBaseEntity("", 1);
+    public void updateUser(PutUserDto.Request reqDto) {
+        this.name = reqDto.getName();
+        this.password = reqDto.getPassword();
+        this.setBaseEntity("", reqDto.getFlag());
     }
 
 }

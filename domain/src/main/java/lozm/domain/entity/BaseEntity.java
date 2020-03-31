@@ -28,7 +28,7 @@ public class BaseEntity {
     public void setBaseEntity(String modifiedBy, int flag) {
         this.modifiedDt = LocalDateTime.now();
         this.modifiedBy = StringUtils.isEmpty(modifiedBy) ? UserType.API_SYSTEM.toString() : modifiedBy;
-        this.flag = flag;
+        if(!StringUtils.isEmpty(flag)) this.flag = flag;
     }
 
 }

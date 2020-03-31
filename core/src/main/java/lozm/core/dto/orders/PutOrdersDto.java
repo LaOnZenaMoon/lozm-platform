@@ -16,6 +16,8 @@ public class PutOrdersDto {
 
         @NotEmpty
         private OrderStatus status;
+
+        private int flag;
     }
 
     @Getter

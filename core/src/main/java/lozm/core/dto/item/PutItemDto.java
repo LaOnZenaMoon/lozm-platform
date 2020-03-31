@@ -19,6 +19,8 @@ public class PutItemDto {
         private Long price;
 
         private Long quantity;
+
+        private int flag;
     }
 
     @Getter

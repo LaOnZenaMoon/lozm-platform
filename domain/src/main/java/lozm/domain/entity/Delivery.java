@@ -47,6 +47,6 @@ public class Delivery extends BaseEntity {
                 reqDto.getEtc()
         );
         this.status = reqDto.getStatus();
-        this.setBaseEntity("", 1);
+        this.setBaseEntity("", reqDto.getFlag());
     }
 }

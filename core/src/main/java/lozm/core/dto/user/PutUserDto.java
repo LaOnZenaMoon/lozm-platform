@@ -16,6 +16,8 @@ public class PutUserDto {
         private String name;
 
         private String password;
+
+        private int flag;
     }
 
     @Getter

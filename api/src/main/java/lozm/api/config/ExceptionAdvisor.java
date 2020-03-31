@@ -20,9 +20,9 @@ public class ExceptionAdvisor {
         for (FieldError fieldError : bindingResult.getFieldErrors()) {
             builder.append("[");
             builder.append(fieldError.getField());
-            builder.append("](은)는 ");
+            builder.append("] => ");
             builder.append(fieldError.getDefaultMessage());
-            builder.append(" 입력된 값: [");
+            builder.append(" Entered value : [");
             builder.append(fieldError.getRejectedValue());
             builder.append("]");
         }

@@ -43,6 +43,6 @@ public class Orders extends BaseEntity {
 
     public void updateOrders(PutOrdersDto.Request reqDto) {
         this.status = reqDto.getStatus();
-        this.setBaseEntity("", 1);
+        this.setBaseEntity("", reqDto.getFlag());
     }
 }

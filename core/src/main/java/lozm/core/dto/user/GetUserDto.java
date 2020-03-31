@@ -15,11 +15,13 @@ public class GetUserDto {
     @Getter
     @Setter
     public static class Response {
+        private Long id;
         private String name;
         private String identifier;
         private UserType type;
 
-        public Response(String name, String identifier, UserType type) {
+        public Response(Long id, String name, String identifier, UserType type) {
+            this.id = id;
             this.name = name;
             this.identifier = identifier;
             this.type = type;

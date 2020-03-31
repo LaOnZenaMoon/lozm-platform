@@ -26,7 +26,7 @@ public class UserService {
         List<User> userList = userRepository.findAll();
 
         return userList.stream()
-                .map(u -> new GetUserDto.Response(u.getName(), u.getIdentifier(), u.getType()))
+                .map(u -> new GetUserDto.Response(u.getId(), u.getName(), u.getIdentifier(), u.getType()))
                 .collect(Collectors.toList());
     }
 

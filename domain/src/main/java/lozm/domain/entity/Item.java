@@ -3,8 +3,6 @@ package lozm.domain.entity;
 import lombok.Getter;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
-import lozm.core.dto.orders.PostOrdersDto;
-import lozm.core.dto.orders.PutOrdersDto;
 
 import javax.persistence.*;
 

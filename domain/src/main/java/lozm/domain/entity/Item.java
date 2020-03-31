@@ -1,6 +1,10 @@
 package lozm.domain.entity;
 
 import lombok.Getter;
+import lozm.core.dto.item.PostItemDto;
+import lozm.core.dto.item.PutItemDto;
+import lozm.core.dto.orders.PostOrdersDto;
+import lozm.core.dto.orders.PutOrdersDto;
 
 import javax.persistence.*;
 
@@ -23,5 +27,18 @@ public class Item extends BaseEntity {
 
     @Column(name = "QUANTITY")
     private Long quantity;
+
+    public void insertItem(PostItemDto.Request reqDto) {
+        this.name = reqDto.getName();
+        this.price = reqDto.getPrice();
+        this.quantity = reqDto.getQuantity();
+    }
+
+    public void updateItem(PutItemDto.Request reqDto) {
+        this.name = reqDto.getName();
+        this.price = reqDto.getPrice();
+        this.quantity = reqDto.getQuantity();
+        this.setBaseEntity("", 1);
+    }
 
 }

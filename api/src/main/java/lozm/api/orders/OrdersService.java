@@ -7,10 +7,7 @@ import lozm.core.dto.orders.PostOrdersDto;
 import lozm.core.dto.orders.PutOrdersDto;
 import lozm.core.exception.APIException;
 import lozm.domain.entity.*;
-import lozm.domain.repository.DeliveryRepository;
-import lozm.domain.repository.ItemRepository;
-import lozm.domain.repository.OrdersRepository;
-import lozm.domain.repository.UserRepository;
+import lozm.domain.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +25,7 @@ public class OrdersService {
     private final DeliveryRepository deliveryRepository;
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
+    private final OrdersItemRepository ordersItemRepository;
 
 
     public List<GetOrdersDto.Response> findAllOrders() {
@@ -53,8 +51,12 @@ public class OrdersService {
 
         orders.insertOrders(reqDto, findUser.get(), findDelivery.get());
 
+        ordersRepository.save(orders);
+
         OrdersItem ordersItem = new OrdersItem();
         ordersItem.insertOrdersItem(reqDto.getOrderedPrice(), reqDto.getCount(), orders, findItem.get());
+
+        ordersItemRepository.save(ordersItem);
     }
 
     @Transactional

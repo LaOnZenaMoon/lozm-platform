@@ -30,6 +30,7 @@ public class Item extends BaseEntity {
         this.name = reqDto.getName();
         this.price = reqDto.getPrice();
         this.quantity = reqDto.getQuantity();
+        reqDto.getType();
     }
 
     public void updateItem(PutItemDto.Request reqDto) {

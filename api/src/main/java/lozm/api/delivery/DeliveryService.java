@@ -21,11 +21,11 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class DeliveryService {
 
-    private final DeliveryRepository DeliveryRepository;
+    private final DeliveryRepository deliveryRepository;
 
 
     public List<GetDeliveryDto.Response> findAllDeliveries() {
-        List<Delivery> deliveryList = DeliveryRepository.findAll();
+        List<Delivery> deliveryList = deliveryRepository.findAll();
 
         return deliveryList.stream().map(d -> new GetDeliveryDto.Response(
                     d.getId(),
@@ -41,13 +41,15 @@ public class DeliveryService {
 
     @Transactional
     public void save(PostDeliveryDto.Request reqDto) throws Exception {
-        Delivery Delivery = new Delivery();
-        Delivery.insertDelivery(reqDto);
+        Delivery delivery = new Delivery();
+        delivery.insertDelivery(reqDto);
+
+        deliveryRepository.save(delivery);
     }
 
     @Transactional
     public void update(PutDeliveryDto.Request reqDto) throws Exception {
-        Optional<Delivery> findDelivery = DeliveryRepository.findById(reqDto.getId());
+        Optional<Delivery> findDelivery = deliveryRepository.findById(reqDto.getId());
         findDelivery.orElseThrow(() -> new APIException("DELIVERY_0002", "Delivery doesn't exist."));
         findDelivery.get().updateDelivery(reqDto);
     }

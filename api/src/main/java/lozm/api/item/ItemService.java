@@ -1,6 +1,7 @@
 package lozm.api.item;
 
 import lombok.RequiredArgsConstructor;
+import lozm.core.code.ItemType;
 import lozm.core.dto.item.GetItemDto;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
@@ -32,10 +33,25 @@ public class ItemService {
 
     @Transactional
     public void save(PostItemDto.Request reqDto) throws Exception {
+        //TODO @Inheritance 분기 처리 추가 필요.
+
+        String itemType = reqDto.getType();
+        if(ItemType.OUTER.equals(itemType)) {
+
+        } else if(ItemType.TOP.equals(itemType)) {
+
+        } else if(ItemType.BOTTOM.equals(itemType)) {
+
+        } else if(ItemType.SHOES.equals(itemType)) {
+
+        } else {
+            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
+        }
+
         Item item = new Item();
         item.insertItem(reqDto);
 
-        //TODO @Inheritance 분기 처리 추가 필요.
+        itemRepository.save(item);
     }
 
     @Transactional

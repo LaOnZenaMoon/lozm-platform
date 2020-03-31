@@ -1,4 +1,4 @@
-package lozm.core.dto;
+package lozm.core.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

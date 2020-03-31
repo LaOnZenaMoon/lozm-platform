@@ -2,9 +2,9 @@ package lozm.api.user;
 
 import lombok.RequiredArgsConstructor;
 import lozm.core.dto.APIResponseDto;
-import lozm.core.dto.GetUserDto;
-import lozm.core.dto.PostUserDto;
-import lozm.core.dto.PutUserDto;
+import lozm.core.dto.user.GetUserDto;
+import lozm.core.dto.user.PostUserDto;
+import lozm.core.dto.user.PutUserDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

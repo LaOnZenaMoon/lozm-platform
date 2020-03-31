@@ -1,9 +1,9 @@
 package lozm.api.user;
 
 import lombok.RequiredArgsConstructor;
-import lozm.core.dto.GetUserDto;
-import lozm.core.dto.PostUserDto;
-import lozm.core.dto.PutUserDto;
+import lozm.core.dto.user.GetUserDto;
+import lozm.core.dto.user.PostUserDto;
+import lozm.core.dto.user.PutUserDto;
 import lozm.core.exception.APIException;
 import lozm.domain.entity.User;
 import lozm.domain.repository.UserRepository;

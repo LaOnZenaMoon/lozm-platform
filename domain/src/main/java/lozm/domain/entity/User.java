@@ -1,8 +1,8 @@
 package lozm.domain.entity;
 
 import lombok.Getter;
-import lozm.core.dto.PostUserDto;
-import lozm.core.dto.PutUserDto;
+import lozm.core.dto.user.PostUserDto;
+import lozm.core.dto.user.PutUserDto;
 import lozm.core.code.UserType;
 
 import javax.persistence.*;

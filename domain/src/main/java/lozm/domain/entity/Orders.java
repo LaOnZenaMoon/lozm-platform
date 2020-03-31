@@ -2,6 +2,8 @@ package lozm.domain.entity;
 
 import lombok.Getter;
 import lozm.core.code.OrderStatus;
+import lozm.core.dto.orders.PostOrdersDto;
+import lozm.core.dto.orders.PutOrdersDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -33,4 +35,14 @@ public class Orders extends BaseEntity {
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
+    public void insertOrders(PostOrdersDto.Request reqDto) {
+        //TODO User, OrdersItem, Delivery 엔티티 설정 필요
+        this.orderDt = LocalDateTime.now();
+        this.status = OrderStatus.PREPARATION;
+    }
+
+    public void updateOrders(PutOrdersDto.Request reqDto) {
+        this.status = reqDto.getStatus();
+        this.setBaseEntity("", 1);
+    }
 }

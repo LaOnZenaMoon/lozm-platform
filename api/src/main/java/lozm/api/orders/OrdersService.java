@@ -1,14 +1,15 @@
 package lozm.api.orders;
 
 import lombok.RequiredArgsConstructor;
-import lozm.core.dto.item.PutItemDto;
 import lozm.core.dto.orders.GetOrdersDto;
 import lozm.core.dto.orders.PostOrdersDto;
 import lozm.core.dto.orders.PutOrdersDto;
 import lozm.core.exception.APIException;
-import lozm.domain.entity.*;
+import lozm.domain.entity.Item;
+import lozm.domain.entity.Orders;
+import lozm.domain.entity.OrdersItem;
+import lozm.domain.entity.User;
 import lozm.domain.repository.item.ItemRepository;
-import lozm.domain.repository.delivery.DeliveryRepository;
 import lozm.domain.repository.orders.OrdersRepository;
 import lozm.domain.repository.ordersItem.OrdersItemRepository;
 import lozm.domain.repository.user.UserRepository;
@@ -52,6 +53,9 @@ public class OrdersService {
 
         ordersRepository.save(orders);
 
+        //TODO 주문 고도화
+        //1. 하나의 주문에 여러 상품 처리
+        //2. 각 상품 별로 N 개의 쿠폰 적용가능하도록 처리
         OrdersItem ordersItem = new OrdersItem();
         ordersItem.insertOrdersItem(reqDto.getOrderedPrice(), reqDto.getQuantity(), orders, findItem.get());
 

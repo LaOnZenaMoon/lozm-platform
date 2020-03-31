@@ -41,7 +41,7 @@ public class Item extends BaseEntity {
     }
 
     public void decreaseItemQuantity(Long quantity) throws Exception {
-        this.quantity -= 1;
+        this.quantity -= quantity;
         if(this.quantity < 0) throw new APIException("ORDERS_SAVE_ITEM_NO_QUANTITY", "Item quantity is insufficient.");
     }
 

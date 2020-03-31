@@ -39,7 +39,6 @@ public class Orders extends BaseEntity {
         this.orderDt = LocalDateTime.now();
         this.status = OrderStatus.PREPARATION;
         this.user = user;
-//        this.delivery = delivery;
     }
 
     public void updateOrders(PutOrdersDto.Request reqDto) {

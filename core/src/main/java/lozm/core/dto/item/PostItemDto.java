@@ -3,6 +3,7 @@ package lozm.core.dto.item;
 import lombok.Getter;
 import lombok.Setter;
 import lozm.core.code.ItemType;
+import lozm.core.dto.user.PostUserDto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -28,6 +29,18 @@ public class PostItemDto {
 
         @NotEmpty
         private String size;
+
+        public static Request setRequestTestData(String name, Long price, Long quantity, String type, String contents, String size) {
+            PostItemDto.Request reqDto = new PostItemDto.Request();
+            reqDto.name = name;
+            reqDto.price = price;
+            reqDto.quantity = quantity;
+            reqDto.type = type;
+            reqDto.contents = contents;
+            reqDto.size = size;
+
+            return reqDto;
+        }
     }
 
     @Getter

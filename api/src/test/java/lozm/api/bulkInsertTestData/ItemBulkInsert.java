@@ -2,7 +2,6 @@ package lozm.api.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-
 import lozm.core.code.ItemType;
 import lozm.core.dto.item.PostItemDto;
 import org.junit.Test;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -54,13 +52,20 @@ public class ItemBulkInsert {
             sizeList.add("XXL");
 
             for(int i=0; i<100; i++) {
+                String size = null;
+                if(ItemType.SHOES.name().equals(itemType)) {
+                    size = String.valueOf(ThreadLocalRandom.current().nextInt(220, 310));
+                } else {
+                    size = sizeList.get(ThreadLocalRandom.current().nextInt(0, 5));
+                }
+
                 PostItemDto.Request reqDto = PostItemDto.Request.setRequestTestData(
                     faker.university().name(),
                     ThreadLocalRandom.current().nextLong(10, 999) * 1000,
                     ThreadLocalRandom.current().nextLong(1, 200),
                     itemType,
                     faker.lorem().word(),
-                    sizeList.get(ThreadLocalRandom.current().nextInt(0, 5))
+                    size
                 );
                 postItem(reqDto);
             }

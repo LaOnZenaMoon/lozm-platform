@@ -69,15 +69,19 @@ public class Coupon extends BaseEntity {
 
         LocalDateTime sysdateTime = LocalDateTime.now();
         if(sysdateTime.isBefore(this.startDt) || sysdateTime.isAfter(this.endDt)) {
-            new APIException("ORDERS_SAVE_NOT_COUPON_PERIOD", "It is not the period that coupon is available.");
+            throw new APIException("ORDERS_SAVE_NOT_COUPON_PERIOD", "It is not the period that coupon is available.");
         }
 
         if (CouponType.RATIO.equals(this.type)) {
-
+            rtnVal = orderedPrice * (this.amount / 100);
         } else if(CouponType.PRICE.equals(this.type)) {
-
+            rtnVal = orderedPrice - this.amount;
         } else {
-            new APIException("ORDERS_SAVE_NO_COUPON_TYPE", "Coupon type doesn't exist.");
+            throw new APIException("ORDERS_SAVE_NO_COUPON_TYPE", "Coupon type doesn't exist.");
+        }
+
+        if(rtnVal < 0) {
+            throw new APIException("ORDERS_SAVE_COUPON_CALC_PRICE", "Discounted price can't be lower than 0.");
         }
 
         return rtnVal;

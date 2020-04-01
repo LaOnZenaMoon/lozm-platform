@@ -1,6 +1,7 @@
 package lozm.api.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import lozm.core.dto.user.PostUserDto;
 import org.junit.Test;
@@ -31,19 +32,20 @@ public class UserBulkInsert {
     private ObjectMapper objectMapper;
 
 
-
-
-//    @Test
-    void setUser() {
-        List<PostUserDto.Request> postUserList = new ArrayList<>();
-
-
-
-
+    @Test
+    public void setUser() {
+        try {
+            Faker faker = new Faker();
+            for(int i=0; i<100; i++) {
+                PostUserDto.Request reqDto = PostUserDto.Request.setRequestTestData(faker.name().fullName(), faker.pokemon().name());
+                postUser(reqDto);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-
-    void postUser(PostUserDto.Request reqDto) throws Exception {
+    public void postUser(PostUserDto.Request reqDto) throws Exception {
         ResultActions result = mockMvc.perform(
                 post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)

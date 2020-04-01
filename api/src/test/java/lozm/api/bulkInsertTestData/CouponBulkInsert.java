@@ -47,11 +47,18 @@ public class CouponBulkInsert {
                 LocalDateTime startDt = getStartDt(null);
                 LocalDateTime endDt = getEndDt(startDt);
 
+                Long amount = 0L;
+                if(CouponType.RATIO.name().equals(itemType)) {
+                    amount = ThreadLocalRandom.current().nextLong(0, 100);
+                } else {
+                    amount = ThreadLocalRandom.current().nextLong(100, 999) * 10;
+                }
+
                 PostCouponDto.Request reqDto = PostCouponDto.Request.setRequestTestData(
                         faker.book().title(),
                         faker.book().publisher(),
                         itemType,
-                ThreadLocalRandom.current().nextLong(100, 999) * 10,
+                        amount,
                         ThreadLocalRandom.current().nextLong(1, 200),
                         startDt,
                         endDt
@@ -65,7 +72,7 @@ public class CouponBulkInsert {
 
     public void postCoupon(PostCouponDto.Request reqDto) throws Exception {
         ResultActions result = mockMvc.perform(
-                post("/api/item")
+                post("/api/coupon")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(reqDto))
         );

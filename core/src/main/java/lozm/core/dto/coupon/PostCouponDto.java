@@ -27,10 +27,10 @@ public class PostCouponDto {
         @NotNull
         private Long quantity;
 
-        @NotEmpty
+        @NotNull
         private LocalDateTime startDt;
 
-        @NotEmpty
+        @NotNull
         private LocalDateTime endDt;
 
         public static Request setRequestTestData(String name, String contents, String type, Long amount, Long quantity, LocalDateTime startDt, LocalDateTime endDt) {

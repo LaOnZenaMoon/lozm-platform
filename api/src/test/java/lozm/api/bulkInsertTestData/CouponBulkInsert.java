@@ -2,6 +2,7 @@ package lozm.api.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import lozm.core.code.ClothingSizeType;
 import lozm.core.code.ItemType;
 import lozm.core.dto.item.PostItemDto;
 import org.junit.Test;
@@ -44,12 +45,12 @@ public class CouponBulkInsert {
         try {
             Faker faker = new Faker();
             List<String> sizeList = new ArrayList<>();
-            sizeList.add("XS");
-            sizeList.add("S");
-            sizeList.add("M");
-            sizeList.add("L");
-            sizeList.add("XL");
-            sizeList.add("XXL");
+            sizeList.add(ClothingSizeType.XS.name());
+            sizeList.add(ClothingSizeType.S.name());
+            sizeList.add(ClothingSizeType.M.name());
+            sizeList.add(ClothingSizeType.L.name());
+            sizeList.add(ClothingSizeType.XL.name());
+            sizeList.add(ClothingSizeType.XXL.name());
 
             for(int i=0; i<100; i++) {
                 String size = null;

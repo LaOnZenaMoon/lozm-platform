@@ -2,6 +2,7 @@ package lozm.api.item;
 
 import lombok.RequiredArgsConstructor;
 import lozm.core.dto.APIResponseDto;
+import lozm.core.dto.item.GetClothingDto;
 import lozm.core.dto.item.GetItemDto;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
@@ -24,6 +25,22 @@ public class ItemAPIController {
 
         try {
             List<GetItemDto.Response> result = itemService.findAllItems();
+            resDto.setSuccess(true);
+            resDto.setData(result);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @GetMapping(value = "/clothing/{itemType}")
+    public APIResponseDto getClothing(@PathVariable(value = "itemType") String itemType) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            List<GetClothingDto.Response> result = itemService.findAllClothing(itemType);
             resDto.setSuccess(true);
             resDto.setData(result);
         } catch (Exception e) {

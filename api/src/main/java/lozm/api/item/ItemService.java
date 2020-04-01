@@ -2,6 +2,7 @@ package lozm.api.item;
 
 import lombok.RequiredArgsConstructor;
 import lozm.core.code.ItemType;
+import lozm.core.dto.item.GetClothingDto;
 import lozm.core.dto.item.GetItemDto;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
@@ -19,6 +20,7 @@ import lozm.domain.repository.item.inherit.TopRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,5 +75,50 @@ public class ItemService {
         findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
         findItem.get().updateItem(reqDto);
     }
-    
+
+    public List<GetClothingDto.Response> findAllClothing(String itemType) {
+        if(ItemType.OUTER.toString().equals(itemType)) {
+            List<Outer> itemList = outerRepository.findAll();
+            return itemList.stream().map(o -> new GetClothingDto.Response(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else if(ItemType.TOP.toString().equals(itemType)) {
+            List<Top> itemList = topRepository.findAll();
+            return itemList.stream().map(o -> new GetClothingDto.Response(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else if(ItemType.BOTTOM.toString().equals(itemType)) {
+            List<Bottom> itemList = bottomRepository.findAll();
+            return itemList.stream().map(o -> new GetClothingDto.Response(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else if(ItemType.SHOES.toString().equals(itemType)) {
+            List<Shoes> itemList = shoesRepository.findAll();
+            return itemList.stream().map(o -> new GetClothingDto.Response(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else {
+            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
+        }
+    }
 }

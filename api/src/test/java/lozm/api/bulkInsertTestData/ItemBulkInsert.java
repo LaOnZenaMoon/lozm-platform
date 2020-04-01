@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,6 +45,13 @@ public class ItemBulkInsert {
     public void setItem(String itemType) {
         try {
             Faker faker = new Faker();
+            List<String> sizeList = new ArrayList<>();
+            sizeList.add("XS");
+            sizeList.add("S");
+            sizeList.add("M");
+            sizeList.add("L");
+            sizeList.add("XL");
+            sizeList.add("XXL");
 
             for(int i=0; i<100; i++) {
                 PostItemDto.Request reqDto = PostItemDto.Request.setRequestTestData(
@@ -51,7 +60,7 @@ public class ItemBulkInsert {
                     ThreadLocalRandom.current().nextLong(1, 200),
                     itemType,
                     faker.lorem().word(),
-                "L"
+                    sizeList.get(ThreadLocalRandom.current().nextInt(0, 5))
                 );
                 postItem(reqDto);
             }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lozm.core.code.CouponType;
 import lozm.core.dto.coupon.PostCouponDto;
+import lozm.core.util.DateUtility;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static lozm.core.util.DateUtility.getEndDt;
+import static lozm.core.util.DateUtility.getStartDt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,17 +43,20 @@ public class CouponBulkInsert {
     public void setCoupon(String itemType) {
         try {
             Faker faker = new Faker();
-
             for(int i=0; i<100; i++) {
-//                PostCouponDto.Request reqDto = PostCouponDto.Request.setRequestTestData(
-//                    faker.book().title(),
-//                    faker.book().publisher(),
-//                    itemType,
-//            ThreadLocalRandom.current().nextLong(100, 999) * 10,
-//                    ThreadLocalRandom.current().nextLong(1, 200),
-//
-//                );
-//                postCoupon(reqDto);
+                LocalDateTime startDt = getStartDt(null);
+                LocalDateTime endDt = getEndDt(startDt);
+
+                PostCouponDto.Request reqDto = PostCouponDto.Request.setRequestTestData(
+                        faker.book().title(),
+                        faker.book().publisher(),
+                        itemType,
+                ThreadLocalRandom.current().nextLong(100, 999) * 10,
+                        ThreadLocalRandom.current().nextLong(1, 200),
+                        startDt,
+                        endDt
+                );
+                postCoupon(reqDto);
             }
         } catch (Exception e) {
             e.printStackTrace();

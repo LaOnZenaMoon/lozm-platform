@@ -20,6 +20,8 @@ public class PostOrdersDto {
 
         @NotNull
         private Long itemId;
+
+        private Long couponId;
     }
 
     @Getter

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lozm.core.code.CouponType;
 import lozm.core.dto.coupon.PostCouponDto;
 import lozm.core.dto.coupon.PutCouponDto;
+import lozm.core.exception.APIException;
 import lozm.domain.entity.BaseEntity;
 
 import javax.persistence.*;
@@ -61,5 +62,19 @@ public class Coupon extends BaseEntity {
         this.startDt = reqDto.getStartDt();
         this.endDt = reqDto.getEndDt();
         this.setBaseEntity("", reqDto.getFlag());
+    }
+
+    public Long calculateOrderedPrice(Long orderedPrice) throws Exception {
+        Long rtnVal = -1L;
+
+        if (CouponType.RATIO.equals(this.type)) {
+
+        } else if(CouponType.PRICE.equals(this.type)) {
+
+        } else {
+            new APIException("ORDERS_SAVE_NO_COUPON_TYPE", "Coupon type doesn't exist.");
+        }
+
+        return rtnVal;
     }
 }

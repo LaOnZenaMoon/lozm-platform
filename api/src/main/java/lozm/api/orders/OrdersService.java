@@ -5,10 +5,12 @@ import lozm.core.dto.orders.GetOrdersDto;
 import lozm.core.dto.orders.PostOrdersDto;
 import lozm.core.dto.orders.PutOrdersDto;
 import lozm.core.exception.APIException;
+import lozm.domain.entity.coupon.Coupon;
 import lozm.domain.entity.item.Item;
 import lozm.domain.entity.orders.Orders;
 import lozm.domain.entity.orders.OrdersItem;
 import lozm.domain.entity.user.User;
+import lozm.domain.repository.coupon.CouponRepository;
 import lozm.domain.repository.item.ItemRepository;
 import lozm.domain.repository.orders.OrdersRepository;
 import lozm.domain.repository.ordersItem.OrdersItemRepository;
@@ -30,6 +32,7 @@ public class OrdersService {
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
     private final OrdersItemRepository ordersItemRepository;
+    private final CouponRepository couponRepository;
 
 
     public List<GetOrdersDto.Response> findAllOrders() {
@@ -49,6 +52,14 @@ public class OrdersService {
         Optional<Item> findItem = itemRepository.findById(reqDto.getItemId());
         findItem.orElseThrow(() -> new APIException("ORDERS_SAVE_ITEM", "Item doesn't exist."));
 
+        Long orderedPrice = reqDto.getOrderedPrice();
+        Optional<Coupon> findCoupon = null;
+        if(reqDto.getCouponId() != null) {
+            findCoupon = couponRepository.findById(reqDto.getCouponId());
+            findCoupon.orElseThrow(() -> new APIException("ORDERS_SAVE_COUPON", "Coupon doesn't exist."));
+            orderedPrice = findCoupon.get().calculateOrderedPrice(orderedPrice);
+        }
+
         orders.insertOrders(reqDto, findUser.get());
 
         ordersRepository.save(orders);
@@ -57,7 +68,7 @@ public class OrdersService {
         //1. 하나의 주문에 여러 상품 처리
         //2. 각 상품 별로 N 개의 쿠폰 적용가능하도록 처리
         OrdersItem ordersItem = new OrdersItem();
-        ordersItem.insertOrdersItem(reqDto.getOrderedPrice(), reqDto.getQuantity(), orders, findItem.get());
+        ordersItem.insertOrdersItem(orderedPrice, reqDto.getQuantity(), orders, findItem.get());
 
         ordersItemRepository.save(ordersItem);
 

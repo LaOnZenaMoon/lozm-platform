@@ -45,15 +45,15 @@ public class CouponBulkInsert {
             Faker faker = new Faker();
 
             for(int i=0; i<100; i++) {
-                PostCouponDto.Request reqDto = PostCouponDto.Request.setRequestTestData(
-                    faker.book().title(),
-                    faker.book().publisher(),
-                    itemType,
-            ThreadLocalRandom.current().nextLong(100, 999) * 10,
-                    ThreadLocalRandom.current().nextLong(1, 200),
-
-                );
-                postCoupon(reqDto);
+//                PostCouponDto.Request reqDto = PostCouponDto.Request.setRequestTestData(
+//                    faker.book().title(),
+//                    faker.book().publisher(),
+//                    itemType,
+//            ThreadLocalRandom.current().nextLong(100, 999) * 10,
+//                    ThreadLocalRandom.current().nextLong(1, 200),
+//
+//                );
+//                postCoupon(reqDto);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,9 +72,9 @@ public class CouponBulkInsert {
     }
 
     private void getStartDt() {
-        long minDay = LocalDateTime.of(2014, 1, 1, 0, 0, 0).toEpochDay();
-        long maxDay = LocalDateTime.of(2020, 12, 31, 23, 59, 59).toEpochDay();
-        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+//        long minDay = LocalDateTime.of(2014, 1, 1, 0, 0, 0).;
+//        long maxDay = LocalDateTime.of(2020, 12, 31, 23, 59, 59);
+//        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
 //        LocalDateTime randomDate = LocalDateTime.ofEpochSecond(randomDay);
     }
 

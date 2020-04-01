@@ -73,7 +73,7 @@ public class Coupon extends BaseEntity {
         }
 
         if (CouponType.RATIO.equals(this.type)) {
-            rtnVal = orderedPrice * (this.amount / 100);
+            rtnVal = orderedPrice * ((100 - this.amount) / 100);
         } else if(CouponType.PRICE.equals(this.type)) {
             rtnVal = orderedPrice - this.amount;
         } else {

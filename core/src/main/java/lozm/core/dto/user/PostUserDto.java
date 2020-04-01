@@ -20,6 +20,16 @@ public class PostUserDto {
 
         @NotEmpty
         private String type;
+
+        public Request setRequestTestData(String name, String identifier) {
+            PostUserDto.Request reqDto = new PostUserDto.Request();
+            reqDto.name = name;
+            reqDto.identifier = identifier;
+            reqDto.password = "asdf1234";
+            reqDto.type = "USER";
+
+            return reqDto;
+        }
     }
 
     @Getter

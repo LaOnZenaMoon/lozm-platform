@@ -2,6 +2,7 @@ package lozm.api.user;
 
 import lombok.RequiredArgsConstructor;
 import lozm.core.dto.user.GetUserDto;
+import lozm.core.dto.user.PostUserCouponDto;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
 import lozm.core.exception.APIException;
@@ -49,5 +50,8 @@ public class UserService {
         findUser.get().updateUser(reqDto);
     }
 
+    public void saveUserCoupon(PostUserCouponDto.Request reqDto) {
+
+    }
 }
 

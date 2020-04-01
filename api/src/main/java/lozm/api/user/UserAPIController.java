@@ -3,6 +3,7 @@ package lozm.api.user;
 import lombok.RequiredArgsConstructor;
 import lozm.core.dto.APIResponseDto;
 import lozm.core.dto.user.GetUserDto;
+import lozm.core.dto.user.PostUserCouponDto;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +59,22 @@ public class UserAPIController {
             userService.update(reqDto);
             resDto.setSuccess(true);
         } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @PostMapping(value = "/coupon")
+    public APIResponseDto postUserCoupon(@RequestBody @Valid PostUserCouponDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            userService.saveUserCoupon(reqDto);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
         }

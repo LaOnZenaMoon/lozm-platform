@@ -2,15 +2,15 @@ package lozm.api.coupon;
 
 import lombok.RequiredArgsConstructor;
 import lozm.core.dto.APIResponseDto;
-import lozm.core.dto.item.GetItemDto;
-import lozm.core.dto.item.PostItemDto;
-import lozm.core.dto.item.PutItemDto;
+import lozm.core.dto.coupon.GetCouponDto;
+import lozm.core.dto.coupon.PostCouponDto;
+import lozm.core.dto.coupon.PutCouponDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/api/item")
+@RequestMapping(value = "/api/coupon")
 @RestController
 @RequiredArgsConstructor
 public class CouponAPIController {
@@ -19,11 +19,11 @@ public class CouponAPIController {
 
 
     @GetMapping
-    public APIResponseDto getItem() {
+    public APIResponseDto getCoupon() {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetItemDto.Response> result = couponService.findAllItems();
+            List<GetCouponDto.Response> result = couponService.findAllCoupons();
             resDto.setSuccess(true);
             resDto.setData(result);
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class CouponAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) {
+    public APIResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
@@ -51,7 +51,7 @@ public class CouponAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) {
+    public APIResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {

@@ -2,6 +2,8 @@ package lozm.domain.entity;
 
 import lombok.Getter;
 import lozm.core.code.CouponType;
+import lozm.core.dto.coupon.PostCouponDto;
+import lozm.core.dto.coupon.PutCouponDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,8 +40,25 @@ public class Coupon extends BaseEntity {
     @Column(name = "END_DT")
     private LocalDateTime endDt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
-    private User user;
 
+    public void insertCoupon(PostCouponDto.Request reqDto) {
+        this.name = reqDto.getName();
+        this.contents = reqDto.getContents();
+        this.type = CouponType.valueOf(reqDto.getType());
+        this.amount = reqDto.getAmount();
+        this.quantity = reqDto.getQuantity();
+        this.startDt = reqDto.getStartDt();
+        this.endDt = reqDto.getEndDt();
+    }
+
+    public void updateCoupon(PutCouponDto.Request reqDto) {
+        this.name = reqDto.getName();
+        this.contents = reqDto.getContents();
+        this.type = CouponType.valueOf(reqDto.getType());
+        this.amount = reqDto.getAmount();
+        this.quantity = reqDto.getQuantity();
+        this.startDt = reqDto.getStartDt();
+        this.endDt = reqDto.getEndDt();
+        this.setBaseEntity("", reqDto.getFlag());
+    }
 }

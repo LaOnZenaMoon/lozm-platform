@@ -14,7 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -71,15 +74,6 @@ public class CouponBulkInsert {
         System.out.println("result = " + result);
     }
 
-    private void getStartDt() {
-//        long minDay = LocalDateTime.of(2014, 1, 1, 0, 0, 0).;
-//        long maxDay = LocalDateTime.of(2020, 12, 31, 23, 59, 59);
-//        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
-//        LocalDateTime randomDate = LocalDateTime.ofEpochSecond(randomDay);
-    }
 
-    private void getEndDt() {
-
-    }
 
 }

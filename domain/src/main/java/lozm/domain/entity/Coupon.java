@@ -20,19 +20,26 @@ public class Coupon extends BaseEntity {
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "CONTENTS")
+    private String contents;
+
     @Column(name = "TYPE")
     private CouponType type;
 
-    @Column(name = "CONTENTS")
-    private Long contents;
-
     @Column(name = "AMOUNT")
     private Long amount;
+
+    @Column(name = "QUANTITY")
+    private Long quantity;
 
     @Column(name = "START_DT")
     private LocalDateTime startDt;
 
     @Column(name = "END_DT")
     private LocalDateTime endDt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
 
 }

@@ -32,6 +32,9 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private List<Orders> orders;
 
+    @OneToMany(mappedBy = "user")
+    private List<Coupon> coupon;
+
 
     public void insertUser(PostUserDto.Request reqDto) {
         this.name = reqDto.getName();

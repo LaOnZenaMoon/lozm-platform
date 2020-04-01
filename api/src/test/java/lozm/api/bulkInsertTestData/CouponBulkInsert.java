@@ -2,9 +2,8 @@ package lozm.api.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lozm.core.code.ClothingSizeType;
-import lozm.core.code.ItemType;
-import lozm.core.dto.item.PostItemDto;
+import lozm.core.code.CouponType;
+import lozm.core.dto.coupon.PostCouponDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,48 +35,32 @@ public class CouponBulkInsert {
     private ObjectMapper objectMapper;
 
     @Test
-    public void setItems() {
-        setItem(ItemType.OUTER.name());
-        setItem(ItemType.TOP.name());
-        setItem(ItemType.BOTTOM.name());
-        setItem(ItemType.SHOES.name());
+    public void setCoupons() {
+        setCoupon(CouponType.PRICE.name());
+        setCoupon(CouponType.RATIO.name());
     }
 
-    public void setItem(String itemType) {
+    public void setCoupon(String itemType) {
         try {
             Faker faker = new Faker();
-            List<String> sizeList = new ArrayList<>();
-            sizeList.add(ClothingSizeType.XS.name());
-            sizeList.add(ClothingSizeType.S.name());
-            sizeList.add(ClothingSizeType.M.name());
-            sizeList.add(ClothingSizeType.L.name());
-            sizeList.add(ClothingSizeType.XL.name());
-            sizeList.add(ClothingSizeType.XXL.name());
 
             for(int i=0; i<100; i++) {
-                String size = null;
-                if(ItemType.SHOES.name().equals(itemType)) {
-                    size = String.valueOf(ThreadLocalRandom.current().nextInt(220, 310));
-                } else {
-                    size = sizeList.get(ThreadLocalRandom.current().nextInt(0, 5));
-                }
-
-                PostItemDto.Request reqDto = PostItemDto.Request.setRequestTestData(
-                    faker.university().name(),
-                    ThreadLocalRandom.current().nextLong(10, 999) * 1000,
-                    ThreadLocalRandom.current().nextLong(1, 200),
+                PostCouponDto.Request reqDto = PostCouponDto.Request.setRequestTestData(
+                    faker.book().title(),
+                    faker.book().publisher(),
                     itemType,
-                    faker.lorem().word(),
-                    size
+            ThreadLocalRandom.current().nextLong(100, 999) * 10,
+                    ThreadLocalRandom.current().nextLong(1, 200),
+
                 );
-                postItem(reqDto);
+                postCoupon(reqDto);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void postItem(PostItemDto.Request reqDto) throws Exception {
+    public void postCoupon(PostCouponDto.Request reqDto) throws Exception {
         ResultActions result = mockMvc.perform(
                 post("/api/item")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -86,5 +71,15 @@ public class CouponBulkInsert {
         System.out.println("result = " + result);
     }
 
+    private void getStartDt() {
+        long minDay = LocalDateTime.of(2014, 1, 1, 0, 0, 0).toEpochDay();
+        long maxDay = LocalDateTime.of(2020, 12, 31, 23, 59, 59).toEpochDay();
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+//        LocalDateTime randomDate = LocalDateTime.ofEpochSecond(randomDay);
+    }
+
+    private void getEndDt() {
+
+    }
 
 }

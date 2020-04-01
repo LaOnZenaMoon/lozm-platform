@@ -67,6 +67,11 @@ public class Coupon extends BaseEntity {
     public Long calculateOrderedPrice(Long orderedPrice) throws Exception {
         Long rtnVal = -1L;
 
+        LocalDateTime sysdateTime = LocalDateTime.now();
+        if(sysdateTime.isBefore(this.startDt) || sysdateTime.isAfter(this.endDt)) {
+            new APIException("ORDERS_SAVE_NOT_COUPON_PERIOD", "It is not the period that coupon is available.");
+        }
+
         if (CouponType.RATIO.equals(this.type)) {
 
         } else if(CouponType.PRICE.equals(this.type)) {

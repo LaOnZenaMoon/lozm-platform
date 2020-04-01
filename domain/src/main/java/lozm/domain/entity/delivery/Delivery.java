@@ -1,9 +1,10 @@
-package lozm.domain.entity;
+package lozm.domain.entity.delivery;
 
 import lombok.Getter;
 import lozm.core.code.DeliveryStatus;
 import lozm.core.dto.delivery.PostDeliveryDto;
 import lozm.core.dto.delivery.PutDeliveryDto;
+import lozm.domain.entity.BaseEntity;
 import lozm.domain.entity.embedded.Address;
 import org.springframework.util.StringUtils;
 

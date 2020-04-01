@@ -5,7 +5,7 @@ import lozm.core.dto.user.GetUserDto;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
 import lozm.core.exception.APIException;
-import lozm.domain.entity.User;
+import lozm.domain.entity.user.User;
 import lozm.domain.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

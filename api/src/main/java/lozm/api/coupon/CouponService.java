@@ -5,7 +5,7 @@ import lozm.core.dto.coupon.GetCouponDto;
 import lozm.core.dto.coupon.PostCouponDto;
 import lozm.core.dto.coupon.PutCouponDto;
 import lozm.core.exception.APIException;
-import lozm.domain.entity.Coupon;
+import lozm.domain.entity.coupon.Coupon;
 import lozm.domain.repository.coupon.CouponRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

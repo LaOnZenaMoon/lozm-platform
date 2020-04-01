@@ -1,9 +1,12 @@
-package lozm.domain.entity;
+package lozm.domain.entity.user;
 
 import lombok.Getter;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
 import lozm.core.code.UserType;
+import lozm.domain.entity.BaseEntity;
+import lozm.domain.entity.coupon.CouponUser;
+import lozm.domain.entity.orders.Orders;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,6 +34,9 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<Orders> orders;
+
+    @OneToMany(mappedBy = "user")
+    private List<CouponUser> couponUsers;
 
 
     public void insertUser(PostUserDto.Request reqDto) {

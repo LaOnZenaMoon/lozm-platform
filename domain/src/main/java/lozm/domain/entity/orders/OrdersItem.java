@@ -1,6 +1,8 @@
-package lozm.domain.entity;
+package lozm.domain.entity.orders;
 
 import lombok.Getter;
+import lozm.domain.entity.BaseEntity;
+import lozm.domain.entity.item.Item;
 
 import javax.persistence.*;
 

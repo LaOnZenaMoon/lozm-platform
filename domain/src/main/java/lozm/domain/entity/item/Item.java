@@ -1,9 +1,10 @@
-package lozm.domain.entity;
+package lozm.domain.entity.item;
 
 import lombok.Getter;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
 import lozm.core.exception.APIException;
+import lozm.domain.entity.BaseEntity;
 
 import javax.persistence.*;
 

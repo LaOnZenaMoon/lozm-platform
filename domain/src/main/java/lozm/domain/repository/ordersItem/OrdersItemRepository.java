@@ -1,6 +1,6 @@
 package lozm.domain.repository.ordersItem;
 
-import lozm.domain.entity.OrdersItem;
+import lozm.domain.entity.orders.OrdersItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

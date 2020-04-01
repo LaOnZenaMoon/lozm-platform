@@ -2,7 +2,7 @@ package lozm.domain.entity.inheritance;
 
 import lombok.Getter;
 import lozm.core.dto.item.PostItemDto;
-import lozm.domain.entity.Item;
+import lozm.domain.entity.item.Item;
 import lozm.domain.entity.embedded.Clothing;
 
 import javax.persistence.DiscriminatorValue;

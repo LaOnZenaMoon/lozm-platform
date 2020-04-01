@@ -6,7 +6,7 @@ import lozm.core.dto.item.GetItemDto;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
 import lozm.core.exception.APIException;
-import lozm.domain.entity.Item;
+import lozm.domain.entity.item.Item;
 import lozm.domain.entity.inheritance.Bottom;
 import lozm.domain.entity.inheritance.Outer;
 import lozm.domain.entity.inheritance.Shoes;

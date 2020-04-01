@@ -1,9 +1,12 @@
-package lozm.domain.entity;
+package lozm.domain.entity.orders;
 
 import lombok.Getter;
 import lozm.core.code.OrderStatus;
 import lozm.core.dto.orders.PostOrdersDto;
 import lozm.core.dto.orders.PutOrdersDto;
+import lozm.domain.entity.BaseEntity;
+import lozm.domain.entity.delivery.Delivery;
+import lozm.domain.entity.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,9 +1,10 @@
-package lozm.domain.entity;
+package lozm.domain.entity.coupon;
 
 import lombok.Getter;
 import lozm.core.code.CouponType;
 import lozm.core.dto.coupon.PostCouponDto;
 import lozm.core.dto.coupon.PutCouponDto;
+import lozm.domain.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

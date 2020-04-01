@@ -4,9 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lozm.core.dto.coupon.GetCouponDto;
 import lozm.core.dto.coupon.PostCouponDto;
 import lozm.core.dto.coupon.PutCouponDto;
+import lozm.core.dto.user.PostUserCouponDto;
 import lozm.core.exception.APIException;
 import lozm.domain.entity.coupon.Coupon;
+import lozm.domain.entity.coupon.CouponUser;
+import lozm.domain.entity.user.User;
 import lozm.domain.repository.coupon.CouponRepository;
+import lozm.domain.repository.coupon.CouponUserRepository;
+import lozm.domain.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +26,8 @@ import static java.util.stream.Collectors.toList;
 public class CouponService {
 
     private final CouponRepository couponRepository;
+    private final UserRepository userRepository;
+    private final CouponUserRepository couponUserRepository;
 
 
     public List<GetCouponDto.Response> findAllCoupons() {
@@ -48,6 +55,20 @@ public class CouponService {
         Optional<Coupon> findCoupon = couponRepository.findById(reqDto.getId());
         findCoupon.orElseThrow(() -> new APIException("COUPON_0002", "Coupon doesn't exist."));
         findCoupon.get().updateCoupon(reqDto);
+    }
+
+    @Transactional
+    public void saveCouponUser(PostUserCouponDto.Request reqDto) throws Exception {
+        Optional<User> findUser = userRepository.findById(reqDto.getUserId());
+        findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
+
+        Optional<Coupon> findCoupon = couponRepository.findById(reqDto.getCouponId());
+        findCoupon.orElseThrow(() -> new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist."));
+
+        CouponUser couponUser = new CouponUser();
+        couponUser.insertCouponUser(reqDto.getCouponQuantity(), findCoupon.get(), findUser.get());
+
+        couponUserRepository.save(couponUser);
     }
     
 }

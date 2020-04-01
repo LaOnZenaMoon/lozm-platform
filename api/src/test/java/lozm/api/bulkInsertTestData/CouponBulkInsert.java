@@ -34,6 +34,7 @@ public class CouponBulkInsert {
     @Autowired
     private ObjectMapper objectMapper;
 
+
     @Test
     public void setCoupons() {
         setCoupon(CouponType.PRICE.name());

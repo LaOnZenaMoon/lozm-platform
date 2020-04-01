@@ -6,7 +6,9 @@ import lozm.core.dto.user.PostUserCouponDto;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
 import lozm.core.exception.APIException;
+import lozm.domain.entity.coupon.Coupon;
 import lozm.domain.entity.user.User;
+import lozm.domain.repository.coupon.CouponRepository;
 import lozm.domain.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,8 +52,5 @@ public class UserService {
         findUser.get().updateUser(reqDto);
     }
 
-    public void saveUserCoupon(PostUserCouponDto.Request reqDto) {
-
-    }
 }
 

@@ -7,6 +7,7 @@ import lozm.domain.entity.orders.Orders;
 import lozm.domain.entity.user.User;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -29,4 +30,9 @@ public class CouponUser extends BaseEntity {
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    public void insertCouponUser(Long couponQuantity, Coupon coupon, User user) {
+        this.quantity = couponQuantity;
+        this.coupon = coupon;
+        this.user = user;
+    }
 }

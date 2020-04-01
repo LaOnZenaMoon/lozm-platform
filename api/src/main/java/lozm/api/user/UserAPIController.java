@@ -66,20 +66,6 @@ public class UserAPIController {
         return resDto;
     }
 
-    @PostMapping(value = "/coupon")
-    public APIResponseDto postUserCoupon(@RequestBody @Valid PostUserCouponDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
 
-        try {
-            userService.saveUserCoupon(reqDto);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
-    }
 
 }

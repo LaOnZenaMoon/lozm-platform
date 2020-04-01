@@ -13,7 +13,7 @@ import lozm.domain.entity.user.User;
 import lozm.domain.repository.coupon.CouponRepository;
 import lozm.domain.repository.item.ItemRepository;
 import lozm.domain.repository.orders.OrdersRepository;
-import lozm.domain.repository.ordersItem.OrdersItemRepository;
+import lozm.domain.repository.orders.OrdersItemRepository;
 import lozm.domain.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

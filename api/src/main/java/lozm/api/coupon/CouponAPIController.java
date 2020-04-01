@@ -5,6 +5,7 @@ import lozm.core.dto.APIResponseDto;
 import lozm.core.dto.coupon.GetCouponDto;
 import lozm.core.dto.coupon.PostCouponDto;
 import lozm.core.dto.coupon.PutCouponDto;
+import lozm.core.dto.user.PostUserCouponDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -58,6 +59,22 @@ public class CouponAPIController {
             couponService.update(reqDto);
             resDto.setSuccess(true);
         } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @PostMapping(value = "/user")
+    public APIResponseDto postCouponUser(@RequestBody @Valid PostUserCouponDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            couponService.saveCouponUser(reqDto);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
         }

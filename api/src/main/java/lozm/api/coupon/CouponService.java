@@ -69,6 +69,8 @@ public class CouponService {
         couponUser.insertCouponUser(reqDto.getCouponQuantity(), findCoupon.get(), findUser.get());
 
         couponUserRepository.save(couponUser);
+
+        findCoupon.get().decreaseCouponQuantity(reqDto.getCouponQuantity());
     }
     
 }

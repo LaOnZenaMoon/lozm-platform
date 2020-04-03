@@ -5,7 +5,7 @@
 <th:block layout:fragment="content">
 
     <!-- start loader -->
-    <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
+        <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
     <!-- end loader -->
 
     <!-- Start wrapper-->
@@ -15,20 +15,23 @@
         <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
             <div class="brand-logo">
                 <a href="index.html">
-                    <img th:src="@{/libs/dashtreme/vertical-layout/assets/images/logo-icon.png}" class="logo-icon" alt="logo icon">
+                    <img th:src="@{/libs/dashtreme/vertical-layout/assets/images/logo-icon.png}" class="logo-icon"
+                         alt="logo icon">
                     <h5 class="logo-text">Dashtreme Admin</h5>
                 </a>
             </div>
             <div class="user-details">
-                <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#user-dropdown">
-                    <div class="avatar"><img class="mr-3 side-user-img" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                <div class="media align-items-center user-pointer collapsed" data-toggle="collapse"
+                     data-target="#user-dropdown">
+                    <div class="avatar"><img class="mr-3 side-user-img" src="https://via.placeholder.com/110x110"
+                                             alt="user avatar"></div>
                     <div class="media-body">
                         <h6 class="side-user-name">Mark Johnson</h6>
                     </div>
                 </div>
                 <div id="user-dropdown" class="collapse">
                     <ul class="user-setting-menu">
-                        <li><a href="javaScript:void();"><i class="icon-user"></i>  My Profile</a></li>
+                        <li><a href="javaScript:void();"><i class="icon-user"></i> My Profile</a></li>
                         <li><a href="javaScript:void();"><i class="icon-settings"></i> Setting</a></li>
                         <li><a href="javaScript:void();"><i class="icon-power"></i> Logout</a></li>
                     </ul>
@@ -38,15 +41,21 @@
                 <li class="sidebar-header">MAIN NAVIGATION</li>
                 <li>
                     <a href="javaScript:void();" class="waves-effect">
-                        <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span><i class="fa fa-angle-left pull-right"></i>
+                        <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span><i
+                            class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="sidebar-submenu">
                         <li><a href="index.html"><i class="zmdi zmdi-dot-circle-alt"></i> eCommerce</a></li>
-                        <li><a href="dashboard-human-resources.html"><i class="zmdi zmdi-dot-circle-alt"></i> Human Resources</a></li>
-                        <li><a href="dashboard-digital-marketing.html"><i class="zmdi zmdi-dot-circle-alt"></i> Digital Marketing</a></li>
-                        <li><a href="dashboard-property-listing.html"><i class="zmdi zmdi-dot-circle-alt"></i> Property Listings</a></li>
-                        <li><a href="dashboard-service-support.html"><i class="zmdi zmdi-dot-circle-alt"></i> Services & Support</a></li>
-                        <li><a href="dashboard-logistics.html"><i class="zmdi zmdi-dot-circle-alt"></i> Logistics</a></li>
+                        <li><a href="dashboard-human-resources.html"><i class="zmdi zmdi-dot-circle-alt"></i> Human
+                            Resources</a></li>
+                        <li><a href="dashboard-digital-marketing.html"><i class="zmdi zmdi-dot-circle-alt"></i> Digital
+                            Marketing</a></li>
+                        <li><a href="dashboard-property-listing.html"><i class="zmdi zmdi-dot-circle-alt"></i> Property
+                            Listings</a></li>
+                        <li><a href="dashboard-service-support.html"><i class="zmdi zmdi-dot-circle-alt"></i> Services &
+                            Support</a></li>
+                        <li><a href="dashboard-logistics.html"><i class="zmdi zmdi-dot-circle-alt"></i> Logistics</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -62,12 +71,16 @@
                         <li><a href="ui-accordions.html"><i class="zmdi zmdi-dot-circle-alt"></i> Accordions</a></li>
                         <li><a href="ui-modals.html"><i class="zmdi zmdi-dot-circle-alt"></i> Modals</a></li>
                         <li><a href="ui-list-groups.html"><i class="zmdi zmdi-dot-circle-alt"></i> List Groups</a></li>
-                        <li><a href="ui-bootstrap-elements.html"><i class="zmdi zmdi-dot-circle-alt"></i> BS Elements</a></li>
+                        <li><a href="ui-bootstrap-elements.html"><i class="zmdi zmdi-dot-circle-alt"></i> BS
+                            Elements</a></li>
                         <li><a href="ui-pagination.html"><i class="zmdi zmdi-dot-circle-alt"></i> Pagination</a></li>
                         <li><a href="ui-alerts.html"><i class="zmdi zmdi-dot-circle-alt"></i> Alerts</a></li>
-                        <li><a href="ui-progressbars.html"><i class="zmdi zmdi-dot-circle-alt"></i> Progress Bars</a></li>
-                        <li><a href="ui-checkbox-radio.html"><i class="zmdi zmdi-dot-circle-alt"></i> Checkboxes & Radios</a></li>
-                        <li><a href="ui-notification.html"><i class="zmdi zmdi-dot-circle-alt"></i> Notifications</a></li>
+                        <li><a href="ui-progressbars.html"><i class="zmdi zmdi-dot-circle-alt"></i> Progress Bars</a>
+                        </li>
+                        <li><a href="ui-checkbox-radio.html"><i class="zmdi zmdi-dot-circle-alt"></i> Checkboxes &
+                            Radios</a></li>
+                        <li><a href="ui-notification.html"><i class="zmdi zmdi-dot-circle-alt"></i> Notifications</a>
+                        </li>
                         <li><a href="ui-sweet-alert.html"><i class="zmdi zmdi-dot-circle-alt"></i> Sweet Alerts</a></li>
                     </ul>
                 </li>
@@ -78,15 +91,24 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="sidebar-submenu">
-                        <li><a href="components-range-slider.html"><i class="zmdi zmdi-dot-circle-alt"></i> Range Sliders</a></li>
-                        <li><a href="components-image-carousel.html"><i class="zmdi zmdi-dot-circle-alt"></i> Image Carousels</a></li>
-                        <li><a href="components-grid-layouts.html"><i class="zmdi zmdi-dot-circle-alt"></i> Grid Layouts</a></li>
-                        <li><a href="components-switcher-buttons.html"><i class="zmdi zmdi-dot-circle-alt"></i> Switcher Buttons</a></li>
-                        <li><a href="components-pricing-table.html"><i class="zmdi zmdi-dot-circle-alt"></i> Pricing Tables</a></li>
-                        <li><a href="components-vertical-timeline.html"><i class="zmdi zmdi-dot-circle-alt"></i> Vertical Timeline</a></li>
-                        <li><a href="components-horizontal-timeline.html"><i class="zmdi zmdi-dot-circle-alt"></i> Horizontal Timeline</a></li>
-                        <li><a href="components-fancy-lightbox.html"><i class="zmdi zmdi-dot-circle-alt"></i> Fancy Lightbox</a></li>
-                        <li><a href="components-color-palette.html"><i class="zmdi zmdi-dot-circle-alt"></i> Color Palette</a></li>
+                        <li><a href="components-range-slider.html"><i class="zmdi zmdi-dot-circle-alt"></i> Range
+                            Sliders</a></li>
+                        <li><a href="components-image-carousel.html"><i class="zmdi zmdi-dot-circle-alt"></i> Image
+                            Carousels</a></li>
+                        <li><a href="components-grid-layouts.html"><i class="zmdi zmdi-dot-circle-alt"></i> Grid Layouts</a>
+                        </li>
+                        <li><a href="components-switcher-buttons.html"><i class="zmdi zmdi-dot-circle-alt"></i> Switcher
+                            Buttons</a></li>
+                        <li><a href="components-pricing-table.html"><i class="zmdi zmdi-dot-circle-alt"></i> Pricing
+                            Tables</a></li>
+                        <li><a href="components-vertical-timeline.html"><i class="zmdi zmdi-dot-circle-alt"></i>
+                            Vertical Timeline</a></li>
+                        <li><a href="components-horizontal-timeline.html"><i class="zmdi zmdi-dot-circle-alt"></i>
+                            Horizontal Timeline</a></li>
+                        <li><a href="components-fancy-lightbox.html"><i class="zmdi zmdi-dot-circle-alt"></i> Fancy
+                            Lightbox</a></li>
+                        <li><a href="components-color-palette.html"><i class="zmdi zmdi-dot-circle-alt"></i> Color
+                            Palette</a></li>
                     </ul>
                 </li>
                 <li>
@@ -97,7 +119,8 @@
                     <ul class="sidebar-submenu">
                         <li><a href="charts-chartjs.html"><i class="zmdi zmdi-dot-circle-alt"></i> Chart JS</a></li>
                         <li><a href="charts-apex.html"><i class="zmdi zmdi-dot-circle-alt"></i> Apex Charts</a></li>
-                        <li><a href="charts-sparkline.html"><i class="zmdi zmdi-dot-circle-alt"></i> Sparkline Charts</a></li>
+                        <li><a href="charts-sparkline.html"><i class="zmdi zmdi-dot-circle-alt"></i> Sparkline
+                            Charts</a></li>
                         <li><a href="charts-peity.html"><i class="zmdi zmdi-dot-circle-alt"></i> Peity Charts</a></li>
                         <li><a href="charts-other.html"><i class="zmdi zmdi-dot-circle-alt"></i> Other Charts</a></li>
                     </ul>
@@ -108,7 +131,8 @@
                         <i class="fa fa-angle-left float-right"></i>
                     </a>
                     <ul class="sidebar-submenu">
-                        <li><a href="widgets-static.html"><i class="zmdi zmdi-dot-circle-alt"></i> Static Widgets</a></li>
+                        <li><a href="widgets-static.html"><i class="zmdi zmdi-dot-circle-alt"></i> Static Widgets</a>
+                        </li>
                         <li><a href="widgets-data.html"><i class="zmdi zmdi-dot-circle-alt"></i> Data Widgets</a></li>
                     </ul>
                 </li>
@@ -133,13 +157,17 @@
                     </a>
                     <ul class="sidebar-submenu">
                         <li><a href="form-inputs.html"><i class="zmdi zmdi-dot-circle-alt"></i> Basic Inputs</a></li>
-                        <li><a href="form-input-group.html"><i class="zmdi zmdi-dot-circle-alt"></i> Input Groups</a></li>
+                        <li><a href="form-input-group.html"><i class="zmdi zmdi-dot-circle-alt"></i> Input Groups</a>
+                        </li>
                         <li><a href="form-layouts.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Layouts</a></li>
                         <li><a href="form-advanced.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Advanced</a></li>
                         <li><a href="form-uploads.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Uploads</a></li>
-                        <li><a href="form-validation.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Validation</a></li>
-                        <li><a href="form-step-wizard.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Wizard</a></li>
-                        <li><a href="form-text-editor.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Editor</a></li>
+                        <li><a href="form-validation.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Validation</a>
+                        </li>
+                        <li><a href="form-step-wizard.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Wizard</a>
+                        </li>
+                        <li><a href="form-text-editor.html"><i class="zmdi zmdi-dot-circle-alt"></i> Form Editor</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -149,13 +177,20 @@
                         <i class="fa fa-angle-left float-right"></i>
                     </a>
                     <ul class="sidebar-submenu">
-                        <li><a href="authentication-signin.html" target="_blank"><i class="zmdi zmdi-dot-circle-alt"></i> SignIn 1</a></li>
-                        <li><a href="authentication-signup.html" target="_blank"><i class="zmdi zmdi-dot-circle-alt"></i> SignUp 1</a></li>
-                        <li><a href="authentication-signin2.html" target="_blank"><i class="zmdi zmdi-dot-circle-alt"></i> SignIn 2</a></li>
-                        <li><a href="authentication-signup2.html" target="_blank"><i class="zmdi zmdi-dot-circle-alt"></i> SignUp 2</a></li>
-                        <li><a href="authentication-lock-screen.html" target="_blank"><i class="zmdi zmdi-dot-circle-alt"></i> Lock Screen</a></li>
-                        <li><a href="authentication-reset-password.html" target="_blank"><i class="zmdi zmdi-dot-circle-alt"></i> Reset Password 1</a></li>
-                        <li><a href="authentication-reset-password2.html" target="_blank"><i class="zmdi zmdi-dot-circle-alt"></i> Reset Password 2</a></li>
+                        <li><a href="authentication-signin.html" target="_blank"><i
+                                class="zmdi zmdi-dot-circle-alt"></i> SignIn 1</a></li>
+                        <li><a href="authentication-signup.html" target="_blank"><i
+                                class="zmdi zmdi-dot-circle-alt"></i> SignUp 1</a></li>
+                        <li><a href="authentication-signin2.html" target="_blank"><i
+                                class="zmdi zmdi-dot-circle-alt"></i> SignIn 2</a></li>
+                        <li><a href="authentication-signup2.html" target="_blank"><i
+                                class="zmdi zmdi-dot-circle-alt"></i> SignUp 2</a></li>
+                        <li><a href="authentication-lock-screen.html" target="_blank"><i
+                                class="zmdi zmdi-dot-circle-alt"></i> Lock Screen</a></li>
+                        <li><a href="authentication-reset-password.html" target="_blank"><i
+                                class="zmdi zmdi-dot-circle-alt"></i> Reset Password 1</a></li>
+                        <li><a href="authentication-reset-password2.html" target="_blank"><i
+                                class="zmdi zmdi-dot-circle-alt"></i> Reset Password 2</a></li>
                     </ul>
                 </li>
                 <li>
@@ -170,10 +205,13 @@
                         <i class="fa fa-angle-left float-right"></i>
                     </a>
                     <ul class="sidebar-submenu">
-                        <li><a href="icons-font-awesome.html"><i class="zmdi zmdi-dot-circle-alt"></i> Font Awesome</a></li>
-                        <li><a href="icons-material-designs.html"><i class="zmdi zmdi-dot-circle-alt"></i> Material Design</a></li>
+                        <li><a href="icons-font-awesome.html"><i class="zmdi zmdi-dot-circle-alt"></i> Font Awesome</a>
+                        </li>
+                        <li><a href="icons-material-designs.html"><i class="zmdi zmdi-dot-circle-alt"></i> Material
+                            Design</a></li>
                         <li><a href="icons-themify.html"><i class="zmdi zmdi-dot-circle-alt"></i> Themify Icons</a></li>
-                        <li><a href="icons-simple-line-icons.html"><i class="zmdi zmdi-dot-circle-alt"></i> Line Icons</a></li>
+                        <li><a href="icons-simple-line-icons.html"><i class="zmdi zmdi-dot-circle-alt"></i> Line
+                            Icons</a></li>
                         <li><a href="icons-flags.html"><i class="zmdi zmdi-dot-circle-alt"></i> Flag Icons</a></li>
                     </ul>
                 </li>
@@ -184,8 +222,10 @@
                         <i class="fa fa-angle-left float-right"></i>
                     </a>
                     <ul class="sidebar-submenu">
-                        <li><a href="table-simple-tables.html"><i class="zmdi zmdi-dot-circle-alt"></i> Simple Tables</a></li>
-                        <li><a href="table-data-tables.html"><i class="zmdi zmdi-dot-circle-alt"></i> Data Tables</a></li>
+                        <li><a href="table-simple-tables.html"><i class="zmdi zmdi-dot-circle-alt"></i> Simple
+                            Tables</a></li>
+                        <li><a href="table-data-tables.html"><i class="zmdi zmdi-dot-circle-alt"></i> Data Tables</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -207,9 +247,11 @@
                     </a>
                     <ul class="sidebar-submenu">
                         <li><a href="pages-invoice.html"><i class="zmdi zmdi-dot-circle-alt"></i> Invoice</a></li>
-                        <li><a href="pages-user-profile.html"><i class="zmdi zmdi-dot-circle-alt"></i> User Profile</a></li>
+                        <li><a href="pages-user-profile.html"><i class="zmdi zmdi-dot-circle-alt"></i> User Profile</a>
+                        </li>
                         <li><a href="pages-blank-page.html"><i class="zmdi zmdi-dot-circle-alt"></i> Blank Page</a></li>
-                        <li><a href="pages-coming-soon.html"><i class="zmdi zmdi-dot-circle-alt"></i> Coming Soon</a></li>
+                        <li><a href="pages-coming-soon.html"><i class="zmdi zmdi-dot-circle-alt"></i> Coming Soon</a>
+                        </li>
                         <li><a href="pages-403.html"><i class="zmdi zmdi-dot-circle-alt"></i> 403 Error</a></li>
                         <li><a href="pages-404.html"><i class="zmdi zmdi-dot-circle-alt"></i> 404 Error</a></li>
                         <li><a href="pages-500.html"><i class="zmdi zmdi-dot-circle-alt"></i> 500 Error</a></li>
@@ -224,25 +266,34 @@
                     <ul class="sidebar-submenu">
                         <li><a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level One</a></li>
                         <li>
-                            <a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                            <a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level One <i
+                                    class="fa fa-angle-left pull-right"></i></a>
                             <ul class="sidebar-submenu">
-                                <li><a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level Two</a></li>
+                                <li><a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level Two</a>
+                                </li>
                                 <li>
-                                    <a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                                    <a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level Two <i
+                                            class="fa fa-angle-left pull-right"></i></a>
                                     <ul class="sidebar-submenu">
-                                        <li><a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level Three</a></li>
-                                        <li><a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level Three</a></li>
+                                        <li><a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level
+                                            Three</a></li>
+                                        <li><a href="javaScript:void();"><i class="zmdi zmdi-dot-circle-alt"></i> Level
+                                            Three</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-dot-circle-alt"></i> Level One</a></li>
+                        <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-dot-circle-alt"></i>
+                            Level One</a></li>
                     </ul>
                 </li>
                 <li class="sidebar-header">LABELS</li>
-                <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
-                <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
-                <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>
+                <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-coffee text-danger"></i>
+                    <span>Important</span></a></li>
+                <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-chart-donut text-success"></i>
+                    <span>Warning</span></a></li>
+                <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>
+                </li>
             </ul>
 
         </div>
@@ -267,7 +318,8 @@
 
                 <ul class="navbar-nav align-items-center right-nav-link">
                     <li class="nav-item dropdown-lg">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                           href="javascript:void();">
                             <i class="fa fa-envelope-open-o"></i><span class="badge badge-light badge-up">12</span></a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <ul class="list-group list-group-flush">
@@ -278,7 +330,9 @@
                                 <li class="list-group-item">
                                     <a href="javaScript:void();">
                                         <div class="media">
-                                            <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                            <div class="avatar"><img class="align-self-start mr-3"
+                                                                     src="https://via.placeholder.com/110x110"
+                                                                     alt="user avatar"></div>
                                             <div class="media-body">
                                                 <h6 class="mt-0 msg-title">Jhon Deo</h6>
                                                 <p class="msg-info">Lorem ipsum dolor sit amet...</p>
@@ -290,7 +344,9 @@
                                 <li class="list-group-item">
                                     <a href="javaScript:void();">
                                         <div class="media">
-                                            <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                            <div class="avatar"><img class="align-self-start mr-3"
+                                                                     src="https://via.placeholder.com/110x110"
+                                                                     alt="user avatar"></div>
                                             <div class="media-body">
                                                 <h6 class="mt-0 msg-title">Sara Jen</h6>
                                                 <p class="msg-info">Lorem ipsum dolor sit amet...</p>
@@ -302,7 +358,9 @@
                                 <li class="list-group-item">
                                     <a href="javaScript:void();">
                                         <div class="media">
-                                            <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                            <div class="avatar"><img class="align-self-start mr-3"
+                                                                     src="https://via.placeholder.com/110x110"
+                                                                     alt="user avatar"></div>
                                             <div class="media-body">
                                                 <h6 class="mt-0 msg-title">Dannish Josh</h6>
                                                 <p class="msg-info">Lorem ipsum dolor sit amet...</p>
@@ -314,7 +372,9 @@
                                 <li class="list-group-item">
                                     <a href="javaScript:void();">
                                         <div class="media">
-                                            <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                            <div class="avatar"><img class="align-self-start mr-3"
+                                                                     src="https://via.placeholder.com/110x110"
+                                                                     alt="user avatar"></div>
                                             <div class="media-body">
                                                 <h6 class="mt-0 msg-title">Katrina Mccoy</h6>
                                                 <p class="msg-info">Lorem ipsum dolor sit amet.</p>
@@ -323,12 +383,14 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li class="list-group-item text-center"><a href="javaScript:void();">See All Messages</a></li>
+                                <li class="list-group-item text-center"><a href="javaScript:void();">See All
+                                    Messages</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item dropdown-lg">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                           href="javascript:void();">
                             <i class="fa fa-bell-o"></i><span class="badge badge-info badge-up">14</span></a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <ul class="list-group list-group-flush">
@@ -369,28 +431,33 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li class="list-group-item text-center"><a href="javaScript:void();">See All Notifications</a></li>
+                                <li class="list-group-item text-center"><a href="javaScript:void();">See All
+                                    Notifications</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item language">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown"
+                           href="javascript:void();"><i class="fa fa-flag"></i></a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-                            <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
+                            <li class="dropdown-item"><i class="flag-icon flag-icon-gb mr-2"></i> English</li>
+                            <li class="dropdown-item"><i class="flag-icon flag-icon-fr mr-2"></i> French</li>
+                            <li class="dropdown-item"><i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
+                            <li class="dropdown-item"><i class="flag-icon flag-icon-de mr-2"></i> German</li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-                            <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
+                            <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
+                                                            alt="user avatar"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item user-details">
                                 <a href="javaScript:void();">
                                     <div class="media">
-                                        <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                        <div class="avatar"><img class="align-self-start mr-3"
+                                                                 src="https://via.placeholder.com/110x110"
+                                                                 alt="user avatar"></div>
                                         <div class="media-body">
                                             <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
                                             <p class="user-subtitle">mccoy@example.com</p>
@@ -425,38 +492,46 @@
                         <div class="row row-group m-0">
                             <div class="col-12 col-lg-6 col-xl-3 border-light">
                                 <div class="card-body">
-                                    <h5 class="text-white mb-0">9526 <span class="float-right"><i class="fa fa-shopping-cart"></i></span></h5>
+                                    <h5 class="text-white mb-0">9526 <span class="float-right"><i
+                                            class="fa fa-shopping-cart"></i></span></h5>
                                     <div class="progress my-3" style="height:3px;">
                                         <div class="progress-bar" style="width:55%"></div>
                                     </div>
-                                    <p class="mb-0 text-white small-font">Total Orders <span class="float-right">+4.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
+                                    <p class="mb-0 text-white small-font">Total Orders <span
+                                            class="float-right">+4.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6 col-xl-3 border-light">
                                 <div class="card-body">
-                                    <h5 class="text-white mb-0">8323 <span class="float-right"><i class="fa fa-usd"></i></span></h5>
+                                    <h5 class="text-white mb-0">8323 <span class="float-right"><i class="fa fa-usd"></i></span>
+                                    </h5>
                                     <div class="progress my-3" style="height:3px;">
                                         <div class="progress-bar" style="width:55%"></div>
                                     </div>
-                                    <p class="mb-0 text-white small-font">Total Revenue <span class="float-right">+1.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
+                                    <p class="mb-0 text-white small-font">Total Revenue <span class="float-right">+1.2% <i
+                                            class="zmdi zmdi-long-arrow-up"></i></span></p>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6 col-xl-3 border-light">
                                 <div class="card-body">
-                                    <h5 class="text-white mb-0">6200 <span class="float-right"><i class="fa fa-eye"></i></span></h5>
+                                    <h5 class="text-white mb-0">6200 <span class="float-right"><i class="fa fa-eye"></i></span>
+                                    </h5>
                                     <div class="progress my-3" style="height:3px;">
                                         <div class="progress-bar" style="width:55%"></div>
                                     </div>
-                                    <p class="mb-0 text-white small-font">Visitors <span class="float-right">+5.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
+                                    <p class="mb-0 text-white small-font">Visitors <span class="float-right">+5.2% <i
+                                            class="zmdi zmdi-long-arrow-up"></i></span></p>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6 col-xl-3 border-light">
                                 <div class="card-body">
-                                    <h5 class="text-white mb-0">5630 <span class="float-right"><i class="fa fa-envira"></i></span></h5>
+                                    <h5 class="text-white mb-0">5630 <span class="float-right"><i
+                                            class="fa fa-envira"></i></span></h5>
                                     <div class="progress my-3" style="height:3px;">
                                         <div class="progress-bar" style="width:55%"></div>
                                     </div>
-                                    <p class="mb-0 text-white small-font">Messages <span class="float-right">+2.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
+                                    <p class="mb-0 text-white small-font">Messages <span class="float-right">+2.2% <i
+                                            class="zmdi zmdi-long-arrow-up"></i></span></p>
                                 </div>
                             </div>
                         </div>
@@ -469,7 +544,8 @@
                             <div class="card-header">Site Traffic
                                 <div class="card-action">
                                     <div class="dropdown">
-                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                           data-toggle="dropdown">
                                             <i class="icon-options"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
@@ -484,8 +560,10 @@
                             </div>
                             <div class="card-body">
                                 <ul class="list-inline">
-                                    <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New Visitor</li>
-                                    <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old Visitor</li>
+                                    <li class="list-inline-item"><i class="fa fa-circle mr-2 text-white"></i>New Visitor
+                                    </li>
+                                    <li class="list-inline-item"><i class="fa fa-circle mr-2 text-light"></i>Old Visitor
+                                    </li>
                                 </ul>
                                 <div class="chart-container-1">
                                     <canvas id="chart1"></canvas>
@@ -508,7 +586,8 @@
                                 <div class="col-12 col-lg-4">
                                     <div class="p-3">
                                         <h5 class="mb-0">245.65</h5>
-                                        <small class="mb-0">Pages/Visit <span> <i class="fa fa-arrow-up"></i> 5.62%</span></small>
+                                        <small class="mb-0">Pages/Visit <span> <i
+                                                class="fa fa-arrow-up"></i> 5.62%</span></small>
                                     </div>
                                 </div>
                             </div>
@@ -521,7 +600,8 @@
                             <div class="card-header">Weekly sales
                                 <div class="card-action">
                                     <div class="dropdown">
-                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                           data-toggle="dropdown">
                                             <i class="icon-options"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
@@ -579,7 +659,8 @@
                                     </div>
                                     <div class="media-body ml-3">
                                         <h6 class="mb-0">Facebook Followers</h6>
-                                        <small class="mb-0">22.14% <i class="fa fa-arrow-up"></i> Since Last Week</small>
+                                        <small class="mb-0">22.14% <i class="fa fa-arrow-up"></i> Since Last
+                                            Week</small>
                                     </div>
                                     <i class="fa fa-facebook text-white text-right fa-2x"></i>
                                 </div>
@@ -595,7 +676,8 @@
                                     </div>
                                     <div class="media-body ml-3">
                                         <h6 class="mb-0">Twitter Tweets</h6>
-                                        <small class="mb-0">32.15% <i class="fa fa-arrow-up"></i> Since Last Week</small>
+                                        <small class="mb-0">32.15% <i class="fa fa-arrow-up"></i> Since Last
+                                            Week</small>
                                     </div>
                                     <i class="fa fa-twitter text-white text-right fa-2x"></i>
                                 </div>
@@ -611,7 +693,8 @@
                                     </div>
                                     <div class="media-body ml-3">
                                         <h6 class="mb-0">Youtube Subscribers</h6>
-                                        <small class="mb-0">58.24% <i class="fa fa-arrow-up"></i> Since Last Week</small>
+                                        <small class="mb-0">58.24% <i class="fa fa-arrow-up"></i> Since Last
+                                            Week</small>
                                     </div>
                                     <i class="fa fa-youtube text-white fa-2x"></i>
                                 </div>
@@ -627,7 +710,8 @@
                             <div class="card-header">World Selling Region
                                 <div class="card-action">
                                     <div class="dropdown">
-                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                           data-toggle="dropdown">
                                             <i class="icon-options"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
@@ -694,7 +778,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <p>Page Views</p>
-                                        <h4 class="mb-0">8,293 <small class="small-font">5.2% <i class="zmdi zmdi-long-arrow-up"></i></small></h4>
+                                        <h4 class="mb-0">8,293 <small class="small-font">5.2% <i
+                                                class="zmdi zmdi-long-arrow-up"></i></small></h4>
                                     </div>
                                     <div class="chart-container-3">
                                         <canvas id="chart3"></canvas>
@@ -705,7 +790,8 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <p>Total Clicks</p>
-                                        <h4 class="mb-0">7,493 <small class="small-font">1.4% <i class="zmdi zmdi-long-arrow-up"></i></small></h4>
+                                        <h4 class="mb-0">7,493 <small class="small-font">1.4% <i
+                                                class="zmdi zmdi-long-arrow-up"></i></small></h4>
                                     </div>
                                     <div class="chart-container-3">
                                         <canvas id="chart4"></canvas>
@@ -716,9 +802,13 @@
                                 <div class="card">
                                     <div class="card-body text-center">
                                         <p class="mb-4">Total Downloads</p>
-                                        <input class="knob" data-width="175" data-height="175" data-readOnly="true" data-thickness=".2" data-angleoffset="90" data-linecap="round" data-bgcolor="rgba(255, 255, 255, 0.14)" data-fgcolor="#fff" data-max="15000" value="8550"/>
+                                        <input class="knob" data-width="175" data-height="175" data-readOnly="true"
+                                               data-thickness=".2" data-angleoffset="90" data-linecap="round"
+                                               data-bgcolor="rgba(255, 255, 255, 0.14)" data-fgcolor="#fff"
+                                               data-max="15000" value="8550"/>
                                         <hr>
-                                        <p class="mb-0 small-font text-center">3.4% <i class="zmdi zmdi-long-arrow-up"></i> since yesterday</p>
+                                        <p class="mb-0 small-font text-center">3.4% <i
+                                                class="zmdi zmdi-long-arrow-up"></i> since yesterday</p>
                                     </div>
                                 </div>
                             </div>
@@ -784,7 +874,8 @@
                             <div class="card-header">Customer Review
                                 <div class="card-action">
                                     <div class="dropdown">
-                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                           data-toggle="dropdown">
                                             <i class="icon-options"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
@@ -800,10 +891,12 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item bg-transparent">
                                     <div class="media align-items-center">
-                                        <img src="https://via.placeholder.com/110x110" alt="user avatar" class="customer-img rounded-circle">
+                                        <img src="https://via.placeholder.com/110x110" alt="user avatar"
+                                             class="customer-img rounded-circle">
                                         <div class="media-body ml-3">
                                             <h6 class="mb-0">iPhone X <small class="ml-4">08.34 AM</small></h6>
-                                            <p class="mb-0 small-font">Sara Jhon : This i svery Nice phone in low budget.</p>
+                                            <p class="mb-0 small-font">Sara Jhon : This i svery Nice phone in low
+                                                budget.</p>
                                         </div>
                                         <div class="star">
                                             <i class="zmdi zmdi-star"></i>
@@ -816,7 +909,8 @@
                                 </li>
                                 <li class="list-group-item bg-transparent">
                                     <div class="media align-items-center">
-                                        <img src="https://via.placeholder.com/110x110" alt="user avatar" class="customer-img rounded-circle">
+                                        <img src="https://via.placeholder.com/110x110" alt="user avatar"
+                                             class="customer-img rounded-circle">
                                         <div class="media-body ml-3">
                                             <h6 class="mb-0">Air Pod <small class="ml-4">05.26 PM</small></h6>
                                             <p class="mb-0 small-font">Danish Josh : The brand apple is original !</p>
@@ -832,10 +926,12 @@
                                 </li>
                                 <li class="list-group-item bg-transparent">
                                     <div class="media align-items-center">
-                                        <img src="https://via.placeholder.com/110x110" alt="user avatar" class="customer-img rounded-circle">
+                                        <img src="https://via.placeholder.com/110x110" alt="user avatar"
+                                             class="customer-img rounded-circle">
                                         <div class="media-body ml-3">
                                             <h6 class="mb-0">Mackbook Pro <small class="ml-4">06.45 AM</small></h6>
-                                            <p class="mb-0 small-font">Jhon Doe : Excllent product and awsome quality</p>
+                                            <p class="mb-0 small-font">Jhon Doe : Excllent product and awsome
+                                                quality</p>
                                         </div>
                                         <div class="star">
                                             <i class="zmdi zmdi-star"></i>
@@ -848,7 +944,8 @@
                                 </li>
                                 <li class="list-group-item bg-transparent">
                                     <div class="media align-items-center">
-                                        <img src="https://via.placeholder.com/110x110" alt="user avatar" class="customer-img rounded-circle">
+                                        <img src="https://via.placeholder.com/110x110" alt="user avatar"
+                                             class="customer-img rounded-circle">
                                         <div class="media-body ml-3">
                                             <h6 class="mb-0">Air Pod <small class="ml-4">08.34 AM</small></h6>
                                             <p class="mb-0 small-font">Christine : The brand apple is original !</p>
@@ -864,7 +961,8 @@
                                 </li>
                                 <li class="list-group-item bg-transparent">
                                     <div class="media align-items-center">
-                                        <img src="https://via.placeholder.com/110x110" alt="user avatar" class="customer-img rounded-circle">
+                                        <img src="https://via.placeholder.com/110x110" alt="user avatar"
+                                             class="customer-img rounded-circle">
                                         <div class="media-body ml-3">
                                             <h6 class="mb-0">Mackbook <small class="ml-4">08.34 AM</small></h6>
                                             <p class="mb-0 small-font">Michle : The brand apple is original !</p>
@@ -889,7 +987,8 @@
                             <div class="card-header">Recent Order Tables
                                 <div class="card-action">
                                     <div class="dropdown">
-                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
+                                        <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret"
+                                           data-toggle="dropdown">
                                             <i class="icon-options"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
@@ -914,73 +1013,93 @@
                                         <th>Shipping</th>
                                     </tr>
                                     </thead>
-                                    <tbody><tr>
+                                    <tbody>
+                                    <tr>
                                         <td>Iphone 5</td>
-                                        <td><img src="https://via.placeholder.com/110x110" class="product-img" alt="product img"></td>
+                                        <td><img src="https://via.placeholder.com/110x110" class="product-img"
+                                                 alt="product img"></td>
                                         <td>#9405822</td>
                                         <td>$ 1250.00</td>
                                         <td>03 Aug 2017</td>
-                                        <td><div class="progress shadow" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 90%"></div>
-                                        </div></td>
+                                        <td>
+                                            <div class="progress shadow" style="height: 3px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                                            </div>
+                                        </td>
                                     </tr>
 
                                     <tr>
                                         <td>Earphone GL</td>
-                                        <td><img src="https://via.placeholder.com/110x110" class="product-img" alt="product img"></td>
+                                        <td><img src="https://via.placeholder.com/110x110" class="product-img"
+                                                 alt="product img"></td>
                                         <td>#9405820</td>
                                         <td>$ 1500.00</td>
                                         <td>03 Aug 2017</td>
-                                        <td><div class="progress shadow" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 60%"></div>
-                                        </div></td>
+                                        <td>
+                                            <div class="progress shadow" style="height: 3px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 60%"></div>
+                                            </div>
+                                        </td>
                                     </tr>
 
                                     <tr>
                                         <td>HD Hand Camera</td>
-                                        <td><img src="https://via.placeholder.com/110x110" class="product-img" alt="product img"></td>
+                                        <td><img src="https://via.placeholder.com/110x110" class="product-img"
+                                                 alt="product img"></td>
                                         <td>#9405830</td>
                                         <td>$ 1400.00</td>
                                         <td>03 Aug 2017</td>
-                                        <td><div class="progress shadow" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 70%"></div>
-                                        </div></td>
+                                        <td>
+                                            <div class="progress shadow" style="height: 3px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 70%"></div>
+                                            </div>
+                                        </td>
                                     </tr>
 
                                     <tr>
                                         <td>Clasic Shoes</td>
-                                        <td><img src="https://via.placeholder.com/110x110" class="product-img" alt="product img"></td>
+                                        <td><img src="https://via.placeholder.com/110x110" class="product-img"
+                                                 alt="product img"></td>
                                         <td>#9405825</td>
                                         <td>$ 1200.00</td>
                                         <td>03 Aug 2017</td>
-                                        <td><div class="progress shadow" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 100%"></div>
-                                        </div></td>
+                                        <td>
+                                            <div class="progress shadow" style="height: 3px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 100%"></div>
+                                            </div>
+                                        </td>
                                     </tr>
 
                                     <tr>
                                         <td>Hand Watch</td>
-                                        <td><img src="https://via.placeholder.com/110x110" class="product-img" alt="product img"></td>
+                                        <td><img src="https://via.placeholder.com/110x110" class="product-img"
+                                                 alt="product img"></td>
                                         <td>#9405840</td>
                                         <td>$ 1800.00</td>
                                         <td>03 Aug 2017</td>
-                                        <td><div class="progress shadow" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 40%"></div>
-                                        </div></td>
+                                        <td>
+                                            <div class="progress shadow" style="height: 3px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 40%"></div>
+                                            </div>
+                                        </td>
                                     </tr>
 
                                     <tr>
                                         <td>Clasic Shoes</td>
-                                        <td><img src="https://via.placeholder.com/110x110" class="product-img" alt="product img"></td>
+                                        <td><img src="https://via.placeholder.com/110x110" class="product-img"
+                                                 alt="product img"></td>
                                         <td>#9405825</td>
                                         <td>$ 1200.00</td>
                                         <td>03 Aug 2017</td>
-                                        <td><div class="progress shadow" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 100%"></div>
-                                        </div></td>
+                                        <td>
+                                            <div class="progress shadow" style="height: 3px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 100%"></div>
+                                            </div>
+                                        </td>
                                     </tr>
 
-                                    </tbody></table>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -1053,7 +1172,7 @@
 <th:block layout:fragment="customScript">
     <script th:inline="javascript" type="text/javascript">
         $(function () {
-            // $(".knob").knob();
+            $(".knob").knob();
         });
     </script>
 </th:block>

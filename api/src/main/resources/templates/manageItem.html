@@ -87,7 +87,7 @@
 <th:block layout:fragment="customScript">
     <script th:inline="javascript" type="text/javascript">
         $(document).ready(function () {
-            $('#default-datatable').empty();
+            // $('#default-datatable').empty();
             var table = $('#default-datatable').DataTable({
                 ajax: "/api/item/clothing/SHOES",
                 columns: [
@@ -98,14 +98,29 @@
                     { title:'contents', data: 'contents' },
                     { title:'sizes', data: 'sizes' },
                 ],
-                // select: {
-                //     style: 'multi'
-                // },
                 select: {
                     style:    'multi',
                     selector: 'td:first-child'
                 },
+                buttons: [
+                    {
+                        text: 'Get selected data',
+                        action: function () {
+                            var count = table.rows( { selected: true } ).count();
+                            console.log(count);
+                            // events.prepend( '<div>'+count+' row(s) selected</div>' );
+                        }
+                    },
+                    'selected',
+                    'selectedSingle',
+                    'selectAll',
+                    'selectNone',
+                    'selectRows',
+                    'selectColumns',
+                    'selectCells'
+                ],
+                dom: 'Bfrtip',
             });
-        })
+        });
     </script>
 </th:block>

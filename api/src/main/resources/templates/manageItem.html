@@ -158,19 +158,26 @@
                         text: '<i class="fa fa-refresh"></i>',
                         action: function () {
                             var _selectedRows = table.rows({selected: true}).data().toArray();
-                            for (var _idx in _selectedRows) {
-                                console.log(_selectedRows[_idx].id);
+                            if(_selectedRows.length < 1) {
+                                alert("At least select one row.");
+                                return;
                             }
+                        },
+                        attr: {
+                            "data-toggle": "modal",
+                            "data-target": "#modal-animation-4"
                         }
                     },
                     {
                         text: '<i class="fa fa-minus"></i>',
                         action: function () {
                             var _selectedRows = table.rows({selected: true}).data().toArray();
-                            for (var _idx in _selectedRows) {
-                                console.log(_selectedRows[_idx].id);
+                            if(_selectedRows.length < 1) {
+                                alert("At least select one row.");
+                                return;
                             }
-                        }
+                            if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
+                        },
                     },
                 ],
             });

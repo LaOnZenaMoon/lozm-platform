@@ -27,7 +27,7 @@
                             <div class="card-header"><i class="fa fa-table"></i> Data Table Example</div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="default-datatable" class="table table-bordered">
+                                    <table id="default-datatable" class="table table-bordered display">
 
                                     </table>
                                 </div>
@@ -88,19 +88,23 @@
     <script th:inline="javascript" type="text/javascript">
         $(document).ready(function () {
             $('#default-datatable').empty();
-            $('#default-datatable').DataTable({
-
-                    ajax: "/api/item/clothing/SHOES",
-                    fixHeader: {header: true},
-                    columns: [
-                        { title:'id', data: 'id' },
-                        { title:'name', data: 'name' },
-                        { title:'price', data: 'price' },
-                        { title:'quantity', data: 'quantity' },
-                        { title:'contents', data: 'contents' },
-                        { title:'sizes', data: 'sizes' },
-                    ],
-                    data: [],
+            var table = $('#default-datatable').DataTable({
+                ajax: "/api/item/clothing/SHOES",
+                columns: [
+                    { title:'id', data: 'id', visible: false },
+                    { title:'name', data: 'name' },
+                    { title:'price', data: 'price' },
+                    { title:'quantity', data: 'quantity' },
+                    { title:'contents', data: 'contents' },
+                    { title:'sizes', data: 'sizes' },
+                ],
+                // select: {
+                //     style: 'multi'
+                // },
+                select: {
+                    style:    'multi',
+                    selector: 'td:first-child'
+                },
             });
         })
     </script>

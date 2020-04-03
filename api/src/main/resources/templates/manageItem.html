@@ -4,7 +4,13 @@
 
 <th:block layout:fragment="content">
 
-    <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
+    <div id="pageloader-overlay" class="visible incoming">
+        <div class="loader-wrapper-outer">
+            <div class="loader-wrapper-inner">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="wrapper">
 
@@ -19,12 +25,24 @@
         <div class="content-wrapper">
             <div class="container-fluid">
 
-                <th:block th:replace="@{layout/contentHeader.html} :: contentHeader('아이템 관리','아이템','','','')"></th:block>
+                <th:block
+                        th:replace="@{layout/contentHeader.html} :: contentHeader('아이템 관리','아이템','','','')"></th:block>
 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><i class="fa fa-table"></i> Data Table Example</div>
+                            <div class="card-header">
+                                <div>
+                                    <i class="fa fa-table"></i> Data Table Example
+                                </div>
+                                <div>
+                                    <div class="dt-buttons btn-group">
+                                        <button class="btn btn-light" type="button"><i class="fa fa-plus"></i></button>
+                                        <button class="btn btn-light" type="button"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-light" type="button"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="default-datatable" class="table table-bordered display">
@@ -91,37 +109,31 @@
             var table = $('#default-datatable').DataTable({
                 ajax: "/api/item/clothing/SHOES",
                 columns: [
-                    { title:'id', data: 'id' },
-                    { title:'name', data: 'name' },
-                    { title:'price', data: 'price' },
-                    { title:'quantity', data: 'quantity' },
-                    { title:'contents', data: 'contents' },
-                    { title:'sizes', data: 'sizes' },
+                    {title: 'id', data: 'id'},
+                    {title: 'name', data: 'name'},
+                    {title: 'price', data: 'price'},
+                    {title: 'quantity', data: 'quantity'},
+                    {title: 'contents', data: 'contents'},
+                    {title: 'sizes', data: 'sizes'},
                 ],
                 select: {
-                    style:    'multi',
+                    style: 'multi',
                     selector: 'td:first-child'
                 },
-                buttons: [
-                    {
-                        text: 'Get selected data',
-                        action: function () {
-                            var _selectedRows = table.rows({selected:true}).data().toArray();
-                            for(var _idx in _selectedRows) {
-                                console.log(_selectedRows[_idx].id);
-                            }
-
-                            // events.prepend( '<div>'+count+' row(s) selected</div>' );
-                        }
-                    },
-                    'selected',
-                    'selectedSingle',
-                    'selectAll',
-                    'selectNone',
-                    'selectRows',
-                    'selectColumns',
-                    'selectCells'
-                ],
+                // buttons: [
+                //     {
+                //         text: 'Get selected data',
+                //         action: function () {
+                //             var _selectedRows = table.rows({selected: true}).data().toArray();
+                //             for (var _idx in _selectedRows) {
+                //                 console.log(_selectedRows[_idx].id);
+                //             }
+                //
+                //             // events.prepend( '<div>'+count+' row(s) selected</div>' );
+                //         }
+                //     },
+                //     'selectAll',
+                // ],
                 dom: 'Bfrtip',
             });
         });

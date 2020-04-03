@@ -32,16 +32,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <div>
-                                    <i class="fa fa-table"></i> Data Table Example
-                                </div>
-                                <div>
-                                    <div class="dt-buttons btn-group">
-                                        <button class="btn btn-light" type="button"><i class="fa fa-plus"></i></button>
-                                        <button class="btn btn-light" type="button"><i class="fa fa-refresh"></i></button>
-                                        <button class="btn btn-light" type="button"><i class="fa fa-minus"></i></button>
-                                    </div>
-                                </div>
+                                <i class="fa fa-table"></i> Data Table Example
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -107,6 +98,7 @@
         $(document).ready(function () {
             // $('#default-datatable').empty();
             var table = $('#default-datatable').DataTable({
+                dom: 'Bftrip',
                 ajax: "/api/item/clothing/SHOES",
                 columns: [
                     {title: 'id', data: 'id'},
@@ -120,21 +112,43 @@
                     style: 'multi',
                     selector: 'td:first-child'
                 },
-                // buttons: [
-                //     {
-                //         text: 'Get selected data',
-                //         action: function () {
-                //             var _selectedRows = table.rows({selected: true}).data().toArray();
-                //             for (var _idx in _selectedRows) {
-                //                 console.log(_selectedRows[_idx].id);
-                //             }
-                //
-                //             // events.prepend( '<div>'+count+' row(s) selected</div>' );
-                //         }
-                //     },
-                //     'selectAll',
-                // ],
-                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        text: '<i class="fa fa-check"></i>',
+                        action: function () {
+                            var _selectedRows = table.rows({selected: true}).data().toArray();
+                            if(_selectedRows.length > 0) table.rows().deselect();
+                            else table.rows().select();
+                        }
+                    },
+                    {
+                        text: '<i class="fa fa-plus"></i>',
+                        action: function () {
+                            var _selectedRows = table.rows({selected: true}).data().toArray();
+                            for (var _idx in _selectedRows) {
+                                console.log(_selectedRows[_idx].id);
+                            }
+                        }
+                    },
+                    {
+                        text: '<i class="fa fa-refresh"></i>',
+                        action: function () {
+                            var _selectedRows = table.rows({selected: true}).data().toArray();
+                            for (var _idx in _selectedRows) {
+                                console.log(_selectedRows[_idx].id);
+                            }
+                        }
+                    },
+                    {
+                        text: '<i class="fa fa-minus"></i>',
+                        action: function () {
+                            var _selectedRows = table.rows({selected: true}).data().toArray();
+                            for (var _idx in _selectedRows) {
+                                console.log(_selectedRows[_idx].id);
+                            }
+                        }
+                    },
+                ],
             });
         });
     </script>

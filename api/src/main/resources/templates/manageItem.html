@@ -91,7 +91,7 @@
             var table = $('#default-datatable').DataTable({
                 ajax: "/api/item/clothing/SHOES",
                 columns: [
-                    { title:'id', data: 'id', visible: false },
+                    { title:'id', data: 'id' },
                     { title:'name', data: 'name' },
                     { title:'price', data: 'price' },
                     { title:'quantity', data: 'quantity' },
@@ -106,8 +106,11 @@
                     {
                         text: 'Get selected data',
                         action: function () {
-                            var count = table.rows( { selected: true } ).count();
-                            console.log(count);
+                            var _selectedRows = table.rows({selected:true}).data().toArray();
+                            for(var _idx in _selectedRows) {
+                                console.log(_selectedRows[_idx].id);
+                            }
+
                             // events.prepend( '<div>'+count+' row(s) selected</div>' );
                         }
                     },

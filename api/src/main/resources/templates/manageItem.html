@@ -116,71 +116,95 @@
 <th:block layout:fragment="customScript">
     <script th:inline="javascript" type="text/javascript">
         $(document).ready(function () {
-            // $('#default-datatable').empty();
-            var table = $('#default-datatable').DataTable({
-                dom: 'Bftrip',
-                ajax: "/api/item/clothing/SHOES",
-                columns: [
-                    {title: 'id', data: 'id'},
-                    {title: 'name', data: 'name'},
-                    {title: 'price', data: 'price'},
-                    {title: 'quantity', data: 'quantity'},
-                    {title: 'contents', data: 'contents'},
-                    {title: 'sizes', data: 'sizes'},
-                ],
-                select: {
-                    style: 'multi',
-                    selector: 'td:first-child'
-                },
-                buttons: [
-                    {
-                        text: '<i class="fa fa-check"></i>',
-                        action: function () {
-                            var _selectedRows = table.rows({selected: true}).data().toArray();
-                            if(_selectedRows.length > 0) table.rows().deselect();
-                            else table.rows().select();
-                        }
-                    },
-                    {
-                        text: '<i class="fa fa-plus"></i>',
-                        action: function () {
-                            var _selectedRows = table.rows({selected: true}).data().toArray();
-                            for (var _idx in _selectedRows) {
-                                console.log(_selectedRows[_idx].id);
-                            }
-                        },
-                        attr: {
-                            "data-toggle": "modal",
-                            "data-target": "#modal-animation-4"
-                        }
-                    },
-                    {
-                        text: '<i class="fa fa-refresh"></i>',
-                        action: function () {
-                            var _selectedRows = table.rows({selected: true}).data().toArray();
-                            if(_selectedRows.length < 1) {
-                                alert("At least select one row.");
-                                return;
-                            }
-                        },
-                        attr: {
-                            "data-toggle": "modal",
-                            "data-target": "#modal-animation-4"
-                        }
-                    },
-                    {
-                        text: '<i class="fa fa-minus"></i>',
-                        action: function () {
-                            var _selectedRows = table.rows({selected: true}).data().toArray();
-                            if(_selectedRows.length < 1) {
-                                alert("At least select one row.");
-                                return;
-                            }
-                            if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
-                        },
-                    },
-                ],
-            });
+            item.initGrid();
         });
+
+        var item = {
+            gridId: "default-datatable",
+            initGrid: function () {
+                $("#"+item.gridId).DataTable({
+                    dom: 'Bftrip',
+                    // ajax: "/api/item/clothing/SHOES",
+                    columns: [
+                        {title: 'id', data: 'id'},
+                        {title: 'name', data: 'name'},
+                        {title: 'price', data: 'price'},
+                        {title: 'quantity', data: 'quantity'},
+                        {title: 'contents', data: 'contents'},
+                        {title: 'sizes', data: 'sizes'},
+                    ],
+                    data: [],
+                    select: {
+                        style: 'multi',
+                        selector: 'td:first-child'
+                    },
+                    buttons: [
+                        {
+                            text: '<i class="fa fa-check"></i>',
+                            action: function () {
+                                var _selectedRows = table.rows({selected: true}).data().toArray();
+                                if(_selectedRows.length > 0) table.rows().deselect();
+                                else table.rows().select();
+                            }
+                        },
+                        {
+                            text: '<i class="fa fa-plus"></i>',
+                            action: function () {
+                                var _selectedRows = table.rows({selected: true}).data().toArray();
+                                for (var _idx in _selectedRows) {
+                                    console.log(_selectedRows[_idx].id);
+                                }
+                            },
+                            attr: {
+                                "data-toggle": "modal",
+                                "data-target": "#modal-animation-4"
+                            }
+                        },
+                        {
+                            text: '<i class="fa fa-refresh"></i>',
+                            action: function () {
+                                var _selectedRows = table.rows({selected: true}).data().toArray();
+                                if(_selectedRows.length < 1) {
+                                    alert("At least select one row.");
+                                    return;
+                                }
+                            },
+                            attr: {
+                                "data-toggle": "modal",
+                                "data-target": "#modal-animation-4"
+                            }
+                        },
+                        {
+                            text: '<i class="fa fa-minus"></i>',
+                            action: function () {
+                                var _selectedRows = table.rows({selected: true}).data().toArray();
+                                if(_selectedRows.length < 1) {
+                                    alert("At least select one row.");
+                                    return;
+                                }
+                                if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
+                            },
+                        },
+                    ],
+                });
+            },
+            getGridData: function () {
+                lozm.func.requestGet({
+                    url: "/api/item/clothing/SHOES",
+                    callback: {
+                        success: function(resData) {
+                            console.log(resData);
+                            $("#"+item.gridId).DataTable().clear().draw();
+                            item.gridData = resData.data;
+                        }, error: function(xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+                    }
+                });
+            },
+            gridData: [],
+        };
     </script>
 </th:block>

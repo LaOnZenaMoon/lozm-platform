@@ -121,6 +121,9 @@
 
         var item = {
             gridId: "default-datatable",
+            gridTarget: function () {
+                return $("#" + item.gridId).DataTable();
+            },
             initGrid: function () {
                 $("#"+item.gridId).DataTable({
                     dom: 'Bftrip',
@@ -142,15 +145,15 @@
                         {
                             text: '<i class="fa fa-check"></i>',
                             action: function () {
-                                var _selectedRows = table.rows({selected: true}).data().toArray();
-                                if(_selectedRows.length > 0) table.rows().deselect();
-                                else table.rows().select();
+                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
+                                if(_selectedRows.length > 0) item.gridTarget().rows().deselect();
+                                else item.gridTarget().rows().select();
                             }
                         },
                         {
                             text: '<i class="fa fa-plus"></i>',
                             action: function () {
-                                var _selectedRows = table.rows({selected: true}).data().toArray();
+                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
                                 for (var _idx in _selectedRows) {
                                     console.log(_selectedRows[_idx].id);
                                 }
@@ -163,7 +166,7 @@
                         {
                             text: '<i class="fa fa-refresh"></i>',
                             action: function () {
-                                var _selectedRows = table.rows({selected: true}).data().toArray();
+                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
                                 if(_selectedRows.length < 1) {
                                     alert("At least select one row.");
                                     return;
@@ -177,7 +180,7 @@
                         {
                             text: '<i class="fa fa-minus"></i>',
                             action: function () {
-                                var _selectedRows = table.rows({selected: true}).data().toArray();
+                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
                                 if(_selectedRows.length < 1) {
                                     alert("At least select one row.");
                                     return;
@@ -194,8 +197,10 @@
                     callback: {
                         success: function(resData) {
                             console.log(resData);
-                            $("#"+item.gridId).DataTable().clear().draw();
-                            item.gridData = resData.data;
+                            if(resData.success === true) {
+                                item.gridTarget().clear().draw();
+                                item.gridTarget().rows.add(resData.data).draw();
+                            }
                         }, error: function(xhr, status, error) {
                             console.log(xhr);
                             console.log(status);

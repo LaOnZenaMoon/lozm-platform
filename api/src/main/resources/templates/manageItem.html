@@ -117,6 +117,7 @@
     <script th:inline="javascript" type="text/javascript">
         $(document).ready(function () {
             item.initGrid();
+            item.getGridData();
         });
 
         var item = {
@@ -129,17 +130,17 @@
                     dom: 'Bftrip',
                     // ajax: "/api/item/clothing/SHOES",
                     columns: [
-                        {title: 'id', data: 'id'},
-                        {title: 'name', data: 'name'},
-                        {title: 'price', data: 'price'},
-                        {title: 'quantity', data: 'quantity'},
-                        {title: 'contents', data: 'contents'},
-                        {title: 'sizes', data: 'sizes'},
+                        {title: 'id', data: 'id', visible: false},
+                        {title: 'name', data: 'name', width: "30%"},
+                        {title: 'contents', data: 'contents', width: "40%"},
+                        {title: 'price', data: 'price', width: "10%"},
+                        {title: 'sizes', data: 'sizes', width: "10%"},
+                        {title: 'quantity', data: 'quantity', width: "10%"},
                     ],
                     data: [],
                     select: {
                         style: 'multi',
-                        selector: 'td:first-child'
+                        // selector: 'td:first-child'
                     },
                     buttons: [
                         {
@@ -191,7 +192,7 @@
                     ],
                 });
             },
-            getGridData: function () {
+            getGridData: function (itemType) {
                 lozm.func.requestGet({
                     url: "/api/item/clothing/SHOES",
                     callback: {
@@ -209,7 +210,7 @@
                     }
                 });
             },
-            gridData: [],
+
         };
     </script>
 </th:block>

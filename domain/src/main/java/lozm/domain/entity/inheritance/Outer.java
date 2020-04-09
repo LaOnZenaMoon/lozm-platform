@@ -24,4 +24,8 @@ public class Outer extends Item {
         clothing.setClothing(itemVo.getContents(), itemVo.getSize());
     }
 
+    public void updateOuter(ItemVo itemVo) {
+        updateItem(itemVo);
+        clothing.setClothing(itemVo.getContents(), itemVo.getSize());
+    }
 }

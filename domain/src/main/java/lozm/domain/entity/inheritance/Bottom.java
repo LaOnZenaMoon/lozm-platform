@@ -24,4 +24,8 @@ public class Bottom extends Item {
         clothing.setClothing(itemVo.getContents(), itemVo.getSize());
     }
 
+    public void updateBottom(ItemVo itemVo) {
+        updateItem(itemVo);
+        clothing.setClothing(itemVo.getContents(), itemVo.getSize());
+    }
 }

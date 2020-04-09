@@ -74,7 +74,22 @@ public class ItemService {
     public void update(ItemVo itemVo) throws Exception {
         Optional<Item> findItem = itemRepository.findById(itemVo.getId());
         findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
-        findItem.get().updateItem(itemVo);
+//        findItem.get().updateItem(itemVo);
+
+        String itemType = findItem.get().getType();
+        if(ItemType.OUTER.toString().equals(itemType)) {
+            Optional<Outer> findOuter = outerRepository.findById(itemVo.getId());
+            findOuter.get().updateOuter(itemVo);
+        } else if(ItemType.TOP.toString().equals(itemType)) {
+            Optional<Top> findTop = topRepository.findById(itemVo.getId());
+            findTop.get().updateTop(itemVo);
+        } else if(ItemType.BOTTOM.toString().equals(itemType)) {
+            Optional<Bottom> findBottom = bottomRepository.findById(itemVo.getId());
+            findBottom.get().updateBottom(itemVo);
+        } else if(ItemType.SHOES.toString().equals(itemType)) {
+            Optional<Shoes> findShoes = shoesRepository.findById(itemVo.getId());
+            findShoes.get().updateShoes(itemVo);
+        }
     }
 
     public List<GetClothingDto> findAllClothing(ItemVo itemVo) throws InterruptedException {

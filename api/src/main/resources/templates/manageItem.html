@@ -267,7 +267,7 @@
                     ],
                 });
             },
-            getGridData: function (itemType) {
+            getGridData: function () {
                 lozm.func.requestGet({
                     url: "/api/item/clothing/SHOES",
                     callback: {
@@ -294,7 +294,8 @@
                         price: $("#post_shoes_price").val(),
                         quantity: $("#post_shoes_quantity").val(),
                         contents: $("#post_shoes_contents").val(),
-                        size: $("#post_shoes_size").val()
+                        size: $("#post_shoes_size").val(),
+                        type: "SHOES"
                     },
                     callback: {
                         success: function (result) {

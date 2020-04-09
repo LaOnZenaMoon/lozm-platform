@@ -28,6 +28,9 @@ public class Item extends BaseEntity {
     @Column(name = "QUANTITY")
     private Long quantity;
 
+    @Column(name = "type", insertable = false, updatable = false)
+    protected String type;
+
     public void insertItem(ItemVo itemVo) {
         this.name = itemVo.getName();
         this.price = itemVo.getPrice();

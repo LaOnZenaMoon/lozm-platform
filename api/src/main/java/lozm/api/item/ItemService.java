@@ -71,10 +71,10 @@ public class ItemService {
     }
 
     @Transactional
-    public void update(PutItemDto.Request reqDto) throws Exception {
-        Optional<Item> findItem = itemRepository.findById(reqDto.getId());
+    public void update(ItemVo itemVo) throws Exception {
+        Optional<Item> findItem = itemRepository.findById(itemVo.getId());
         findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
-        findItem.get().updateItem(reqDto);
+        findItem.get().updateItem(itemVo);
     }
 
     public List<GetClothingDto> findAllClothing(ItemVo itemVo) throws InterruptedException {
@@ -86,7 +86,7 @@ public class ItemService {
                     o.getPrice(),
                     o.getQuantity(),
                     o.getClothing().getContents(),
-                    o.getClothing().getSize()
+                    o.getClothing().getSizes()
             )).collect(toList());
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
             List<Top> itemList = topRepository.findAll();
@@ -96,7 +96,7 @@ public class ItemService {
                     o.getPrice(),
                     o.getQuantity(),
                     o.getClothing().getContents(),
-                    o.getClothing().getSize()
+                    o.getClothing().getSizes()
             )).collect(toList());
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
             List<Bottom> itemList = bottomRepository.findAll();
@@ -106,7 +106,7 @@ public class ItemService {
                     o.getPrice(),
                     o.getQuantity(),
                     o.getClothing().getContents(),
-                    o.getClothing().getSize()
+                    o.getClothing().getSizes()
             )).collect(toList());
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
             List<Shoes> itemList = shoesRepository.findAll();
@@ -116,7 +116,7 @@ public class ItemService {
                     o.getPrice(),
                     o.getQuantity(),
                     o.getClothing().getContents(),
-                    o.getClothing().getSize()
+                    o.getClothing().getSizes()
             )).collect(toList());
         } else {
             throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");

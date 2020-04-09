@@ -90,7 +90,15 @@ public class ItemAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            itemService.update(reqDto);
+            ItemVo itemvo = ItemVo.builder()
+                    .id(reqDto.getId())
+                    .name(reqDto.getName())
+                    .price(reqDto.getPrice())
+                    .quantity(reqDto.getQuantity())
+                    .flag(reqDto.getFlag())
+                    .build();
+
+            itemService.update(itemvo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

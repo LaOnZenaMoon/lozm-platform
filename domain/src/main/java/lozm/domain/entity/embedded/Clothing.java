@@ -9,11 +9,11 @@ import javax.persistence.Embeddable;
 public class Clothing {
 
     private String contents;
-    private String size;
+    private String sizes;
 
     public void setClothing(String contents, String size) {
         this.contents = contents;
-        this.size = size;
+        this.sizes = size;
     }
 
 }

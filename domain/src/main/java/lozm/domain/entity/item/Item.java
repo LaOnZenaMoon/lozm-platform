@@ -34,11 +34,11 @@ public class Item extends BaseEntity {
         this.quantity = itemVo.getQuantity();
     }
 
-    public void updateItem(PutItemDto.Request reqDto) {
-        this.name = reqDto.getName();
-        this.price = reqDto.getPrice();
-        this.quantity = reqDto.getQuantity();
-        this.setBaseEntity("", reqDto.getFlag());
+    public void updateItem(ItemVo itemVo) {
+        this.name = itemVo.getName();
+        this.price = itemVo.getPrice();
+        this.quantity = itemVo.getQuantity();
+        this.setBaseEntity("", itemVo.getFlag());
     }
 
     public void decreaseItemQuantity(Long quantity) throws Exception {

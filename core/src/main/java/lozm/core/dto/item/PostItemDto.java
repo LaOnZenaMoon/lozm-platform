@@ -43,10 +43,4 @@ public class PostItemDto {
         }
     }
 
-    @Getter
-    @Setter
-    public static class Response {
-
-    }
-
 }

@@ -76,7 +76,7 @@ public class ItemService {
         findItem.get().updateItem(reqDto);
     }
 
-    public List<GetClothingDto.Response> findAllClothing(String itemType) {
+    public List<GetClothingDto.Response> findAllClothing(String itemType) throws InterruptedException {
         if(ItemType.OUTER.toString().equals(itemType)) {
             List<Outer> itemList = outerRepository.findAll();
             return itemList.stream().map(o -> new GetClothingDto.Response(

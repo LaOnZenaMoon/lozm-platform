@@ -99,33 +99,13 @@
         $.ajaxSetup(ajaxOptions);
     };
 
-    var constantValue = {
-        LOADING_BAR: "_LOADING_BAR"
-    };
-
-    var loadingBar = $("<div/>")
-        .attr("id", constantValue.LOADING_BAR)
-        .addClass("loading-area")
-        .append(
-            $("<div/>")
-                .addClass("loading")
-                .append(
-                    $("<img/>").attr("src", "\\resources\\images\\loadingBar.gif")
-                )
-        );
 
     var showLoadingBar = lozm.func.showLoadingBar = function() {
-        var _body = $("body");
-        if (isEmpty(_body.find("[id='" + constantValue.LOADING_BAR + "']"))) {
-            _body.append(loadingBar);
-        }
+        $("#pageloader-overlay").show();
     };
 
     var hideLoadingBar = lozm.func.hideLoadingBar = function() {
-        var _body = $("body");
-        if (isNotEmpty(_body.find("[id='" + constantValue.LOADING_BAR + "']"))) {
-            loadingBar.remove();
-        }
+        $("#pageloader-overlay").hide();
     };
 
     lozm.func.requestGet = function(options) {

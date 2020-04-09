@@ -204,7 +204,7 @@
                         {title: 'name',     data: 'name',       width: "30%"},
                         {title: 'contents', data: 'contents',   width: "40%"},
                         {title: 'price',    data: 'price',      width: "10%"},
-                        {title: 'size',    data: 'size',      width: "10%"},
+                        {title: 'size',     data: 'size',       width: "10%"},
                         {title: 'quantity', data: 'quantity',   width: "10%"},
                     ],
                     data: [],
@@ -271,11 +271,11 @@
                 lozm.func.requestGet({
                     url: "/api/item/clothing/SHOES",
                     callback: {
-                        success: function(resData) {
-                            console.log(resData);
-                            if(resData.success === true) {
+                        success: function(result) {
+                            console.log(result);
+                            if(result.success === true) {
                                 item.gridTarget().clear().draw();
-                                item.gridTarget().rows.add(resData.data).draw();
+                                item.gridTarget().rows.add(result.data.list).draw();
                             }
                         },
                         error: function(xhr, status, error) {

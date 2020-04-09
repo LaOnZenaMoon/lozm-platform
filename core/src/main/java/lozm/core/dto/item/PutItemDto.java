@@ -20,6 +20,10 @@ public class PutItemDto {
 
         private Long quantity;
 
+        private String contents;
+
+        private String size;
+
         private int flag;
     }
 

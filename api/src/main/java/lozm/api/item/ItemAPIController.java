@@ -95,6 +95,8 @@ public class ItemAPIController {
                     .name(reqDto.getName())
                     .price(reqDto.getPrice())
                     .quantity(reqDto.getQuantity())
+                    .contents(reqDto.getContents())
+                    .size(reqDto.getSize())
                     .flag(reqDto.getFlag())
                     .build();
 

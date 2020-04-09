@@ -3,21 +3,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-
-    <div id="pageloader-overlay" class="visible incoming">
-        <div class="loader-wrapper-outer">
-            <div class="loader-wrapper-inner">
-                <div class="loader"></div>
-            </div>
-        </div>
-    </div>
+    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
 
     <div id="wrapper">
-
-        <th:block th:replace="@{layout/mainSidebar.html} :: sidebar"></th:block>
-
+        <th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
         <th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-
         <th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
 
         <div class="clearfix"></div>
@@ -32,84 +22,118 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fa fa-table"></i> Data Table Example
+                                <i class="fa fa-table"></i> Item > Shoes
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="default-datatable" class="table table-bordered display">
-
-                                    </table>
+                                    <table id="default-datatable" class="table table-bordered display"></table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div><!-- End Row-->
+                </div>
 
                 <div class="overlay toggle-menu"></div>
             </div>
 
         </div>
 
-        <div class="modal fade" id="modal-animation-4">
+        <div class="modal fade" id="post_shoes">
             <div class="modal-dialog">
                 <div class="modal-content animated slideInUp">
                     <div class="modal-header">
-                        <h5 class="modal-title">Your modal title here</h5>
+                        <h5 class="modal-title">post</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, dicta. Voluptate cumque odit quam velit maiores sint rerum, dolore impedit commodi. Tempora eveniet odit vero rem blanditiis, tenetur laudantium cumque.</p>
+                    <form id="post_shoesForm">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="post_shoes_name">name</label>
+                                <input type="text" class="form-control" id="post_shoes_name" name="post_shoes_name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="post_shoes_price">price</label>
+                                <input type="text" class="form-control" id="post_shoes_price" name="post_shoes_price">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="post_shoes_size">size</label>
+                                <input type="text" class="form-control" id="post_shoes_size" name="post_shoes_size">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="post_shoes_quantity">quantity</label>
+                                <input type="text" class="form-control" id="post_shoes_quantity" name="post_shoes_quantity">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="post_shoes_contents">contents</label>
+                                <textarea rows="4" class="form-control" id="post_shoes_contents" name="post_shoes_contents"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" onclick="item.post()"><i class="fa fa-check-square-o"></i>Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="put_shoes">
+            <div class="modal-dialog">
+                <div class="modal-content animated slideInUp">
+                    <div class="modal-header">
+                        <h5 class="modal-title">put</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        <button type="button" class="btn btn-success"><i class="fa fa-check-square-o"></i> Save changes</button>
-                    </div>
+                    <form id="put_shoesForm">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="put_shoes_id">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="put_shoes_name">name</label>
+                                <input type="text" class="form-control" id="put_shoes_name" name="put_shoes_name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="put_shoes_price">price</label>
+                                <input type="text" class="form-control" id="put_shoes_price" name="put_shoes_price">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="post_shoes_size">size</label>
+                                <input type="text" class="form-control" id="put_shoes_size" name="post_shoes_size">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="put_shoes_quantity">quantity</label>
+                                <input type="text" class="form-control" id="put_shoes_quantity" name="put_shoes_quantity">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="put_shoes_contents">contents</label>
+                                <textarea rows="4" class="form-control" id="put_shoes_contents" name="put_shoes_contents"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" onclick="item.put()"><i class="fa fa-check-square-o"></i>Save</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
         <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
 
-
         <th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-
-        <div class="right-sidebar">
-            <div class="switcher-icon">
-                <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
-            </div>
-            <div class="right-sidebar-content">
-
-                <p class="mb-0">Gaussion Texture</p>
-                <hr>
-
-                <ul class="switcher">
-                    <li id="theme1"></li>
-                    <li id="theme2"></li>
-                    <li id="theme3"></li>
-                    <li id="theme4"></li>
-                    <li id="theme5"></li>
-                    <li id="theme6"></li>
-                </ul>
-
-                <p class="mb-0">Gradient Background</p>
-                <hr>
-
-                <ul class="switcher">
-                    <li id="theme7"></li>
-                    <li id="theme8"></li>
-                    <li id="theme9"></li>
-                    <li id="theme10"></li>
-                    <li id="theme11"></li>
-                    <li id="theme12"></li>
-                    <li id="theme13"></li>
-                    <li id="theme14"></li>
-                    <li id="theme15"></li>
-                </ul>
-
-            </div>
-        </div>
+        <th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
     </div>
 </th:block>
 
@@ -118,6 +142,48 @@
         $(document).ready(function () {
             item.initGrid();
             item.getGridData();
+
+            $("#post_shoesForm").validate({
+                rules: {
+                    itemTel: {
+                        required: true,
+                        minlength: 3
+                    },
+                    bigo: {
+                        required: true
+                    }
+                },
+                message: {
+                    itemTel: {
+                        required: "itemTel is required.",
+                        minlength: "itemTel min length is 3."
+                    },
+                    bigo: {
+                        required: "Bigo is required."
+                    },
+                },
+            });
+
+            $("#put_itemForm").validate({
+                rules: {
+                    itemTel: {
+                        required: true,
+                        minlength: 3
+                    },
+                    bigo: {
+                        required: true
+                    }
+                },
+                message: {
+                    itemTel: {
+                        required: "itemTel is required.",
+                        minlength: "itemTel min length is 3."
+                    },
+                    bigo: {
+                        required: "Bigo is required."
+                    },
+                },
+            });
         });
 
 
@@ -134,21 +200,20 @@
                     dom: 'Bftrip',
                     // ajax: "/api/item/clothing/SHOES",
                     columns: [
-                        {title: 'id', data: 'id', visible: false},
-                        {title: 'name', data: 'name', width: "30%"},
-                        {title: 'contents', data: 'contents', width: "40%"},
-                        {title: 'price', data: 'price', width: "10%"},
-                        {title: 'sizes', data: 'sizes', width: "10%"},
-                        {title: 'quantity', data: 'quantity', width: "10%"},
+                        {title: 'id',       data: 'id',         visible: false},
+                        {title: 'name',     data: 'name',       width: "30%"},
+                        {title: 'contents', data: 'contents',   width: "40%"},
+                        {title: 'price',    data: 'price',      width: "10%"},
+                        {title: 'size',    data: 'size',      width: "10%"},
+                        {title: 'quantity', data: 'quantity',   width: "10%"},
                     ],
                     data: [],
                     select: {
                         style: 'multi',
-                        // selector: 'td:first-child'
                     },
                     buttons: [
                         {
-                            text: '<i class="fa fa-check"></i>',
+                            text: '<i class="fa fa-check-square"></i>',
                             action: function () {
                                 var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
                                 if(_selectedRows.length > 0) item.gridTarget().rows().deselect();
@@ -158,29 +223,25 @@
                         {
                             text: '<i class="fa fa-plus"></i>',
                             action: function () {
-                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
-                                for (var _idx in _selectedRows) {
-                                    console.log(_selectedRows[_idx].id);
-                                }
+                                $("#post_shoes").modal("show");
                             },
-                            attr: {
-                                "data-toggle": "modal",
-                                "data-target": "#modal-animation-4"
-                            }
                         },
                         {
-                            text: '<i class="fa fa-refresh"></i>',
+                            text: '<i class="fa fa-edit"></i>',
                             action: function () {
                                 var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
                                 if(_selectedRows.length < 1) {
                                     alert("At least select one row.");
                                     return;
+                                } else if(_selectedRows.length > 1) {
+                                    alert("Cannot select more then one row.");
+                                    return;
                                 }
+
+                                console.log(_selectedRows);
+                                lozm.func.setDetail("put_shoes_", _selectedRows[0]);
+                                $("#put_shoes").modal("show");
                             },
-                            attr: {
-                                "data-toggle": "modal",
-                                "data-target": "#modal-animation-4"
-                            }
                         },
                         {
                             text: '<i class="fa fa-minus"></i>',
@@ -195,11 +256,13 @@
                         },
                         {
                             extend: "csv",
-                            text: '<i class="fa fa-address-book"></i>',
+                            text: '<i class="fa fa-download"></i>',
+                            charset: 'UTF-16LE',
                         },
                         {
                             extend: "excel",
                             text: '<i class="fa fa-file-excel-o"></i>',
+                            charset: 'UTF-16LE',
                         }
                     ],
                 });
@@ -214,7 +277,8 @@
                                 item.gridTarget().clear().draw();
                                 item.gridTarget().rows.add(resData.data).draw();
                             }
-                        }, error: function(xhr, status, error) {
+                        },
+                        error: function(xhr, status, error) {
                             console.log(xhr);
                             console.log(status);
                             console.log(error);
@@ -222,7 +286,55 @@
                     }
                 });
             },
-
+            post: function () {
+                lozm.func.requestPost({
+                    url: "/api/item",
+                    data: {
+                        name: $("#post_shoes_name").val(),
+                        price: $("#post_shoes_price").val(),
+                        quantity: $("#post_shoes_quantity").val(),
+                        contents: $("#post_shoes_contents").val(),
+                        size: $("#post_shoes_size").val()
+                    },
+                    callback: {
+                        success: function (result) {
+                            console.log(result);
+                            item.getGridData();
+                            $("#post_shoesForm input textarea").clear();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+                    }
+                });
+            },
+            put: function () {
+                lozm.func.requestPut({
+                    url: "/api/item",
+                    data: {
+                        id: $("#put_shoes_id").val(),
+                        name: $("#put_shoes_name").val(),
+                        price: $("#put_shoes_price").val(),
+                        quantity: $("#put_shoes_quantity").val(),
+                        contents: $("#put_shoes_contents").val(),
+                        size: $("#put_shoes_size").val()
+                    },
+                    callback: {
+                        success: function (result) {
+                            console.log(result);
+                            item.getGridData();
+                            $("#put_shoesForm input textarea").clear();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+                    }
+                });
+            },
         };
     </script>
 </th:block>

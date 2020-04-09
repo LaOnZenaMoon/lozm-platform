@@ -74,14 +74,12 @@
         }, options);
 
         ajaxOptions.success = function(resData) {
-            // success 함수가 있을 때 실행되는 코드
             if (options.callback.success) {
                 options.callback.success(resData);
             }
         };
 
         ajaxOptions.error = function(xhr, status, error) {
-            // error 함수가 있을 때 실행되는 코드
             if (options.callback.error) {
                 options.callback.error(xhr, status, error);
             }
@@ -159,6 +157,14 @@
         ajaxOptions.data = JSON.stringify(isNotEmpty(options.data) ? options.data : {});
 
         requestAjax(ajaxOptions);
+    };
+
+    lozm.func.setDetail = function (_id, _data) {
+        if(isNotEmpty(_data)) {
+            for(var _idx in _data) {
+                $("#"+_id+_idx).val(_data[_idx]);
+            }
+        }
     };
 
     init.prototype = lozm.func;

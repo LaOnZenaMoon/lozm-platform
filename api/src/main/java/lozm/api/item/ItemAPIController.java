@@ -6,6 +6,7 @@ import lozm.core.dto.item.GetClothingDto;
 import lozm.core.dto.item.GetItemDto;
 import lozm.core.dto.item.PostItemDto;
 import lozm.core.dto.item.PutItemDto;
+import lozm.core.vo.item.ItemVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,9 +25,12 @@ public class ItemAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetItemDto.Response> result = itemService.findAllItems();
+            List<GetItemDto> itemList = itemService.findAllItems();
+            GetItemDto.Response itemResDto = new GetItemDto.Response();
+            itemResDto.setList(itemList);
+
             resDto.setSuccess(true);
-            resDto.setData(result);
+            resDto.setData(itemResDto);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
@@ -40,9 +44,15 @@ public class ItemAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetClothingDto.Response> result = itemService.findAllClothing(itemType);
+            ItemVo itemVo = ItemVo.builder()
+                    .type(itemType)
+                    .build();
+            List<GetClothingDto> clothingList = itemService.findAllClothing(itemVo);
+            GetClothingDto.Response clothingResDto = new GetClothingDto.Response();
+            clothingResDto.setList(clothingList);
+
             resDto.setSuccess(true);
-            resDto.setData(result);
+            resDto.setData(clothingResDto);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
@@ -56,7 +66,15 @@ public class ItemAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            itemService.save(reqDto);
+            ItemVo itemvo = ItemVo.builder()
+                    .name(reqDto.getName())
+                    .price(reqDto.getPrice())
+                    .quantity(reqDto.getQuantity())
+                    .type(reqDto.getType())
+                    .contents(reqDto.getContents())
+                    .size(reqDto.getSize())
+                    .build();
+            itemService.save(itemvo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();

@@ -190,6 +190,8 @@
         //TODO
         //1. 엑셀, csv 다운로드 버튼 붙이기.
         //2. CRUD 기능 만들기.
+        //3. 삭제 기능 만들기
+        //4. 아이템 목록 flag 1 인 것만 가져오기 위해서, queryDSL 및 JPQL 이용하여 select 쿼리 만들기.
         var item = {
             gridId: "default-datatable",
             gridTarget: function () {
@@ -321,6 +323,27 @@
                         quantity: $("#put_shoes_quantity").val(),
                         contents: $("#put_shoes_contents").val(),
                         size: $("#put_shoes_size").val()
+                    },
+                    callback: {
+                        success: function (result) {
+                            console.log(result);
+                            item.getGridData();
+                            $("#put_shoesForm input textarea").clear();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+                    }
+                });
+            },
+            delete: function () {
+                lozm.func.requestPut({
+                    url: "/api/item",
+                    data: {
+                        id: $("#put_shoes_id").val(),
+                        flag: 0
                     },
                     callback: {
                         success: function (result) {

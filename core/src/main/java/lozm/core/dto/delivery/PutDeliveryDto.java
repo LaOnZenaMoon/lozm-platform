@@ -24,7 +24,7 @@ public class PutDeliveryDto {
 
         private String etc;
 
-        private DeliveryStatus status;
+        private String status;
 
         private int flag;
     }

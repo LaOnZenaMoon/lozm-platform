@@ -32,10 +32,4 @@ public class PostUserDto {
         }
     }
 
-    @Getter
-    @Setter
-    public static class Response {
-
-    }
-
 }

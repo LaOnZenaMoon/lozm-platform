@@ -20,10 +20,4 @@ public class PutUserDto {
         private int flag;
     }
 
-    @Getter
-    @Setter
-    public static class Response {
-
-    }
-
 }

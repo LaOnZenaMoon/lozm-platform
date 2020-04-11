@@ -42,10 +42,4 @@ public class PostDeliveryDto {
 
     }
 
-    @Getter
-    @Setter
-    public static class Response {
-
-    }
-
 }

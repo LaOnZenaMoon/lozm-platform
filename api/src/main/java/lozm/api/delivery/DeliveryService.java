@@ -6,6 +6,7 @@ import lozm.core.dto.delivery.GetDeliveryDto;
 import lozm.core.dto.delivery.PostDeliveryDto;
 import lozm.core.dto.delivery.PutDeliveryDto;
 import lozm.core.exception.APIException;
+import lozm.core.vo.delivery.DeliveryVo;
 import lozm.domain.entity.delivery.Delivery;
 import lozm.domain.repository.delivery.DeliveryRepository;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,10 @@ public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
 
 
-    public List<GetDeliveryDto.Response> findAllDeliveries() {
+    public List<GetDeliveryDto> findAllDeliveries() {
         List<Delivery> deliveryList = deliveryRepository.findAll();
 
-        return deliveryList.stream().map(d -> new GetDeliveryDto.Response(
+        return deliveryList.stream().map(d -> new GetDeliveryDto(
                     d.getId(),
                     d.getStatus(),
                     d.getAddress().getCountry(),
@@ -40,18 +41,18 @@ public class DeliveryService {
     }
 
     @Transactional
-    public void save(PostDeliveryDto.Request reqDto) throws Exception {
+    public void save(DeliveryVo deliveryVo) throws Exception {
         Delivery delivery = new Delivery();
-        delivery.insertDelivery(reqDto);
+        delivery.insertDelivery(deliveryVo);
 
         deliveryRepository.save(delivery);
     }
 
     @Transactional
-    public void update(PutDeliveryDto.Request reqDto) throws Exception {
-        Optional<Delivery> findDelivery = deliveryRepository.findById(reqDto.getId());
+    public void update(DeliveryVo deliveryVo) throws Exception {
+        Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
         findDelivery.orElseThrow(() -> new APIException("DELIVERY_0002", "Delivery doesn't exist."));
-        findDelivery.get().updateDelivery(reqDto);
+        findDelivery.get().updateDelivery(deliveryVo);
     }
     
 }

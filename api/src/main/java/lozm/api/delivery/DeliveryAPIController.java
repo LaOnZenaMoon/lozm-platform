@@ -6,6 +6,8 @@ import lozm.core.dto.APIResponseDto;
 import lozm.core.dto.delivery.GetDeliveryDto;
 import lozm.core.dto.delivery.PostDeliveryDto;
 import lozm.core.dto.delivery.PutDeliveryDto;
+import lozm.core.vo.delivery.DeliveryVo;
+import lozm.domain.entity.delivery.Delivery;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,9 +26,12 @@ public class DeliveryAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetDeliveryDto.Response> result = deliveryService.findAllDeliveries();
+            List<GetDeliveryDto> result = deliveryService.findAllDeliveries();
+            GetDeliveryDto.Response deliveryResDto = new GetDeliveryDto.Response();
+            deliveryResDto.setList(result);
+
             resDto.setSuccess(true);
-            resDto.setData(result);
+            resDto.setData(deliveryResDto);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
@@ -40,7 +45,16 @@ public class DeliveryAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            deliveryService.save(reqDto);
+            DeliveryVo deliveryVo = DeliveryVo.builder()
+                    .country(reqDto.getCountry())
+                    .zipCode(reqDto.getZipCode())
+                    .city(reqDto.getCity())
+                    .street(reqDto.getStreet())
+                    .etc(reqDto.getEtc())
+                    .status(reqDto.getStatus())
+                    .build();
+
+            deliveryService.save(deliveryVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +70,18 @@ public class DeliveryAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            deliveryService.update(reqDto);
+            DeliveryVo deliveryVo = DeliveryVo.builder()
+                    .id(reqDto.getId())
+                    .country(reqDto.getCountry())
+                    .zipCode(reqDto.getZipCode())
+                    .city(reqDto.getCity())
+                    .street(reqDto.getStreet())
+                    .etc(reqDto.getEtc())
+                    .status(reqDto.getStatus())
+                    .flag(reqDto.getFlag())
+                    .build();
+
+            deliveryService.update(deliveryVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lozm.core.code.DeliveryStatus;
 import lozm.core.dto.delivery.PostDeliveryDto;
 import lozm.core.dto.delivery.PutDeliveryDto;
+import lozm.core.vo.delivery.DeliveryVo;
 import lozm.domain.entity.BaseEntity;
 import lozm.domain.entity.embedded.Address;
 import org.springframework.util.StringUtils;
@@ -26,28 +27,28 @@ public class Delivery extends BaseEntity {
     @Column(name = "STATUS")
     private DeliveryStatus status;
 
-    public void insertDelivery(PostDeliveryDto.Request reqDto) {
+    public void insertDelivery(DeliveryVo deliveryVo) {
         address = new Address();
         address.setAddress(
-                reqDto.getCountry(),
-                reqDto.getZipCode(),
-                reqDto.getCity(),
-                reqDto.getStreet(),
-                reqDto.getEtc()
+                deliveryVo.getCountry(),
+                deliveryVo.getZipCode(),
+                deliveryVo.getCity(),
+                deliveryVo.getStreet(),
+                deliveryVo.getEtc()
         );
 
-        this.status = StringUtils.isEmpty(reqDto.getStatus()) ? DeliveryStatus.PREPARATION : DeliveryStatus.valueOf(reqDto.getStatus());
+        this.status = StringUtils.isEmpty(deliveryVo.getStatus()) ? DeliveryStatus.PREPARATION : DeliveryStatus.valueOf(deliveryVo.getStatus());
     }
 
-    public void updateDelivery(PutDeliveryDto.Request reqDto) {
+    public void updateDelivery(DeliveryVo deliveryVo) {
         this.address.setAddress(
-                reqDto.getCountry(),
-                reqDto.getZipCode(),
-                reqDto.getCity(),
-                reqDto.getStreet(),
-                reqDto.getEtc()
+                deliveryVo.getCountry(),
+                deliveryVo.getZipCode(),
+                deliveryVo.getCity(),
+                deliveryVo.getStreet(),
+                deliveryVo.getEtc()
         );
-        this.status = reqDto.getStatus();
-        this.setBaseEntity("", reqDto.getFlag());
+        this.status = deliveryVo.getStatus();
+        this.setBaseEntity("", deliveryVo.getFlag());
     }
 }

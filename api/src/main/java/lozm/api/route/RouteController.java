@@ -17,12 +17,12 @@ public class RouteController {
     private final HttpSession httpSession;
 
 
-    @GetMapping
+    @GetMapping(value = "/home")
     public String home(ModelMap modelMap) {
-        return "index";
+        return "home";
     }
 
-    @GetMapping(value = "/manageItem")
+    @GetMapping(value = "/manage/item")
     public String managingItem(ModelMap modelMap) {
         return "manageItem";
     }

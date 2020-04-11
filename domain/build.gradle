@@ -4,7 +4,6 @@ jar { enabled = true }
 dependencies {
     compile project(':core')
 
-
     implementation('org.springframework.boot:spring-boot-starter-test')
 
     // QueryDSL

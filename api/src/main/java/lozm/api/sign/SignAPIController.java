@@ -1,13 +1,19 @@
 package lozm.api.sign;
 
 import lombok.RequiredArgsConstructor;
+import static lozm.core.code.SessionType.*;
 import lozm.core.dto.APIResponseDto;
 import lozm.core.dto.sign.PostSignDto;
-import lozm.core.dto.user.PostUserDto;
 import lozm.core.vo.sign.SignVo;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @RequestMapping(value = "/api/sign")
 @RestController
@@ -15,6 +21,7 @@ import javax.validation.Valid;
 public class SignAPIController {
 
     private final SignService signService;
+    private final HttpSession httpSession;
 
 
     @PostMapping(value = "/in")
@@ -26,7 +33,8 @@ public class SignAPIController {
                     .identifier(reqDto.getIdentifier())
                     .password(reqDto.getPassword())
                     .build();
-            signService.signIn(signVo);
+            List<SignVo> result = signService.signIn(signVo);
+            setSessionInfo(result.get(0));
 
             resDto.setSuccess(true);
         } catch (Exception e) {
@@ -43,6 +51,8 @@ public class SignAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
+            httpSession.removeAttribute(USER.name());
+            httpSession.removeAttribute(PREV_PAGE.name());
 
             resDto.setSuccess(true);
         } catch (Exception e) {
@@ -52,6 +62,16 @@ public class SignAPIController {
         }
 
         return resDto;
+    }
+
+    private String setSessionInfo(SignVo SignVo) {
+        httpSession.setAttribute(USER.name(), SignVo);
+
+        if( StringUtils.isEmpty(httpSession.getAttribute(PREV_PAGE.name())) ) {
+            return "/home";
+        }
+
+        return httpSession.getAttribute(PREV_PAGE.name()).toString();
     }
 
 }

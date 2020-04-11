@@ -31,6 +31,7 @@ public class UserRepositorySupport extends QuerydslRepositorySupport {
                 .where(
                         user.identifier.eq(signVo.getIdentifier())
                         .and(user.password.eq(signVo.getPassword()))
+                        .and(user.flag.eq(1))
                 )
                 .fetch();
     }

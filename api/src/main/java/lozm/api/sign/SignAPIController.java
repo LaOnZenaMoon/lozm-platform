@@ -2,9 +2,12 @@ package lozm.api.sign;
 
 import lombok.RequiredArgsConstructor;
 import static lozm.core.code.SessionType.*;
+
+import lozm.api.route.RouteController;
 import lozm.core.dto.APIResponseDto;
 import lozm.core.dto.sign.PostSignDto;
 import lozm.core.vo.sign.SignVo;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,24 +38,6 @@ public class SignAPIController {
                     .build();
             List<SignVo> result = signService.signIn(signVo);
             setSessionInfo(result.get(0));
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
-    }
-
-    @PostMapping(value = "/out")
-    public APIResponseDto postUser(@RequestBody @Valid PostSignDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
-
-        try {
-            httpSession.removeAttribute(USER.name());
-            httpSession.removeAttribute(PREV_PAGE.name());
 
             resDto.setSuccess(true);
         } catch (Exception e) {

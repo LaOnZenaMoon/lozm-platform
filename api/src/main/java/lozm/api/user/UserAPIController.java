@@ -25,7 +25,7 @@ public class UserAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetUserDto.Response> result = userService.findAllUsers();
+            List<GetUserDto> result = userService.findAllUsers();
             resDto.setSuccess(true);
             resDto.setData(result);
         } catch (Exception e) {

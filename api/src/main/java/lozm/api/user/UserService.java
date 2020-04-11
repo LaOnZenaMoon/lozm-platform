@@ -26,11 +26,11 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public List<GetUserDto.Response> findAllUsers() throws Exception {
+    public List<GetUserDto> findAllUsers() throws Exception {
         List<User> userList = userRepository.findAll();
 
         return userList.stream()
-                .map(u -> new GetUserDto.Response(u.getId(), u.getName(), u.getIdentifier(), u.getType()))
+                .map(u -> new GetUserDto(u.getId(), u.getName(), u.getIdentifier(), u.getType()))
                 .collect(Collectors.toList());
     }
 

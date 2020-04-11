@@ -1,3 +1,13 @@
+# TODO List
+1. Entity 추가
+=> Store(1) - Item(N) 추가.
+=> Image 추가.
+  => 연관관계 어떻게 설정할 것인지?
+
+2. 로그인 기능 및 세션 추가
+=> 로그인 페이지 및 세션 추가.
+
+
 # Database script
 CREATE USER LOZM identified by oracle ;
 GRANT CONNECT, RESOURCE TO LOZM

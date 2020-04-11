@@ -38,3 +38,6 @@ log/
 
 ### template ###
 **/dashtreme/
+
+### Query DSL ###
+**/generated/

@@ -4,15 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lozm.core.code.ItemType;
 import lozm.core.dto.item.GetClothingDto;
 import lozm.core.dto.item.GetItemDto;
-import lozm.core.dto.item.PostItemDto;
-import lozm.core.dto.item.PutItemDto;
 import lozm.core.exception.APIException;
 import lozm.core.vo.item.ItemVo;
-import lozm.domain.entity.item.Item;
 import lozm.domain.entity.inheritance.Bottom;
 import lozm.domain.entity.inheritance.Outer;
 import lozm.domain.entity.inheritance.Shoes;
 import lozm.domain.entity.inheritance.Top;
+import lozm.domain.entity.item.Item;
 import lozm.domain.repository.item.ItemRepository;
 import lozm.domain.repository.item.inherit.BottomRepository;
 import lozm.domain.repository.item.inherit.OuterRepository;
@@ -21,7 +19,6 @@ import lozm.domain.repository.item.inherit.TopRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

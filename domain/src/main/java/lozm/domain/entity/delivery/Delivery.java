@@ -48,7 +48,7 @@ public class Delivery extends BaseEntity {
                 deliveryVo.getStreet(),
                 deliveryVo.getEtc()
         );
-        this.status = deliveryVo.getStatus();
+        this.status = DeliveryStatus.valueOf(deliveryVo.getStatus());
         this.setBaseEntity("", deliveryVo.getFlag());
     }
 }

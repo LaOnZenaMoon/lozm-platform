@@ -15,7 +15,7 @@ public class PutOrdersDto {
         private Long id;
 
         @NotEmpty
-        private OrderStatus status;
+        private String status;
 
         private int flag;
     }

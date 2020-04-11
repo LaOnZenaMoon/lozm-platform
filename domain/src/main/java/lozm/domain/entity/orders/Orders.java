@@ -4,6 +4,7 @@ import lombok.Getter;
 import lozm.core.code.OrderStatus;
 import lozm.core.dto.orders.PostOrdersDto;
 import lozm.core.dto.orders.PutOrdersDto;
+import lozm.core.vo.orders.OrdersVo;
 import lozm.domain.entity.BaseEntity;
 import lozm.domain.entity.delivery.Delivery;
 import lozm.domain.entity.user.User;
@@ -38,14 +39,14 @@ public class Orders extends BaseEntity {
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    public void insertOrders(PostOrdersDto.Request reqDto, User user) {
+    public void insertOrders(OrdersVo ordersVo, User user) {
         this.orderDt = LocalDateTime.now();
         this.status = OrderStatus.PREPARATION;
         this.user = user;
     }
 
-    public void updateOrders(PutOrdersDto.Request reqDto) {
-        this.status = reqDto.getStatus();
-        this.setBaseEntity("", reqDto.getFlag());
+    public void updateOrders(OrdersVo ordersVo) {
+        this.status = OrderStatus.valueOf(ordersVo.getStatus());
+        this.setBaseEntity("", ordersVo.getFlag());
     }
 }

@@ -6,28 +6,26 @@ import lozm.core.code.OrderStatus;
 import lozm.core.code.UserType;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-
+@Getter
 public class GetOrdersDto {
 
-    @Getter
-    public static class Request {
+    private Long id;
+    private LocalDateTime orderDt;
+    private OrderStatus status;
 
+    public GetOrdersDto(Long id, LocalDateTime orderDt, OrderStatus status) {
+        this.id = id;
+        this.orderDt = orderDt;
+        this.status = status;
     }
 
     @Getter
     @Setter
     public static class Response {
-        private Long id;
-        private LocalDateTime orderDt;
-        private OrderStatus status;
-
-        public Response(Long id, LocalDateTime orderDt, OrderStatus status) {
-            this.id = id;
-            this.orderDt = orderDt;
-            this.status = status;
-        }
-
+        List<GetOrdersDto> list = new ArrayList<>();
     }
 
 }

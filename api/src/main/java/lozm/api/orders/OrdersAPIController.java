@@ -7,6 +7,7 @@ import lozm.core.dto.orders.PostOrdersDto;
 import lozm.core.dto.orders.PutOrdersDto;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
+import lozm.core.vo.orders.OrdersVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,9 +26,12 @@ public class OrdersAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetOrdersDto.Response> result = ordersService.findAllOrders();
+            List<GetOrdersDto> result = ordersService.findAllOrders();
+            GetOrdersDto.Response ordersResDto = new GetOrdersDto.Response();
+            ordersResDto.setList(result);
+
             resDto.setSuccess(true);
-            resDto.setData(result);
+            resDto.setData(ordersResDto);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
@@ -41,7 +45,15 @@ public class OrdersAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            ordersService.save(reqDto);
+            OrdersVo ordersVo = OrdersVo.builder()
+                    .orderedPrice(reqDto.getOrderedPrice())
+                    .quantity(reqDto.getQuantity())
+                    .userId(reqDto.getUserId())
+                    .itemId(reqDto.getItemId())
+                    .couponId(reqDto.getCouponId())
+                    .build();
+
+            ordersService.save(ordersVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +69,13 @@ public class OrdersAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            ordersService.update(reqDto);
+            OrdersVo ordersVo = OrdersVo.builder()
+                    .id(reqDto.getId())
+                    .status(reqDto.getStatus())
+                    .flag(reqDto.getFlag())
+                    .build();
+
+            ordersService.update(ordersVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

@@ -4,30 +4,30 @@ import lombok.Getter;
 import lombok.Setter;
 import lozm.core.code.CouponType;
 
+import java.util.ArrayList;
+import java.util.List;
 
+@Getter
 public class GetCouponDto {
 
-    @Getter
-    public static class Request {
+    private Long id;
+    private String name;
+    private String contents;
+    private CouponType type;
+    private Long amount;
 
+    public GetCouponDto(Long id, String name, String contents, CouponType type, Long amount) {
+        this.id = id;
+        this.name = name;
+        this.contents = contents;
+        this.type = type;
+        this.amount = amount;
     }
 
     @Getter
     @Setter
     public static class Response {
-        private Long id;
-        private String name;
-        private String contents;
-        private CouponType type;
-        private Long amount;
-
-        public Response(Long id, String name, String contents, CouponType type, Long amount) {
-            this.id = id;
-            this.name = name;
-            this.contents = contents;
-            this.type = type;
-            this.amount = amount;
-        }
+        List<GetCouponDto> list = new ArrayList<>();
     }
 
 }

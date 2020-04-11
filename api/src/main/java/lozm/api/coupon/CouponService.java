@@ -6,6 +6,7 @@ import lozm.core.dto.coupon.PostCouponDto;
 import lozm.core.dto.coupon.PutCouponDto;
 import lozm.core.dto.user.PostUserCouponDto;
 import lozm.core.exception.APIException;
+import lozm.core.vo.coupon.CouponVo;
 import lozm.domain.entity.coupon.Coupon;
 import lozm.domain.entity.coupon.CouponUser;
 import lozm.domain.entity.user.User;
@@ -30,10 +31,10 @@ public class CouponService {
     private final CouponUserRepository couponUserRepository;
 
 
-    public List<GetCouponDto.Response> findAllCoupons() {
+    public List<GetCouponDto> findAllCoupons() {
         List<Coupon> couponList = couponRepository.findAll();
 
-        return couponList.stream().map(c -> new GetCouponDto.Response(
+        return couponList.stream().map(c -> new GetCouponDto(
                 c.getId(),
                 c.getName(),
                 c.getContents(),
@@ -43,18 +44,18 @@ public class CouponService {
     }
 
     @Transactional
-    public void save(PostCouponDto.Request reqDto) throws Exception {
+    public void save(CouponVo couponVo) throws Exception {
         Coupon coupon = new Coupon();
-        coupon.insertCoupon(reqDto);
+        coupon.insertCoupon(couponVo);
 
         couponRepository.save(coupon);
     }
 
     @Transactional
-    public void update(PutCouponDto.Request reqDto) throws Exception {
-        Optional<Coupon> findCoupon = couponRepository.findById(reqDto.getId());
+    public void update(CouponVo couponVo) throws Exception {
+        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> new APIException("COUPON_0002", "Coupon doesn't exist."));
-        findCoupon.get().updateCoupon(reqDto);
+        findCoupon.get().updateCoupon(couponVo);
     }
 
     @Transactional

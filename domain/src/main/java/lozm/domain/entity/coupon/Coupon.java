@@ -5,6 +5,7 @@ import lozm.core.code.CouponType;
 import lozm.core.dto.coupon.PostCouponDto;
 import lozm.core.dto.coupon.PutCouponDto;
 import lozm.core.exception.APIException;
+import lozm.core.vo.coupon.CouponVo;
 import lozm.domain.entity.BaseEntity;
 
 import javax.persistence.*;
@@ -43,25 +44,25 @@ public class Coupon extends BaseEntity {
     private LocalDateTime endDt;
 
 
-    public void insertCoupon(PostCouponDto.Request reqDto) {
-        this.name = reqDto.getName();
-        this.contents = reqDto.getContents();
-        this.type = CouponType.valueOf(reqDto.getType());
-        this.amount = reqDto.getAmount();
-        this.quantity = reqDto.getQuantity();
-        this.startDt = reqDto.getStartDt();
-        this.endDt = reqDto.getEndDt();
+    public void insertCoupon(CouponVo couponVo) {
+        this.name = couponVo.getName();
+        this.contents = couponVo.getContents();
+        this.type = CouponType.valueOf(couponVo.getType());
+        this.amount = couponVo.getAmount();
+        this.quantity = couponVo.getQuantity();
+        this.startDt = couponVo.getStartDt();
+        this.endDt = couponVo.getEndDt();
     }
 
-    public void updateCoupon(PutCouponDto.Request reqDto) {
-        this.name = reqDto.getName();
-        this.contents = reqDto.getContents();
-        this.type = CouponType.valueOf(reqDto.getType());
-        this.amount = reqDto.getAmount();
-        this.quantity = reqDto.getQuantity();
-        this.startDt = reqDto.getStartDt();
-        this.endDt = reqDto.getEndDt();
-        this.setBaseEntity("", reqDto.getFlag());
+    public void updateCoupon(CouponVo couponVo) {
+        this.name = couponVo.getName();
+        this.contents = couponVo.getContents();
+        this.type = CouponType.valueOf(couponVo.getType());
+        this.amount = couponVo.getAmount();
+        this.quantity = couponVo.getQuantity();
+        this.startDt = couponVo.getStartDt();
+        this.endDt = couponVo.getEndDt();
+        this.setBaseEntity("", couponVo.getFlag());
     }
 
     public Long calculateOrderedPrice(Long orderedPrice) throws Exception {

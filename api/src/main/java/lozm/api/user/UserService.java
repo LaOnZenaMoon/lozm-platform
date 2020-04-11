@@ -6,6 +6,7 @@ import lozm.core.dto.user.PostUserCouponDto;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
 import lozm.core.exception.APIException;
+import lozm.core.vo.user.UserVo;
 import lozm.domain.entity.coupon.Coupon;
 import lozm.domain.entity.user.User;
 import lozm.domain.repository.coupon.CouponRepository;
@@ -34,9 +35,9 @@ public class UserService {
     }
 
     @Transactional
-    public void save(PostUserDto.Request reqDto) throws Exception {
+    public void save(UserVo userVo) throws Exception {
         User user = new User();
-        user.insertUser(reqDto);
+        user.insertUser(userVo);
 
         //1. check ID duplicated
         List<User> findUsersIdDuplicated = userRepository.findByIdentifier(user.getIdentifier());
@@ -46,10 +47,10 @@ public class UserService {
     }
 
     @Transactional
-    public void update(PutUserDto.Request reqDto) throws Exception {
-        Optional<User> findUser = userRepository.findById(reqDto.getId());
+    public void update(UserVo userVo) throws Exception {
+        Optional<User> findUser = userRepository.findById(userVo.getId());
         findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
-        findUser.get().updateUser(reqDto);
+        findUser.get().updateUser(userVo);
     }
 
 }

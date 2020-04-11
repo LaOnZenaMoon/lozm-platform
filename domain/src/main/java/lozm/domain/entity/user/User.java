@@ -4,6 +4,7 @@ import lombok.Getter;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
 import lozm.core.code.UserType;
+import lozm.core.vo.user.UserVo;
 import lozm.domain.entity.BaseEntity;
 import lozm.domain.entity.coupon.CouponUser;
 import lozm.domain.entity.orders.Orders;
@@ -39,17 +40,17 @@ public class User extends BaseEntity {
     private List<CouponUser> couponUsers;
 
 
-    public void insertUser(PostUserDto.Request reqDto) {
-        this.name = reqDto.getName();
-        this.identifier = reqDto.getIdentifier();
-        this.password = reqDto.getPassword();
-        this.type = UserType.valueOf(reqDto.getType());
+    public void insertUser(UserVo userVo) {
+        this.name = userVo.getName();
+        this.identifier = userVo.getIdentifier();
+        this.password = userVo.getPassword();
+        this.type = UserType.valueOf(userVo.getType());
     }
 
-    public void updateUser(PutUserDto.Request reqDto) {
-        this.name = reqDto.getName();
-        this.password = reqDto.getPassword();
-        this.setBaseEntity("", reqDto.getFlag());
+    public void updateUser(UserVo userVo) {
+        this.name = userVo.getName();
+        this.password = userVo.getPassword();
+        this.setBaseEntity("", userVo.getFlag());
     }
 
 }

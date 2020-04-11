@@ -6,6 +6,7 @@ import lozm.core.dto.user.GetUserDto;
 import lozm.core.dto.user.PostUserCouponDto;
 import lozm.core.dto.user.PostUserDto;
 import lozm.core.dto.user.PutUserDto;
+import lozm.core.vo.user.UserVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,7 +41,14 @@ public class UserAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            userService.save(reqDto);
+            UserVo userVo = UserVo.builder()
+                    .name(reqDto.getName())
+                    .identifier(reqDto.getIdentifier())
+                    .password(reqDto.getPassword())
+                    .type(reqDto.getType())
+                    .build();
+
+            userService.save(userVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +64,14 @@ public class UserAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            userService.update(reqDto);
+            UserVo userVo = UserVo.builder()
+                    .id(reqDto.getId())
+                    .name(reqDto.getName())
+                    .password(reqDto.getPassword())
+                    .flag(reqDto.getFlag())
+                    .build();
+
+            userService.update(userVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

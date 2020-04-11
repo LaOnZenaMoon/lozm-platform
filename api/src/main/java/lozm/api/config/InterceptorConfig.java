@@ -18,7 +18,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
         HttpSession httpSession = request.getSession();
 
         String reqUri = request.getRequestURI();
-        if (reqUri.contains("/login")) {
+        if (reqUri.contains("/sign")) {
             return super.preHandle(request, response, handler);
         }
 

@@ -1,11 +1,14 @@
 package lozm.api.config;
 
+import lozm.core.vo.sign.SignVo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import static lozm.core.code.SessionType.*;
 
 @Component
 public class InterceptorConfig extends HandlerInterceptorAdapter {
@@ -20,13 +23,13 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
         }
 
         if (reqUri.startsWith("/")) {
-//            LoginVo userSession = (LoginVo) httpSession.getAttribute(CommonUtility.SESSION.USER.getCode());
-//            if (ObjectUtility.isEmpty(userSession)) {
-//                httpSession.setAttribute(CommonUtility.SESSION.PREV_PAGE.getCode(), reqUri);
-//                response.sendRedirect("/web/login");
-//
-//                return false;
-//            }
+            SignVo userSession = (SignVo) httpSession.getAttribute(USER.name());
+            if (userSession == null) {
+                httpSession.setAttribute(PREV_PAGE.name(), reqUri);
+                response.sendRedirect("/signOut");
+
+                return false;
+            }
         }
 
         return super.preHandle(request, response, handler);

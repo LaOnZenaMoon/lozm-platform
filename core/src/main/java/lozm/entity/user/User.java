@@ -1,14 +1,17 @@
 package lozm.entity.user;
 
 import lombok.Getter;
-import lozm.code.UserType;
-import lozm.vo.user.UserVo;
+
 import lozm.entity.BaseEntity;
 import lozm.entity.coupon.CouponUser;
 import lozm.entity.orders.Orders;
+import lozm.vo.user.UserVo;
+
 
 import javax.persistence.*;
 import java.util.List;
+
+import lozm.code.UserType;
 
 @Entity
 @Getter

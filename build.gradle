@@ -46,4 +46,43 @@ subprojects {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
     }
+
+    // QueryDSL -- start
+    apply plugin: "com.ewerk.gradle.plugins.querydsl"
+//    def querydslSrcDir = 'src/main/generated'
+//
+//    querydsl {
+//        library = "com.querydsl:querydsl-apt"
+//        jpa = true
+//        querydslSourcesDir = querydslSrcDir
+//    }
+//
+//    sourceSets {
+//        main {
+//            java {
+//                srcDirs = ['src/main/java', querydslSrcDir]
+//            }
+//        }
+//    }
+    def querydslDir = "$buildDir/generated/querydsl"
+//    def querydslDir = "src/main/generated"
+
+    querydsl {
+        library = "com.querydsl:querydsl-apt" //??
+        jpa = true
+        querydslSourcesDir = querydslDir
+    }
+
+    sourceSets {
+        main.java.srcDir querydslDir
+    }
+
+    compileQuerydsl{
+        options.annotationProcessorPath = configurations.querydsl
+    }
+
+    configurations {
+        querydsl.extendsFrom compileClasspath
+    }
+// QueryDSL -- end
 }

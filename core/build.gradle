@@ -3,4 +3,9 @@ jar { enabled = true }
 
 dependencies {
     implementation 'jakarta.validation:jakarta.validation-api'
+    implementation('org.springframework.boot:spring-boot-starter-test')
+    // QueryDSL
+    implementation("com.querydsl:querydsl-jpa")
+    implementation("com.querydsl:querydsl-apt")
 }
+

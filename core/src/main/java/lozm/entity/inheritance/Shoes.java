@@ -1,9 +1,9 @@
 package lozm.entity.inheritance;
 
 import lombok.Getter;
-import lozm.vo.item.ItemVo;
-import lozm.entity.item.Item;
 import lozm.entity.embedded.Clothing;
+import lozm.entity.item.Item;
+import lozm.vo.item.ItemVo;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;

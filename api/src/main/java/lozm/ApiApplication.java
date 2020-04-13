@@ -10,8 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 
 @SpringBootApplication
-//@EntityScan(basePackages = "*")
-//@EnableJpaRepositories(basePackages = "*")
 public class ApiApplication {
 
     public static void main(String[] args) {

@@ -2,9 +2,9 @@ package lozm.entity.coupon;
 
 import lombok.Getter;
 import lozm.code.CouponType;
+import lozm.entity.BaseEntity;
 import lozm.exception.APIException;
 import lozm.vo.coupon.CouponVo;
-import lozm.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

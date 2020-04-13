@@ -1,9 +1,9 @@
 package lozm.entity.item;
 
 import lombok.Getter;
+import lozm.entity.BaseEntity;
 import lozm.exception.APIException;
 import lozm.vo.item.ItemVo;
-import lozm.entity.BaseEntity;
 
 import javax.persistence.*;
 

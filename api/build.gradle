@@ -7,7 +7,6 @@ jar { enabled = true }
 
 dependencies {
     compile project(':core')
-    compile project(':domain')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.hateoas:spring-hateoas'

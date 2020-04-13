@@ -2,8 +2,8 @@ package lozm.repository.user;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lozm.vo.sign.SignVo;
 import lozm.entity.user.User;
+import lozm.vo.sign.SignVo;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +21,7 @@ public class UserRepositorySupport extends QuerydslRepositorySupport {
         super(User.class);
         this.jpaQueryFactory = jpaQueryFactory;
     }
+
 
     public List<User> selectUserDetail(SignVo signVo) {
         return jpaQueryFactory

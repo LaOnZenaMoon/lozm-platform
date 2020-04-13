@@ -3,8 +3,8 @@ package lozm.api.bulkInsertTestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 
-import lozm.core.code.DeliveryStatus;
-import lozm.core.dto.delivery.PostDeliveryDto;
+import lozm.code.DeliveryStatus;
+import lozm.dto.delivery.PostDeliveryDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

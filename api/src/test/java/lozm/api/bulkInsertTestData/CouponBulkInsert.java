@@ -2,9 +2,8 @@ package lozm.api.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lozm.core.code.CouponType;
-import lozm.core.dto.coupon.PostCouponDto;
-import lozm.core.util.DateUtility;
+import lozm.code.CouponType;
+import lozm.dto.coupon.PostCouponDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.time.LocalDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static lozm.core.util.DateUtility.getEndDt;
-import static lozm.core.util.DateUtility.getStartDt;
+import static lozm.util.DateUtility.getEndDt;
+import static lozm.util.DateUtility.getStartDt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

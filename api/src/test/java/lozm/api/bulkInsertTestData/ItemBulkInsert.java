@@ -2,9 +2,9 @@ package lozm.api.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lozm.core.code.ClothingSizeType;
-import lozm.core.code.ItemType;
-import lozm.core.dto.item.PostItemDto;
+import lozm.code.ClothingSizeType;
+import lozm.code.ItemType;
+import lozm.dto.item.PostItemDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

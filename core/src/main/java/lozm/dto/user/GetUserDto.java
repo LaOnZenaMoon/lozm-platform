@@ -2,7 +2,7 @@ package lozm.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import lozm.code.UserType;
+import lozm.code.UsersType;
 import lozm.dto.item.GetItemDto;
 
 import java.util.ArrayList;
@@ -14,9 +14,9 @@ public class GetUserDto {
     private Long id;
     private String name;
     private String identifier;
-    private UserType type;
+    private UsersType type;
 
-    public GetUserDto(Long id, String name, String identifier, UserType type) {
+    public GetUserDto(Long id, String name, String identifier, UsersType type) {
         this.id = id;
         this.name = name;
         this.identifier = identifier;

@@ -2,6 +2,7 @@ package lozm.entity.user;
 
 import lombok.Getter;
 
+import lozm.code.UsersType;
 import lozm.entity.BaseEntity;
 import lozm.entity.coupon.CouponUser;
 import lozm.entity.orders.Orders;
@@ -11,7 +12,7 @@ import lozm.vo.user.UserVo;
 import javax.persistence.*;
 import java.util.List;
 
-import lozm.code.UserType;
+
 
 @Entity
 @Getter
@@ -32,7 +33,7 @@ public class User extends BaseEntity {
     private String password;
 
     @Column(name = "TYPE")
-    private UserType type;
+    private UsersType type;
 
     @OneToMany(mappedBy = "user")
     private List<Orders> orders;
@@ -45,7 +46,7 @@ public class User extends BaseEntity {
         this.name = userVo.getName();
         this.identifier = userVo.getIdentifier();
         this.password = userVo.getPassword();
-        this.type = UserType.valueOf(userVo.getType());
+        this.type = UsersType.valueOf(userVo.getType());
     }
 
     public void updateUser(UserVo userVo) {

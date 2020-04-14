@@ -1,4 +1,4 @@
-package lozm.api.bulkInsertTestData;
+package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
@@ -17,10 +17,11 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.time.LocalDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static lozm.util.DateUtility.getEndDt;
-import static lozm.util.DateUtility.getStartDt;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import static lozm.util.DateUtility.*;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc

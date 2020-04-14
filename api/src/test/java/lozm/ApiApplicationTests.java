@@ -1,4 +1,4 @@
-package lozm.api;
+package lozm;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package lozm.api;
+package lozm;
 
 import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;

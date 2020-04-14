@@ -68,7 +68,7 @@ subprojects {
 //    def querydslDir = "src/main/generated"
 
     querydsl {
-        library = "com.querydsl:querydsl-apt" //??
+        library = "com.querydsl:querydsl-apt"
         jpa = true
         querydslSourcesDir = querydslDir
     }

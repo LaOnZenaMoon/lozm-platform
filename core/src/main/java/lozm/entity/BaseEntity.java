@@ -1,6 +1,6 @@
 package lozm.entity;
 
-import lozm.code.UserType;
+import lozm.code.UsersType;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
@@ -17,7 +17,7 @@ public class BaseEntity {
     private LocalDateTime modifiedDt;
 
     @Column(name = "CREATED_BY")
-    private String createdBy = UserType.API_SYSTEM.toString();
+    private String createdBy = UsersType.API_SYSTEM.toString();
 
     @Column(name = "MODIFY_BY")
     private String modifiedBy;
@@ -27,7 +27,7 @@ public class BaseEntity {
 
     public void setBaseEntity(String modifiedBy, int flag) {
         this.modifiedDt = LocalDateTime.now();
-        this.modifiedBy = StringUtils.isEmpty(modifiedBy) ? UserType.API_SYSTEM.toString() : modifiedBy;
+        this.modifiedBy = StringUtils.isEmpty(modifiedBy) ? UsersType.API_SYSTEM.toString() : modifiedBy;
         if(!StringUtils.isEmpty(flag)) this.flag = flag;
     }
 

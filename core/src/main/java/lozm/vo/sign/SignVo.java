@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lozm.code.UserType;
+import lozm.code.UsersType;
 
 @Getter
 @Builder
@@ -15,10 +15,10 @@ public class SignVo {
     private String name;
     private String identifier;
     private String password;
-    private UserType type;
+    private UsersType type;
 
 
-    public SignVo(String name, String identifier, UserType type) {
+    public SignVo(String name, String identifier, UsersType type) {
         this.name = name;
         this.identifier = identifier;
         this.type = type;

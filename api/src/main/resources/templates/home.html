@@ -3,66 +3,148 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-
-    <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
+    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
 
     <div id="wrapper">
-
-        <th:block th:replace="@{layout/mainSidebar.html} :: sidebar"></th:block>
-
         <th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-
-        <div class="clearfix"></div>
+        <th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
+        <th:block th:replace="@{layout/digitalMarketing.html} :: digitalMarketing"></th:block>
 
         <div class="content-wrapper">
             <div class="container-fluid">
-                <th:block th:replace="@{layout/contentHeader.html} :: contentHeader('메인화면','','','','')"></th:block>
+                <th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Home','','','','')"></th:block>
 
-                <div class="overlay toggle-menu"></div>
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-6 col-xl-6">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>Website Sessions</p>
+                                        <h3>652.9K</h3>
+                                        <p class="mb-0">72% <span class="float-right">500k</span></p>
+                                    </div>
+                                    <div class="progress-wrapper">
+                                        <div class="progress" style="height: 7px;">
+                                            <div class="progress-bar bg-white" role="progressbar" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>Twitter Followers</p>
+                                        <h3>8,256K</h3>
+                                        <p class="mb-0">2.5% Increase</p>
+                                    </div>
+                                    <div id="twitter-followers"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body text-center px-0">
+                                        <h6 class="text-uppercase">Total Visitors</h6>
+                                        <div class="chart-container-10 d-flex align-items-center justify-content-center">
+                                            <div id="total-visitors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer border-0">
+                                        <div class="row align-items-center text-center">
+                                            <div class="col border-right border-light">
+                                                <h5 class="mb-0">563</h5>
+                                                <small class="extra-small-font">Last Week</small>
+                                            </div>
+                                            <div class="col">
+                                                <h5 class="mb-0">985</h5>
+                                                <small class="extra-small-font">Last Month</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div>
+
+
+                    <div class="col-12 col-lg-6 col-xl-6">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>Facebook Pageviews</p>
+                                        <h3>35.7K</h3>
+                                        <div id="facebook-pageviews"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>Bounce Rate</p>
+                                        <h3>82.3%</h3>
+                                        <div id="bounce-rate"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="sr-only">List Subscribers</p>
+                                        <div id="list-subscribers"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-lg-6 col-xl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="text-uppercase mb-3">Goal Completion by channel</h6>
+                                <div class="mt-1">
+                                    <div id="direct"></div>
+                                </div>
+                                <div class="mt-1">
+                                    <div id="organic-search"></div>
+                                </div>
+                                <div class="mt-1">
+                                    <div id="referral"></div>
+                                </div>
+                                <div class="mt-1">
+                                    <div id="social"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-xl-6">
+                        <div class="card-group flex-column flex-md-row">
+                            <div class="card border-right border-light mb-0">
+                                <div class="card-body text-center">
+                                    <h6 class="text-uppercase">Newsletter Open Rate</h6>
+                                    <div class="chart-container-10 d-flex align-items-center justify-content-center">
+                                        <div id="newsletter-open-rate"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-0">
+                                <div class="card-body text-center">
+                                    <h6 class="text-uppercase">Click Through Rate</h6>
+                                    <div class="chart-container-10 d-flex align-items-center justify-content-center">
+                                        <div id="click-through-rate"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
         </div>
-
-        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-
 
         <th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-
-        <div class="right-sidebar">
-            <div class="switcher-icon">
-                <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
-            </div>
-            <div class="right-sidebar-content">
-
-                <p class="mb-0">Gaussion Texture</p>
-                <hr>
-
-                <ul class="switcher">
-                    <li id="theme1"></li>
-                    <li id="theme2"></li>
-                    <li id="theme3"></li>
-                    <li id="theme4"></li>
-                    <li id="theme5"></li>
-                    <li id="theme6"></li>
-                </ul>
-
-                <p class="mb-0">Gradient Background</p>
-                <hr>
-
-                <ul class="switcher">
-                    <li id="theme7"></li>
-                    <li id="theme8"></li>
-                    <li id="theme9"></li>
-                    <li id="theme10"></li>
-                    <li id="theme11"></li>
-                    <li id="theme12"></li>
-                    <li id="theme13"></li>
-                    <li id="theme14"></li>
-                    <li id="theme15"></li>
-                </ul>
-
-            </div>
-        </div>
+        <th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
     </div>
 </th:block>
 

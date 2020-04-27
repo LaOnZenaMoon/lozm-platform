@@ -26,7 +26,11 @@ public class UserRepositorySupport extends QuerydslRepositorySupport {
     public List<User> selectUserDetail(SignVo signVo) {
         return jpaQueryFactory
                 .select(Projections.fields(
-                    User.class
+                    User.class,
+                        user.id,
+                        user.name,
+                        user.identifier,
+                        user.type
                 ))
                 .from(user)
                 .where(

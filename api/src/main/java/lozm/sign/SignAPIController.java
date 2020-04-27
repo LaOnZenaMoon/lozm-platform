@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @RequestMapping(value = "/api/sign")
 @RestController
@@ -33,8 +34,8 @@ public class SignAPIController {
                     .identifier(reqDto.getIdentifier())
                     .password(reqDto.getPassword())
                     .build();
-//            List<SignVo> result = signService.signIn(signVo);
-//            setSessionInfo(result.get(0));
+            List<SignVo> result = signService.signIn(signVo);
+            setSessionInfo(result.get(0));
 
             resDto.setSuccess(true);
         } catch (Exception e) {

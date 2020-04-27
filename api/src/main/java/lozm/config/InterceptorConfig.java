@@ -29,7 +29,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
             return super.preHandle(request, response, handler);
         }
 
-        if (!reqUri.startsWith("/api")) {
+        if (!reqUri.contains("/api")) {
             SignVo userSession = (SignVo) httpSession.getAttribute(USER.name());
             if (userSession == null) {
                 httpSession.setAttribute(PREV_PAGE.name(), reqUri);

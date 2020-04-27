@@ -148,7 +148,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-                        <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle"
+                        <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" th:src="@{/images/agent.png}"
                                                         alt="user avatar"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -157,10 +157,11 @@
                                 <div class="media">
                                     <div class="avatar"><img class="align-self-start mr-3"
                                                              src="https://via.placeholder.com/110x110"
+                                                             th:src="@{/images/agent.png}"
                                                              alt="user avatar"></div>
                                     <div class="media-body">
-                                        <h6 class="mt-2 user-title" th:text="${session.user.name}">Administrator</h6>
-                                        <p class="user-subtitle" th:text="${session.user.identifier}">Administrator</p>
+                                        <h6 class="mt-2 user-title" th:text="${session.USER.name}">Administrator</h6>
+                                        <p class="user-subtitle" th:text="${session.USER.identifier}">Administrator</p>
                                     </div>
                                 </div>
                             </a>

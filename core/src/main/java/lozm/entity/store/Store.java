@@ -3,6 +3,7 @@ package lozm.entity.store;
 import lombok.Getter;
 import lozm.entity.BaseEntity;
 import lozm.entity.item.Item;
+import lozm.vo.store.StoreVo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,5 +28,18 @@ public class Store extends BaseEntity {
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Item> itemList;
+
+    public void insertStore(StoreVo storeVo) {
+        this.name = storeVo.getName();
+        this.telNumber = storeVo.getTelNumber();
+        this.info = storeVo.getInfo();
+    }
+
+    public void updateStore(StoreVo storeVo) {
+        this.name = storeVo.getName();
+        this.telNumber = storeVo.getTelNumber();
+        this.info = storeVo.getInfo();
+        this.setBaseEntity("", storeVo.getFlag());
+    }
 
 }

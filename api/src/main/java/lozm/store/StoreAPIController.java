@@ -7,6 +7,8 @@ import lozm.dto.item.GetItemDto;
 import lozm.dto.item.PostItemDto;
 import lozm.dto.item.PutItemDto;
 import lozm.dto.store.GetStoreDto;
+import lozm.dto.store.PostStoreDto;
+import lozm.dto.store.PutStoreDto;
 import lozm.vo.item.ItemVo;
 import lozm.vo.store.StoreVo;
 import org.springframework.web.bind.annotation.*;
@@ -62,19 +64,17 @@ public class StoreAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) {
+    public APIResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            ItemVo itemvo = ItemVo.builder()
+            StoreVo storeVo = StoreVo.builder()
                     .name(reqDto.getName())
-                    .price(reqDto.getPrice())
-                    .quantity(reqDto.getQuantity())
-                    .type(reqDto.getType())
-                    .contents(reqDto.getContents())
-                    .size(reqDto.getSize())
+                    .telNumber(reqDto.getTelNumber())
+                    .info(reqDto.getInfo())
                     .build();
-            storeService.save(itemvo);
+
+            storeService.save(storeVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,21 +86,18 @@ public class StoreAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) {
+    public APIResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            ItemVo itemvo = ItemVo.builder()
+            StoreVo storeVo = StoreVo.builder()
                     .id(reqDto.getId())
                     .name(reqDto.getName())
-                    .price(reqDto.getPrice())
-                    .quantity(reqDto.getQuantity())
-                    .contents(reqDto.getContents())
-                    .size(reqDto.getSize())
-                    .flag(reqDto.getFlag())
+                    .telNumber(reqDto.getTelNumber())
+                    .info(reqDto.getInfo())
                     .build();
 
-            storeService.update(itemvo);
+            storeService.update(storeVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

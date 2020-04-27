@@ -2,6 +2,7 @@ package lozm.dto.store;
 
 import lombok.Getter;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class PutStoreDto {
@@ -11,15 +12,14 @@ public class PutStoreDto {
         @NotNull
         private Long id;
 
+        @NotEmpty
         private String name;
 
-        private Long price;
+        @NotEmpty
+        private String telNumber;
 
-        private Long quantity;
-
-        private String contents;
-
-        private String size;
+        @NotEmpty
+        private String info;
 
         private int flag;
     }

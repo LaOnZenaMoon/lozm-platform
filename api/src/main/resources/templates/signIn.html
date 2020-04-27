@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/web/mainLayout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-    <th:block th:replace="@{layout/web/mainLoadingBar.html} :: loadingBar"></th:block>
+    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
 
     <div id="wrapper">
 
@@ -22,14 +22,14 @@
                     <div class="card-body">
                         <div class="card-content p-3">
                             <div class="text-center">
-                                <img src="assets/images/logo-icon.png" alt="logo icon">
+                                <img th:src="@{/libs/dashtreme/vertical-layout/assets/images/logo-icon.png}" alt="logo icon">
                             </div>
                             <div class="card-title text-uppercase text-center py-3">Sign In</div>
-                            <form>
+                            <form id="post_signForm">
                                 <div class="form-group">
                                     <div class="position-relative has-icon-left">
-                                        <label for="exampleInputUsername" class="sr-only">Username</label>
-                                        <input type="text" id="exampleInputUsername" class="form-control" placeholder="Username" id="post_identifier">
+                                        <label for="post_identifier" class="sr-only">Username</label>
+                                        <input type="text" class="form-control" placeholder="Username" id="post_identifier" name="identifier">
                                         <div class="form-control-position">
                                             <i class="icon-user"></i>
                                         </div>
@@ -37,41 +37,43 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="position-relative has-icon-left">
-                                        <label for="exampleInputPassword" class="sr-only">Password</label>
-                                        <input type="password" id="exampleInputPassword" class="form-control" placeholder="Password" id="post_password">
+                                        <label for="post_password" class="sr-only">Password</label>
+                                        <input type="password" class="form-control" placeholder="Password" id="post_password" name="password">
                                         <div class="form-control-position">
                                             <i class="icon-lock"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-row mr-0 ml-0">
-                                    <div class="form-group col-6">
-                                        <div class="icheck-material-white">
-                                            <input type="checkbox" id="user-checkbox" checked="" />
-                                            <label for="user-checkbox">Remember me</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-6 text-right">
-                                        <a href="authentication-reset-password2.html">Reset Password</a>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-light btn-block waves-effect waves-light">Sign In</button>
-                                <div class="text-center pt-3">
-                                    <p>or Sign in with</p>
-
-                                    <div class="form-row mt-4">
-                                        <div class="form-group mb-0 col-6">
-                                            <button type="button" class="btn btn-light btn-block"><i class="fa fa-facebook-square"></i> Facebook</button>
-                                        </div>
-                                        <div class="form-group mb-0 col-6 text-right">
-                                            <button type="button" class="btn btn-light btn-block"><i class="fa fa-twitter-square"></i> Twitter</button>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <p class="text-warning">Do not have an account? <a href="authentication-signup2.html"> Sign Up here</a></p>
-                                </div>
                             </form>
+
+                            <div class="form-row mr-0 ml-0">
+                                <div class="form-group col-6">
+                                    <div class="icheck-material-white">
+                                        <input type="checkbox" id="user-checkbox" checked="" />
+                                        <label for="user-checkbox">Remember me</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6 text-right">
+                                    <a href="authentication-reset-password2.html">Reset Password</a>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-light btn-block waves-effect waves-light" onclick="sign.submit()">Sign In</button>
+                            <div class="text-center pt-3">
+<!--                                    <p>or Sign in with</p>-->
+
+                                <div class="form-row mt-4">
+<!--                                        <div class="form-group mb-0 col-6">-->
+<!--                                            <button type="button" class="btn btn-light btn-block"><i class="fa fa-facebook-square"></i> Facebook</button>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group mb-0 col-6 text-right">-->
+<!--                                            <button type="button" class="btn btn-light btn-block"><i class="fa fa-twitter-square"></i> Twitter</button>-->
+<!--                                        </div>-->
+                                </div>
+
+                                <hr>
+                                <p class="text-warning">Do not have an account? <a href="authentication-signup2.html"> Sign Up here</a></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,7 +82,7 @@
 
         <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
 
-        <th:block th:replace="@{layout/web/mainRightSidebar.html} :: sidebar"></th:block>
+        <th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
     </div>
 
 </th:block>
@@ -88,27 +90,42 @@
 <th:block layout:fragment="customScript">
     <script th:inline="javascript" type="text/javascript">
         $(document).ready(function () {
-
+            $("#post_signForm").validate({
+                rules: {
+                    identifier: {
+                        required: true,
+                    },
+                    password: {
+                        required: true,
+                    },
+                },
+                message: {
+                    identifier: {
+                        required: "Identifier is required.",
+                    },
+                    password: {
+                        required: "Password is required.",
+                    },
+                },
+            });
         });
 
         var sign = {
-            enter: function() {
-                // $.keyup(function(e) {
-                // 	if(e.keyCode == 13)  sign.submit();
-                // });
-            },
-
             submit: function () {
                 lozm.func.requestPost({
                     url: /*[[ @{/api/sign/in} ]]*/ ""
                     , data: {
-                        userId: $("#post_identifier").val(),
-                        userPwd: $("#post_password").val()
+                        identifier: $("#post_identifier").val(),
+                        password: $("#post_password").val()
                     }
                     , callback: {
                         success: function (result) {
                             console.log(result);
-                            if(result.success) location.href = "/home";
+                            if(result.success) {
+                                location.href = "/home";
+                            } else {
+                                lozm.func.alertFail();
+                            }
                         }, error: function (xhr, status, error) {
                             console.log(xhr);
                             console.log(status);
@@ -122,4 +139,3 @@
 </th:block>
 
 </html>
-

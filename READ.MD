@@ -7,6 +7,14 @@
 2. 로그인 기능 및 세션 추가
 => 로그인 페이지 및 세션 추가.
 
+3. 파일 업로드 및 다운로드 API
+=> 캐시 처리.
+
+4. 이외의 관리 화면 만들기
+
+5. API 인증 절차 정의 및 개발
+
+6. B2C 페이지 만들기
 
 # Database script
 CREATE USER LOZM identified by oracle ;

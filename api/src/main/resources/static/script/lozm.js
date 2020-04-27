@@ -81,6 +81,7 @@
 
         ajaxOptions.error = function(xhr, status, error) {
             if (options.callback.error) {
+                alertFail();
                 options.callback.error(xhr, status, error);
             }
         };
@@ -88,7 +89,6 @@
         ajaxOptions.complete = function() {
             hideLoadingBar();
 
-            // complete 함수가 있을 때 실행되는 코드
             if (options.callback.complete) {
                 options.callback.complete();
             }
@@ -165,6 +165,54 @@
                 $("#"+_id+_idx).val(_data[_idx]);
             }
         }
+    };
+
+    lozm.func.changeFileLabel = function(_targetId) {
+        $("#"+_targetId).change(function(){
+            $("#"+_targetId).next(".custom-file-label").text(this.files[0].name);
+        });
+    };
+
+    lozm.func.checkFileType = function(_targetId, _fileType) {
+        var _fileName = $("#"+_targetId).next(".custom-file-label").text();
+        if(_fileName.toLowerCase().indexOf(_fileType.toLowerCase()) == -1) return true;
+        return false;
+    };
+
+    lozm.func.requestMultipartFormData = function (options) {
+        setRequestMultipartFormData(options);
+    };
+
+    var setRequestMultipartFormData = function (options) {
+        var ajaxOptions = $.extend({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "",
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+        }, options);
+
+        ajaxOptions.data = options.data;
+
+        requestAjax(ajaxOptions);
+    };
+
+    lozm.func.alertSuccess = function() {
+        swal("Success", "Succeed to process the data.", "success");
+    };
+
+    var alertFail = lozm.func.alertFail = function() {
+        swal("Error", "Failed to process the data. Please check or contact to administrator.", "error");
+    };
+
+    lozm.func.alertRowIsSelected = function() {
+        swal("Error", "At least select one row.", "error");
+    };
+
+    lozm.func.alertRowsAreSelected = function() {
+        swal("Error", "Cannot select more then one row.", "error");
     };
 
     init.prototype = lozm.func;

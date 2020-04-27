@@ -27,6 +27,11 @@ public class RouteController {
         return "manageItem";
     }
 
+    @GetMapping(value = "/signIn")
+    public String signIn(ModelMap modelMap) {
+        return "signIn";
+    }
+
     @GetMapping(value = "/signOut")
     public String signOut(ModelMap modelMap) {
         httpSession.removeAttribute(USER.name());

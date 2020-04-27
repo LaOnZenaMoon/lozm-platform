@@ -35,9 +35,9 @@ public class SignAPIController {
                     .password(reqDto.getPassword())
                     .build();
             List<SignVo> result = signService.signIn(signVo);
-            setSessionInfo(result.get(0));
 
             resDto.setSuccess(true);
+            resDto.setMessage(setSessionInfo(result.get(0)));
         } catch (Exception e) {
             e.printStackTrace();
             resDto.setSuccess(false);

@@ -23,7 +23,7 @@ public class StoreService {
 
 
     public List<GetStoreDto> findAllStores() {
-        List<Store> storeList = storeRepository.findAll();
+        List<Store> storeList = storeRepository.selectStoreList();
 
         return storeList.stream().map(s -> new GetStoreDto(s.getId(), s.getName(), s.getTelNumber(), s.getInfo()))
                 .collect(toList());
@@ -55,4 +55,8 @@ public class StoreService {
         findStore.get().updateStore(storeVo);
     }
 
+    @Transactional
+    public void delete(StoreVo storeVo) {
+        storeRepository.deleteById(storeVo.getId());
+    }
 }

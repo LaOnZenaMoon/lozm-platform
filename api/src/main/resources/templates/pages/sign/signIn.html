@@ -119,7 +119,7 @@
                         success: function (result) {
                             console.log(result);
                             if(result.success) {
-                                location.href = "/home";
+                                location.href = result.message;
                             } else {
                                 lozm.func.alertFail();
                             }

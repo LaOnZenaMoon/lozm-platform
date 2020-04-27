@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import java.util.List;
 
 @Getter
 @Builder
@@ -18,5 +19,7 @@ public class StoreVo {
     private String telNumber;
     private String info;
     private int flag;
+
+    private List<StoreVo> storeList;
 
 }

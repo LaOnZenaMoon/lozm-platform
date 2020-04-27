@@ -21,11 +21,34 @@ public class ItemAPIController {
 
 
     @GetMapping
-    public APIResponseDto getItem() {
+    public APIResponseDto getItemList() {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetItemDto> itemList = itemService.findAllItems();
+            List<GetItemDto> itemList = itemService.getItemList();
+            GetItemDto.Response itemResDto = new GetItemDto.Response();
+            itemResDto.setList(itemList);
+
+            resDto.setSuccess(true);
+            resDto.setData(itemResDto);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @GetMapping(value = "/{storeId}")
+    public APIResponseDto getItemListByStoreId(@PathVariable(value = "storeId") Long itemId) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            ItemVo itemVo = ItemVo.builder()
+                    .storeId(itemId)
+                    .build();
+
+            List<GetItemDto> itemList = itemService.getItemListByStoreId(itemVo);
             GetItemDto.Response itemResDto = new GetItemDto.Response();
             itemResDto.setList(itemList);
 

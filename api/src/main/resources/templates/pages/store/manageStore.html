@@ -35,8 +35,8 @@
 		</div>
 
 		<div class="modal fade" id="post_store">
-			<div class="modal-dialog">
-				<div class="modal-content settingmated slideInUp">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
 					<div class="modal-header">
 						<h5 class="modal-title"></h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,8 +70,8 @@
 		</div>
 
 		<div class="modal fade" id="put_store">
-			<div class="modal-dialog">
-				<div class="modal-content settingmated slideInUp">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
 					<div class="modal-header">
 						<h5 class="modal-title"></h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -98,6 +98,23 @@
 								<label for="put_info">Information</label>
 								<textarea rows="4" class="form-control" id="put_info" name="info"></textarea>
 							</div>
+
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="card">
+										<div class="card-header">
+											<i class="fa fa-table"></i> Store > Item
+										</div>
+										<div class="card-body">
+											<div class="table-responsive">
+												<table id="itemGrid" class="table table-bordered display modal-grid">
+
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</form>
 
@@ -118,6 +135,8 @@
 		$(document).ready(function () {
 			store.initGrid();
 			store.getGridData();
+
+			item.initGrid();
 
 			$("#post_storeForm").validate({
 				rules: {
@@ -219,6 +238,10 @@
 								}
 
 								lozm.func.setDetail("put_", _selectedRows[0]);
+
+								item.gridTarget().clear().draw();
+								item.getGridData(_selectedRows[0].id);
+
 								$("#put_store").modal("show");
 							},
 						},
@@ -230,6 +253,7 @@
 									lozm.func.alertRowIsSelected();
 									return;
 								}
+
 								if(confirm("Are you sure to delete the data?")) store.delete(_selectedRows);
 							},
 						},
@@ -315,11 +339,11 @@
 					}
 				});
 			},
-			delete: function (idList) {
+			delete: function (list) {
 				lozm.func.requestDelete({
 					url: /*[[ @{/api/store} ]]*/ "",
 					data: {
-						storeList: idList
+						list: list
 					},
 					callback: {
 						success: function (result) {
@@ -329,6 +353,176 @@
 							} else {
 								lozm.func.alertFail();
 							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+		};
+
+		var item = {
+			gridId: "itemGrid",
+			gridTarget: function () {
+				return $("#" + item.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+item.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',       data: 'id',         visible: false},
+						{title: 'name',     data: 'name',       width: "30%"},
+						{title: 'contents', data: 'contents',   width: "40%"},
+						{title: 'price',    data: 'price',      width: "10%"},
+						{title: 'size',     data: 'size',       width: "10%"},
+						{title: 'quantity', data: 'quantity',   width: "10%"},
+					],
+					data: [],
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) item.gridTarget().rows().deselect();
+								else item.gridTarget().rows().select();
+							}
+						},
+						{
+							text: '<i class="fa fa-plus"></i>',
+							action: function () {
+								$("#post_shoes").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-edit"></i>',
+							action: function () {
+								var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									alert("At least select one row.");
+									return;
+								} else if(_selectedRows.length > 1) {
+									alert("Cannot select more then one row.");
+									return;
+								}
+
+								console.log(_selectedRows);
+								lozm.func.setDetail("put_shoes_", _selectedRows[0]);
+								$("#put_shoes").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									alert("At least select one row.");
+									return;
+								}
+								if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
+							},
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+			getGridData: function (storeId) {
+				lozm.func.requestGet({
+					url: "/api/item/"+storeId,
+					callback: {
+						success: function(result) {
+							console.log(result);
+							if(result.success === true) {
+								item.gridTarget().clear().draw();
+								item.gridTarget().rows.add(result.data.list).draw();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function(xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			post: function () {
+				lozm.func.requestPost({
+					url: "/api/item",
+					data: {
+						name: $("#post_shoes_name").val(),
+						price: $("#post_shoes_price").val(),
+						quantity: $("#post_shoes_quantity").val(),
+						contents: $("#post_shoes_contents").val(),
+						size: $("#post_shoes_size").val(),
+						type: "SHOES"
+					},
+					callback: {
+						success: function (result) {
+							console.log(result);
+							item.getGridData();
+							$("#post_shoesForm input textarea").clear();
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			put: function () {
+				lozm.func.requestPut({
+					url: "/api/item",
+					data: {
+						id: $("#put_shoes_id").val(),
+						name: $("#put_shoes_name").val(),
+						price: $("#put_shoes_price").val(),
+						quantity: $("#put_shoes_quantity").val(),
+						contents: $("#put_shoes_contents").val(),
+						size: $("#put_shoes_size").val()
+					},
+					callback: {
+						success: function (result) {
+							console.log(result);
+							item.getGridData();
+							$("#put_shoesForm input textarea").clear();
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			delete: function () {
+				lozm.func.requestPut({
+					url: "/api/item",
+					data: {
+						id: $("#put_shoes_id").val(),
+						flag: 0
+					},
+					callback: {
+						success: function (result) {
+							console.log(result);
+							item.getGridData();
+							$("#put_shoesForm input textarea").clear();
 						},
 						error: function (xhr, status, error) {
 							console.log(xhr);

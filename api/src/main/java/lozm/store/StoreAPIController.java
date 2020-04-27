@@ -6,6 +6,7 @@ import lozm.dto.item.GetClothingDto;
 import lozm.dto.item.GetItemDto;
 import lozm.dto.item.PostItemDto;
 import lozm.dto.item.PutItemDto;
+import lozm.dto.store.DeleteStoreDto;
 import lozm.dto.store.GetStoreDto;
 import lozm.dto.store.PostStoreDto;
 import lozm.dto.store.PutStoreDto;
@@ -100,6 +101,28 @@ public class StoreAPIController {
                     .build();
 
             storeService.update(storeVo);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @DeleteMapping
+    public APIResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            for(DeleteStoreDto dto : reqDto.getList()) {
+                StoreVo storeVo = StoreVo.builder()
+                    .id(dto.getId())
+                    .build();
+
+                storeService.delete(storeVo);
+            }
+
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

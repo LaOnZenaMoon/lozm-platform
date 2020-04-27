@@ -88,6 +88,7 @@ public class StoreAPIController {
             resDto.setSuccess(true);
             resDto.setData(clothingResDto);
         } catch (Exception e) {
+            e.printStackTrace();
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
         }

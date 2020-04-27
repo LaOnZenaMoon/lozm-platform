@@ -16,6 +16,7 @@ public class GetClothingDto {
     private String contents;
     private String size;
 
+
     public GetClothingDto(Long id, String name, Long price, Long quantity, String contents, String size) {
         this.id = id;
         this.name = name;

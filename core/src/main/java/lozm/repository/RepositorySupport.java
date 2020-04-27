@@ -63,8 +63,8 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                         outer.price,
                         outer.quantity,
                         outer.type,
-                        outer.clothing.contents,
-                        outer.clothing.sizes
+                        outer.clothing,
+                        outer.store
                 ))
                 .from(outer)
                 .where(

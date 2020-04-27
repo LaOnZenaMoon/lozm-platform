@@ -90,7 +90,7 @@
 													</div>
 													<div class="card-body">
 														<div class="table-responsive">
-															<table id="outerGrid" class="table table-bordered display"></table>
+															<table id="outerGrid" class="table table-bordered display modal-grid"></table>
 														</div>
 													</div>
 												</div>
@@ -109,7 +109,7 @@
 													</div>
 													<div class="card-body">
 														<div class="table-responsive">
-															<table id="topGrid" class="table table-bordered display"></table>
+															<table id="topGrid" class="table table-bordered display modal-grid"></table>
 														</div>
 													</div>
 												</div>
@@ -127,7 +127,7 @@
 													</div>
 													<div class="card-body">
 														<div class="table-responsive">
-															<table id="bottomGrid" class="table table-bordered display"></table>
+															<table id="bottomGrid" class="table table-bordered display modal-grid"></table>
 														</div>
 													</div>
 												</div>
@@ -145,7 +145,7 @@
 													</div>
 													<div class="card-body">
 														<div class="table-responsive">
-															<table id="shoesGrid" class="table table-bordered display"></table>
+															<table id="shoesGrid" class="table table-bordered display modal-grid"></table>
 														</div>
 													</div>
 												</div>
@@ -263,185 +263,11 @@
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
-			store.initGrid();
-			store.getGridData();
-
 			outer.initGrid();
-			top.initGrid();
+			// top.initGrid();
 			bottom.initGrid();
-			shoes.initGrid();
+			// shoes.initGrid();
 		});
-
-		var store = {
-			gridId: "storeGrid",
-			gridTarget: function () {
-				return $("#" + store.gridId).DataTable();
-			},
-			initGrid: function () {
-				$("#"+store.gridId).DataTable({
-					dom: 'Bftrip',
-					columns: [
-						{title: 'Store name', 			data: 'name', 			width: "20%"},
-						{title: 'Telephone Number', 	data: 'telNumber', 		width: "30%"},
-						{title: 'Information', 			data: 'info', 			width: "40%"},
-					],
-					data: [],
-					select: {
-						style: 'multi',
-					},
-					buttons: [
-						{
-							text: '<i class="fa fa-check-square"></i>',
-							action: function () {
-								var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) store.gridTarget().rows().deselect();
-								else store.gridTarget().rows().select();
-							}
-						},
-						{
-							text: '<i class="fa fa-plus"></i>',
-							action: function () {
-								$("#post_store").modal("show");
-							},
-						},
-						{
-							text: '<i class="fa fa-edit"></i>',
-							action: function () {
-								var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length < 1) {
-									lozm.func.alertRowIsSelected();
-									return;
-								} else if(_selectedRows.length > 1) {
-									lozm.func.alertRowsAreSelected();
-									return;
-								}
-
-								lozm.func.setDetail("put_", _selectedRows[0]);
-
-								// item.gridTarget().clear().draw();
-								// item.getGridData(_selectedRows[0].id);
-
-								$("#put_store").modal("show");
-							},
-						},
-						{
-							text: '<i class="fa fa-minus"></i>',
-							action: function () {
-								var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length < 1) {
-									lozm.func.alertRowIsSelected();
-									return;
-								}
-
-								if(confirm("Are you sure to delete the data?")) store.delete(_selectedRows);
-							},
-						},
-						{
-							extend: "csv",
-							text: '<i class="fa fa-download"></i>',
-							charset: 'UTF-16LE',
-						},
-						{
-							extend: "excel",
-							text: '<i class="fa fa-file-excel-o"></i>',
-							charset: 'UTF-16LE',
-						}
-					],
-				});
-			},
-			getGridData: function () {
-				lozm.func.requestGet({
-					url: /*[[ @{/api/store} ]]*/ "",
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								store.gridTarget().clear().draw();
-								store.gridTarget().rows.add(result.data.list).draw();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			post: function () {
-				lozm.func.requestPost({
-					url: /*[[ @{/api/store} ]]*/ "",
-					data: {
-						name: $("#post_name").val(),
-						telNumber: $("#post_telNumber").val(),
-						info: $("#post_info").val()
-					},
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								lozm.func.alertSuccess();
-								store.getGridData();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			put: function () {
-				lozm.func.requestPut({
-					url: /*[[ @{/api/store} ]]*/ "",
-					data: {
-						id: $("#put_id").val(),
-						name: $("#put_name").val(),
-						telNumber: $("#put_telNumber").val(),
-						info: $("#put_info").val()
-					},
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								lozm.func.alertSuccess();
-								store.getGridData();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			delete: function (list) {
-				lozm.func.requestDelete({
-					url: /*[[ @{/api/store} ]]*/ "",
-					data: {
-						list: list
-					},
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								lozm.func.alertSuccess();
-								store.getGridData();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-		};
 
 		var outer = {
 			gridId: "outerGrid",
@@ -691,7 +517,7 @@
 			},
 			getGridData: function (storeId) {
 				lozm.func.requestGet({
-					url: "/api/top."+storeId,
+					url: "/api/top/"+storeId,
 					callback: {
 						success: function(result) {
 							console.log(result);
@@ -703,77 +529,6 @@
 							}
 						},
 						error: function(xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			post: function () {
-				lozm.func.requestPost({
-					url: "/api/item",
-					data: {
-						name: $("#post_shoes_name").val(),
-						price: $("#post_shoes_price").val(),
-						quantity: $("#post_shoes_quantity").val(),
-						contents: $("#post_shoes_contents").val(),
-						size: $("#post_shoes_size").val(),
-						type: "SHOES"
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#post_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			put: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						name: $("#put_shoes_name").val(),
-						price: $("#put_shoes_price").val(),
-						quantity: $("#put_shoes_quantity").val(),
-						contents: $("#put_shoes_contents").val(),
-						size: $("#put_shoes_size").val()
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			delete: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						flag: 0
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
 							console.log(xhr);
 							console.log(status);
 							console.log(error);
@@ -861,7 +616,7 @@
 			},
 			getGridData: function (storeId) {
 				lozm.func.requestGet({
-					url: "/api/bottom."+storeId,
+					url: "/api/bottom/"+storeId,
 					callback: {
 						success: function(result) {
 							console.log(result);
@@ -873,77 +628,6 @@
 							}
 						},
 						error: function(xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			post: function () {
-				lozm.func.requestPost({
-					url: "/api/item",
-					data: {
-						name: $("#post_shoes_name").val(),
-						price: $("#post_shoes_price").val(),
-						quantity: $("#post_shoes_quantity").val(),
-						contents: $("#post_shoes_contents").val(),
-						size: $("#post_shoes_size").val(),
-						type: "SHOES"
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#post_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			put: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						name: $("#put_shoes_name").val(),
-						price: $("#put_shoes_price").val(),
-						quantity: $("#put_shoes_quantity").val(),
-						contents: $("#put_shoes_contents").val(),
-						size: $("#put_shoes_size").val()
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			delete: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						flag: 0
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
 							console.log(xhr);
 							console.log(status);
 							console.log(error);
@@ -1031,7 +715,7 @@
 			},
 			getGridData: function (storeId) {
 				lozm.func.requestGet({
-					url: "/api/shoes."+storeId,
+					url: "/api/shoes/"+storeId,
 					callback: {
 						success: function(result) {
 							console.log(result);
@@ -1043,77 +727,6 @@
 							}
 						},
 						error: function(xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			post: function () {
-				lozm.func.requestPost({
-					url: "/api/item",
-					data: {
-						name: $("#post_shoes_name").val(),
-						price: $("#post_shoes_price").val(),
-						quantity: $("#post_shoes_quantity").val(),
-						contents: $("#post_shoes_contents").val(),
-						size: $("#post_shoes_size").val(),
-						type: "SHOES"
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#post_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			put: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						name: $("#put_shoes_name").val(),
-						price: $("#put_shoes_price").val(),
-						quantity: $("#put_shoes_quantity").val(),
-						contents: $("#put_shoes_contents").val(),
-						size: $("#put_shoes_size").val()
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			delete: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						flag: 0
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
 							console.log(xhr);
 							console.log(status);
 							console.log(error);

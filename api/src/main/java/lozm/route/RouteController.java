@@ -52,17 +52,17 @@ public class RouteController {
         List<GetClothingDto> outerList = outer.getList();
         modelMap.addAttribute("outerList", outerList);
 
-        APIResponseDto getTop = storeAPIController.getStoreClothing(storeId, "OUTER");
+        APIResponseDto getTop = storeAPIController.getStoreClothing(storeId, "TOP");
         GetClothingDto.Response top = (GetClothingDto.Response) getTop.getData();
         List<GetClothingDto> topList = top.getList();
         modelMap.addAttribute("topList", topList);
 
-        APIResponseDto getBottom = storeAPIController.getStoreClothing(storeId, "OUTER");
+        APIResponseDto getBottom = storeAPIController.getStoreClothing(storeId, "BOTTOM");
         GetClothingDto.Response bottom = (GetClothingDto.Response) getBottom.getData();
         List<GetClothingDto> bottomList = bottom.getList();
         modelMap.addAttribute("bottomList", bottomList);
 
-        APIResponseDto getShoes = storeAPIController.getStoreClothing(storeId, "OUTER");
+        APIResponseDto getShoes = storeAPIController.getStoreClothing(storeId, "SHOES");
         GetClothingDto.Response shoes = (GetClothingDto.Response) getShoes.getData();
         List<GetClothingDto> shoesList = shoes.getList();
         modelMap.addAttribute("shoesList", shoesList);

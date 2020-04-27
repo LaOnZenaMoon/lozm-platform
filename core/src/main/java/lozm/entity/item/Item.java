@@ -35,10 +35,11 @@ public class Item extends BaseEntity {
     @JoinColumn(name = "STORE_ID")
     private Store store;
 
-    public void insertItem(ItemVo itemVo) {
+    public void insertItem(ItemVo itemVo, Store store) {
         this.name = itemVo.getName();
         this.price = itemVo.getPrice();
         this.quantity = itemVo.getQuantity();
+        this.store = store;
     }
 
     public void updateItem(ItemVo itemVo) {

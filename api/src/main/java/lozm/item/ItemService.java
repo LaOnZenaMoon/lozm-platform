@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lozm.code.ItemType;
 import lozm.dto.item.GetClothingDto;
 import lozm.dto.item.GetItemDto;
+import lozm.entity.store.Store;
 import lozm.exception.APIException;
+import lozm.store.StoreService;
 import lozm.vo.item.ItemVo;
 import lozm.entity.inheritance.Bottom;
 import lozm.entity.inheritance.Outer;
@@ -16,6 +18,7 @@ import lozm.repository.item.inherit.BottomRepository;
 import lozm.repository.item.inherit.OuterRepository;
 import lozm.repository.item.inherit.ShoesRepository;
 import lozm.repository.item.inherit.TopRepository;
+import lozm.vo.store.StoreVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +37,7 @@ public class ItemService {
     private final TopRepository topRepository;
     private final BottomRepository bottomRepository;
     private final ShoesRepository shoesRepository;
+    private final StoreService storeService;
 
 
     public List<GetItemDto> findAllItems() {
@@ -45,22 +49,28 @@ public class ItemService {
 
     @Transactional
     public void save(ItemVo itemVo) throws Exception {
+        StoreVo storeVo = StoreVo.builder()
+                .id(itemVo.getStoreId())
+                .build();
+
+        Store findStore = storeService.findById(storeVo);
+
         String itemType = itemVo.getType();
         if(ItemType.OUTER.toString().equals(itemType)) {
             Outer outer = new Outer();
-            outer.insertOuter(itemVo);
+            outer.insertOuter(itemVo, findStore);
             outerRepository.save(outer);
         } else if(ItemType.TOP.toString().equals(itemType)) {
             Top top = new Top();
-            top.insertTop(itemVo);
+            top.insertTop(itemVo, findStore);
             topRepository.save(top);
         } else if(ItemType.BOTTOM.toString().equals(itemType)) {
             Bottom bottom = new Bottom();
-            bottom.insertBottom(itemVo);
+            bottom.insertBottom(itemVo, findStore);
             bottomRepository.save(bottom);
         } else if(ItemType.SHOES.toString().equals(itemType)) {
             Shoes shoes = new Shoes();
-            shoes.insertShoes(itemVo);
+            shoes.insertShoes(itemVo, findStore);
             shoesRepository.save(shoes);
         } else {
             throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");

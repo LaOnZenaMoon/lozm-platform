@@ -73,7 +73,9 @@ public class ItemAPIController {
                     .type(reqDto.getType())
                     .contents(reqDto.getContents())
                     .size(reqDto.getSize())
+                    .storeId(reqDto.getStoreId())
                     .build();
+
             itemService.save(itemvo);
             resDto.setSuccess(true);
         } catch (Exception e) {

@@ -22,19 +22,18 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
 
-    public List<GetStoreDto> findAllItems() {
+    public List<GetStoreDto> findAllStores() {
         List<Store> storeList = storeRepository.findAll();
 
         return storeList.stream().map(s -> new GetStoreDto(s.getId(), s.getName(), s.getTelNumber(), s.getInfo()))
                 .collect(toList());
     }
 
-    public GetStoreDto findById(StoreVo storeVo) {
+    public Store findById(StoreVo storeVo) {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
         findStore.orElseThrow(() -> new APIException("STORE_0002", "The store doesn't exist."));
 
-        Store store = findStore.get();
-        return new GetStoreDto(store.getId(), store.getName(), store.getTelNumber(), store.getInfo());
+        return findStore.get();
     }
 
     @Transactional

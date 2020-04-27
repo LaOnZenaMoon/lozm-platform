@@ -5,6 +5,8 @@ import com.github.javafaker.Faker;
 import lozm.code.ClothingSizeType;
 import lozm.code.ItemType;
 import lozm.dto.item.PostItemDto;
+import lozm.dto.store.GetStoreDto;
+import lozm.store.StoreService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +35,21 @@ public class ItemBulkInsert {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private StoreService storeService;
+
+
     @Test
     public void setItems() {
-        setItem(ItemType.OUTER.name());
-        setItem(ItemType.TOP.name());
-        setItem(ItemType.BOTTOM.name());
-        setItem(ItemType.SHOES.name());
+        for (GetStoreDto findStore : storeService.findAllStores()) {
+            setItem(ItemType.OUTER.name(), findStore.getId());
+            setItem(ItemType.TOP.name(), findStore.getId());
+            setItem(ItemType.BOTTOM.name(), findStore.getId());
+            setItem(ItemType.SHOES.name(), findStore.getId());
+        };
     }
 
-    public void setItem(String itemType) {
+    public void setItem(String itemType, Long storeId) {
         try {
             Faker faker = new Faker();
             List<String> sizeList = new ArrayList<>();
@@ -52,7 +60,7 @@ public class ItemBulkInsert {
             sizeList.add(ClothingSizeType.XL.name());
             sizeList.add(ClothingSizeType.XXL.name());
 
-            for(int i=0; i<100; i++) {
+            for(int i=0; i<50; i++) {
                 String size = null;
                 if(ItemType.SHOES.name().equals(itemType)) {
                     size = String.valueOf(ThreadLocalRandom.current().nextInt(220, 310));
@@ -61,12 +69,13 @@ public class ItemBulkInsert {
                 }
 
                 PostItemDto.Request reqDto = PostItemDto.Request.setRequestTestData(
-                    faker.university().name(),
-                    ThreadLocalRandom.current().nextLong(10, 999) * 1000,
-                    ThreadLocalRandom.current().nextLong(1, 200),
-                    itemType,
-                    faker.lorem().word(),
-                    size
+                        faker.university().name(),
+                        ThreadLocalRandom.current().nextLong(10, 999) * 1000,
+                        ThreadLocalRandom.current().nextLong(1, 200),
+                        itemType,
+                        faker.lorem().word(),
+                        size,
+                        storeId
                 );
                 postItem(reqDto);
             }

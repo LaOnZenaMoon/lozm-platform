@@ -27,7 +27,10 @@ public class PostItemDto {
         @NotEmpty
         private String size;
 
-        public static Request setRequestTestData(String name, Long price, Long quantity, String type, String contents, String size) {
+        @NotEmpty
+        private Long storeId;
+
+        public static Request setRequestTestData(String name, Long price, Long quantity, String type, String contents, String size, Long storeId) {
             PostItemDto.Request reqDto = new PostItemDto.Request();
             reqDto.name = name;
             reqDto.price = price;
@@ -35,6 +38,7 @@ public class PostItemDto {
             reqDto.type = type;
             reqDto.contents = contents;
             reqDto.size = size;
+            reqDto.storeId = storeId;
 
             return reqDto;
         }

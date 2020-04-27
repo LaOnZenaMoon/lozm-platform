@@ -9,6 +9,7 @@ import lozm.dto.item.PutItemDto;
 import lozm.dto.store.GetStoreDto;
 import lozm.dto.store.PostStoreDto;
 import lozm.dto.store.PutStoreDto;
+import lozm.entity.store.Store;
 import lozm.vo.item.ItemVo;
 import lozm.vo.store.StoreVo;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class StoreAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetStoreDto> storeList = storeService.findAllItems();
+            List<GetStoreDto> storeList = storeService.findAllStores();
             GetStoreDto.Response storeResDto = new GetStoreDto.Response();
             storeResDto.setList(storeList);
 
@@ -52,7 +53,8 @@ public class StoreAPIController {
                     .id(storeId)
                     .build();
 
-            GetStoreDto storeResDto = storeService.findById(storeVo);
+            Store store = storeService.findById(storeVo);
+            GetStoreDto storeResDto = new GetStoreDto(store.getId(), store.getName(), store.getTelNumber(), store.getInfo());
             resDto.setData(storeResDto);
             resDto.setSuccess(true);
         } catch (Exception e) {

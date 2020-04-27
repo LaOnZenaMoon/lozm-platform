@@ -3,6 +3,7 @@ package lozm.entity.inheritance;
 import lombok.Getter;
 import lozm.entity.embedded.Clothing;
 import lozm.entity.item.Item;
+import lozm.entity.store.Store;
 import lozm.vo.item.ItemVo;
 
 import javax.persistence.DiscriminatorValue;
@@ -17,8 +18,8 @@ public class Shoes extends Item {
     @Embedded
     private Clothing clothing;
 
-    public void insertShoes(ItemVo itemVo) {
-        insertItem(itemVo);
+    public void insertShoes(ItemVo itemVo, Store store) {
+        insertItem(itemVo, store);
         clothing = new Clothing();
         clothing.setClothing(itemVo.getContents(), itemVo.getSize());
     }

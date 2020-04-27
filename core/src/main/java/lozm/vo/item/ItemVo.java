@@ -19,5 +19,6 @@ public class ItemVo {
     private String contents;
     private String size;
     private int flag;
+    private Long storeId;
 
 }

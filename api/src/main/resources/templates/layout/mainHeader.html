@@ -159,8 +159,8 @@
                                                              src="https://via.placeholder.com/110x110"
                                                              alt="user avatar"></div>
                                     <div class="media-body">
-                                        <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-                                        <p class="user-subtitle">mccoy@example.com</p>
+                                        <h6 class="mt-2 user-title" th:text="${session.user.name}">Administrator</h6>
+                                        <p class="user-subtitle" th:text="${session.user.identifier}">Administrator</p>
                                     </div>
                                 </div>
                             </a>

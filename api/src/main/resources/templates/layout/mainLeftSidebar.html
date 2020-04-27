@@ -14,7 +14,7 @@
                 <div class="avatar"><img class="mr-3 side-user-img" src="https://via.placeholder.com/110x110"
                                          alt="user avatar"></div>
                 <div class="media-body">
-                    <h6 class="side-user-name">Administrator</h6>
+                    <h6 class="side-user-name" th:text="${session.user.name}">Administrator</h6>
                 </div>
             </div>
             <div id="user-dropdown" class="collapse">
@@ -30,24 +30,14 @@
 
             <li>
                 <a href="javaScript:void();" class="waves-effect">
-                    <i class="zmdi zmdi-view-dashboard"></i> <span>아이템</span><i
-                        class="fa fa-angle-left pull-right"></i>
+                    <i class="zmdi zmdi-view-dashboard"></i><span>Manage store</span><i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                    <li><a href="/manageItem"><i class="zmdi zmdi-dot-circle-alt"></i>아이템 관리</a></li>
-                </ul>
-                <ul class="sidebar-submenu">
-                    <li><a href="/manageItem"><i class="zmdi zmdi-dot-circle-alt"></i>기타</a></li>
+                    <li><a href="/store/manage">Manage store</a></li>
+                    <li><a href="/item/manage">Manage item</a></li>
                 </ul>
             </li>
 
-<!--            <li class="sidebar-header">LABELS</li>-->
-<!--            <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-coffee text-danger"></i>-->
-<!--                <span>Important</span></a></li>-->
-<!--            <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-chart-donut text-success"></i>-->
-<!--                <span>Warning</span></a></li>-->
-<!--            <li><a href="javaScript:void();" class="waves-effect"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a>-->
-<!--            </li>-->
         </ul>
 
     </div>

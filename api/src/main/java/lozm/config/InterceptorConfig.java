@@ -19,24 +19,22 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
 
         String reqUri = request.getRequestURI();
         if (
-                reqUri.contains("/sign")
-                || reqUri.contains("/error")
+                reqUri.contains("/api")
                 || reqUri.contains("/libs")
                 || reqUri.contains("/script")
-                || reqUri.contains("/favicon")
-                || reqUri.contains("/asset")
+                || reqUri.contains("/layout")
+                || reqUri.contains("/error")
+                || reqUri.contains("/sign")
         ) {
             return super.preHandle(request, response, handler);
         }
 
-        if (!reqUri.contains("/api")) {
-            SignVo userSession = (SignVo) httpSession.getAttribute(USER.name());
-            if (userSession == null) {
-                httpSession.setAttribute(PREV_PAGE.name(), reqUri);
-                response.sendRedirect("/signOut");
+        SignVo userSession = (SignVo) httpSession.getAttribute(USER.name());
+        if (userSession == null) {
+            httpSession.setAttribute(PREV_PAGE.name(), reqUri);
+            response.sendRedirect("/signOut");
 
-                return false;
-            }
+            return false;
         }
 
         return super.preHandle(request, response, handler);

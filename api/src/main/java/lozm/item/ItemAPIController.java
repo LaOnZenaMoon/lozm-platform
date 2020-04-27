@@ -70,7 +70,7 @@ public class ItemAPIController {
             ItemVo itemVo = ItemVo.builder()
                     .type(itemType)
                     .build();
-            List<GetClothingDto> clothingList = itemService.findAllClothing(itemVo);
+            List<GetClothingDto> clothingList = itemService.getClothingList(itemVo);
             GetClothingDto.Response clothingResDto = new GetClothingDto.Response();
             clothingResDto.setList(clothingList);
 

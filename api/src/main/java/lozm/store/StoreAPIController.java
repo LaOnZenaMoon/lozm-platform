@@ -11,6 +11,7 @@ import lozm.dto.store.GetStoreDto;
 import lozm.dto.store.PostStoreDto;
 import lozm.dto.store.PutStoreDto;
 import lozm.entity.store.Store;
+import lozm.item.ItemService;
 import lozm.vo.item.ItemVo;
 import lozm.vo.store.StoreVo;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ import java.util.List;
 public class StoreAPIController {
 
     private final StoreService storeService;
+    private final ItemService itemService;
 
 
     @GetMapping
@@ -58,6 +60,33 @@ public class StoreAPIController {
             GetStoreDto storeResDto = new GetStoreDto(store.getId(), store.getName(), store.getTelNumber(), store.getInfo());
             resDto.setData(storeResDto);
             resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @GetMapping(value = "/{storeId}/clothing/{itemType}")
+    public APIResponseDto getStoreClothing(
+            @PathVariable(value = "storeId") Long storeId,
+            @PathVariable(value = "itemType") String itemType
+    ) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            ItemVo itemVo = ItemVo.builder()
+                    .storeId(storeId)
+                    .type(itemType)
+                    .build();
+
+            List<GetClothingDto> clothingList = itemService.getClothingList(itemVo);
+            GetClothingDto.Response clothingResDto = new GetClothingDto.Response();
+            clothingResDto.setList(clothingList);
+
+            resDto.setSuccess(true);
+            resDto.setData(clothingResDto);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());

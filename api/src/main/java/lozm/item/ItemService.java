@@ -54,6 +54,56 @@ public class ItemService {
                 .collect(toList());
     }
 
+    public List<GetClothingDto> getClothingList(ItemVo itemVo) throws InterruptedException {
+        if(ItemType.OUTER.toString().equals(itemVo.getType())) {
+            List<Outer> itemList = outerRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+
+            return itemList.stream().map(o -> new GetClothingDto(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
+            List<Top> itemList = topRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+
+            return itemList.stream().map(o -> new GetClothingDto(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
+            List<Bottom> itemList = bottomRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+
+            return itemList.stream().map(o -> new GetClothingDto(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
+            List<Shoes> itemList = shoesRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+
+            return itemList.stream().map(o -> new GetClothingDto(
+                    o.getId(),
+                    o.getName(),
+                    o.getPrice(),
+                    o.getQuantity(),
+                    o.getClothing().getContents(),
+                    o.getClothing().getSizes()
+            )).collect(toList());
+        } else {
+            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
+        }
+    }
+
     @Transactional
     public void save(ItemVo itemVo) throws Exception {
         StoreVo storeVo = StoreVo.builder()
@@ -106,49 +156,4 @@ public class ItemService {
         }
     }
 
-    public List<GetClothingDto> findAllClothing(ItemVo itemVo) throws InterruptedException {
-        if(ItemType.OUTER.toString().equals(itemVo.getType())) {
-            List<Outer> itemList = outerRepository.findAll();
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
-        } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
-            List<Top> itemList = topRepository.findAll();
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
-        } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
-            List<Bottom> itemList = bottomRepository.findAll();
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
-        } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
-            List<Shoes> itemList = shoesRepository.findAll();
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
-        } else {
-            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
-        }
-    }
 }

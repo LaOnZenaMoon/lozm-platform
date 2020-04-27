@@ -1,15 +1,19 @@
 package lozm.route;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lozm.item.ItemAPIController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
 
 import static lozm.code.SessionType.PREV_PAGE;
 import static lozm.code.SessionType.USER;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class RouteController {
@@ -22,12 +26,19 @@ public class RouteController {
         return "pages/home";
     }
 
-    @GetMapping(value = "/store/manage")
+    @GetMapping(value = "/manage/store")
     public String managingStore(ModelMap modelMap) {
         return "pages/store/manageStore";
     }
 
-    @GetMapping(value = "/item/manage")
+    @GetMapping(value = "/manage/store/{storeId}")
+    public String managingItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) {
+        log.debug("Store ID: "+storeId);
+
+        return "pages/store/manageStoreDetail";
+    }
+
+    @GetMapping(value = "/manage/item")
     public String managingItem(ModelMap modelMap) {
         return "pages/item/manageItem";
     }
@@ -40,7 +51,7 @@ public class RouteController {
     @GetMapping(value = "/sign/out")
     public String signOut(ModelMap modelMap) {
         httpSession.removeAttribute(USER.name());
-        httpSession.removeAttribute(PREV_PAGE.name());
+//        httpSession.removeAttribute(PREV_PAGE.name());
 
         return this.signIn(modelMap);
     }

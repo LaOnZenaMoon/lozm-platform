@@ -36,12 +36,12 @@ public class SignAPIController {
                     .build();
             List<SignVo> result = signService.signIn(signVo);
 
-            resDto.setSuccess(true);
             resDto.setMessage(setSessionInfo(result.get(0)));
+            resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
-            resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
+            resDto.setSuccess(false);
         }
 
         return resDto;

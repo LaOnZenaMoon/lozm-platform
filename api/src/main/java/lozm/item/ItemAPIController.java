@@ -40,12 +40,12 @@ public class ItemAPIController {
     }
 
     @GetMapping(value = "/{storeId}")
-    public APIResponseDto getItemListByStoreId(@PathVariable(value = "storeId") Long itemId) {
+    public APIResponseDto getItemListByStoreId(@PathVariable(value = "storeId") Long storeId) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
             ItemVo itemVo = ItemVo.builder()
-                    .storeId(itemId)
+                    .storeId(storeId)
                     .build();
 
             List<GetItemDto> itemList = itemService.getItemListByStoreId(itemVo);

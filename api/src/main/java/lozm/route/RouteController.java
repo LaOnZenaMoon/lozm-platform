@@ -19,25 +19,25 @@ public class RouteController {
 
     @GetMapping(value = "/home")
     public String home(ModelMap modelMap) {
-        return "home";
+        return "pages/home";
     }
 
-    @GetMapping(value = "/manage/item")
+    @GetMapping(value = "/item/manage")
     public String managingItem(ModelMap modelMap) {
-        return "manageItem";
+        return "pages/item/manageItem";
     }
 
-    @GetMapping(value = "/signIn")
+    @GetMapping(value = "/sign/in")
     public String signIn(ModelMap modelMap) {
-        return "signIn";
+        return "pages/sign/signIn";
     }
 
-    @GetMapping(value = "/signOut")
+    @GetMapping(value = "/sign/out")
     public String signOut(ModelMap modelMap) {
         httpSession.removeAttribute(USER.name());
         httpSession.removeAttribute(PREV_PAGE.name());
 
-        return "signIn";
+        return this.signIn(modelMap);
     }
 
 }

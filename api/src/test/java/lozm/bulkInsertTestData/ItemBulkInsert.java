@@ -60,7 +60,7 @@ public class ItemBulkInsert {
             sizeList.add(ClothingSizeType.XL.name());
             sizeList.add(ClothingSizeType.XXL.name());
 
-            for(int i=0; i<50; i++) {
+            for(int i=0; i<12; i++) {
                 String size = null;
                 if(ItemType.SHOES.name().equals(itemType)) {
                     size = String.valueOf(ThreadLocalRandom.current().nextInt(220, 310));

@@ -27,7 +27,7 @@ public class PostItemDto {
         @NotEmpty
         private String size;
 
-        @NotEmpty
+        @NotNull
         private Long storeId;
 
         public static Request setRequestTestData(String name, Long price, Long quantity, String type, String contents, String size, Long storeId) {

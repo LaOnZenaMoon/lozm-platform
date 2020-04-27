@@ -33,7 +33,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
         SignVo userSession = (SignVo) httpSession.getAttribute(USER.name());
         if (userSession == null) {
             httpSession.setAttribute(PREV_PAGE.name(), reqUri);
-            response.sendRedirect("/signOut");
+            response.sendRedirect("/sign/out");
 
             return false;
         }

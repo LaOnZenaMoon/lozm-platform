@@ -6,6 +6,7 @@ import lozm.dto.item.GetClothingDto;
 import lozm.dto.item.GetItemDto;
 import lozm.entity.store.Store;
 import lozm.exception.APIException;
+import lozm.repository.RepositorySupport;
 import lozm.store.StoreService;
 import lozm.vo.item.ItemVo;
 import lozm.entity.inheritance.Bottom;
@@ -38,6 +39,7 @@ public class ItemService {
     private final BottomRepository bottomRepository;
     private final ShoesRepository shoesRepository;
     private final StoreService storeService;
+    private final RepositorySupport repositorySupport;
 
 
     public List<GetItemDto> getItemList() {
@@ -54,9 +56,10 @@ public class ItemService {
                 .collect(toList());
     }
 
-    public List<GetClothingDto> getClothingList(ItemVo itemVo) throws InterruptedException {
+    public List<GetClothingDto> getClothingList(ItemVo itemVo) throws Exception {
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
-            List<Outer> itemList = outerRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+//            List<Outer> itemList = outerRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+            List<Outer> itemList = repositorySupport.selectOuterList(itemVo);
 
             return itemList.stream().map(o -> new GetClothingDto(
                     o.getId(),

@@ -3,6 +3,7 @@ package lozm.route;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lozm.dto.APIResponseDto;
+import lozm.dto.item.GetClothingDto;
 import lozm.dto.store.GetStoreDto;
 import lozm.item.ItemAPIController;
 import lozm.store.StoreAPIController;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.List;
 
 import static lozm.code.SessionType.PREV_PAGE;
 import static lozm.code.SessionType.USER;
@@ -45,6 +48,9 @@ public class RouteController {
         modelMap.addAttribute("storeDetail", storeDetail);
 
 
+        APIResponseDto getStoreClothingResDto = storeAPIController.getStoreClothing(storeId, "OUTER");
+        GetClothingDto.Response clothingRes = (GetClothingDto.Response) getStoreClothingResDto.getData();
+        List<GetClothingDto> clothingList = clothingRes.getList();
 
         return "pages/store/manageStoreDetail";
     }

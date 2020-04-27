@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/web/mainLayout}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-	<th:block th:replace="@{layout/web/mainLoadingBar.html} :: loadingBar"></th:block>
+	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
 
 	<div id="wrapper">
-		<th:block th:replace="@{layout/web/mainHeader.html} :: header"></th:block>
-		<th:block th:replace="@{layout/web/mainLeftSidebar.html} :: sidebar"></th:block>
-		<th:block th:replace="@{layout/web/contentDataTable.html} :: dataTable"></th:block>
+		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
+		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
+		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
 
 		<div class="content-wrapper">
 			<div class="container-fluid">
-				<th:block th:replace="@{layout/web/contentHeader.html} :: contentHeader('화면 메뉴코드 관리','시스템 관리','화면 메뉴코드 관리','','')"></th:block>
+				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Manage store','Management','Manage store','','')"></th:block>
 
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-header">
-								<i class="fa fa-table"></i> 화면 메뉴코드
+								<i class="fa fa-table"></i> Store
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
@@ -46,24 +46,25 @@
 					<form id="post_storeForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="post_cdMenu">화면 메뉴코드</label>
-								<input type="text" class="form-control" id="post_cdMenu" name="cdMenu">
+								<label for="post_name">Store name</label>
+								<input type="text" class="form-control" id="post_name" name="name">
 							</div>
 
 							<div class="form-group">
-								<label for="post_cdDesc">화면 메뉴명</label>
-								<input type="text" class="form-control" id="post_cdDesc" name="cdDesc">
+								<label for="post_telNumber">Telephone number</label>
+								<input type="text" class="form-control" id="post_telNumber" name="telNumber">
 							</div>
 
 							<div class="form-group">
-								<label for="post_menuDesc">화면 메뉴 설명</label>
-								<textarea rows="4" class="form-control" id="post_menuDesc" name="menuDesc"></textarea>
+								<label for="post_info">Information</label>
+								<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" onclick="store.post()"><i class="fa fa-check-square-o"></i>Save</button>
 						</div>
 					</form>
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success" onclick="store.post()"><i class="fa fa-check-square-o"></i>Save</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -80,30 +81,35 @@
 					<form id="put_storeForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="put_cdMenu">화면 메뉴코드</label>
-								<input type="text" class="form-control" id="put_cdMenu" name="cdMenu" readonly>
+								<input type="hidden" id="put_id" name="id">
 							</div>
 
 							<div class="form-group">
-								<label for="put_cdDesc">화면 메뉴명</label>
-								<input type="text" class="form-control" id="put_cdDesc" name="cdDesc">
+								<label for="put_name">Store name</label>
+								<input type="text" class="form-control" id="put_name" name="name">
 							</div>
 
 							<div class="form-group">
-								<label for="put_menuDesc">화면 메뉴 설명</label>
-								<textarea rows="4" class="form-control" id="put_menuDesc" name="menuDesc"></textarea>
+								<label for="put_telNumber">Telephone number</label>
+								<input type="text" class="form-control" id="put_telNumber" name="telNumber">
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" onclick="store.put()"><i class="fa fa-check-square-o"></i>Save</button>
+
+							<div class="form-group">
+								<label for="put_info">Information</label>
+								<textarea rows="4" class="form-control" id="put_info" name="info"></textarea>
+							</div>
 						</div>
 					</form>
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success" onclick="store.put()"><i class="fa fa-check-square-o"></i>Save</button>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<th:block th:replace="@{layout/web/mainFooter.html} :: footer"></th:block>
-		<th:block th:replace="@{layout/web/mainRightSidebar.html} :: sidebar"></th:block>
+		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
+		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
 </th:block>
 
@@ -115,54 +121,54 @@
 
 			$("#post_storeForm").validate({
 				rules: {
-					cdMenu: {
-						required: true,
-						minlength: 3
-					},
-					cdDesc: {
+					name: {
 						required: true
 					},
-					menuDesc: {
+					telNumber: {
+						required: true,
+						minlength: 9
+					},
+					info: {
 						required: true
 					}
 				},
 				message: {
-					storeTel: {
-						required: "cdMenu is required.",
-						minlength: "cdMenu min length is 3."
+					name: {
+						required: "Name is required.",
 					},
-					cdDesc: {
-						required: "cdDesc is required."
+					telNumber: {
+						required: "TelNumber is required.",
+						minlength: "TelNumber min length is 9."
 					},
-					menuDesc: {
-						required: "menuDesc is required."
+					info: {
+						required: "Info is required."
 					},
 				},
 			});
 
 			$("#put_storeForm").validate({
 				rules: {
-					cdMenu: {
-						required: true,
-						minlength: 3
-					},
-					cdDesc: {
+					name: {
 						required: true
 					},
-					menuDesc: {
+					telNumber: {
+						required: true,
+						minlength: 9
+					},
+					info: {
 						required: true
 					}
 				},
 				message: {
-					storeTel: {
-						required: "cdMenu is required.",
-						minlength: "cdMenu min length is 3."
+					name: {
+						required: "Name is required.",
 					},
-					cdDesc: {
-						required: "cdDesc is required."
+					telNumber: {
+						required: "TelNumber is required.",
+						minlength: "TelNumber min length is 9."
 					},
-					menuDesc: {
-						required: "menuDesc is required."
+					info: {
+						required: "Info is required."
 					},
 				},
 			});
@@ -262,9 +268,9 @@
 				lozm.func.requestPost({
 					url: /*[[ @{/api/store} ]]*/ "",
 					data: {
-						cdMenu: $("#post_cdMenu").val(),
-						cdDesc: $("#post_cdDesc").val(),
-						menuDesc: $("#post_menuDesc").val()
+						name: $("#post_name").val(),
+						telNumber: $("#post_telNumber").val(),
+						info: $("#post_info").val()
 					},
 					callback: {
 						success: function (result) {
@@ -287,9 +293,10 @@
 				lozm.func.requestPut({
 					url: /*[[ @{/api/store} ]]*/ "",
 					data: {
-						cdMenu: $("#put_cdMenu").val(),
-						cdDesc: $("#put_cdDesc").val(),
-						menuDesc: $("#put_menuDesc").val()
+						id: $("#put_id").val(),
+						name: $("#put_name").val(),
+						telNumber: $("#put_telNumber").val(),
+						info: $("#put_info").val()
 					},
 					callback: {
 						success: function (result) {

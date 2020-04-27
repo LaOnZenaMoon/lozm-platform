@@ -15,42 +15,35 @@
 				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Detail','Management','Manage store','','')"></th:block>
 
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="card-title">Vertical Form</div>
+								<div class="card-title">Store > Detail</div>
 								<hr>
 								<form>
 									<div class="form-group">
-										<label for="input-1">Name</label>
-										<input type="text" class="form-control" id="input-1" placeholder="Enter Your Name">
+										<input type="hidden" id="put_id" name="id">
 									</div>
+
 									<div class="form-group">
-										<label for="input-2">Email</label>
-										<input type="text" class="form-control" id="input-2" placeholder="Enter Your Email Address">
+										<label for="put_name">Store name</label>
+										<input type="text" class="form-control" id="put_name" name="name">
 									</div>
+
 									<div class="form-group">
-										<label for="input-3">Mobile</label>
-										<input type="text" class="form-control" id="input-3" placeholder="Enter Your Mobile Number">
+										<label for="put_telNumber">Telephone number</label>
+										<input type="text" class="form-control" id="put_telNumber" name="telNumber">
 									</div>
+
 									<div class="form-group">
-										<label for="input-4">Password</label>
-										<input type="text" class="form-control" id="input-4" placeholder="Enter Password">
-									</div>
-									<div class="form-group">
-										<label for="input-5">Confirm Password</label>
-										<input type="text" class="form-control" id="input-5" placeholder="Confirm Password">
-									</div>
-									<div class="form-group py-2">
-										<div class="icheck-material-white">
-											<input type="checkbox" id="user-checkbox1" checked=""/>
-											<label for="user-checkbox1">I Agree Terms & Conditions</label>
-										</div>
-									</div>
-									<div class="form-group">
-										<button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Register</button>
+										<label for="put_info">Information</label>
+										<textarea rows="4" class="form-control" id="put_info" name="info"></textarea>
 									</div>
 								</form>
+
+								<div class="form-group">
+									<button type="submit" class="btn btn-success" onclick="store.put()"><i class="fa fa-check-square-o"></i>Save</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -117,96 +110,96 @@
 			</div>
 		</div>
 
-		<div class="modal fade" id="post_store">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form id="post_storeForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="post_name">Store name</label>
-								<input type="text" class="form-control" id="post_name" name="name">
-							</div>
+<!--		<div class="modal fade" id="post_store">-->
+<!--			<div class="modal-dialog modal-custom">-->
+<!--				<div class="modal-content slideInUp">-->
+<!--					<div class="modal-header">-->
+<!--						<h5 class="modal-title"></h5>-->
+<!--						<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--							<span aria-hidden="true">&times;</span>-->
+<!--						</button>-->
+<!--					</div>-->
+<!--					<form id="post_storeForm">-->
+<!--						<div class="modal-body">-->
+<!--							<div class="form-group">-->
+<!--								<label for="post_name">Store name</label>-->
+<!--								<input type="text" class="form-control" id="post_name" name="name">-->
+<!--							</div>-->
 
-							<div class="form-group">
-								<label for="post_telNumber">Telephone number</label>
-								<input type="text" class="form-control" id="post_telNumber" name="telNumber">
-							</div>
+<!--							<div class="form-group">-->
+<!--								<label for="post_telNumber">Telephone number</label>-->
+<!--								<input type="text" class="form-control" id="post_telNumber" name="telNumber">-->
+<!--							</div>-->
 
-							<div class="form-group">
-								<label for="post_info">Information</label>
-								<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>
-							</div>
-						</div>
-					</form>
+<!--							<div class="form-group">-->
+<!--								<label for="post_info">Information</label>-->
+<!--								<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</form>-->
 
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="store.post()"><i class="fa fa-check-square-o"></i>Save</button>
-					</div>
-				</div>
-			</div>
-		</div>
+<!--					<div class="modal-footer">-->
+<!--						<button type="submit" class="btn btn-success" onclick="store.post()"><i class="fa fa-check-square-o"></i>Save</button>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
 
-		<div class="modal fade" id="put_store">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form id="put_storeForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<input type="hidden" id="put_id" name="id">
-							</div>
+<!--		<div class="modal fade" id="put_store">-->
+<!--			<div class="modal-dialog modal-custom">-->
+<!--				<div class="modal-content slideInUp">-->
+<!--					<div class="modal-header">-->
+<!--						<h5 class="modal-title"></h5>-->
+<!--						<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--							<span aria-hidden="true">&times;</span>-->
+<!--						</button>-->
+<!--					</div>-->
+<!--					<form id="put_storeForm">-->
+<!--						<div class="modal-body">-->
+<!--							<div class="form-group">-->
+<!--								<input type="hidden" id="put_id" name="id">-->
+<!--							</div>-->
 
-							<div class="form-group">
-								<label for="put_name">Store name</label>
-								<input type="text" class="form-control" id="put_name" name="name">
-							</div>
+<!--							<div class="form-group">-->
+<!--								<label for="put_name">Store name</label>-->
+<!--								<input type="text" class="form-control" id="put_name" name="name">-->
+<!--							</div>-->
 
-							<div class="form-group">
-								<label for="put_telNumber">Telephone number</label>
-								<input type="text" class="form-control" id="put_telNumber" name="telNumber">
-							</div>
+<!--							<div class="form-group">-->
+<!--								<label for="put_telNumber">Telephone number</label>-->
+<!--								<input type="text" class="form-control" id="put_telNumber" name="telNumber">-->
+<!--							</div>-->
 
-							<div class="form-group">
-								<label for="put_info">Information</label>
-								<textarea rows="4" class="form-control" id="put_info" name="info"></textarea>
-							</div>
+<!--							<div class="form-group">-->
+<!--								<label for="put_info">Information</label>-->
+<!--								<textarea rows="4" class="form-control" id="put_info" name="info"></textarea>-->
+<!--							</div>-->
 
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="card">
-										<div class="card-header">
-											<i class="fa fa-table"></i> Store > Item
-										</div>
-										<div class="card-body">
-											<div class="table-responsive">
-												<table id="itemGrid" class="table table-bordered display modal-grid">
+<!--							<div class="row">-->
+<!--								<div class="col-lg-12">-->
+<!--									<div class="card">-->
+<!--										<div class="card-header">-->
+<!--											<i class="fa fa-table"></i> Store > Item-->
+<!--										</div>-->
+<!--										<div class="card-body">-->
+<!--											<div class="table-responsive">-->
+<!--												<table id="itemGrid" class="table table-bordered display modal-grid">-->
 
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
+<!--												</table>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</form>-->
 
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="store.put()"><i class="fa fa-check-square-o"></i>Save</button>
-					</div>
-				</div>
-			</div>
-		</div>
+<!--					<div class="modal-footer">-->
+<!--						<button type="submit" class="btn btn-success" onclick="store.put()"><i class="fa fa-check-square-o"></i>Save</button>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
 
 		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
 		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>

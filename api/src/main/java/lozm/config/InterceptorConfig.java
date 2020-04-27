@@ -20,6 +20,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
         String reqUri = request.getRequestURI();
         if (
                 reqUri.contains("/api")
+                || reqUri.contains("/images")
                 || reqUri.contains("/libs")
                 || reqUri.contains("/script")
                 || reqUri.contains("/layout")

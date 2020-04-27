@@ -10,8 +10,8 @@ import org.springframework.util.StringUtils;
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Table(schema = "LOZM", name = "DELIVERY")
+@Getter
 public class Delivery extends BaseEntity {
 
     @Id

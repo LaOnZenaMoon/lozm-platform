@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter
 @Table(schema = "LOZM", name = "ORDERS")
+@Getter
 public class Orders extends BaseEntity {
 
     @Id @GeneratedValue

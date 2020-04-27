@@ -7,8 +7,8 @@ import lozm.entity.user.User;
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Table(schema = "LOZM", name = "COUPON_USER")
+@Getter
 public class CouponUser extends BaseEntity {
 
     @Id

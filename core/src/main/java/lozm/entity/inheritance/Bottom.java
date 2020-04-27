@@ -10,8 +10,8 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 @Entity
-@Getter
 @DiscriminatorValue("BOTTOM")
+@Getter
 public class Bottom extends Item {
 
     @Embedded

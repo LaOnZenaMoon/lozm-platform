@@ -1,13 +1,11 @@
 package lozm.entity.user;
 
 import lombok.Getter;
-
 import lozm.code.UsersType;
 import lozm.entity.BaseEntity;
 import lozm.entity.coupon.CouponUser;
 import lozm.entity.orders.Orders;
 import lozm.vo.user.UserVo;
-
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,8 +13,8 @@ import java.util.List;
 
 
 @Entity
-@Getter
 @Table(schema = "LOZM", name = "USERS")
+@Getter
 public class User extends BaseEntity {
 
     @Id @GeneratedValue

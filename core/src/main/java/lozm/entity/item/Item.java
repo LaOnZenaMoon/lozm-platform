@@ -2,16 +2,17 @@ package lozm.entity.item;
 
 import lombok.Getter;
 import lozm.entity.BaseEntity;
+import lozm.entity.store.Store;
 import lozm.exception.APIException;
 import lozm.vo.item.ItemVo;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Table(schema = "LOZM", name = "ITEM")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type")
+@Getter
 public class Item extends BaseEntity {
 
     @Id @GeneratedValue
@@ -29,6 +30,10 @@ public class Item extends BaseEntity {
 
     @Column(name = "type", insertable = false, updatable = false)
     protected String type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STORE_ID")
+    private Store store;
 
     public void insertItem(ItemVo itemVo) {
         this.name = itemVo.getName();

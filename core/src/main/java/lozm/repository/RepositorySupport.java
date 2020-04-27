@@ -4,7 +4,10 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lozm.code.ItemType;
+import lozm.entity.inheritance.Bottom;
 import lozm.entity.inheritance.Outer;
+import lozm.entity.inheritance.Shoes;
+import lozm.entity.inheritance.Top;
 import lozm.entity.user.User;
 import lozm.exception.APIException;
 import lozm.vo.item.ItemVo;
@@ -27,6 +30,7 @@ import static lozm.entity.user.QUser.user;
 public class RepositorySupport extends QuerydslRepositorySupport {
 
     private final JPAQueryFactory jpaQueryFactory;
+
 
     public RepositorySupport(JPAQueryFactory jpaQueryFactory) {
         super(User.class);
@@ -52,8 +56,6 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-
-
     public List<Outer> selectOuterList(ItemVo itemVo) throws Exception {
         return jpaQueryFactory
                 .select(Projections.fields(
@@ -69,8 +71,71 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .from(outer)
                 .where(
                         outer.flag.eq(1)
-                        .and(outer.type.eq(itemVo.getType()))
-                        .and(checkStoreId(itemVo))
+                                .and(outer.type.eq(itemVo.getType()))
+                                .and(checkStoreId(itemVo))
+                )
+                .fetch();
+    }
+
+    public List<Top> selectTopList(ItemVo itemVo) throws Exception {
+        return jpaQueryFactory
+                .select(Projections.fields(
+                        Top.class,
+                        top.id,
+                        top.name,
+                        top.price,
+                        top.quantity,
+                        top.type,
+                        top.clothing,
+                        top.store
+                ))
+                .from(top)
+                .where(
+                        top.flag.eq(1)
+                                .and(top.type.eq(itemVo.getType()))
+                                .and(checkStoreId(itemVo))
+                )
+                .fetch();
+    }
+
+    public List<Bottom> selectBottomList(ItemVo itemVo) throws Exception {
+        return jpaQueryFactory
+                .select(Projections.fields(
+                        Bottom.class,
+                        bottom.id,
+                        bottom.name,
+                        bottom.price,
+                        bottom.quantity,
+                        bottom.type,
+                        bottom.clothing,
+                        bottom.store
+                ))
+                .from(bottom)
+                .where(
+                        bottom.flag.eq(1)
+                                .and(bottom.type.eq(itemVo.getType()))
+                                .and(checkStoreId(itemVo))
+                )
+                .fetch();
+    }
+
+    public List<Shoes> selectShoesList(ItemVo itemVo) throws Exception {
+        return jpaQueryFactory
+                .select(Projections.fields(
+                        Shoes.class,
+                        shoes.id,
+                        shoes.name,
+                        shoes.price,
+                        shoes.quantity,
+                        shoes.type,
+                        shoes.clothing,
+                        shoes.store
+                ))
+                .from(shoes)
+                .where(
+                        shoes.flag.eq(1)
+                                .and(shoes.type.eq(itemVo.getType()))
+                                .and(checkStoreId(itemVo))
                 )
                 .fetch();
     }

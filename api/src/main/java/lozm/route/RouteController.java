@@ -43,14 +43,29 @@ public class RouteController {
     public String managingItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) {
         log.debug("Store ID: "+storeId);
 
-        APIResponseDto getStoreDetailResDto = storeAPIController.getStoreDetail(storeId);
-        GetStoreDto storeDetail = (GetStoreDto) getStoreDetailResDto.getData();
+        APIResponseDto getStoreDetail = storeAPIController.getStoreDetail(storeId);
+        GetStoreDto storeDetail = (GetStoreDto) getStoreDetail.getData();
         modelMap.addAttribute("storeDetail", storeDetail);
 
+        APIResponseDto getOuter = storeAPIController.getStoreClothing(storeId, "OUTER");
+        GetClothingDto.Response outer = (GetClothingDto.Response) getOuter.getData();
+        List<GetClothingDto> outerList = outer.getList();
+        modelMap.addAttribute("outerList", outerList);
 
-        APIResponseDto getStoreClothingResDto = storeAPIController.getStoreClothing(storeId, "OUTER");
-        GetClothingDto.Response clothingRes = (GetClothingDto.Response) getStoreClothingResDto.getData();
-        List<GetClothingDto> clothingList = clothingRes.getList();
+        APIResponseDto getTop = storeAPIController.getStoreClothing(storeId, "OUTER");
+        GetClothingDto.Response top = (GetClothingDto.Response) getTop.getData();
+        List<GetClothingDto> topList = top.getList();
+        modelMap.addAttribute("topList", topList);
+
+        APIResponseDto getBottom = storeAPIController.getStoreClothing(storeId, "OUTER");
+        GetClothingDto.Response bottom = (GetClothingDto.Response) getBottom.getData();
+        List<GetClothingDto> bottomList = bottom.getList();
+        modelMap.addAttribute("bottomList", bottomList);
+
+        APIResponseDto getShoes = storeAPIController.getStoreClothing(storeId, "OUTER");
+        GetClothingDto.Response shoes = (GetClothingDto.Response) getShoes.getData();
+        List<GetClothingDto> shoesList = shoes.getList();
+        modelMap.addAttribute("shoesList", shoesList);
 
         return "pages/store/manageStoreDetail";
     }

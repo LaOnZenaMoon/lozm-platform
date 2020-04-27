@@ -70,7 +70,8 @@ public class ItemService {
                     o.getClothing().getSizes()
             )).collect(toList());
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
-            List<Top> itemList = topRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+//            List<Top> itemList = topRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+            List<Top> itemList = repositorySupport.selectTopList(itemVo);
 
             return itemList.stream().map(o -> new GetClothingDto(
                     o.getId(),
@@ -81,7 +82,8 @@ public class ItemService {
                     o.getClothing().getSizes()
             )).collect(toList());
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
-            List<Bottom> itemList = bottomRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+//            List<Bottom> itemList = bottomRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+            List<Bottom> itemList = repositorySupport.selectBottomList(itemVo);
 
             return itemList.stream().map(o -> new GetClothingDto(
                     o.getId(),
@@ -92,7 +94,8 @@ public class ItemService {
                     o.getClothing().getSizes()
             )).collect(toList());
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
-            List<Shoes> itemList = shoesRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+//            List<Shoes> itemList = shoesRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
+            List<Shoes> itemList = repositorySupport.selectShoesList(itemVo);
 
             return itemList.stream().map(o -> new GetClothingDto(
                     o.getId(),

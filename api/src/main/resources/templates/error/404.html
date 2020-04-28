@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/web/mainLayout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-    <th:block th:replace="@{layout/web/mainLoadingBar.html} :: loadingBar"></th:block>
+    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
 
     <div id="wrapper">
         <div class="container">
@@ -16,7 +16,7 @@
                         <p class="error-message text-white text-uppercase">Sorry, an error has occured, Requested page not found!</p>
                         
                         <div class="mt-4">
-                          <a href="/web/home" class="btn btn-light btn-round m-1">Go To Home </a>
+                          <a href="/home" class="btn btn-light btn-round m-1">Go To Home </a>
                           <a href="javascript:history.back();" class="btn btn-light btn-round m-1">Previous Page </a>
                         </div>
 
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <th:block th:replace="@{layout/web/mainRightSidebar.html} :: sidebar"></th:block>
+        <th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
     </div>
 </th:block>
 

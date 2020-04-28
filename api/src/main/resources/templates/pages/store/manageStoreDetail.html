@@ -22,22 +22,22 @@
 								<hr>
 								<form>
 									<div class="form-group">
-										<input type="hidden" id="put_id" name="id">
+										<input type="hidden" id="put_id" name="id" th:value="${storeDetail.id}">
 									</div>
 
 									<div class="form-group">
 										<label for="put_name">Store name</label>
-										<input type="text" class="form-control" id="put_name" name="name">
+										<input type="text" class="form-control" id="put_name" name="name" th:value="${storeDetail.name}">
 									</div>
 
 									<div class="form-group">
 										<label for="put_telNumber">Telephone number</label>
-										<input type="text" class="form-control" id="put_telNumber" name="telNumber">
+										<input type="text" class="form-control" id="put_telNumber" name="telNumber" th:value="${storeDetail.telNumber}">
 									</div>
 
 									<div class="form-group">
 										<label for="put_info">Information</label>
-										<textarea rows="4" class="form-control" id="put_info" name="info"></textarea>
+										<textarea rows="4" class="form-control" id="put_info" name="info" th:text="${storeDetail.info}"></textarea>
 									</div>
 								</form>
 
@@ -123,7 +123,7 @@
 											<div class="col-lg-12">
 												<div class="card">
 													<div class="card-header">
-														<i class="fa fa-table"></i> Item > bottom
+														<i class="fa fa-table"></i> Item > Bottom
 													</div>
 													<div class="card-body">
 														<div class="table-responsive">
@@ -263,19 +263,19 @@
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
-			outer.initGrid();
-			// top.initGrid();
-			bottom.initGrid();
-			// shoes.initGrid();
+			itemOuter.initGrid();
+			itemTop.initGrid();
+			itemBottom.initGrid();
+			itemShoes.initGrid();
 		});
 
-		var outer = {
+		var itemOuter = {
 			gridId: "outerGrid",
 			gridTarget: function () {
-				return $("#" + outer.gridId).DataTable();
+				return $("#" + itemOuter.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+outer.gridId).DataTable({
+				$("#"+itemOuter.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',       data: 'id',         visible: false},
@@ -293,9 +293,9 @@
 						{
 							text: '<i class="fa fa-check-square"></i>',
 							action: function () {
-								var _selectedRows = outer.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) outer.gridTarget().rows().deselect();
-								else outer.gridTarget().rows().select();
+								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemOuter.gridTarget().rows().deselect();
+								else itemOuter.gridTarget().rows().select();
 							}
 						},
 						{
@@ -307,7 +307,7 @@
 						{
 							text: '<i class="fa fa-edit"></i>',
 							action: function () {
-								var _selectedRows = outer.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -324,7 +324,7 @@
 						{
 							text: '<i class="fa fa-minus"></i>',
 							action: function () {
-								var _selectedRows = outer.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -352,8 +352,8 @@
 						success: function(result) {
 							console.log(result);
 							if(result.success === true) {
-								outer.gridTarget().clear().draw();
-								outer.gridTarget().rows.add(result.data.list).draw();
+								itemOuter.gridTarget().clear().draw();
+								itemOuter.gridTarget().rows.add(result.data.list).draw();
 							} else {
 								lozm.func.alertFail();
 							}
@@ -366,86 +366,15 @@
 					}
 				});
 			},
-			post: function () {
-				lozm.func.requestPost({
-					url: "/api/item",
-					data: {
-						name: $("#post_shoes_name").val(),
-						price: $("#post_shoes_price").val(),
-						quantity: $("#post_shoes_quantity").val(),
-						contents: $("#post_shoes_contents").val(),
-						size: $("#post_shoes_size").val(),
-						type: "SHOES"
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#post_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			put: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						name: $("#put_shoes_name").val(),
-						price: $("#put_shoes_price").val(),
-						quantity: $("#put_shoes_quantity").val(),
-						contents: $("#put_shoes_contents").val(),
-						size: $("#put_shoes_size").val()
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			delete: function () {
-				lozm.func.requestPut({
-					url: "/api/item",
-					data: {
-						id: $("#put_shoes_id").val(),
-						flag: 0
-					},
-					callback: {
-						success: function (result) {
-							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
 		};
 
-		var top = {
+		var itemTop = {
 			gridId: "topGrid",
 			gridTarget: function () {
-				return $("#" + top.gridId).DataTable();
+				return $("#" + itemTop.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+top.gridId).DataTable({
+				$("#"+itemTop.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',       data: 'id',         visible: false},
@@ -463,9 +392,9 @@
 						{
 							text: '<i class="fa fa-check-square"></i>',
 							action: function () {
-								var _selectedRows = top.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) top.gridTarget().rows().deselect();
-								else top.gridTarget().rows().select();
+								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemTop.gridTarget().rows().deselect();
+								else itemTop.gridTarget().rows().select();
 							}
 						},
 						{
@@ -477,7 +406,7 @@
 						{
 							text: '<i class="fa fa-edit"></i>',
 							action: function () {
-								var _selectedRows = top.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -494,7 +423,7 @@
 						{
 							text: '<i class="fa fa-minus"></i>',
 							action: function () {
-								var _selectedRows = top.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -522,8 +451,8 @@
 						success: function(result) {
 							console.log(result);
 							if(result.success === true) {
-								top.gridTarget().clear().draw();
-								top.gridTarget().rows.add(result.data.list).draw();
+								itemTop.gridTarget().clear().draw();
+								itemTop.gridTarget().rows.add(result.data.list).draw();
 							} else {
 								lozm.func.alertFail();
 							}
@@ -535,16 +464,16 @@
 						}
 					}
 				});
-			},
+			}
 		};
 
-		var bottom = {
+		var itemBottom = {
 			gridId: "bottomGrid",
 			gridTarget: function () {
-				return $("#" + bottom.gridId).DataTable();
+				return $("#" + itemBottom.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+bottom.gridId).DataTable({
+				$("#"+itemBottom.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',       data: 'id',         visible: false},
@@ -562,9 +491,9 @@
 						{
 							text: '<i class="fa fa-check-square"></i>',
 							action: function () {
-								var _selectedRows = bottom.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) bottom.gridTarget().rows().deselect();
-								else bottom.gridTarget().rows().select();
+								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemBottom.gridTarget().rows().deselect();
+								else itemBottom.gridTarget().rows().select();
 							}
 						},
 						{
@@ -576,7 +505,7 @@
 						{
 							text: '<i class="fa fa-edit"></i>',
 							action: function () {
-								var _selectedRows = bottom.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -593,7 +522,7 @@
 						{
 							text: '<i class="fa fa-minus"></i>',
 							action: function () {
-								var _selectedRows = bottom.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -621,8 +550,8 @@
 						success: function(result) {
 							console.log(result);
 							if(result.success === true) {
-								bottom.gridTarget().clear().draw();
-								bottom.gridTarget().rows.add(result.data.list).draw();
+								itemBottom.gridTarget().clear().draw();
+								itemBottom.gridTarget().rows.add(result.data.list).draw();
 							} else {
 								lozm.func.alertFail();
 							}
@@ -637,13 +566,13 @@
 			},
 		};
 
-		var shoes = {
+		var itemShoes = {
 			gridId: "shoesGrid",
 			gridTarget: function () {
-				return $("#" + shoes.gridId).DataTable();
+				return $("#" + itemShoes.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+shoes.gridId).DataTable({
+				$("#"+itemShoes.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',       data: 'id',         visible: false},
@@ -661,21 +590,21 @@
 						{
 							text: '<i class="fa fa-check-square"></i>',
 							action: function () {
-								var _selectedRows = shoes.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) shoes.gridTarget().rows().deselect();
-								else shoes.gridTarget().rows().select();
+								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemShoes.gridTarget().rows().deselect();
+								else itemShoes.gridTarget().rows().select();
 							}
 						},
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								$("#post_shoes").modal("show");
+								$("#post_itemShoes").modal("show");
 							},
 						},
 						{
 							text: '<i class="fa fa-edit"></i>',
 							action: function () {
-								var _selectedRows = shoes.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -685,14 +614,14 @@
 								}
 
 								console.log(_selectedRows);
-								lozm.func.setDetail("put_shoes_", _selectedRows[0]);
-								$("#put_shoes").modal("show");
+								lozm.func.setDetail("put_itemShoes_", _selectedRows[0]);
+								$("#put_itemShoes").modal("show");
 							},
 						},
 						{
 							text: '<i class="fa fa-minus"></i>',
 							action: function () {
-								var _selectedRows = shoes.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									alert("At least select one row.");
 									return;
@@ -720,8 +649,8 @@
 						success: function(result) {
 							console.log(result);
 							if(result.success === true) {
-								shoes.gridTarget().clear().draw();
-								shoes.gridTarget().rows.add(result.data.list).draw();
+								itemShoes.gridTarget().clear().draw();
+								itemShoes.gridTarget().rows.add(result.data.list).draw();
 							} else {
 								lozm.func.alertFail();
 							}

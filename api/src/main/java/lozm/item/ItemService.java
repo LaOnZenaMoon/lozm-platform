@@ -167,6 +167,6 @@ public class ItemService {
         Optional<Item> findItem = itemRepository.findById(itemVo.getId());
         findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
 
-        itemRepository.delete(findItem.get());
+        findItem.get().updateItem(itemVo);
     }
 }

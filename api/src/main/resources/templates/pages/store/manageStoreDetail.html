@@ -177,36 +177,37 @@
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="post_item_type">Type</label>
-								<input type="text" class="form-control" id="post_item_type" name="post_item_type" readonly>
+								<input type="text" class="form-control" id="post_item_type" name="type" readonly>
 							</div>
 
 							<div class="form-group">
 								<label for="post_item_name">Name</label>
-								<input type="text" class="form-control" id="post_item_name" name="post_item_name">
+								<input type="text" class="form-control" id="post_item_name" name="name">
 							</div>
 
 							<div class="form-group">
 								<label for="post_item_price">Price</label>
-								<input type="text" class="form-control" id="post_item_price" name="post_item_price">
+								<input type="text" class="form-control" id="post_item_price" name="price">
 							</div>
 
 							<div class="form-group">
 								<label for="post_item_size">Size</label>
-								<input type="text" class="form-control" id="post_item_size" name="post_item_size">
+								<input type="text" class="form-control" id="post_item_size" name="size">
 							</div>
 
 							<div class="form-group">
 								<label for="post_item_quantity">Quantity</label>
-								<input type="text" class="form-control" id="post_item_quantity" name="post_item_quantity">
+								<input type="text" class="form-control" id="post_item_quantity" name="quantity">
 							</div>
 
 							<div class="form-group">
 								<label for="post_item_contents">Contents</label>
-								<textarea rows="4" class="form-control" id="post_item_contents" name="post_item_contents"></textarea>
+								<textarea rows="4" class="form-control" id="post_item_contents" name="contents"></textarea>
 							</div>
 						</div>
+
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" onclick="item.post($('#post_item_type').val())"><i class="fa fa-check-square-o"></i>Save</button>
+							<button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i>Save</button>
 						</div>
 					</form>
 				</div>
@@ -230,36 +231,37 @@
 
 							<div class="form-group">
 								<label for="put_item_type">Type</label>
-								<input type="text" class="form-control" id="put_item_type" name="put_item_type" readonly>
+								<input type="text" class="form-control" id="put_item_type" name="type" readonly>
 							</div>
 
 							<div class="form-group">
 								<label for="put_item_name">name</label>
-								<input type="text" class="form-control" id="put_item_name" name="put_item_name">
+								<input type="text" class="form-control" id="put_item_name" name="name">
 							</div>
 
 							<div class="form-group">
 								<label for="put_item_price">price</label>
-								<input type="text" class="form-control" id="put_item_price" name="put_item_price">
+								<input type="text" class="form-control" id="put_item_price" name="price">
 							</div>
 
 							<div class="form-group">
-								<label for="post_item_size">size</label>
-								<input type="text" class="form-control" id="put_item_size" name="post_item_size">
+								<label for="put_item_size">size</label>
+								<input type="text" class="form-control" id="put_item_size" name="size">
 							</div>
 
 							<div class="form-group">
 								<label for="put_item_quantity">quantity</label>
-								<input type="text" class="form-control" id="put_item_quantity" name="put_item_quantity">
+								<input type="text" class="form-control" id="put_item_quantity" name="quantity">
 							</div>
 
 							<div class="form-group">
 								<label for="put_item_contents">contents</label>
-								<textarea rows="4" class="form-control" id="put_item_contents" name="put_item_contents"></textarea>
+								<textarea rows="4" class="form-control" id="put_item_contents" name="contents"></textarea>
 							</div>
 						</div>
+
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" onclick="item.put($('#put_item_type').val())"><i class="fa fa-check-square-o"></i>Save</button>
+							<button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i>Save</button>
 						</div>
 					</form>
 				</div>
@@ -278,6 +280,98 @@
 			itemTop.initGrid();
 			itemBottom.initGrid();
 			itemShoes.initGrid();
+
+			$("#post_itemForm").validate({
+				submitHandler: function(form) {
+					item.post($("#post_item_type").val());
+				},
+				rules: {
+					name: {
+						required: true
+					},
+					price: {
+						required: true
+					},
+					size: {
+						required: true
+					},
+					quantity: {
+						required: true
+					},
+					contents: {
+						required: true
+					},
+					type: {
+						required: true
+					},
+				},
+				message: {
+					name: {
+						required: "name is required."
+					},
+					price: {
+						required: "price is required."
+					},
+					size: {
+						required: "size is required."
+					},
+					quantity: {
+						required: "quantity is required."
+					},
+					contents: {
+						required: "contents is required."
+					},
+					type: {
+						required: "type is required."
+					},
+				},
+			});
+
+			$("#put_itemForm").validate({
+				submitHandler: function(form) {
+					item.put($("#put_item_type").val());
+				},
+				rules: {
+					name: {
+						required: true
+					},
+					price: {
+						required: true
+					},
+					size: {
+						required: true
+					},
+					quantity: {
+						required: true
+					},
+					contents: {
+						required: true
+					},
+					id: {
+						required: true
+					},
+				},
+				message: {
+					name: {
+						required: "name is required."
+					},
+					price: {
+						required: "price is required."
+					},
+					size: {
+						required: "size is required."
+					},
+					quantity: {
+						required: "quantity is required."
+					},
+					contents: {
+						required: "contents is required."
+					},
+					id: {
+						required: "id is required."
+					},
+				},
+			});
 		});
 
 		var store = {
@@ -317,13 +411,14 @@
 			},
 			getGridData: function (itemType) {
 				lozm.func.requestGet({
-					url: "/api/item/" + $("#put_store_id").val() + "/clothing/" + itemType,
+					url: "/api/store/" + $("#put_store_id").val() + "/clothing/" + itemType,
 					callback: {
 						success: function(result) {
 							console.log(result);
 							if(result.success === true) {
-								itemTop.gridTarget().clear().draw();
-								itemTop.gridTarget().rows.add(result.data.list).draw();
+								var _gridTarget = $("#" + itemType.toLowerCase() + "Grid").DataTable();
+								_gridTarget.clear().draw();
+								_gridTarget.rows.add(result.data.list).draw();
 							} else {
 								lozm.func.alertFail();
 							}
@@ -345,7 +440,8 @@
 						quantity: $("#post_item_quantity").val(),
 						contents: $("#post_item_contents").val(),
 						size: $("#post_item_size").val(),
-						type: $("#post_item_type").val()
+						type: $("#post_item_type").val(),
+						storeId: $("#put_store_id").val()
 					},
 					callback: {
 						success: function (result) {
@@ -369,12 +465,12 @@
 				lozm.func.requestPut({
 					url: "/api/item",
 					data: {
-						id: $("#put_shoes_id").val(),
-						name: $("#put_shoes_name").val(),
-						price: $("#put_shoes_price").val(),
-						quantity: $("#put_shoes_quantity").val(),
-						contents: $("#put_shoes_contents").val(),
-						size: $("#put_shoes_size").val()
+						id: $("#put_item_id").val(),
+						name: $("#put_item_name").val(),
+						price: $("#put_item_price").val(),
+						quantity: $("#put_item_quantity").val(),
+						contents: $("#put_item_contents").val(),
+						size: $("#put_item_size").val()
 					},
 					callback: {
 						success: function (result) {
@@ -470,6 +566,7 @@
 
 								console.log(_selectedRows);
 								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.outer);
 								$("#put_item").modal("show");
 							},
 						},
@@ -549,6 +646,7 @@
 
 								console.log(_selectedRows);
 								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.top);
 								$("#put_item").modal("show");
 							},
 						},
@@ -629,6 +727,7 @@
 
 								console.log(_selectedRows);
 								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.bottom);
 								$("#put_item").modal("show");
 							},
 						},
@@ -708,6 +807,7 @@
 
 								console.log(_selectedRows);
 								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.shoes);
 								$("#put_item").modal("show");
 							},
 						},

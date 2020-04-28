@@ -121,7 +121,6 @@ public class ItemAPIController {
                     .quantity(reqDto.getQuantity())
                     .contents(reqDto.getContents())
                     .size(reqDto.getSize())
-                    .flag(reqDto.getFlag())
                     .build();
 
             itemService.update(itemVo);
@@ -142,6 +141,7 @@ public class ItemAPIController {
             for(DeleteItemDto dto : reqDto.getList()) {
                 ItemVo itemVo = ItemVo.builder()
                         .id(dto.getId())
+                        .flag(0)
                         .build();
 
                 itemService.delete(itemVo);

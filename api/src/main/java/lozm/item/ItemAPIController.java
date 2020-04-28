@@ -121,6 +121,7 @@ public class ItemAPIController {
                     .quantity(reqDto.getQuantity())
                     .contents(reqDto.getContents())
                     .size(reqDto.getSize())
+                    .flag(1)
                     .build();
 
             itemService.update(itemVo);

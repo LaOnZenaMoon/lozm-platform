@@ -67,7 +67,7 @@ public class UserAPIController {
                     .id(reqDto.getId())
                     .name(reqDto.getName())
                     .password(reqDto.getPassword())
-                    .flag(reqDto.getFlag())
+                    .flag(1)
                     .build();
 
             userService.update(userVo);

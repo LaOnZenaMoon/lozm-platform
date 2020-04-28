@@ -79,7 +79,7 @@ public class CouponAPIController {
                     .quantity(reqDto.getQuantity())
                     .startDt(reqDto.getStartDt())
                     .endDt(reqDto.getEndDt())
-                    .flag(reqDto.getFlag())
+                    .flag(1)
                     .build();
 
             couponService.update(couponVo);

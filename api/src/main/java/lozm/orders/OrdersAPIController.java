@@ -70,7 +70,7 @@ public class OrdersAPIController {
             OrdersVo ordersVo = OrdersVo.builder()
                     .id(reqDto.getId())
                     .status(reqDto.getStatus())
-                    .flag(reqDto.getFlag())
+                    .flag(1)
                     .build();
 
             ordersService.update(ordersVo);

@@ -77,7 +77,7 @@ public class DeliveryAPIController {
                     .street(reqDto.getStreet())
                     .etc(reqDto.getEtc())
                     .status(reqDto.getStatus())
-                    .flag(reqDto.getFlag())
+                    .flag(1)
                     .build();
 
             deliveryService.update(deliveryVo);

@@ -128,6 +128,7 @@ public class StoreAPIController {
                     .name(reqDto.getName())
                     .telNumber(reqDto.getTelNumber())
                     .info(reqDto.getInfo())
+                    .flag(1)
                     .build();
 
             storeService.update(storeVo);

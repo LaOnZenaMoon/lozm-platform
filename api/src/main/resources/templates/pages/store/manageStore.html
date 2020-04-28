@@ -12,7 +12,7 @@
 
 		<div class="content-wrapper">
 			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Manage store','Management','Manage store','','')"></th:block>
+				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Manage store','Management','','','')"></th:block>
 
 				<div class="row">
 					<div class="col-lg-12">
@@ -60,11 +60,11 @@
 								<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>
 							</div>
 						</div>
-					</form>
 
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="store.post()"><i class="fa fa-check-square-o"></i>Save</button>
-					</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -80,9 +80,10 @@
 			store.initGrid();
 			store.getGridData();
 
-			item.initGrid();
-
 			$("#post_storeForm").validate({
+				submitHandler: function(form) {
+					store.post();
+				},
 				rules: {
 					name: {
 						required: true

@@ -8,6 +8,7 @@ import lozm.entity.inheritance.Bottom;
 import lozm.entity.inheritance.Outer;
 import lozm.entity.inheritance.Shoes;
 import lozm.entity.inheritance.Top;
+import lozm.entity.item.Item;
 import lozm.entity.user.User;
 import lozm.exception.APIException;
 import lozm.vo.item.ItemVo;
@@ -23,7 +24,7 @@ import static lozm.entity.inheritance.QOuter.outer;
 import static lozm.entity.inheritance.QShoes.shoes;
 import static lozm.entity.inheritance.QTop.top;
 import static lozm.entity.user.QUser.user;
-//import static lozm.entity.store.QStore.store;
+import static lozm.entity.item.QItem.item;
 
 
 @Repository
@@ -159,4 +160,13 @@ public class RepositorySupport extends QuerydslRepositorySupport {
         return rtnVal;
     }
 
+    public List<Item> selectItemList() {
+        return jpaQueryFactory
+                .select(item)
+                .from(shoes)
+                .where(
+                        shoes.flag.eq(1)
+                )
+                .fetch();
+    }
 }

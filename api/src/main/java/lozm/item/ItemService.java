@@ -43,10 +43,15 @@ public class ItemService {
 
 
     public List<GetItemDto> getItemList() {
-        List<Item> itemList = itemRepository.selectItemList();
+//        List<Item> itemList = itemRepository.selectItemList();
+        List<Item> itemList = repositorySupport.selectItemList();
 
-        return itemList.stream().map(o -> new GetItemDto(o.getId(), o.getName(), o.getPrice(), o.getQuantity()))
-                .collect(toList());
+        return itemList.stream().map(o -> new GetItemDto(
+                o.getId(),
+                o.getName(),
+                o.getPrice(),
+                o.getQuantity()
+        )).collect(toList());
     }
 
     public List<GetItemDto> getItemListByStoreId(ItemVo itemVo) {

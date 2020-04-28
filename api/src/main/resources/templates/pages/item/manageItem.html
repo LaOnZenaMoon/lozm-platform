@@ -233,10 +233,10 @@
                             action: function () {
                                 var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
                                 if(_selectedRows.length < 1) {
-                                    alert("At least select one row.");
+                                    lozm.func.alertRowIsSelected();
                                     return;
                                 } else if(_selectedRows.length > 1) {
-                                    alert("Cannot select more then one row.");
+                                    lozm.func.alertRowsAreSelected();
                                     return;
                                 }
 
@@ -250,7 +250,7 @@
                             action: function () {
                                 var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
                                 if(_selectedRows.length < 1) {
-                                    alert("At least select one row.");
+                                    lozm.func.alertRowIsSelected();
                                     return;
                                 }
                                 if(confirm("Are you sure to delete the data?")) console.log("Deleted.");

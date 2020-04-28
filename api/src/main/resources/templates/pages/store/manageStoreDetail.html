@@ -206,7 +206,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" onclick="item.post()"><i class="fa fa-check-square-o"></i>Save</button>
+							<button type="submit" class="btn btn-success" onclick="item.post($('#post_item_type').val())"><i class="fa fa-check-square-o"></i>Save</button>
 						</div>
 					</form>
 				</div>
@@ -259,7 +259,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" onclick="item.put()"><i class="fa fa-check-square-o"></i>Save</button>
+							<button type="submit" class="btn btn-success" onclick="item.put($('#put_item_type').val())"><i class="fa fa-check-square-o"></i>Save</button>
 						</div>
 					</form>
 				</div>
@@ -280,8 +280,63 @@
 			itemShoes.initGrid();
 		});
 
+		var store = {
+			put: function () {
+				lozm.func.requestPut({
+					url: /*[[ @{/api/store} ]]*/ "",
+					data: {
+						id: $("#put_store_id").val(),
+						name: $("#put_store_name").val(),
+						telNumber: $("#put_store_telNumber").val(),
+						info: $("#put_store_info").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+		};
+
 		var item = {
-			post: function () {
+			type: {
+				outer: "OUTER",
+				top: "TOP",
+				bottom: "BOTTOM",
+				shoes: "SHOES"
+			},
+			getGridData: function (itemType) {
+				lozm.func.requestGet({
+					url: "/api/item/" + $("#put_store_id").val() + "/clothing/" + itemType,
+					callback: {
+						success: function(result) {
+							console.log(result);
+							if(result.success === true) {
+								itemTop.gridTarget().clear().draw();
+								itemTop.gridTarget().rows.add(result.data.list).draw();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function(xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			post: function (itemType) {
 				lozm.func.requestPost({
 					url: "/api/item",
 					data: {
@@ -297,6 +352,7 @@
 							console.log(result);
 							if(result.success) {
 								lozm.func.alertSuccess();
+								item.getGridData(itemType);
 							} else {
 								lozm.func.alertFail();
 							}
@@ -309,7 +365,7 @@
 					}
 				});
 			},
-			put: function () {
+			put: function (itemType) {
 				lozm.func.requestPut({
 					url: "/api/item",
 					data: {
@@ -325,6 +381,7 @@
 							console.log(result);
 							if(result.success) {
 								lozm.func.alertSuccess();
+								item.getGridData(itemType);
 							} else {
 								lozm.func.alertFail();
 							}
@@ -337,7 +394,7 @@
 					}
 				});
 			},
-			delete: function (list) {
+			delete: function (list, itemType) {
 				lozm.func.requestDelete({
 					url: "/api/item",
 					data: {
@@ -346,8 +403,12 @@
 					callback: {
 						success: function (result) {
 							console.log(result);
-							item.getGridData();
-							$("#put_shoesForm input textarea").clear();
+							if(result.success) {
+								lozm.func.alertSuccess();
+								item.getGridData(itemType);
+							} else {
+								lozm.func.alertFail();
+							}
 						},
 						error: function (xhr, status, error) {
 							console.log(xhr);
@@ -391,7 +452,8 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								$("#post_shoes").modal("show");
+								$('#post_item_type').val(item.type.outer);
+								$("#post_item").modal("show");
 							},
 						},
 						{
@@ -399,16 +461,16 @@
 							action: function () {
 								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								} else if(_selectedRows.length > 1) {
-									alert("Cannot select more then one row.");
+									lozm.func.alertRowsAreSelected();
 									return;
 								}
 
 								console.log(_selectedRows);
-								lozm.func.setDetail("put_shoes_", _selectedRows[0]);
-								$("#put_shoes").modal("show");
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$("#put_item").modal("show");
 							},
 						},
 						{
@@ -416,10 +478,10 @@
 							action: function () {
 								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								}
-								if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.outer);
 							},
 						},
 						{
@@ -433,27 +495,6 @@
 							charset: 'UTF-16LE',
 						}
 					],
-				});
-			},
-			getGridData: function (storeId) {
-				lozm.func.requestGet({
-					url: "/api/outer."+storeId,
-					callback: {
-						success: function(result) {
-							console.log(result);
-							if(result.success === true) {
-								itemOuter.gridTarget().clear().draw();
-								itemOuter.gridTarget().rows.add(result.data.list).draw();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function(xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
 				});
 			},
 		};
@@ -490,7 +531,8 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								$("#post_shoes").modal("show");
+								$('#post_item_type').val(item.type.top);
+								$("#post_item").modal("show");
 							},
 						},
 						{
@@ -498,16 +540,16 @@
 							action: function () {
 								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								} else if(_selectedRows.length > 1) {
-									alert("Cannot select more then one row.");
+									lozm.func.alertRowsAreSelected();
 									return;
 								}
 
 								console.log(_selectedRows);
-								lozm.func.setDetail("put_shoes_", _selectedRows[0]);
-								$("#put_shoes").modal("show");
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$("#put_item").modal("show");
 							},
 						},
 						{
@@ -515,10 +557,10 @@
 							action: function () {
 								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								}
-								if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.top);
 							},
 						},
 						{
@@ -534,27 +576,7 @@
 					],
 				});
 			},
-			getGridData: function (storeId) {
-				lozm.func.requestGet({
-					url: "/api/top/"+storeId,
-					callback: {
-						success: function(result) {
-							console.log(result);
-							if(result.success === true) {
-								itemTop.gridTarget().clear().draw();
-								itemTop.gridTarget().rows.add(result.data.list).draw();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function(xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			}
+
 		};
 
 		var itemBottom = {
@@ -589,7 +611,8 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								$("#post_shoes").modal("show");
+								$('#post_item_type').val(item.type.bottom);
+								$("#post_item").modal("show");
 							},
 						},
 						{
@@ -597,16 +620,16 @@
 							action: function () {
 								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								} else if(_selectedRows.length > 1) {
-									alert("Cannot select more then one row.");
+									lozm.func.alertRowsAreSelected();
 									return;
 								}
 
 								console.log(_selectedRows);
-								lozm.func.setDetail("put_shoes_", _selectedRows[0]);
-								$("#put_shoes").modal("show");
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$("#put_item").modal("show");
 							},
 						},
 						{
@@ -614,10 +637,10 @@
 							action: function () {
 								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								}
-								if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.bottom);
 							},
 						},
 						{
@@ -631,27 +654,6 @@
 							charset: 'UTF-16LE',
 						}
 					],
-				});
-			},
-			getGridData: function (storeId) {
-				lozm.func.requestGet({
-					url: "/api/bottom/"+storeId,
-					callback: {
-						success: function(result) {
-							console.log(result);
-							if(result.success === true) {
-								itemBottom.gridTarget().clear().draw();
-								itemBottom.gridTarget().rows.add(result.data.list).draw();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function(xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
 				});
 			},
 		};
@@ -688,7 +690,8 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								$("#post_itemShoes").modal("show");
+								$('#post_item_type').val(item.type.shoes);
+								$("#post_item").modal("show");
 							},
 						},
 						{
@@ -696,16 +699,16 @@
 							action: function () {
 								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								} else if(_selectedRows.length > 1) {
-									alert("Cannot select more then one row.");
+									lozm.func.alertRowsAreSelected();
 									return;
 								}
 
 								console.log(_selectedRows);
-								lozm.func.setDetail("put_itemShoes_", _selectedRows[0]);
-								$("#put_itemShoes").modal("show");
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$("#put_item").modal("show");
 							},
 						},
 						{
@@ -713,10 +716,10 @@
 							action: function () {
 								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
-									alert("At least select one row.");
+									lozm.func.alertRowIsSelected();
 									return;
 								}
-								if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.shoes);
 							},
 						},
 						{
@@ -730,27 +733,6 @@
 							charset: 'UTF-16LE',
 						}
 					],
-				});
-			},
-			getGridData: function (storeId) {
-				lozm.func.requestGet({
-					url: "/api/shoes/"+storeId,
-					callback: {
-						success: function(result) {
-							console.log(result);
-							if(result.success === true) {
-								itemShoes.gridTarget().clear().draw();
-								itemShoes.gridTarget().rows.add(result.data.list).draw();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function(xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
 				});
 			},
 		};

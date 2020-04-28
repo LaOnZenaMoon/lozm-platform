@@ -314,32 +314,7 @@
 					}
 				});
 			},
-			put: function () {
-				lozm.func.requestPut({
-					url: /*[[ @{/api/store} ]]*/ "",
-					data: {
-						id: $("#put_id").val(),
-						name: $("#put_name").val(),
-						telNumber: $("#put_telNumber").val(),
-						info: $("#put_info").val()
-					},
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								lozm.func.alertSuccess();
-								store.getGridData();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
+
 			delete: function (list) {
 				lozm.func.requestDelete({
 					url: /*[[ @{/api/store} ]]*/ "",

@@ -4,26 +4,26 @@ import lombok.RequiredArgsConstructor;
 import lozm.code.ItemType;
 import lozm.dto.item.GetClothingDto;
 import lozm.dto.item.GetItemDto;
-import lozm.entity.store.Store;
-import lozm.exception.APIException;
-import lozm.repository.RepositorySupport;
-import lozm.store.StoreService;
-import lozm.vo.item.ItemVo;
 import lozm.entity.inheritance.Bottom;
 import lozm.entity.inheritance.Outer;
 import lozm.entity.inheritance.Shoes;
 import lozm.entity.inheritance.Top;
 import lozm.entity.item.Item;
+import lozm.entity.store.Store;
+import lozm.exception.APIException;
+import lozm.repository.RepositorySupport;
 import lozm.repository.item.ItemRepository;
 import lozm.repository.item.inherit.BottomRepository;
 import lozm.repository.item.inherit.OuterRepository;
 import lozm.repository.item.inherit.ShoesRepository;
 import lozm.repository.item.inherit.TopRepository;
+import lozm.store.StoreService;
+import lozm.vo.item.ItemVo;
 import lozm.vo.store.StoreVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.tools.tree.BooleanExpression;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,15 +46,30 @@ public class ItemService {
     public List<GetItemDto> getItemList() {
 //        List<Item> itemList = itemRepository.selectItemList();
         List<Item> itemList = repositorySupport.selectItemList();
+        List<GetItemDto> rtnList = new ArrayList<>();
+        for (Item item : itemList) {
+            rtnList.add(
+                    new GetItemDto(
+                            item.getId(),
+                            item.getName(),
+                            item.getPrice(),
+                            item.getQuantity(),
+                            item.getType(),
+                            item.getStore()
+                    )
+            );
+        }
 
-        return itemList.stream().map(o -> new GetItemDto(
-                o.getId(),
-                o.getName(),
-                o.getPrice(),
-                o.getQuantity(),
-                o.getType(),
-                o.getStore()
-        )).collect(toList());
+        return rtnList;
+
+//        return itemList.stream().map(o -> new GetItemDto(
+//                o.getId(),
+//                o.getName(),
+//                o.getPrice(),
+//                o.getQuantity(),
+//                o.getType(),
+//                o.getStore()
+//        )).collect(toList());
     }
 
     public GetItemDto getItemDetail(ItemVo itemVo) {

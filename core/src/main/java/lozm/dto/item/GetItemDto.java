@@ -2,6 +2,7 @@ package lozm.dto.item;
 
 import lombok.Getter;
 import lombok.Setter;
+import lozm.entity.embedded.Clothing;
 import lozm.entity.store.Store;
 
 import java.util.ArrayList;
@@ -15,16 +16,27 @@ public class GetItemDto {
     private Long price;
     private Long quantity;
     protected String type;
-    private String contents;
-    private String sizes;
+    private Clothing clothing;
     private Store store;
 
 
-    public GetItemDto(Long id, String name, Long price, Long quantity, String contents, String sizes, Store store) {
+    public GetItemDto(Long id, String name, Long price, Long quantity, String type, Store store) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.type = type;
+        this.store = store;
+    }
+
+    public GetItemDto(Long id, String name, Long price, Long quantity, String type, Clothing clothing, Store store) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.type = type;
+        this.clothing = clothing;
+        this.store = store;
     }
 
     @Getter

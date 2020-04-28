@@ -163,9 +163,9 @@ public class RepositorySupport extends QuerydslRepositorySupport {
     public List<Item> selectItemList() {
         return jpaQueryFactory
                 .select(item)
-                .from(shoes)
+                .from(item)
                 .where(
-                        shoes.flag.eq(1)
+                        item.flag.eq(1)
                 )
                 .fetch();
     }

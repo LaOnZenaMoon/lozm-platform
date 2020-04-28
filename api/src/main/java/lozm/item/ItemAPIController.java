@@ -38,21 +38,19 @@ public class ItemAPIController {
         return resDto;
     }
 
-    @GetMapping(value = "/{storeId}")
-    public APIResponseDto getItemListByStoreId(@PathVariable(value = "storeId") Long storeId) {
+    @GetMapping(value = "/{itemId}")
+    public APIResponseDto getItemDetail(@PathVariable(value = "itemId") Long itemId) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
             ItemVo itemVo = ItemVo.builder()
-                    .storeId(storeId)
+                    .id(itemId)
                     .build();
 
-            List<GetItemDto> itemList = itemService.getItemListByStoreId(itemVo);
-            GetItemDto.Response itemResDto = new GetItemDto.Response();
-            itemResDto.setList(itemList);
+            GetItemDto itemDto = itemService.getItemDetail(itemVo);
 
+            resDto.setData(itemDto);
             resDto.setSuccess(true);
-            resDto.setData(itemResDto);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
@@ -60,6 +58,8 @@ public class ItemAPIController {
 
         return resDto;
     }
+
+
 
     @GetMapping(value = "/clothing/{itemType}")
     public APIResponseDto getClothing(@PathVariable(value = "itemType") String itemType) {

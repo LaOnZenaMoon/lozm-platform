@@ -22,6 +22,7 @@ import lozm.repository.item.inherit.TopRepository;
 import lozm.vo.store.StoreVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.tools.tree.BooleanExpression;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,15 +51,85 @@ public class ItemService {
                 o.getId(),
                 o.getName(),
                 o.getPrice(),
-                o.getQuantity()
+                o.getQuantity(),
+                o.getType(),
+                o.getStore()
         )).collect(toList());
+    }
+
+    public GetItemDto getItemDetail(ItemVo itemVo) {
+        if(ItemType.OUTER.toString().equals(itemVo.getType())) {
+            Optional<Outer> findItem = outerRepository.findById(itemVo.getId());
+            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            Outer item = findItem.get();
+
+            return new GetItemDto(
+                    item.getId(),
+                    item.getName(),
+                    item.getPrice(),
+                    item.getQuantity(),
+                    item.getType(),
+                    item.getClothing(),
+                    item.getStore()
+            );
+        } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
+            Optional<Top> findItem = topRepository.findById(itemVo.getId());
+            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            Top item = findItem.get();
+
+            return new GetItemDto(
+                    item.getId(),
+                    item.getName(),
+                    item.getPrice(),
+                    item.getQuantity(),
+                    item.getType(),
+                    item.getClothing(),
+                    item.getStore()
+            );
+        } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
+            Optional<Bottom> findItem = bottomRepository.findById(itemVo.getId());
+            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            Bottom item = findItem.get();
+
+            return new GetItemDto(
+                    item.getId(),
+                    item.getName(),
+                    item.getPrice(),
+                    item.getQuantity(),
+                    item.getType(),
+                    item.getClothing(),
+                    item.getStore()
+            );
+        } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
+            Optional<Shoes> findItem = shoesRepository.findById(itemVo.getId());
+            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            Shoes item = findItem.get();
+
+            return new GetItemDto(
+                    item.getId(),
+                    item.getName(),
+                    item.getPrice(),
+                    item.getQuantity(),
+                    item.getType(),
+                    item.getClothing(),
+                    item.getStore()
+            );
+        } else {
+            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
+        }
     }
 
     public List<GetItemDto> getItemListByStoreId(ItemVo itemVo) {
         List<Item> itemList = itemRepository.selectItemListByStoreId(itemVo.getStoreId());
 
-        return itemList.stream().map(o -> new GetItemDto(o.getId(), o.getName(), o.getPrice(), o.getQuantity()))
-                .collect(toList());
+        return itemList.stream().map(o -> new GetItemDto(
+                o.getId(),
+                o.getName(),
+                o.getPrice(),
+                o.getQuantity(),
+                o.getType(),
+                o.getStore()
+        )).collect(toList());
     }
 
     public List<GetClothingDto> getClothingList(ItemVo itemVo) throws Exception {
@@ -174,4 +245,6 @@ public class ItemService {
 
         findItem.get().updateItem(itemVo);
     }
+
+
 }

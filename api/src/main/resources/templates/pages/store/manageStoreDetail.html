@@ -22,22 +22,22 @@
 								<hr>
 								<form>
 									<div class="form-group">
-										<input type="hidden" id="put_id" name="id" th:value="${storeDetail.id}">
+										<input type="hidden" id="put_store_id" name="id" th:value="${storeDetail.id}">
 									</div>
 
 									<div class="form-group">
-										<label for="put_name">Store name</label>
-										<input type="text" class="form-control" id="put_name" name="name" th:value="${storeDetail.name}">
+										<label for="put_store_name">Store name</label>
+										<input type="text" class="form-control" id="put_store_name" name="name" th:value="${storeDetail.name}">
 									</div>
 
 									<div class="form-group">
-										<label for="put_telNumber">Telephone number</label>
-										<input type="text" class="form-control" id="put_telNumber" name="telNumber" th:value="${storeDetail.telNumber}">
+										<label for="put_store_telNumber">Telephone number</label>
+										<input type="text" class="form-control" id="put_store_telNumber" name="telNumber" th:value="${storeDetail.telNumber}">
 									</div>
 
 									<div class="form-group">
-										<label for="put_info">Information</label>
-										<textarea rows="4" class="form-control" id="put_info" name="info" th:text="${storeDetail.info}"></textarea>
+										<label for="put_store_info">Information</label>
+										<textarea rows="4" class="form-control" id="put_store_info" name="info" th:text="${storeDetail.info}"></textarea>
 									</div>
 								</form>
 
@@ -164,96 +164,107 @@
 			</div>
 		</div>
 
-<!--		<div class="modal fade" id="post_store">-->
-<!--			<div class="modal-dialog modal-custom">-->
-<!--				<div class="modal-content slideInUp">-->
-<!--					<div class="modal-header">-->
-<!--						<h5 class="modal-title"></h5>-->
-<!--						<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--							<span aria-hidden="true">&times;</span>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					<form id="post_storeForm">-->
-<!--						<div class="modal-body">-->
-<!--							<div class="form-group">-->
-<!--								<label for="post_name">Store name</label>-->
-<!--								<input type="text" class="form-control" id="post_name" name="name">-->
-<!--							</div>-->
+		<div class="modal fade" id="post_item">
+			<div class="modal-dialog">
+				<div class="modal-content animated slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title">post</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="post_itemForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="post_item_type">Type</label>
+								<input type="text" class="form-control" id="post_item_type" name="post_item_type" readonly>
+							</div>
 
-<!--							<div class="form-group">-->
-<!--								<label for="post_telNumber">Telephone number</label>-->
-<!--								<input type="text" class="form-control" id="post_telNumber" name="telNumber">-->
-<!--							</div>-->
+							<div class="form-group">
+								<label for="post_item_name">Name</label>
+								<input type="text" class="form-control" id="post_item_name" name="post_item_name">
+							</div>
 
-<!--							<div class="form-group">-->
-<!--								<label for="post_info">Information</label>-->
-<!--								<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</form>-->
+							<div class="form-group">
+								<label for="post_item_price">Price</label>
+								<input type="text" class="form-control" id="post_item_price" name="post_item_price">
+							</div>
 
-<!--					<div class="modal-footer">-->
-<!--						<button type="submit" class="btn btn-success" onclick="store.post()"><i class="fa fa-check-square-o"></i>Save</button>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
+							<div class="form-group">
+								<label for="post_item_size">Size</label>
+								<input type="text" class="form-control" id="post_item_size" name="post_item_size">
+							</div>
 
-<!--		<div class="modal fade" id="put_store">-->
-<!--			<div class="modal-dialog modal-custom">-->
-<!--				<div class="modal-content slideInUp">-->
-<!--					<div class="modal-header">-->
-<!--						<h5 class="modal-title"></h5>-->
-<!--						<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--							<span aria-hidden="true">&times;</span>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					<form id="put_storeForm">-->
-<!--						<div class="modal-body">-->
-<!--							<div class="form-group">-->
-<!--								<input type="hidden" id="put_id" name="id">-->
-<!--							</div>-->
+							<div class="form-group">
+								<label for="post_item_quantity">Quantity</label>
+								<input type="text" class="form-control" id="post_item_quantity" name="post_item_quantity">
+							</div>
 
-<!--							<div class="form-group">-->
-<!--								<label for="put_name">Store name</label>-->
-<!--								<input type="text" class="form-control" id="put_name" name="name">-->
-<!--							</div>-->
+							<div class="form-group">
+								<label for="post_item_contents">Contents</label>
+								<textarea rows="4" class="form-control" id="post_item_contents" name="post_item_contents"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" onclick="item.post()"><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
-<!--							<div class="form-group">-->
-<!--								<label for="put_telNumber">Telephone number</label>-->
-<!--								<input type="text" class="form-control" id="put_telNumber" name="telNumber">-->
-<!--							</div>-->
+		<div class="modal fade" id="put_item">
+			<div class="modal-dialog">
+				<div class="modal-content animated slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title">put</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="put_itemForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="put_item_id">
+							</div>
 
-<!--							<div class="form-group">-->
-<!--								<label for="put_info">Information</label>-->
-<!--								<textarea rows="4" class="form-control" id="put_info" name="info"></textarea>-->
-<!--							</div>-->
+							<div class="form-group">
+								<label for="put_item_type">Type</label>
+								<input type="text" class="form-control" id="put_item_type" name="put_item_type" readonly>
+							</div>
 
-<!--							<div class="row">-->
-<!--								<div class="col-lg-12">-->
-<!--									<div class="card">-->
-<!--										<div class="card-header">-->
-<!--											<i class="fa fa-table"></i> Store > Item-->
-<!--										</div>-->
-<!--										<div class="card-body">-->
-<!--											<div class="table-responsive">-->
-<!--												<table id="itemGrid" class="table table-bordered display modal-grid">-->
+							<div class="form-group">
+								<label for="put_item_name">name</label>
+								<input type="text" class="form-control" id="put_item_name" name="put_item_name">
+							</div>
 
-<!--												</table>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</form>-->
+							<div class="form-group">
+								<label for="put_item_price">price</label>
+								<input type="text" class="form-control" id="put_item_price" name="put_item_price">
+							</div>
 
-<!--					<div class="modal-footer">-->
-<!--						<button type="submit" class="btn btn-success" onclick="store.put()"><i class="fa fa-check-square-o"></i>Save</button>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
+							<div class="form-group">
+								<label for="post_item_size">size</label>
+								<input type="text" class="form-control" id="put_item_size" name="post_item_size">
+							</div>
+
+							<div class="form-group">
+								<label for="put_item_quantity">quantity</label>
+								<input type="text" class="form-control" id="put_item_quantity" name="put_item_quantity">
+							</div>
+
+							<div class="form-group">
+								<label for="put_item_contents">contents</label>
+								<textarea rows="4" class="form-control" id="put_item_contents" name="put_item_contents"></textarea>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" onclick="item.put()"><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 
 		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
 		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
@@ -268,6 +279,85 @@
 			itemBottom.initGrid();
 			itemShoes.initGrid();
 		});
+
+		var item = {
+			post: function () {
+				lozm.func.requestPost({
+					url: "/api/item",
+					data: {
+						name: $("#post_item_name").val(),
+						price: $("#post_item_price").val(),
+						quantity: $("#post_item_quantity").val(),
+						contents: $("#post_item_contents").val(),
+						size: $("#post_item_size").val(),
+						type: $("#post_item_type").val()
+					},
+					callback: {
+						success: function (result) {
+							console.log(result);
+							if(result.success) {
+								lozm.func.alertSuccess();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			put: function () {
+				lozm.func.requestPut({
+					url: "/api/item",
+					data: {
+						id: $("#put_shoes_id").val(),
+						name: $("#put_shoes_name").val(),
+						price: $("#put_shoes_price").val(),
+						quantity: $("#put_shoes_quantity").val(),
+						contents: $("#put_shoes_contents").val(),
+						size: $("#put_shoes_size").val()
+					},
+					callback: {
+						success: function (result) {
+							console.log(result);
+							if(result.success) {
+								lozm.func.alertSuccess();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			delete: function (list) {
+				lozm.func.requestDelete({
+					url: "/api/item",
+					data: {
+						list: list
+					},
+					callback: {
+						success: function (result) {
+							console.log(result);
+							item.getGridData();
+							$("#put_shoesForm input textarea").clear();
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+		};
 
 		var itemOuter = {
 			gridId: "outerGrid",

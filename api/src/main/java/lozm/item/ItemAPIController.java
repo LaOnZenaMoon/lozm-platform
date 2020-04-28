@@ -2,11 +2,10 @@ package lozm.item;
 
 import lombok.RequiredArgsConstructor;
 import lozm.dto.APIResponseDto;
-import lozm.dto.item.GetClothingDto;
-import lozm.dto.item.GetItemDto;
-import lozm.dto.item.PostItemDto;
-import lozm.dto.item.PutItemDto;
+import lozm.dto.item.*;
+import lozm.dto.store.DeleteStoreDto;
 import lozm.vo.item.ItemVo;
+import lozm.vo.store.StoreVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -89,7 +88,7 @@ public class ItemAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            ItemVo itemvo = ItemVo.builder()
+            ItemVo itemVo = ItemVo.builder()
                     .name(reqDto.getName())
                     .price(reqDto.getPrice())
                     .quantity(reqDto.getQuantity())
@@ -99,7 +98,7 @@ public class ItemAPIController {
                     .storeId(reqDto.getStoreId())
                     .build();
 
-            itemService.save(itemvo);
+            itemService.save(itemVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,7 +114,7 @@ public class ItemAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            ItemVo itemvo = ItemVo.builder()
+            ItemVo itemVo = ItemVo.builder()
                     .id(reqDto.getId())
                     .name(reqDto.getName())
                     .price(reqDto.getPrice())
@@ -125,7 +124,29 @@ public class ItemAPIController {
                     .flag(reqDto.getFlag())
                     .build();
 
-            itemService.update(itemvo);
+            itemService.update(itemVo);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @DeleteMapping
+    public APIResponseDto deleteItem(@RequestBody @Valid DeleteItemDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            for(DeleteItemDto dto : reqDto.getList()) {
+                ItemVo itemVo = ItemVo.builder()
+                        .id(dto.getId())
+                        .build();
+
+                itemService.delete(itemVo);
+            }
+
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

@@ -97,7 +97,7 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 
-									<div id="outer" class="container tab-pane active">
+									<div id="couponUser" class="container tab-pane active">
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="card">
@@ -203,6 +203,7 @@
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
 			couponUser.initGrid();
+			user.initGrid();
 
 			lozm.func.datetimepicker("put_startDt");
 			lozm.func.datetimepicker("put_endDt");
@@ -340,8 +341,8 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								$('#post_item_type').val(item.type.outer);
-								$("#post_item").modal("show");
+								user.getGridData();
+								$("#post_couponUser").modal("show");
 							},
 						},
 						{
@@ -357,9 +358,8 @@
 								}
 
 								console.log(_selectedRows);
-								lozm.func.setDetail("put_item_", _selectedRows[0]);
-								$('#put_item_type').val(item.type.outer);
-								$("#put_item").modal("show");
+								lozm.func.setDetail("put_couponUser_", _selectedRows[0]);
+								$("#put_couponUser").modal("show");
 							},
 						},
 						{
@@ -370,7 +370,7 @@
 									lozm.func.alertRowIsSelected();
 									return;
 								}
-								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.outer);
+								if(confirm("Are you sure to delete the data?")) couponUser.delete(_selectedRows);
 							},
 						},
 						{
@@ -407,9 +407,9 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/api/couponUser} ]]*/ "",
+					url: /*[[ @{/api/coupon/user} ]]*/ "",
 					data: {
-						couponId: $("#put_coupon_id"),
+						couponId: $("#put_coupon_id").val(),
 						userList: user.getSelectedRows(),
 						couponUserQuantity: $("#put_couponUserQuantity").val()
 					},

@@ -16,10 +16,10 @@ public class PostCouponUserDto {
         @Size(min = 1)
         private List<GetUserDto> userList = new ArrayList<>();
 
-        @NotEmpty
+        @NotNull
         private Long couponId;
 
-        @NotEmpty
+        @NotNull
         private Long couponUserQuantity;
     }
 

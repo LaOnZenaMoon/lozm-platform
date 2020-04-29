@@ -118,6 +118,8 @@ public class CouponService {
         couponUserRepository.save(couponUser);
 
         findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity());
+
+        couponRepository.save(findCoupon.get());
     }
 
 

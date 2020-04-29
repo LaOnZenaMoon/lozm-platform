@@ -1,6 +1,8 @@
 package lozm.dto.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lozm.code.UsersType;
 import lozm.dto.item.GetItemDto;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class GetUserDto {
 
     private Long id;

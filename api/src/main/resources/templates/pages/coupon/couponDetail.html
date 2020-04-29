@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
+
+<th:block layout:fragment="content">
+	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+
+	<div id="wrapper">
+		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
+		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
+		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Detail','Management','Manage coupon','','')"></th:block>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="card-title">coupon > Detail</div>
+								<hr>
+								<form id="put_couponForm">
+
+									<div class="form-group">
+										<input type="hidden" id="put_coupon_id" name="id">
+									</div>
+
+									<div class="form-group">
+										<label for="put_coupon_name">Name</label>
+										<input type="text" class="form-control" id="put_coupon_name" name="name">
+									</div>
+
+									<div class="form-group">
+										<label for="put_coupon_type">Type</label>
+										<select class="form-control single-select" id="put_coupon_type" name="type">
+											<option value="RATIO">Ratio</option>
+											<option value="PRICE">Price</option>
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="put_coupon_amount">Amount</label>
+										<input type="number" class="form-control" id="put_coupon_amount" name="amount">
+									</div>
+
+									<div class="form-group">
+										<label for="put_coupon_quantity">Quantity</label>
+										<input type="number" class="form-control" id="put_coupon_quantity" name="quantity">
+									</div>
+
+									<div class="form-group">
+										<label for="put_coupon_startDt">Start dateTime</label>
+										<div class='input-group date' id='put_coupon_startDt'>
+											<input type='text' class="form-control" name="startDt"/>
+											<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="put_coupon_endDt">End dateTime</label>
+										<div class='input-group date' id='put_coupon_endDt'>
+											<input type='text' class="form-control" name="endDt"/>
+											<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="put_coupon_contents">Contents</label>
+										<textarea rows="4" class="form-control" id="put_coupon_contents" name="contents"></textarea>
+									</div>
+
+									<div class="form-group">
+										<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+									</div>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<ul class="nav nav-tabs nav-tabs-info nav-justified">
+									<li class="nav-item">
+										<a class="nav-link active" data-toggle="tab" href="#outer"><i class="icon-home"></i> <span class="hidden-xs">Outer</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#top"><i class="icon-user"></i> <span class="hidden-xs">Top</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#bottom"><i class="icon-envelope-open"></i> <span class="hidden-xs">Bottom</span></a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" data-toggle="tab" href="#shoes"><i class="icon-envelope-open"></i> <span class="hidden-xs">Shoes</span></a>
+									</li>
+								</ul>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
+
+									<div id="outer" class="container tab-pane active">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="card">
+													<div class="card-header">
+														<i class="fa fa-table"></i> Coupon > User
+													</div>
+													<div class="card-body">
+														<div class="table-responsive">
+															<table id="couponUserGrid" class="table table-bordered display modal-grid"></table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
+		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
+	</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+	<script th:inline="javascript" type="text/javascript">
+		$(document).ready(function () {
+			couponUser.initGrid();
+			couponUser.getGridData();
+
+			$("#put_couponForm").validate({
+				submitHandler: function(form) {
+					coupon.put();
+				},
+				rules: {
+					name: {
+						required: true
+					},
+					contents: {
+						required: true
+					},
+					type: {
+						required: true
+					},
+					amount: {
+						required: true
+					},
+					quantity: {
+						required: true
+					},
+					startDt: {
+						required: true
+					},
+					endDt: {
+						required: true
+					},
+				},
+				message: {
+					name: {
+						required: "Name is required.",
+					},
+					contents: {
+						required: "identifier is required.",
+					},
+					type: {
+						required: "password is required."
+					},
+					amount: {
+						required: "type is required."
+					},
+					quantity: {
+						required: "type is required."
+					},
+					startDt: {
+						required: "type is required."
+					},
+					endDt: {
+						required: "type is required."
+					},
+				},
+			});
+		});
+
+		var coupon = {
+			put: function () {
+				lozm.func.requestPut({
+					url: /*[[ @{/api/coupon} ]]*/ "",
+					data: {
+						id: $("#put_coupon_id").val(),
+						name: $("#put_coupon_name").val(),
+						contents: $("#put_coupon_contents").val(),
+						type: $("#put_coupon_type").val(),
+						amount: $("#put_coupon_amount").val(),
+						quantity: $("#put_coupon_quantity").val(),
+						startDt: $("#put_coupon_startDt > input").val(),
+						endDt: $("#put_coupon_endDt > input").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+		};
+
+		var couponUser = {
+			gridId: "couponUserGrid",
+			gridTarget: function () {
+				return $("#" + couponUser.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+couponUser.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',       			data: 'id',         		visible: false},
+						{title: 'userId',       		data: 'userId',         	visible: false},
+						{title: 'Quantity',     		data: 'quantity',       	width: "10%"},
+						{title: 'User name', 			data: 'userName',   		width: "40%"},
+						{title: 'User identifier',    	data: 'userIdentifier',     width: "40%"},
+						{title: 'User type',    	 	data: 'userType',       	width: "10%"},
+					],
+					data: /*[[ ${couponUserList} ]]*/ "",
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = couponUser.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) couponUser.gridTarget().rows().deselect();
+								else couponUser.gridTarget().rows().select();
+							}
+						},
+						{
+							text: '<i class="fa fa-plus"></i>',
+							action: function () {
+								$('#post_item_type').val(item.type.outer);
+								$("#post_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-edit"></i>',
+							action: function () {
+								var _selectedRows = couponUser.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								} else if(_selectedRows.length > 1) {
+									lozm.func.alertRowsAreSelected();
+									return;
+								}
+
+								console.log(_selectedRows);
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.outer);
+								$("#put_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = couponUser.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								}
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.outer);
+							},
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+			getGridData: function () {
+				lozm.func.requestGet({
+					url: /*[[ @{/api/coupon} ]]*/ "",
+					callback: {
+						success: function (result) {
+							console.log(result);
+							if(result.success) {
+								coupon.gridTarget().clear().draw();
+								coupon.gridTarget().rows.add(result.data.list).draw();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+		};
+
+	</script>
+</th:block>
+</html>

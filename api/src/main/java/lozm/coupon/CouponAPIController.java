@@ -2,11 +2,7 @@ package lozm.coupon;
 
 import lombok.RequiredArgsConstructor;
 import lozm.dto.APIResponseDto;
-import lozm.dto.coupon.DeleteCouponDto;
-import lozm.dto.coupon.GetCouponDto;
-import lozm.dto.coupon.PostCouponDto;
-import lozm.dto.coupon.PutCouponDto;
-import lozm.dto.user.PostUserCouponDto;
+import lozm.dto.coupon.*;
 import lozm.vo.coupon.CouponVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -116,12 +112,42 @@ public class CouponAPIController {
         return resDto;
     }
 
-    @PostMapping(value = "/user")
-    public APIResponseDto postCouponUser(@RequestBody @Valid PostUserCouponDto.Request reqDto) {
+    @GetMapping(value = "/{couponId}/user")
+    public APIResponseDto getCouponUser(@PathVariable(value = "couponId") Long couponId) {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            couponService.saveCouponUser(reqDto);
+            CouponVo couponVo = CouponVo.builder()
+                    .id(couponId)
+                    .build();
+
+            List<GetCouponUserDto> couponUserList = couponService.getCouponUserList(couponVo);
+            GetCouponUserDto.Response couponUserResDto = new GetCouponUserDto.Response();
+            couponUserResDto.setList(couponUserList);
+
+            resDto.setData(couponUserResDto);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @PostMapping(value = "/user")
+    public APIResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            CouponVo couponVo = CouponVo.builder()
+                    .id(reqDto.getCouponId())
+                    .userId(reqDto.getUserId())
+                    .couponUserQuantity(reqDto.getCouponUserQuantity())
+                    .build();
+
+            couponService.saveCouponUser(couponVo);
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();

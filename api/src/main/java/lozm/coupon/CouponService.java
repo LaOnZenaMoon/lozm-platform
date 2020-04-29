@@ -2,7 +2,7 @@ package lozm.coupon;
 
 import lombok.RequiredArgsConstructor;
 import lozm.dto.coupon.GetCouponDto;
-import lozm.dto.user.PostUserCouponDto;
+import lozm.dto.coupon.GetCouponUserDto;
 import lozm.exception.APIException;
 import lozm.vo.coupon.CouponVo;
 import lozm.entity.coupon.Coupon;
@@ -14,6 +14,7 @@ import lozm.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,26 +62,45 @@ public class CouponService {
     }
 
     @Transactional
-    public void saveCouponUser(PostUserCouponDto.Request reqDto) throws Exception {
-        Optional<User> findUser = userRepository.findById(reqDto.getUserId());
-        findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
-
-        Optional<Coupon> findCoupon = couponRepository.findById(reqDto.getCouponId());
-        findCoupon.orElseThrow(() -> new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist."));
-
-        CouponUser couponUser = new CouponUser();
-        couponUser.insertCouponUser(reqDto.getCouponQuantity(), findCoupon.get(), findUser.get());
-
-        couponUserRepository.save(couponUser);
-
-        findCoupon.get().decreaseCouponQuantity(reqDto.getCouponQuantity());
-    }
-
-    @Transactional
     public void delete(CouponVo couponVo) {
         Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> new APIException("COUPON_0002", "Coupon doesn't exist."));
 
         findCoupon.get().deleteCoupon(couponVo);
     }
+
+    public List<GetCouponUserDto> getCouponUserList(CouponVo couponVo) {
+        List<CouponUser> couponUserList = couponUserRepository.selectCouponUserList();
+        List<GetCouponUserDto> rtnList = new ArrayList<>();
+        for (CouponUser couponUser : couponUserList) {
+            GetCouponUserDto dto = new GetCouponUserDto(
+                    couponUser.getId(),
+                    couponUser.getQuantity(),
+                    couponUser.getUser().getId(),
+                    couponUser.getUser().getName(),
+                    couponUser.getUser().getIdentifier(),
+                    couponUser.getUser().getType()
+            );
+            rtnList.add(dto);
+        }
+
+        return rtnList;
+    }
+
+    @Transactional
+    public void saveCouponUser(CouponVo couponVo) throws Exception {
+        Optional<User> findUser = userRepository.findById(couponVo.getUserId());
+        findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
+
+        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
+        findCoupon.orElseThrow(() -> new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist."));
+
+        CouponUser couponUser = new CouponUser();
+        couponUser.insertCouponUser(couponVo.getCouponUserQuantity(), findCoupon.get(), findUser.get());
+
+        couponUserRepository.save(couponUser);
+
+        findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity());
+    }
+
 }

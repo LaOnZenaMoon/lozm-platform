@@ -23,4 +23,7 @@ public class CouponVo {
     private LocalDateTime endDt;
     private int flag;
 
+    private Long userId;
+    private Long couponUserQuantity;
+
 }

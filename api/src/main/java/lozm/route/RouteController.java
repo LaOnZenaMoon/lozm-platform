@@ -2,7 +2,9 @@ package lozm.route;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lozm.coupon.CouponAPIController;
 import lozm.dto.APIResponseDto;
+import lozm.dto.coupon.GetCouponUserDto;
 import lozm.dto.item.GetClothingDto;
 import lozm.dto.store.GetStoreDto;
 import lozm.store.StoreAPIController;
@@ -23,6 +25,7 @@ public class RouteController {
 
     private final HttpSession httpSession;
     private final StoreAPIController storeAPIController;
+    private final CouponAPIController couponAPIController;
 
 
     @GetMapping(value = "/home")
@@ -73,6 +76,17 @@ public class RouteController {
 
     @GetMapping(value = "/manage/coupon")
     public String managingCoupon(ModelMap modelMap) {
+        return "pages/coupon/coupon";
+    }
+
+    @GetMapping(value = "/manage/coupon/{couponId}")
+    public String managingCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) {
+
+        APIResponseDto getCouponUser = couponAPIController.getCouponUser(couponId);
+        GetCouponUserDto.Response couponUser = (GetCouponUserDto.Response) getCouponUser.getData();
+        List<GetCouponUserDto> couponUserList = couponUser.getList();
+        modelMap.addAttribute("couponUserList", couponUserList);
+
         return "pages/coupon/coupon";
     }
 

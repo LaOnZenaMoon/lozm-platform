@@ -1,11 +1,11 @@
-package lozm.dto.user;
+package lozm.dto.coupon;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
-public class PostUserCouponDto {
+public class PostCouponUserDto {
 
     @Getter
     public static class Request {
@@ -16,7 +16,7 @@ public class PostUserCouponDto {
         private Long couponId;
 
         @NotNull
-        private Long couponQuantity;
+        private Long couponUserQuantity;
     }
 
     @Getter

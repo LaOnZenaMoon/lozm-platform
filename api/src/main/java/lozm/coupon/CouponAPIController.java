@@ -3,6 +3,7 @@ package lozm.coupon;
 import lombok.RequiredArgsConstructor;
 import lozm.dto.APIResponseDto;
 import lozm.dto.coupon.*;
+import lozm.dto.user.GetUserDto;
 import lozm.vo.coupon.CouponVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -162,13 +163,16 @@ public class CouponAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            CouponVo couponVo = CouponVo.builder()
-                    .id(reqDto.getCouponId())
-                    .userId(reqDto.getUserId())
-                    .couponUserQuantity(reqDto.getCouponUserQuantity())
-                    .build();
+            for (GetUserDto dto : reqDto.getUserList()) {
+                CouponVo couponVo = CouponVo.builder()
+                        .id(reqDto.getCouponId())
+                        .userId(dto.getId())
+                        .couponUserQuantity(reqDto.getCouponUserQuantity())
+                        .build();
 
-            couponService.saveCouponUser(couponVo);
+                couponService.saveCouponUser(couponVo);
+            }
+
             resDto.setSuccess(true);
         } catch (Exception e) {
             e.printStackTrace();

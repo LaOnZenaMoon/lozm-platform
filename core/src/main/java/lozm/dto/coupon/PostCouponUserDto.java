@@ -1,28 +1,26 @@
 package lozm.dto.coupon;
 
 import lombok.Getter;
-import lombok.Setter;
+import lozm.dto.user.GetUserDto;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostCouponUserDto {
 
     @Getter
     public static class Request {
-        @NotNull
-        private Long userId;
+        @Size(min = 1)
+        private List<GetUserDto> userList = new ArrayList<>();
 
-        @NotNull
+        @NotEmpty
         private Long couponId;
 
-        @NotNull
+        @NotEmpty
         private Long couponUserQuantity;
-    }
-
-    @Getter
-    @Setter
-    public static class Response {
-
     }
 
 }

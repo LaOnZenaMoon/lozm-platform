@@ -90,7 +90,7 @@
 							<div class="card-body">
 								<ul class="nav nav-tabs nav-tabs-info nav-justified">
 									<li class="nav-item">
-										<a class="nav-link active" data-toggle="tab" href="#couponUser"><i class="icon-home"></i> <span class="hidden-xs">Coupon user</span></a>
+										<a class="nav-link active" data-toggle="tab" href="#couponUser"><i class="icon-home"></i> <span class="hidden-xs">Coupon couponUser</span></a>
 									</li>
 								</ul>
 
@@ -121,7 +121,76 @@
 					</div>
 				</div>
 
+			</div>
+		</div>
 
+		<div class="modal fade" id="post_couponUser">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="post_couponUserForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="put_couponUserQuantity">Quantity</label>
+								<input type="number" class="form-control" id="put_couponUserQuantity" name="couponUserQuantity">
+							</div>
+
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="card">
+										<div class="card-header">
+											<i class="fa fa-table"></i> User
+										</div>
+										<div class="card-body">
+											<div class="table-responsive">
+												<table id="userGrid" class="table table-bordered display modal-grid"></table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="put_couponUser">
+			<div class="modal-dialog">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="put_couponUserForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="hidden" id="put_id">
+							</div>
+	
+							<div class="form-group">
+								<label for="put_name">Name</label>
+								<input type="number" class="form-control" id="put_name" name="name">
+							</div>
+
+						</div>
+	
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 
@@ -189,6 +258,22 @@
 					},
 				},
 			});
+
+			$("#post_couponUserForm").validate({
+				submitHandler: function(form) {
+					couponUser.post();
+				},
+				rules: {
+					couponUserQuantity: {
+						required: true
+					},
+				},
+				message: {
+					couponUserQuantity: {
+						required: "Name is required.",
+					},
+				},
+			});
 		});
 
 		var coupon = {
@@ -232,11 +317,11 @@
 				$("#"+couponUser.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
-						{title: 'id',       			data: 'id',         		visible: false},
-						{title: 'userId',       		data: 'userId',         	visible: false},
-						{title: 'Quantity',     		data: 'quantity',       	width: "10%"},
+						{title: 'id',       				data: 'id',         		visible: false},
+						{title: 'userId',       			data: 'userId',         	visible: false},
+						{title: 'Quantity',     			data: 'quantity',       	width: "10%"},
 						{title: 'User name', 			data: 'userName',   		width: "40%"},
-						{title: 'User identifier',    	data: 'userIdentifier',     width: "40%"},
+						{title: 'User identifier',    data: 'userIdentifier',     width: "40%"},
 						{title: 'User type',    	 	data: 'userType',       	width: "10%"},
 					],
 					data: /*[[ ${couponUserList} ]]*/ "",
@@ -303,7 +388,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: "/api/coupon/" + $("#put_coupon_id").val() + "/user",
+					url: "/api/coupon/" + $("#put_coupon_id").val() + "/couponUser",
 					callback: {
 						success: function (result) {
 							console.log(result);
@@ -319,6 +404,146 @@
 						}
 					}
 				});
+			},
+			post: function () {
+				lozm.func.requestPost({
+					url: /*[[ @{/api/couponUser} ]]*/ "",
+					data: {
+						couponId: $("#put_coupon_id"),
+						userList: user.getSelectedRows(),
+						couponUserQuantity: $("#put_couponUserQuantity").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								couponUser.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			put: function () {
+				lozm.func.requestPut({
+					url: /*[[ @{/api/couponUser} ]]*/ "",
+					data: {
+						id: $("#put_id").val(),
+						name: $("#put_name").val(),
+						identifier: $("#put_identifier").val(),
+						password: $("#put_password").val(),
+						type: $("#put_type").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								couponUser.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			delete: function (list) {
+				lozm.func.requestDelete({
+					url: /*[[ @{/api/couponUser} ]]*/ "",
+					data: {
+						list: list
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								couponUser.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+		};
+
+		var user = {
+			gridId: "userGrid",
+			gridTarget: function () {
+				return $("#" + user.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+user.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',               	data: 'id',             	visible: false},
+						{title: 'password',             data: 'password',           visible: false},
+						{title: 'Identifier', 			data: 'identifier', 		width: "40%"},
+						{title: 'Name', 				data: 'name', 				width: "40%"},
+						{title: 'Type', 				data: 'type', 				width: "20%"},
+					],
+					data: [],
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) user.gridTarget().rows().deselect();
+								else user.gridTarget().rows().select();
+							}
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+			getGridData: function () {
+				lozm.func.requestGet({
+					url: /*[[ @{/api/user} ]]*/ "",
+					callback: {
+						success: function (result) {
+							console.log(result);
+							if(result.success) {
+								user.gridTarget().clear().draw();
+								user.gridTarget().rows.add(result.data.list).draw();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			getSelectedRows: function () {
+				return user.gridTarget().rows({selected: true}).data().toArray();
 			},
 		};
 

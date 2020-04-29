@@ -51,69 +51,48 @@
 							</div>
 
 							<div class="form-group">
-								<label for="post_identifier">Identifier</label>
-								<input type="text" class="form-control" id="post_identifier" name="identifier">
-							</div>
-
-							<div class="form-group">
-								<label for="post_password">Identifier</label>
-								<input type="password" class="form-control" id="post_password" name="password">
-							</div>
-
-							<div class="form-group">
 								<label for="post_type">Type</label>
 								<select class="form-control single-select" id="post_type" name="type">
-									<option value="ADMIN">Admin</option>
-									<option value="coupon">coupon</option>
+									<option value="RATIO">Ratio</option>
+									<option value="PRICE">Price</option>
 								</select>
 							</div>
-						</div>
 
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="put_coupon">
-			<div class="modal-dialog">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form id="put_couponForm">
-						<div class="modal-body">
 							<div class="form-group">
-								<input type="hidden" id="put_id">
+								<label for="post_amount">Amount</label>
+								<input type="number" class="form-control" id="post_amount" name="amount">
 							</div>
 
 							<div class="form-group">
-								<label for="put_name">Name</label>
-								<input type="text" class="form-control" id="put_name" name="name">
+								<label for="post_quantity">Quantity</label>
+								<input type="number" class="form-control" id="post_quantity" name="quantity">
 							</div>
 
 							<div class="form-group">
-								<label for="put_identifier">Identifier</label>
-								<input type="text" class="form-control" id="put_identifier" name="identifier">
+								<label for="post_quantity">Start dateTime</label>
+								<div class='input-group date' id='startDt'>
+									<input type='text' class="form-control" />
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="put_password">Identifier</label>
-								<input type="password" class="form-control" id="put_password" name="password">
+								<label for="post_quantity">End dateTime</label>
+								<div class='input-group date' id='endDt'>
+									<input type='text' class="form-control" />
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="put_type">Type</label>
-								<select class="form-control single-select" id="put_type" name="type">
-									<option value="ADMIN">Admin</option>
-									<option value="coupon">coupon</option>
-								</select>
+								<label for="post_contents">Contents</label>
+								<textarea rows="4" class="form-control" id="post_contents" name="contents"></textarea>
 							</div>
+
 						</div>
 
 						<div class="modal-footer">
@@ -135,44 +114,12 @@
 			coupon.initGrid();
 			coupon.getGridData();
 
+			$('#startDt').datetimepicker();
+			$('#endDt').datetimepicker();
+
 			$("#post_couponForm").validate({
 				submitHandler: function(form) {
 					coupon.post();
-				},
-				rules: {
-					name: {
-						required: true
-					},
-					identifier: {
-						required: true
-					},
-					password: {
-						required: true
-					},
-					type: {
-						required: true
-					},
-				},
-				message: {
-					name: {
-						required: "Name is required.",
-					},
-					identifier: {
-						required: "identifier is required.",
-					},
-					password: {
-						required: "password is required."
-					},
-					type: {
-						required: "type is required."
-					},
-				},
-			});
-
-
-			$("#put_couponForm").validate({
-				submitHandler: function(form) {
-					coupon.put();
 				},
 				rules: {
 					name: {

@@ -33,9 +33,9 @@
 
 									<div class="form-group">
 										<label for="put_coupon_type">Type</label>
-										<select class="form-control single-select" id="put_coupon_type" name="type" th:selected="${couponDetail.type}">
-											<option value="RATIO">Ratio</option>
-											<option value="PRICE">Price</option>
+										<select class="form-control single-select" id="put_coupon_type" name="type">
+											<option value="RATIO" th:selected="${couponDetail.type}">Ratio</option>
+											<option value="PRICE" th:selected="${couponDetail.type}">Price</option>
 										</select>
 									</div>
 

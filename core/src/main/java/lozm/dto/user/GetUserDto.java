@@ -14,19 +14,21 @@ public class GetUserDto {
     private Long id;
     private String name;
     private String identifier;
+    private String password;
     private UsersType type;
 
-    public GetUserDto(Long id, String name, String identifier, UsersType type) {
+    public GetUserDto(Long id, String name, String identifier, String password, UsersType type) {
         this.id = id;
         this.name = name;
         this.identifier = identifier;
+        this.password = password;
         this.type = type;
     }
 
     @Getter
     @Setter
     public static class Response {
-        List<GetItemDto> list = new ArrayList<>();
+        List<GetUserDto> list = new ArrayList<>();
     }
 
 }

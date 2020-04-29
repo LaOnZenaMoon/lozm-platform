@@ -28,8 +28,11 @@ public class UserAPIController {
 
         try {
             List<GetUserDto> result = userService.getUserList();
+
+            GetUserDto.Response getUserDto = new GetUserDto.Response();
+            getUserDto.setList(result);
+            resDto.setData(getUserDto);
             resDto.setSuccess(true);
-            resDto.setData(result);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());

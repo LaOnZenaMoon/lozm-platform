@@ -25,8 +25,13 @@ public class UserService {
         List<User> userList = userRepository.selectUserList();
 
         return userList.stream()
-                .map(u -> new GetUserDto(u.getId(), u.getName(), u.getIdentifier(), u.getType()))
-                .collect(Collectors.toList());
+                .map(u -> new GetUserDto(
+                        u.getId(),
+                        u.getName(),
+                        u.getIdentifier(),
+                        u.getPassword(),
+                        u.getType())
+                ).collect(Collectors.toList());
     }
 
     @Transactional

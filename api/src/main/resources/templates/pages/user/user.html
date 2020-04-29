@@ -35,7 +35,7 @@
 		</div>
 
 		<div class="modal fade" id="post_user">
-			<div class="modal-dialog modal-custom">
+			<div class="modal-dialog">
 				<div class="modal-content slideInUp">
 					<div class="modal-header">
 						<h5 class="modal-title"></h5>
@@ -78,7 +78,7 @@
 		</div>
 
 		<div class="modal fade" id="put_user">
-			<div class="modal-dialog modal-custom">
+			<div class="modal-dialog">
 				<div class="modal-content slideInUp">
 					<div class="modal-header">
 						<h5 class="modal-title"></h5>
@@ -215,9 +215,11 @@
 				$("#"+user.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
-						{title: 'user name', 			data: 'name', 			width: "20%"},
-						{title: 'Telephone Number', 	data: 'telNumber', 		width: "30%"},
-						{title: 'Information', 			data: 'info', 			width: "40%"},
+						{title: 'id',               	data: 'id',             	visible: false},
+						{title: 'password',             data: 'password',           visible: false},
+						{title: 'Identifier', 			data: 'identifier', 		width: "40%"},
+						{title: 'Name', 				data: 'name', 				width: "40%"},
+						{title: 'Type', 				data: 'type', 				width: "20%"},
 					],
 					data: [],
 					select: {
@@ -252,11 +254,7 @@
 
 								lozm.func.setDetail("put_", _selectedRows[0]);
 
-								location.href = "/manage/user/" + _selectedRows[0].id;
-								// item.gridTarget().clear().draw();
-								// item.getGridData(_selectedRows[0].id);
-								//
-								// $("#put_user").modal("show");
+								$("#put_user").modal("show");
 							},
 						},
 						{
@@ -289,6 +287,7 @@
 					url: /*[[ @{/api/user} ]]*/ "",
 					callback: {
 						success: function (result) {
+							console.log(result);
 							if(result.success) {
 								user.gridTarget().clear().draw();
 								user.gridTarget().rows.add(result.data.list).draw();

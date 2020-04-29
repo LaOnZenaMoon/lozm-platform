@@ -122,6 +122,7 @@
 				$("#"+store.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
+						{title: 'id',               	data: 'id',             visible: false},
 						{title: 'Store name', 			data: 'name', 			width: "20%"},
 						{title: 'Telephone Number', 	data: 'telNumber', 		width: "30%"},
 						{title: 'Information', 			data: 'info', 			width: "40%"},
@@ -157,13 +158,7 @@
 									return;
 								}
 
-								lozm.func.setDetail("put_", _selectedRows[0]);
-
 								location.href = "/manage/store/" + _selectedRows[0].id;
-								// item.gridTarget().clear().draw();
-								// item.getGridData(_selectedRows[0].id);
-								//
-								// $("#put_store").modal("show");
 							},
 						},
 						{

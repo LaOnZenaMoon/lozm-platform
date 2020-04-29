@@ -55,7 +55,8 @@ public class ItemService {
                             item.getPrice(),
                             item.getQuantity(),
                             item.getType(),
-                            item.getStore()
+                            item.getStore().getId(),
+                            item.getStore().getName()
                     )
             );
         }
@@ -84,8 +85,10 @@ public class ItemService {
                     item.getPrice(),
                     item.getQuantity(),
                     item.getType(),
-                    item.getClothing(),
-                    item.getStore()
+                    item.getClothing().getContents(),
+                    item.getClothing().getSizes(),
+                    item.getStore().getId(),
+                    item.getStore().getName()
             );
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
             Optional<Top> findItem = topRepository.findById(itemVo.getId());
@@ -98,8 +101,10 @@ public class ItemService {
                     item.getPrice(),
                     item.getQuantity(),
                     item.getType(),
-                    item.getClothing(),
-                    item.getStore()
+                    item.getClothing().getContents(),
+                    item.getClothing().getSizes(),
+                    item.getStore().getId(),
+                    item.getStore().getName()
             );
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
             Optional<Bottom> findItem = bottomRepository.findById(itemVo.getId());
@@ -112,8 +117,10 @@ public class ItemService {
                     item.getPrice(),
                     item.getQuantity(),
                     item.getType(),
-                    item.getClothing(),
-                    item.getStore()
+                    item.getClothing().getContents(),
+                    item.getClothing().getSizes(),
+                    item.getStore().getId(),
+                    item.getStore().getName()
             );
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
             Optional<Shoes> findItem = shoesRepository.findById(itemVo.getId());
@@ -126,8 +133,10 @@ public class ItemService {
                     item.getPrice(),
                     item.getQuantity(),
                     item.getType(),
-                    item.getClothing(),
-                    item.getStore()
+                    item.getClothing().getContents(),
+                    item.getClothing().getSizes(),
+                    item.getStore().getId(),
+                    item.getStore().getName()
             );
         } else {
             throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
@@ -143,7 +152,8 @@ public class ItemService {
                 o.getPrice(),
                 o.getQuantity(),
                 o.getType(),
-                o.getStore()
+                o.getStore().getId(),
+                o.getStore().getName()
         )).collect(toList());
     }
 

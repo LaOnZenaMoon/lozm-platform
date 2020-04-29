@@ -195,12 +195,12 @@
                 $("#"+item.gridId).DataTable({
                     dom: 'Bftrip',
                     columns: [
-                        {title: 'id',       data: 'id',         visible: false},
-                        {title: 'name',     data: 'name',       width: "30%"},
-                        // {title: 'contents', data: 'contents',   width: "40%"},
-                        {title: 'price',    data: 'price',      width: "10%"},
-                        // {title: 'size',     data: 'size',       width: "10%"},
-                        {title: 'quantity', data: 'quantity',   width: "10%"},
+                        {title: 'id',               data: 'id',             visible: false},
+                        {title: 'storeId',          data: 'storeId',        visible: false},
+                        {title: 'Store name',       data: 'storeName',      width: "40%"},
+                        {title: 'Item name',        data: 'name',           width: "40%"},
+                        {title: 'Price',            data: 'price',          width: "10%"},
+                        {title: 'Quantity',         data: 'quantity',       width: "10%"},
                     ],
                     data: [],
                     select: {

@@ -28,8 +28,8 @@ public class ItemAPIController {
             GetItemDto.Response itemResDto = new GetItemDto.Response();
             itemResDto.setList(itemList);
 
-            resDto.setSuccess(true);
             resDto.setData(itemResDto);
+            resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());

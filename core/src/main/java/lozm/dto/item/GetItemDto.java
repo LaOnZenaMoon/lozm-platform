@@ -5,6 +5,7 @@ import lombok.Setter;
 import lozm.entity.embedded.Clothing;
 import lozm.entity.store.Store;
 
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,27 +17,32 @@ public class GetItemDto {
     private Long price;
     private Long quantity;
     protected String type;
-    private Clothing clothing;
-    private Store store;
+    private String contents;
+    private String sizes;
+    private Long storeId;
+    private String storeName;
 
 
-    public GetItemDto(Long id, String name, Long price, Long quantity, String type, Store store) {
+    public GetItemDto(Long id, String name, Long price, Long quantity, String type, Long storeId, String storeName) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.type = type;
-        this.store = store;
+        this.storeId = storeId;
+        this.storeName = storeName;
     }
 
-    public GetItemDto(Long id, String name, Long price, Long quantity, String type, Clothing clothing, Store store) {
+    public GetItemDto(Long id, String name, Long price, Long quantity, String type, String contents, String sizes, Long storeId, String storeName) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.type = type;
-        this.clothing = clothing;
-        this.store = store;
+        this.contents = contents;
+        this.sizes = sizes;
+        this.storeId = storeId;
+        this.storeName = storeName;
     }
 
     @Getter

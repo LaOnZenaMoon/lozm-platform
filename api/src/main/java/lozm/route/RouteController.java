@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
-import static lozm.code.SessionType.PREV_PAGE;
 import static lozm.code.SessionType.USER;
 
 @Slf4j
@@ -36,7 +35,7 @@ public class RouteController {
 
     @GetMapping(value = "/manage/store")
     public String managingStore(ModelMap modelMap) {
-        return "pages/store/manageStore";
+        return "pages/store/store";
     }
 
     @GetMapping(value = "/manage/store/{storeId}")
@@ -67,12 +66,17 @@ public class RouteController {
         List<GetClothingDto> shoesList = shoes.getList();
         modelMap.addAttribute("shoesList", shoesList);
 
-        return "pages/store/manageStoreDetail";
+        return "pages/store/storeDetail";
     }
 
     @GetMapping(value = "/manage/item")
     public String managingItem(ModelMap modelMap) {
         return "pages/item/manageItem";
+    }
+
+    @GetMapping(value = "/setting/user")
+    public String settingUser(ModelMap modelMap) {
+        return "pages/user/user";
     }
 
     @GetMapping(value = "/sign/in")

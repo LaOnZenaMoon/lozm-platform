@@ -2,6 +2,7 @@ package lozm.dto.coupon;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,10 +27,10 @@ public class PostCouponDto {
         @NotNull
         private Long quantity;
 
-        @NotNull
+        @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime startDt;
 
-        @NotNull
+        @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
         private LocalDateTime endDt;
 
         public static Request setRequestTestData(String name, String contents, String type, Long amount, Long quantity, LocalDateTime startDt, LocalDateTime endDt) {

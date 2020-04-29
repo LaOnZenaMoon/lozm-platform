@@ -69,9 +69,9 @@
 							</div>
 
 							<div class="form-group">
-								<label for="post_quantity">Start dateTime</label>
-								<div class='input-group date' id='startDt'>
-									<input type='text' class="form-control" />
+								<label for="post_startDt">Start dateTime</label>
+								<div class='input-group date' id='post_startDt'>
+									<input type='text' class="form-control" name="startDt"/>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -79,9 +79,9 @@
 							</div>
 
 							<div class="form-group">
-								<label for="post_quantity">End dateTime</label>
-								<div class='input-group date' id='endDt'>
-									<input type='text' class="form-control" />
+								<label for="post_endDt">End dateTime</label>
+								<div class='input-group date' id='post_endDt'>
+									<input type='text' class="form-control" name="endDt"/>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -114,8 +114,8 @@
 			coupon.initGrid();
 			coupon.getGridData();
 
-			$('#startDt').datetimepicker();
-			$('#endDt').datetimepicker();
+			lozm.func.datetimepicker("post_startDt");
+			lozm.func.datetimepicker("post_endDt");
 
 			$("#post_couponForm").validate({
 				submitHandler: function(form) {
@@ -125,13 +125,22 @@
 					name: {
 						required: true
 					},
-					identifier: {
-						required: true
-					},
-					password: {
+					contents: {
 						required: true
 					},
 					type: {
+						required: true
+					},
+					amount: {
+						required: true
+					},
+					quantity: {
+						required: true
+					},
+					startDt: {
+						required: true
+					},
+					endDt: {
 						required: true
 					},
 				},
@@ -139,13 +148,22 @@
 					name: {
 						required: "Name is required.",
 					},
-					identifier: {
+					contents: {
 						required: "identifier is required.",
 					},
-					password: {
+					type: {
 						required: "password is required."
 					},
-					type: {
+					amount: {
+						required: "type is required."
+					},
+					quantity: {
+						required: "type is required."
+					},
+					startDt: {
+						required: "type is required."
+					},
+					endDt: {
 						required: "type is required."
 					},
 				},
@@ -256,36 +274,12 @@
 					url: /*[[ @{/api/coupon} ]]*/ "",
 					data: {
 						name: $("#post_name").val(),
-						identifier: $("#post_identifier").val(),
-						password: $("#post_password").val(),
-						type: $("#post_type").val()
-					},
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								lozm.func.alertSuccess();
-								coupon.getGridData();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			put: function () {
-				lozm.func.requestPut({
-					url: /*[[ @{/api/coupon} ]]*/ "",
-					data: {
-						id: $("#put_id").val(),
-						name: $("#put_name").val(),
-						identifier: $("#put_identifier").val(),
-						password: $("#put_password").val(),
-						type: $("#put_type").val()
+						contents: $("#post_contents").val(),
+						type: $("#post_type").val(),
+						amount: $("#post_amount").val(),
+						quantity: $("#post_quantity").val(),
+						startDt: $("#post_startDt > input").val(),
+						endDt: $("#post_endDt > input").val()
 					},
 					callback: {
 						success: function (result) {

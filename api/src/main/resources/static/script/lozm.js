@@ -215,6 +215,12 @@
         swal("Error", "Cannot select more then one row.", "error");
     };
 
+    lozm.func.datetimepicker = function(_id) {
+        $("#"+_id).datetimepicker({
+            format:'yyyy-mm-ddThh:ii:ss',
+        });
+    }
+
     init.prototype = lozm.func;
     if (!noGlobal) {
         window.lozm = lozm;

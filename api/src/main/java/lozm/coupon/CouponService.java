@@ -29,15 +29,18 @@ public class CouponService {
     private final CouponUserRepository couponUserRepository;
 
 
-    public List<GetCouponDto> findAllCoupons() {
-        List<Coupon> couponList = couponRepository.findAll();
+    public List<GetCouponDto> getCouponList() {
+        List<Coupon> couponList = couponRepository.selectCouponList();
 
         return couponList.stream().map(c -> new GetCouponDto(
                 c.getId(),
                 c.getName(),
                 c.getContents(),
                 c.getType(),
-                c.getAmount()
+                c.getAmount(),
+                c.getQuantity(),
+                c.getStartDt(),
+                c.getEndDt()
         )).collect(toList());
     }
 
@@ -53,6 +56,7 @@ public class CouponService {
     public void update(CouponVo couponVo) throws Exception {
         Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> new APIException("COUPON_0002", "Coupon doesn't exist."));
+
         findCoupon.get().updateCoupon(couponVo);
     }
 
@@ -71,5 +75,12 @@ public class CouponService {
 
         findCoupon.get().decreaseCouponQuantity(reqDto.getCouponQuantity());
     }
-    
+
+    @Transactional
+    public void delete(CouponVo couponVo) {
+        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
+        findCoupon.orElseThrow(() -> new APIException("COUPON_0002", "Coupon doesn't exist."));
+
+        findCoupon.get().deleteCoupon(couponVo);
+    }
 }

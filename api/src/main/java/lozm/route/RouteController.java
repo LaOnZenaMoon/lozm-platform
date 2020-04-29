@@ -71,6 +71,11 @@ public class RouteController {
         return "pages/item/item";
     }
 
+    @GetMapping(value = "/manage/coupon")
+    public String managingCoupon(ModelMap modelMap) {
+        return "pages/coupon/coupon";
+    }
+
     @GetMapping(value = "/setting/user")
     public String settingUser(ModelMap modelMap) {
         return "pages/user/user";

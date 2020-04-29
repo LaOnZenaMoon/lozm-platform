@@ -90,4 +90,8 @@ public class Coupon extends BaseEntity {
         this.quantity -= couponQuantity;
         if(this.quantity < 0) throw new APIException("USER_SAVE_NO_COUPON_QUANTITY", "Coupon quantity is insufficient.");
     }
+
+    public void deleteCoupon(CouponVo couponVo) {
+        this.setBaseEntity("", couponVo.getFlag());
+    }
 }

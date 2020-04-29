@@ -30,10 +30,4 @@ public class PutCouponDto {
         private int flag;
     }
 
-    @Getter
-    @Setter
-    public static class Response {
-
-    }
-
 }

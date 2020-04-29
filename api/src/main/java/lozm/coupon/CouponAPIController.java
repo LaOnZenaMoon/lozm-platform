@@ -2,6 +2,7 @@ package lozm.coupon;
 
 import lombok.RequiredArgsConstructor;
 import lozm.dto.APIResponseDto;
+import lozm.dto.coupon.DeleteCouponDto;
 import lozm.dto.coupon.GetCouponDto;
 import lozm.dto.coupon.PostCouponDto;
 import lozm.dto.coupon.PutCouponDto;
@@ -25,12 +26,12 @@ public class CouponAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetCouponDto> result = couponService.findAllCoupons();
+            List<GetCouponDto> result = couponService.getCouponList();
             GetCouponDto.Response couponResDto = new GetCouponDto.Response();
             couponResDto.setList(result);
 
-            resDto.setSuccess(true);
             resDto.setData(couponResDto);
+            resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
@@ -83,6 +84,29 @@ public class CouponAPIController {
                     .build();
 
             couponService.update(couponVo);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @DeleteMapping
+    public APIResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            for(DeleteCouponDto dto : reqDto.getList()) {
+                CouponVo couponVo = CouponVo.builder()
+                        .id(dto.getId())
+                        .flag(0)
+                        .build();
+
+                couponService.delete(couponVo);
+            }
+
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

@@ -41,7 +41,7 @@ public class ItemBulkInsert {
 
     @Test
     public void setItems() {
-        for (GetStoreDto findStore : storeService.findAllStores()) {
+        for (GetStoreDto findStore : storeService.getStoreList()) {
             setItem(ItemType.OUTER.name(), findStore.getId());
             setItem(ItemType.TOP.name(), findStore.getId());
             setItem(ItemType.BOTTOM.name(), findStore.getId());

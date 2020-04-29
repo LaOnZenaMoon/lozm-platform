@@ -33,7 +33,7 @@ public class StoreAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetStoreDto> storeList = storeService.findAllStores();
+            List<GetStoreDto> storeList = storeService.getStoreList();
             GetStoreDto.Response storeResDto = new GetStoreDto.Response();
             storeResDto.setList(storeList);
 

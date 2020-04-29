@@ -12,17 +12,17 @@
 
 		<div class="content-wrapper">
 			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Manage store','Management','','','')"></th:block>
+				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('User','Setting','','','')"></th:block>
 
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-header">
-								<i class="fa fa-table"></i> Store
+								<i class="fa fa-table"></i> User
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
-									<table id="storeGrid" class="table table-bordered display">
+									<table id="userGrid" class="table table-bordered display">
 
 									</table>
 								</div>
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 
-		<div class="modal fade" id="post_store">
+		<div class="modal fade" id="post_user">
 			<div class="modal-dialog modal-custom">
 				<div class="modal-content slideInUp">
 					<div class="modal-header">
@@ -43,21 +43,76 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form id="post_storeForm">
+					<form id="post_userForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="post_name">Store name</label>
+								<label for="post_name">Name</label>
 								<input type="text" class="form-control" id="post_name" name="name">
 							</div>
 
 							<div class="form-group">
-								<label for="post_telNumber">Telephone number</label>
-								<input type="text" class="form-control" id="post_telNumber" name="telNumber">
+								<label for="post_identifier">Identifier</label>
+								<input type="text" class="form-control" id="post_identifier" name="identifier">
 							</div>
 
 							<div class="form-group">
-								<label for="post_info">Information</label>
-								<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>
+								<label for="post_password">Identifier</label>
+								<input type="password" class="form-control" id="post_password" name="password">
+							</div>
+
+							<div class="form-group">
+								<label for="post_type">Type</label>
+								<select class="form-control single-select" id="post_type" name="type">
+									<option value="ADMIN">Admin</option>
+									<option value="USER">User</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="put_user">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="put_userForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="hidden" id="put_id">
+							</div>
+
+							<div class="form-group">
+								<label for="put_name">Name</label>
+								<input type="text" class="form-control" id="put_name" name="name">
+							</div>
+
+							<div class="form-group">
+								<label for="put_identifier">Identifier</label>
+								<input type="text" class="form-control" id="put_identifier" name="identifier">
+							</div>
+
+							<div class="form-group">
+								<label for="put_password">Identifier</label>
+								<input type="password" class="form-control" id="put_password" name="password">
+							</div>
+
+							<div class="form-group">
+								<label for="put_type">Type</label>
+								<select class="form-control single-select" id="put_type" name="type">
+									<option value="ADMIN">Admin</option>
+									<option value="USER">User</option>
+								</select>
 							</div>
 						</div>
 
@@ -77,52 +132,90 @@
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
-			store.initGrid();
-			store.getGridData();
+			user.initGrid();
+			user.getGridData();
 
-			$("#post_storeForm").validate({
+			$("#post_userForm").validate({
 				submitHandler: function(form) {
-					store.post();
+					user.post();
 				},
 				rules: {
 					name: {
 						required: true
 					},
-					telNumber: {
-						required: true,
-						minlength: 9
-					},
-					info: {
+					identifier: {
 						required: true
-					}
+					},
+					password: {
+						required: true
+					},
+					type: {
+						required: true
+					},
 				},
 				message: {
 					name: {
 						required: "Name is required.",
 					},
-					telNumber: {
-						required: "TelNumber is required.",
-						minlength: "TelNumber min length is 9."
+					identifier: {
+						required: "identifier is required.",
 					},
-					info: {
-						required: "Info is required."
+					password: {
+						required: "password is required."
+					},
+					type: {
+						required: "type is required."
 					},
 				},
 			});
 
 
+			$("#put_userForm").validate({
+				submitHandler: function(form) {
+					user.put();
+				},
+				rules: {
+					name: {
+						required: true
+					},
+					identifier: {
+						required: true
+					},
+					password: {
+						required: true
+					},
+					type: {
+						required: true
+					},
+				},
+				message: {
+					name: {
+						required: "Name is required.",
+					},
+					identifier: {
+						required: "identifier is required.",
+					},
+					password: {
+						required: "password is required."
+					},
+					type: {
+						required: "type is required."
+					},
+				},
+			});
+
 		});
 
-		var store = {
-			gridId: "storeGrid",
+		var user = {
+			gridId: "userGrid",
 			gridTarget: function () {
-				return $("#" + store.gridId).DataTable();
+				return $("#" + user.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+store.gridId).DataTable({
+				$("#"+user.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
-						{title: 'Store name', 			data: 'name', 			width: "20%"},
+						{title: 'user name', 			data: 'name', 			width: "20%"},
 						{title: 'Telephone Number', 	data: 'telNumber', 		width: "30%"},
 						{title: 'Information', 			data: 'info', 			width: "40%"},
 					],
@@ -134,21 +227,21 @@
 						{
 							text: '<i class="fa fa-check-square"></i>',
 							action: function () {
-								var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) store.gridTarget().rows().deselect();
-								else store.gridTarget().rows().select();
+								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) user.gridTarget().rows().deselect();
+								else user.gridTarget().rows().select();
 							}
 						},
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								$("#post_store").modal("show");
+								$("#post_user").modal("show");
 							},
 						},
 						{
 							text: '<i class="fa fa-edit"></i>',
 							action: function () {
-								var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									lozm.func.alertRowIsSelected();
 									return;
@@ -159,23 +252,23 @@
 
 								lozm.func.setDetail("put_", _selectedRows[0]);
 
-								location.href = "/manage/store/" + _selectedRows[0].id;
+								location.href = "/manage/user/" + _selectedRows[0].id;
 								// item.gridTarget().clear().draw();
 								// item.getGridData(_selectedRows[0].id);
 								//
-								// $("#put_store").modal("show");
+								// $("#put_user").modal("show");
 							},
 						},
 						{
 							text: '<i class="fa fa-minus"></i>',
 							action: function () {
-								var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									lozm.func.alertRowIsSelected();
 									return;
 								}
 
-								if(confirm("Are you sure to delete the data?")) store.delete(_selectedRows);
+								if(confirm("Are you sure to delete the data?")) user.delete(_selectedRows);
 							},
 						},
 						{
@@ -193,12 +286,12 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/api/user} ]]*/ "",
 					callback: {
 						success: function (result) {
 							if(result.success) {
-								store.gridTarget().clear().draw();
-								store.gridTarget().rows.add(result.data.list).draw();
+								user.gridTarget().clear().draw();
+								user.gridTarget().rows.add(result.data.list).draw();
 							}
 						},
 						error: function (xhr, status, error) {
@@ -211,17 +304,18 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/api/user} ]]*/ "",
 					data: {
 						name: $("#post_name").val(),
-						telNumber: $("#post_telNumber").val(),
-						info: $("#post_info").val()
+						identifier: $("#post_identifier").val(),
+						password: $("#post_password").val(),
+						type: $("#post_type").val()
 					},
 					callback: {
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
-								store.getGridData();
+								user.getGridData();
 							} else {
 								lozm.func.alertFail();
 							}
@@ -234,10 +328,36 @@
 					}
 				});
 			},
-
+			put: function () {
+				lozm.func.requestPut({
+					url: /*[[ @{/api/user} ]]*/ "",
+					data: {
+						id: $("#post_id").val(),
+						name: $("#post_name").val(),
+						identifier: $("#post_identifier").val(),
+						password: $("#post_password").val(),
+						type: $("#post_type").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								user.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/api/user} ]]*/ "",
 					data: {
 						list: list
 					},
@@ -245,7 +365,7 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
-								store.getGridData();
+								user.getGridData();
 							} else {
 								lozm.func.alertFail();
 							}

@@ -21,8 +21,8 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public List<GetUserDto> findAllUsers() throws Exception {
-        List<User> userList = userRepository.findAll();
+    public List<GetUserDto> getUserList() throws Exception {
+        List<User> userList = userRepository.selectUserList();
 
         return userList.stream()
                 .map(u -> new GetUserDto(u.getId(), u.getName(), u.getIdentifier(), u.getType()))
@@ -45,8 +45,16 @@ public class UserService {
     public void update(UserVo userVo) throws Exception {
         Optional<User> findUser = userRepository.findById(userVo.getId());
         findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
+
         findUser.get().updateUser(userVo);
     }
 
+    @Transactional
+    public void delete(UserVo userVo) throws Exception {
+        Optional<User> findUser = userRepository.findById(userVo.getId());
+        findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
+
+        findUser.get().updateUser(userVo);
+    }
 }
 

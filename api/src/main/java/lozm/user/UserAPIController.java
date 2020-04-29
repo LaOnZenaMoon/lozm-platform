@@ -2,9 +2,12 @@ package lozm.user;
 
 import lombok.RequiredArgsConstructor;
 import lozm.dto.APIResponseDto;
+import lozm.dto.store.DeleteStoreDto;
+import lozm.dto.user.DeleteUserDto;
 import lozm.dto.user.GetUserDto;
 import lozm.dto.user.PostUserDto;
 import lozm.dto.user.PutUserDto;
+import lozm.vo.store.StoreVo;
 import lozm.vo.user.UserVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +27,7 @@ public class UserAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetUserDto> result = userService.findAllUsers();
+            List<GetUserDto> result = userService.getUserList();
             resDto.setSuccess(true);
             resDto.setData(result);
         } catch (Exception e) {
@@ -66,7 +69,9 @@ public class UserAPIController {
             UserVo userVo = UserVo.builder()
                     .id(reqDto.getId())
                     .name(reqDto.getName())
+                    .identifier(reqDto.getIdentifier())
                     .password(reqDto.getPassword())
+                    .type(reqDto.getType())
                     .flag(1)
                     .build();
 
@@ -80,6 +85,27 @@ public class UserAPIController {
         return resDto;
     }
 
+    @DeleteMapping
+    public APIResponseDto deleteUser(@RequestBody @Valid DeleteUserDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
 
+        try {
+            for(DeleteUserDto dto : reqDto.getList()) {
+                UserVo userVo = UserVo.builder()
+                        .id(dto.getId())
+                        .flag(0)
+                        .build();
+
+                userService.delete(userVo);
+            }
+
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
 
 }

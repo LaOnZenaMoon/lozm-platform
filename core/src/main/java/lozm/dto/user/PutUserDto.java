@@ -13,7 +13,11 @@ public class PutUserDto {
 
         private String name;
 
+        private String identifier;
+
         private String password;
+
+        private String type;
 
         private int flag;
     }

@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import lozm.dto.APIResponseDto;
 import lozm.dto.item.GetClothingDto;
 import lozm.dto.store.GetStoreDto;
-import lozm.item.ItemAPIController;
 import lozm.store.StoreAPIController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
-
 import java.util.List;
 
 import static lozm.code.SessionType.USER;
@@ -25,7 +23,6 @@ public class RouteController {
 
     private final HttpSession httpSession;
     private final StoreAPIController storeAPIController;
-    private final ItemAPIController itemAPIController;
 
 
     @GetMapping(value = "/home")
@@ -71,7 +68,7 @@ public class RouteController {
 
     @GetMapping(value = "/manage/item")
     public String managingItem(ModelMap modelMap) {
-        return "pages/item/manageItem";
+        return "pages/item/item";
     }
 
     @GetMapping(value = "/setting/user")

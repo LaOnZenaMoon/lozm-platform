@@ -22,7 +22,7 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
 
-    public List<GetStoreDto> findAllStores() {
+    public List<GetStoreDto> getStoreList() {
         List<Store> storeList = storeRepository.selectStoreList();
 
         return storeList.stream().map(s -> new GetStoreDto(s.getId(), s.getName(), s.getTelNumber(), s.getInfo()))

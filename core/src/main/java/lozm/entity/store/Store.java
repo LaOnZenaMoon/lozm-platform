@@ -42,4 +42,8 @@ public class Store extends BaseEntity {
         this.setBaseEntity("", storeVo.getFlag());
     }
 
+    public void deleteStore(StoreVo storeVo) {
+        this.setBaseEntity("", storeVo.getFlag());
+    }
+
 }

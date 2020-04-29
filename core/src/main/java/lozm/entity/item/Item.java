@@ -49,6 +49,10 @@ public class Item extends BaseEntity {
         this.setBaseEntity("", itemVo.getFlag());
     }
 
+    public void deleteItem(ItemVo itemVo) {
+        this.setBaseEntity("", itemVo.getFlag());
+    }
+
     public void decreaseItemQuantity(Long quantity) throws Exception {
         this.quantity -= quantity;
         if(this.quantity < 0) throw new APIException("ORDERS_SAVE_ITEM_NO_QUANTITY", "Item quantity is insufficient.");

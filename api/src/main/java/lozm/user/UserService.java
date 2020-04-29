@@ -59,7 +59,7 @@ public class UserService {
         Optional<User> findUser = userRepository.findById(userVo.getId());
         findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
 
-        findUser.get().updateUser(userVo);
+        findUser.get().deleteUser(userVo);
     }
 }
 

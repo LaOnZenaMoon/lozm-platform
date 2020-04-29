@@ -104,6 +104,7 @@ public class UserAPIController {
 
             resDto.setSuccess(true);
         } catch (Exception e) {
+            e.printStackTrace();
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
         }

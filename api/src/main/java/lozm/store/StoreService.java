@@ -60,6 +60,6 @@ public class StoreService {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
         findStore.orElseThrow(() -> new APIException("STORE_0002", "The store doesn't exist."));
 
-        findStore.get().updateStore(storeVo);
+        findStore.get().deleteStore(storeVo);
     }
 }

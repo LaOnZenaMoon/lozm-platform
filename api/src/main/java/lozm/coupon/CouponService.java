@@ -37,12 +37,29 @@ public class CouponService {
                 c.getId(),
                 c.getName(),
                 c.getContents(),
-                c.getType(),
+                c.getType().name(),
                 c.getAmount(),
                 c.getQuantity(),
                 c.getStartDt(),
                 c.getEndDt()
         )).collect(toList());
+    }
+
+    public GetCouponDto getCouponDetail(CouponVo couponVo) {
+        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
+        findCoupon.orElseThrow(() -> new APIException("COUPON_0002", "Coupon doesn't exist."));
+
+        Coupon coupon = findCoupon.get();
+        return new GetCouponDto(
+                coupon.getId(),
+                coupon.getName(),
+                coupon.getContents(),
+                coupon.getType().name(),
+                coupon.getAmount(),
+                coupon.getAmount(),
+                coupon.getStartDt(),
+                coupon.getEndDt()
+        );
     }
 
     @Transactional
@@ -102,5 +119,6 @@ public class CouponService {
 
         findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity());
     }
+
 
 }

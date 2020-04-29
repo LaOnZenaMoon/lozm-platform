@@ -220,9 +220,9 @@
 									return;
 								}
 
-								lozm.func.setDetail("put_", _selectedRows[0]);
+								// lozm.func.setDetail("put_", _selectedRows[0]);
 
-								$("#put_coupon").modal("show");
+								location.href = "/manage/coupon/" + _selectedRows[0].id;
 							},
 						},
 						{

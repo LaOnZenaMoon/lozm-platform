@@ -36,6 +36,27 @@ public class CouponAPIController {
         return resDto;
     }
 
+    @GetMapping("/{couponId}")
+    public APIResponseDto getCouponDetail(@PathVariable(value = "couponId") Long couponId) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            CouponVo couponVo = CouponVo.builder()
+                    .id(couponId)
+                    .build();
+
+            GetCouponDto result = couponService.getCouponDetail(couponVo);
+
+            resDto.setData(result);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
     @PostMapping
     public APIResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) {
         APIResponseDto resDto = new APIResponseDto<>();

@@ -12,28 +12,28 @@
 
 		<div class="content-wrapper">
 			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Detail','Management','Manage coupon','','')"></th:block>
+				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Detail','Management','Coupon','','')"></th:block>
 
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="card-title">coupon > Detail</div>
+								<div class="card-title">Coupon > Detail</div>
 								<hr>
 								<form id="put_couponForm">
 
 									<div class="form-group">
-										<input type="hidden" id="put_coupon_id" name="id">
+										<input type="hidden" id="put_coupon_id" name="id" th:value="${couponDetail.id}">
 									</div>
 
 									<div class="form-group">
 										<label for="put_coupon_name">Name</label>
-										<input type="text" class="form-control" id="put_coupon_name" name="name">
+										<input type="text" class="form-control" id="put_coupon_name" name="name" th:value="${couponDetail.name}">
 									</div>
 
 									<div class="form-group">
 										<label for="put_coupon_type">Type</label>
-										<select class="form-control single-select" id="put_coupon_type" name="type">
+										<select class="form-control single-select" id="put_coupon_type" name="type" th:selected="${couponDetail.type}">
 											<option value="RATIO">Ratio</option>
 											<option value="PRICE">Price</option>
 										</select>
@@ -41,18 +41,18 @@
 
 									<div class="form-group">
 										<label for="put_coupon_amount">Amount</label>
-										<input type="number" class="form-control" id="put_coupon_amount" name="amount">
+										<input type="number" class="form-control" id="put_coupon_amount" name="amount" th:value="${couponDetail.amount}">
 									</div>
 
 									<div class="form-group">
 										<label for="put_coupon_quantity">Quantity</label>
-										<input type="number" class="form-control" id="put_coupon_quantity" name="quantity">
+										<input type="number" class="form-control" id="put_coupon_quantity" name="quantity" th:value="${couponDetail.quantity}">
 									</div>
 
 									<div class="form-group">
 										<label for="put_coupon_startDt">Start dateTime</label>
 										<div class='input-group date' id='put_coupon_startDt'>
-											<input type='text' class="form-control" name="startDt"/>
+											<input type='text' class="form-control" name="startDt" th:value="${couponDetail.startDt}"/>
 											<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -62,7 +62,7 @@
 									<div class="form-group">
 										<label for="put_coupon_endDt">End dateTime</label>
 										<div class='input-group date' id='put_coupon_endDt'>
-											<input type='text' class="form-control" name="endDt"/>
+											<input type='text' class="form-control" name="endDt" th:value="${couponDetail.endDt}"/>
 											<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -71,7 +71,7 @@
 
 									<div class="form-group">
 										<label for="put_coupon_contents">Contents</label>
-										<textarea rows="4" class="form-control" id="put_coupon_contents" name="contents"></textarea>
+										<textarea rows="4" class="form-control" id="put_coupon_contents" name="contents" th:text="${couponDetail.contents}"></textarea>
 									</div>
 
 									<div class="form-group">
@@ -90,16 +90,7 @@
 							<div class="card-body">
 								<ul class="nav nav-tabs nav-tabs-info nav-justified">
 									<li class="nav-item">
-										<a class="nav-link active" data-toggle="tab" href="#outer"><i class="icon-home"></i> <span class="hidden-xs">Outer</span></a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#top"><i class="icon-user"></i> <span class="hidden-xs">Top</span></a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#bottom"><i class="icon-envelope-open"></i> <span class="hidden-xs">Bottom</span></a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" data-toggle="tab" href="#shoes"><i class="icon-envelope-open"></i> <span class="hidden-xs">Shoes</span></a>
+										<a class="nav-link active" data-toggle="tab" href="#couponUser"><i class="icon-home"></i> <span class="hidden-xs">Coupon user</span></a>
 									</li>
 								</ul>
 
@@ -143,7 +134,9 @@
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
 			couponUser.initGrid();
-			couponUser.getGridData();
+
+			lozm.func.datetimepicker("put_startDt");
+			lozm.func.datetimepicker("put_endDt");
 
 			$("#put_couponForm").validate({
 				submitHandler: function(form) {
@@ -310,13 +303,13 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/coupon} ]]*/ "",
+					url: "/api/coupon/" + $("#put_coupon_id").val() + "/user",
 					callback: {
 						success: function (result) {
 							console.log(result);
 							if(result.success) {
-								coupon.gridTarget().clear().draw();
-								coupon.gridTarget().rows.add(result.data.list).draw();
+								couponUser.gridTarget().clear().draw();
+								couponUser.gridTarget().rows.add(result.data.list).draw();
 							}
 						},
 						error: function (xhr, status, error) {

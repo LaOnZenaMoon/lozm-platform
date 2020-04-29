@@ -15,7 +15,7 @@ public class GetCouponDto {
     private Long id;
     private String name;
     private String contents;
-    private CouponType type;
+    private String type;
     private Long amount;
     private Long quantity;
     private LocalDateTime startDt;
@@ -30,7 +30,7 @@ public class GetCouponDto {
 //    }
 
 
-    public GetCouponDto(Long id, String name, String contents, CouponType type, Long amount, Long quantity, LocalDateTime startDt, LocalDateTime endDt) {
+    public GetCouponDto(Long id, String name, String contents, String type, Long amount, Long quantity, LocalDateTime startDt, LocalDateTime endDt) {
         this.id = id;
         this.name = name;
         this.contents = contents;

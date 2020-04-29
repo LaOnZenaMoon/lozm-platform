@@ -38,98 +38,6 @@
 
         </div>
 
-        <div class="modal fade" id="post_shoes">
-            <div class="modal-dialog">
-                <div class="modal-content animated slideInUp">
-                    <div class="modal-header">
-                        <h5 class="modal-title">post</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form id="post_shoesForm">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="post_shoes_name">name</label>
-                                <input type="text" class="form-control" id="post_shoes_name" name="post_shoes_name">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="post_shoes_price">price</label>
-                                <input type="text" class="form-control" id="post_shoes_price" name="post_shoes_price">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="post_shoes_size">size</label>
-                                <input type="text" class="form-control" id="post_shoes_size" name="post_shoes_size">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="post_shoes_quantity">quantity</label>
-                                <input type="text" class="form-control" id="post_shoes_quantity" name="post_shoes_quantity">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="post_shoes_contents">contents</label>
-                                <textarea rows="4" class="form-control" id="post_shoes_contents" name="post_shoes_contents"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" onclick="item.post()"><i class="fa fa-check-square-o"></i>Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="put_shoes">
-            <div class="modal-dialog">
-                <div class="modal-content animated slideInUp">
-                    <div class="modal-header">
-                        <h5 class="modal-title">put</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form id="put_shoesForm">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="put_shoes_id">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="put_shoes_name">name</label>
-                                <input type="text" class="form-control" id="put_shoes_name" name="put_shoes_name">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="put_shoes_price">price</label>
-                                <input type="text" class="form-control" id="put_shoes_price" name="put_shoes_price">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="post_shoes_size">size</label>
-                                <input type="text" class="form-control" id="put_shoes_size" name="post_shoes_size">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="put_shoes_quantity">quantity</label>
-                                <input type="text" class="form-control" id="put_shoes_quantity" name="put_shoes_quantity">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="put_shoes_contents">contents</label>
-                                <textarea rows="4" class="form-control" id="put_shoes_contents" name="put_shoes_contents"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success" onclick="item.put()"><i class="fa fa-check-square-o"></i>Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
 
         <th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
@@ -142,48 +50,6 @@
         $(document).ready(function () {
             item.initGrid();
             item.getGridData();
-
-            $("#post_shoesForm").validate({
-                rules: {
-                    itemTel: {
-                        required: true,
-                        minlength: 3
-                    },
-                    bigo: {
-                        required: true
-                    }
-                },
-                message: {
-                    itemTel: {
-                        required: "itemTel is required.",
-                        minlength: "itemTel min length is 3."
-                    },
-                    bigo: {
-                        required: "Bigo is required."
-                    },
-                },
-            });
-
-            $("#put_itemForm").validate({
-                rules: {
-                    itemTel: {
-                        required: true,
-                        minlength: 3
-                    },
-                    bigo: {
-                        required: true
-                    }
-                },
-                message: {
-                    itemTel: {
-                        required: "itemTel is required.",
-                        minlength: "itemTel min length is 3."
-                    },
-                    bigo: {
-                        required: "Bigo is required."
-                    },
-                },
-            });
         });
 
         var item = {
@@ -207,48 +73,6 @@
                         style: 'multi',
                     },
                     buttons: [
-                        {
-                            text: '<i class="fa fa-check-square"></i>',
-                            action: function () {
-                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
-                                if(_selectedRows.length > 0) item.gridTarget().rows().deselect();
-                                else item.gridTarget().rows().select();
-                            }
-                        },
-                        {
-                            text: '<i class="fa fa-plus"></i>',
-                            action: function () {
-                                $("#post_shoes").modal("show");
-                            },
-                        },
-                        {
-                            text: '<i class="fa fa-edit"></i>',
-                            action: function () {
-                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
-                                if(_selectedRows.length < 1) {
-                                    lozm.func.alertRowIsSelected();
-                                    return;
-                                } else if(_selectedRows.length > 1) {
-                                    lozm.func.alertRowsAreSelected();
-                                    return;
-                                }
-
-                                console.log(_selectedRows);
-                                lozm.func.setDetail("put_shoes_", _selectedRows[0]);
-                                $("#put_shoes").modal("show");
-                            },
-                        },
-                        {
-                            text: '<i class="fa fa-minus"></i>',
-                            action: function () {
-                                var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
-                                if(_selectedRows.length < 1) {
-                                    lozm.func.alertRowIsSelected();
-                                    return;
-                                }
-                                if(confirm("Are you sure to delete the data?")) console.log("Deleted.");
-                            },
-                        },
                         {
                             extend: "csv",
                             text: '<i class="fa fa-download"></i>',
@@ -274,77 +98,6 @@
                             }
                         },
                         error: function(xhr, status, error) {
-                            console.log(xhr);
-                            console.log(status);
-                            console.log(error);
-                        }
-                    }
-                });
-            },
-            post: function () {
-                lozm.func.requestPost({
-                    url: "/api/item",
-                    data: {
-                        name: $("#post_shoes_name").val(),
-                        price: $("#post_shoes_price").val(),
-                        quantity: $("#post_shoes_quantity").val(),
-                        contents: $("#post_shoes_contents").val(),
-                        size: $("#post_shoes_size").val(),
-                        type: "SHOES"
-                    },
-                    callback: {
-                        success: function (result) {
-                            console.log(result);
-                            item.getGridData();
-                            $("#post_shoesForm input textarea").clear();
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(xhr);
-                            console.log(status);
-                            console.log(error);
-                        }
-                    }
-                });
-            },
-            put: function () {
-                lozm.func.requestPut({
-                    url: "/api/item",
-                    data: {
-                        id: $("#put_shoes_id").val(),
-                        name: $("#put_shoes_name").val(),
-                        price: $("#put_shoes_price").val(),
-                        quantity: $("#put_shoes_quantity").val(),
-                        contents: $("#put_shoes_contents").val(),
-                        size: $("#put_shoes_size").val()
-                    },
-                    callback: {
-                        success: function (result) {
-                            console.log(result);
-                            item.getGridData();
-                            $("#put_shoesForm input textarea").clear();
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(xhr);
-                            console.log(status);
-                            console.log(error);
-                        }
-                    }
-                });
-            },
-            delete: function () {
-                lozm.func.requestPut({
-                    url: "/api/item",
-                    data: {
-                        id: $("#put_shoes_id").val(),
-                        flag: 0
-                    },
-                    callback: {
-                        success: function (result) {
-                            console.log(result);
-                            item.getGridData();
-                            $("#put_shoesForm input textarea").clear();
-                        },
-                        error: function (xhr, status, error) {
                             console.log(xhr);
                             console.log(status);
                             console.log(error);

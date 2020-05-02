@@ -318,6 +318,25 @@
 					}
 				});
 			},
+			getDetail: function () {
+				lozm.func.requestGet({
+					url: "/api/coupon/" + $("#put_coupon_id").val(),
+					callback: {
+						success: function (result) {
+							console.log(result);
+							if(result.success) {
+								debugger;
+								lozm.func.setDetail("put_coupon_", result.data);
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
 		};
 
 		var couponUser = {
@@ -402,6 +421,7 @@
 						success: function (result) {
 							console.log(result);
 							if(result.success) {
+								coupon.getDetail();
 								couponUser.gridTarget().clear().draw();
 								couponUser.gridTarget().rows.add(result.data.list).draw();
 							}
@@ -426,6 +446,7 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
+								coupon.getDetail();
 								couponUser.getGridData();
 							} else {
 								lozm.func.alertFail();
@@ -450,6 +471,7 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
+								coupon.getDetail();
 								couponUser.getGridData();
 							} else {
 								lozm.func.alertFail();
@@ -473,6 +495,7 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
+								coupon.getDetail();
 								couponUser.getGridData();
 							} else {
 								lozm.func.alertFail();

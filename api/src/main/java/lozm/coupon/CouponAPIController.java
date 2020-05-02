@@ -188,10 +188,10 @@ public class CouponAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            for (GetUserDto dto : reqDto.getUserList()) {
+            for (GetCouponUserDto dto : reqDto.getList()) {
                 CouponVo couponVo = CouponVo.builder()
-                        .id(reqDto.getCouponId())
-                        .userId(dto.getId())
+                        .couponUserId(dto.getId())
+                        .userId(dto.getUserId())
                         .couponUserQuantity(reqDto.getCouponUserQuantity())
                         .flag(1)
                         .build();
@@ -214,10 +214,10 @@ public class CouponAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            for (GetUserDto dto : reqDto.getUserList()) {
+            for (GetCouponUserDto dto : reqDto.getList()) {
                 CouponVo couponVo = CouponVo.builder()
-                        .id(reqDto.getCouponId())
-                        .userId(dto.getId())
+                        .couponUserId(dto.getId())
+                        .userId(dto.getUserId())
                         .flag(0)
                         .build();
 

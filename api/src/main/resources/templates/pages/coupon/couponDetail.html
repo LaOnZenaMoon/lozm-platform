@@ -136,8 +136,8 @@
 					<form id="post_couponUserForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="put_couponUserQuantity">Quantity</label>
-								<input type="number" class="form-control" id="put_couponUserQuantity" name="couponUserQuantity">
+								<label for="post_couponUserQuantity">Quantity</label>
+								<input type="number" class="form-control" id="post_couponUserQuantity" name="couponUserQuantity">
 							</div>
 
 							<div class="row">
@@ -165,7 +165,7 @@
 		</div>
 
 		<div class="modal fade" id="put_couponUser">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-custom">
 				<div class="modal-content slideInUp">
 					<div class="modal-header">
 						<h5 class="modal-title"></h5>
@@ -176,16 +176,11 @@
 					<form id="put_couponUserForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<input type="hidden" id="put_id">
+								<label for="put_couponUserQuantity">Quantity</label>
+								<input type="number" class="form-control" id="put_couponUserQuantity" name="couponUserQuantity">
 							</div>
-	
-							<div class="form-group">
-								<label for="put_name">Name</label>
-								<input type="number" class="form-control" id="put_name" name="name">
-							</div>
-
 						</div>
-	
+
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
 						</div>
@@ -275,6 +270,22 @@
 					},
 				},
 			});
+
+			$("#put_couponUserForm").validate({
+				submitHandler: function(form) {
+					couponUser.put(couponUser.selectedRows);
+				},
+				rules: {
+					couponUserQuantity: {
+						required: true
+					},
+				},
+				message: {
+					couponUserQuantity: {
+						required: "Name is required.",
+					},
+				},
+			});
 		});
 
 		var coupon = {
@@ -311,6 +322,7 @@
 
 		var couponUser = {
 			gridId: "couponUserGrid",
+			selectedRows: [],
 			gridTarget: function () {
 				return $("#" + couponUser.gridId).DataTable();
 			},
@@ -354,8 +366,8 @@
 									return;
 								}
 
-								console.log(_selectedRows);
-								lozm.func.setDetail("put_couponUser_", _selectedRows[0]);
+								couponUser.selectedRows = _selectedRows;
+
 								$("#put_couponUser").modal("show");
 							},
 						},
@@ -367,7 +379,7 @@
 									lozm.func.alertRowIsSelected();
 									return;
 								}
-								if(confirm("Are you sure to delete the data?")) couponUser.delete();
+								if(confirm("Are you sure to delete the data?")) couponUser.delete(_selectedRows);
 							},
 						},
 						{
@@ -408,7 +420,7 @@
 					data: {
 						couponId: $("#put_coupon_id").val(),
 						userList: user.getSelectedRows(),
-						couponUserQuantity: $("#put_couponUserQuantity").val()
+						couponUserQuantity: $("#post_couponUserQuantity").val()
 					},
 					callback: {
 						success: function (result) {
@@ -427,12 +439,11 @@
 					}
 				});
 			},
-			put: function () {
+			put: function (list) {
 				lozm.func.requestPut({
 					url: /*[[ @{/api/coupon/user} ]]*/ "",
 					data: {
-						couponId: $("#put_coupon_id").val(),
-						userList: user.getSelectedRows(),
+						list: list,
 						couponUserQuantity: $("#put_couponUserQuantity").val()
 					},
 					callback: {
@@ -456,8 +467,7 @@
 				lozm.func.requestDelete({
 					url: /*[[ @{/api/coupon/user} ]]*/ "",
 					data: {
-						couponId: $("#put_coupon_id").val(),
-						userList: user.getSelectedRows()
+						list: list
 					},
 					callback: {
 						success: function (result) {

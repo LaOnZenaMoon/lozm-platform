@@ -24,6 +24,8 @@ public class CouponVo {
     private int flag;
 
     private Long userId;
+
+    private Long couponUserId;
     private Long couponUserQuantity;
 
 }

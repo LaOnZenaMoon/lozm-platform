@@ -120,7 +120,7 @@ public class CouponService {
 
         findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity());
 
-        couponRepository.save(findCoupon.get());
+//        couponRepository.save(findCoupon.get());
 
         //Find the user
         Optional<User> findUser = userRepository.findById(couponVo.getUserId());
@@ -133,7 +133,7 @@ public class CouponService {
         if(findCouponUserList.size() > 0) {
             for (CouponUser couponUser : findCouponUserList) {
                 couponUser.updateCouponUser(couponVo);
-                couponUserRepository.save(couponUser);
+//                couponUserRepository.save(couponUser);
             }
 
             return;
@@ -141,65 +141,34 @@ public class CouponService {
 
         CouponUser couponUser = new CouponUser();
         couponUser.insertCouponUser(couponVo.getCouponUserQuantity(), findCoupon.get(), findUser.get());
-
         couponUserRepository.save(couponUser);
     }
 
-
+    @Transactional
     public void putCouponUser(CouponVo couponVo) throws Exception {
-        //Find and check the coupon
-        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
-        findCoupon.orElseThrow(() -> {
-            throw new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
-        });
-
-        findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity());
-
-        couponRepository.save(findCoupon.get());
-
-        //Find the user
-        Optional<User> findUser = userRepository.findById(couponVo.getUserId());
-        findUser.orElseThrow(() -> {
-            throw new APIException("USER_0002", "User doesn't exist.");
-        });
-
-        //Find the coupon user
-        List<CouponUser> findCouponUserList = couponUserRepository.selectCouponUserByUserIdAndCouponId(couponVo.getUserId(), couponVo.getId());
-        if(findCouponUserList.size() > 0) {
-            for (CouponUser couponUser : findCouponUserList) {
-                couponUser.updateCouponUser(couponVo);
-                couponUserRepository.save(couponUser);
-            }
-
-            return;
-        } else {
+        Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponVo.getCouponUserId());
+        findCouponUser.orElseThrow(() -> {
             throw new APIException("COUPON_USER_0002", "Coupon user doesn't exist.");
+        });
+
+        Coupon findCoupon = findCouponUser.get().getCoupon();
+        Long couponUserQuantity = findCouponUser.get().getQuantity();
+        if(couponUserQuantity > couponVo.getCouponUserQuantity()) {
+            findCoupon.increaseCouponQuantity(couponUserQuantity - couponVo.getCouponUserQuantity());
+        } else if(couponUserQuantity < couponVo.getCouponUserQuantity()) {
+            findCoupon.decreaseCouponQuantity(couponVo.getCouponUserQuantity() - couponUserQuantity);
         }
+
+        findCouponUser.get().updateCouponUser(couponVo);
     }
 
+    @Transactional
     public void deleteCouponUser(CouponVo couponVo) throws Exception {
-        //Find and check the coupon
-        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
-        findCoupon.orElseThrow(() -> {
-            throw new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
-        });
-
-        //Find the user
-        Optional<User> findUser = userRepository.findById(couponVo.getUserId());
-        findUser.orElseThrow(() -> {
-            throw new APIException("USER_0002", "User doesn't exist.");
-        });
-
-        List<CouponUser> findCouponUserList = couponUserRepository.selectCouponUserByUserIdAndCouponId(couponVo.getUserId(), couponVo.getId());
-        if(findCouponUserList.size() > 0) {
-            for (CouponUser couponUser : findCouponUserList) {
-                couponUser.deleteCouponUser(couponVo);
-                couponUserRepository.save(couponUser);
-            }
-
-            return;
-        } else {
+        Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponVo.getCouponUserId());
+        findCouponUser.orElseThrow(() -> {
             throw new APIException("COUPON_USER_0002", "Coupon user doesn't exist.");
-        }
+        });
+
+        findCouponUser.get().deleteCouponUser(couponVo);
     }
 }

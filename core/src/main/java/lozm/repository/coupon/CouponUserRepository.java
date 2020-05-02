@@ -13,4 +13,7 @@ public interface CouponUserRepository extends JpaRepository<CouponUser, Long> {
     @Query("SELECT CU FROM CouponUser CU WHERE CU.flag = 1")
     List<CouponUser> selectCouponUserList();
 
+    @Query("SELECT CU FROM CouponUser CU WHERE CU.flag = 1 AND CU.user.id = :userId AND CU.coupon.id = :couponId")
+    List<CouponUser> selectCouponUserByUserIdAndCouponId(Long userId, Long couponId);
+
 }

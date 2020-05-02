@@ -3,6 +3,7 @@ package lozm.entity.coupon;
 import lombok.Getter;
 import lozm.entity.BaseEntity;
 import lozm.entity.user.User;
+import lozm.vo.coupon.CouponVo;
 
 import javax.persistence.*;
 
@@ -32,4 +33,10 @@ public class CouponUser extends BaseEntity {
         this.coupon = coupon;
         this.user = user;
     }
+
+    public void updateCouponUser(CouponVo couponVo) {
+        this.quantity = couponVo.getCouponUserQuantity();
+        this.setBaseEntity("", couponVo.getFlag());
+    }
+
 }

@@ -39,4 +39,7 @@ public class CouponUser extends BaseEntity {
         this.setBaseEntity("", couponVo.getFlag());
     }
 
+    public void deleteCouponUser(CouponVo couponVo) {
+        this.setBaseEntity("", couponVo.getFlag());
+    }
 }

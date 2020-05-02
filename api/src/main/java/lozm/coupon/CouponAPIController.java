@@ -170,7 +170,58 @@ public class CouponAPIController {
                         .couponUserQuantity(reqDto.getCouponUserQuantity())
                         .build();
 
-                couponService.saveCouponUser(couponVo);
+                couponService.postCouponUser(couponVo);
+            }
+
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @PutMapping(value = "/user")
+    public APIResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            for (GetUserDto dto : reqDto.getUserList()) {
+                CouponVo couponVo = CouponVo.builder()
+                        .id(reqDto.getCouponId())
+                        .userId(dto.getId())
+                        .couponUserQuantity(reqDto.getCouponUserQuantity())
+                        .flag(1)
+                        .build();
+
+                couponService.putCouponUser(couponVo);
+            }
+
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @DeleteMapping(value = "/user")
+    public APIResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            for (GetUserDto dto : reqDto.getUserList()) {
+                CouponVo couponVo = CouponVo.builder()
+                        .id(reqDto.getCouponId())
+                        .userId(dto.getId())
+                        .flag(0)
+                        .build();
+
+                couponService.deleteCouponUser(couponVo);
             }
 
             resDto.setSuccess(true);

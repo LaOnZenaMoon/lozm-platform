@@ -352,9 +352,6 @@
 								if(_selectedRows.length < 1) {
 									lozm.func.alertRowIsSelected();
 									return;
-								} else if(_selectedRows.length > 1) {
-									lozm.func.alertRowsAreSelected();
-									return;
 								}
 
 								console.log(_selectedRows);
@@ -370,7 +367,7 @@
 									lozm.func.alertRowIsSelected();
 									return;
 								}
-								if(confirm("Are you sure to delete the data?")) couponUser.delete(_selectedRows);
+								if(confirm("Are you sure to delete the data?")) couponUser.delete();
 							},
 						},
 						{
@@ -432,13 +429,11 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/api/couponUser} ]]*/ "",
+					url: /*[[ @{/api/coupon/user} ]]*/ "",
 					data: {
-						id: $("#put_id").val(),
-						name: $("#put_name").val(),
-						identifier: $("#put_identifier").val(),
-						password: $("#put_password").val(),
-						type: $("#put_type").val()
+						couponId: $("#put_coupon_id").val(),
+						userList: user.getSelectedRows(),
+						couponUserQuantity: $("#put_couponUserQuantity").val()
 					},
 					callback: {
 						success: function (result) {
@@ -459,9 +454,10 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/api/couponUser} ]]*/ "",
+					url: /*[[ @{/api/coupon/user} ]]*/ "",
 					data: {
-						list: list
+						couponId: $("#put_coupon_id").val(),
+						userList: user.getSelectedRows()
 					},
 					callback: {
 						success: function (result) {

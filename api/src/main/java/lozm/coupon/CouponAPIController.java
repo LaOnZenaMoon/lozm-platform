@@ -71,6 +71,7 @@ public class CouponAPIController {
                     .quantity(reqDto.getQuantity())
                     .startDt(reqDto.getStartDt())
                     .endDt(reqDto.getEndDt())
+                    .flag(1)
                     .build();
 
             couponService.save(couponVo);
@@ -168,6 +169,7 @@ public class CouponAPIController {
                         .id(reqDto.getCouponId())
                         .userId(dto.getId())
                         .couponUserQuantity(reqDto.getCouponUserQuantity())
+                        .flag(1)
                         .build();
 
                 couponService.postCouponUser(couponVo);

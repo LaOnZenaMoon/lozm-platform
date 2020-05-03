@@ -132,6 +132,7 @@ public class CouponService {
         List<CouponUser> findCouponUserList = couponUserRepository.selectCouponUserByUserIdAndCouponId(couponVo.getUserId(), couponVo.getId());
         if(findCouponUserList.size() > 0) {
             for (CouponUser couponUser : findCouponUserList) {
+                //putCouponUser 의 coupon 증감/차감 공식처럼 공통화해서 적게 업데이트 했을 때는 적용되도록...
                 couponUser.updateCouponUser(couponVo);
 //                couponUserRepository.save(couponUser);
             }

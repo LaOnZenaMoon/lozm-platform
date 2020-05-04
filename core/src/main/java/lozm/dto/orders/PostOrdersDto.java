@@ -10,9 +10,6 @@ public class PostOrdersDto {
     @Getter
     public static class Request {
         @NotNull
-        private Long orderedPrice;
-
-        @NotNull
         private Long quantity;
 
         @NotNull
@@ -22,12 +19,18 @@ public class PostOrdersDto {
         private Long itemId;
 
         private Long couponId;
+
+        public static Request setRequestTestData(Long userId, Long itemId, Long couponId, Long quantity) {
+            PostOrdersDto.Request reqDto = new PostOrdersDto.Request();
+            reqDto.userId = userId;
+            reqDto.itemId = itemId;
+            reqDto.couponId = couponId;
+            reqDto.quantity = quantity;
+
+            return reqDto;
+        }
     }
 
-    @Getter
-    @Setter
-    public static class Response {
 
-    }
 
 }

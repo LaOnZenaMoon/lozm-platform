@@ -15,14 +15,16 @@ public class GetCouponUserDto {
     private Long id;
     private Long quantity;
     private Long userId;
+    private Long couponId;
     private String userName;
     private String userIdentifier;
     private UsersType userType;
 
-    public GetCouponUserDto(Long id, Long quantity, Long userId, String userName, String userIdentifier, UsersType userType) {
+    public GetCouponUserDto(Long id, Long quantity, Long userId, Long couponId, String userName, String userIdentifier, UsersType userType) {
         this.id = id;
         this.quantity = quantity;
         this.userId = userId;
+        this.couponId = couponId;
         this.userName = userName;
         this.userIdentifier = userIdentifier;
         this.userType = userType;

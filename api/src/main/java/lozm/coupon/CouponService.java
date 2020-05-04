@@ -93,13 +93,14 @@ public class CouponService {
     }
 
     public List<GetCouponUserDto> getCouponUserList(CouponVo couponVo) {
-        List<CouponUser> couponUserList = couponUserRepository.selectCouponUserList();
+        List<CouponUser> couponUserList = couponUserRepository.selectCouponUserList(couponVo.getId());
         List<GetCouponUserDto> rtnList = new ArrayList<>();
         for (CouponUser couponUser : couponUserList) {
             GetCouponUserDto dto = new GetCouponUserDto(
                     couponUser.getId(),
                     couponUser.getQuantity(),
                     couponUser.getUser().getId(),
+                    couponUser.getCoupon().getId(),
                     couponUser.getUser().getName(),
                     couponUser.getUser().getIdentifier(),
                     couponUser.getUser().getType()
@@ -128,7 +129,13 @@ public class CouponService {
         List<CouponUser> findCouponUserList = couponUserRepository.selectCouponUserByUserIdAndCouponId(couponVo.getUserId(), couponVo.getId());
         if(findCouponUserList.size() > 0) {
             for (CouponUser couponUser : findCouponUserList) {
-                calculateCouponQuantity(couponVo, findCoupon.get(), couponUser);
+                Long couponUserQuantity = couponUser.getQuantity();
+                if(couponUserQuantity > couponVo.getCouponUserQuantity()) {
+                    findCoupon.get().increaseCouponQuantity(couponUserQuantity - couponVo.getCouponUserQuantity());
+                } else if(couponUserQuantity < couponVo.getCouponUserQuantity()) {
+                    findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity() - couponUserQuantity);
+                }
+
                 couponUser.updateCouponUser(couponVo);
             }
 
@@ -139,7 +146,7 @@ public class CouponService {
         couponUser.insertCouponUser(couponVo.getCouponUserQuantity(), findCoupon.get(), findUser.get());
         couponUserRepository.save(couponUser);
 
-        calculateCouponQuantity(couponVo, findCoupon.get(), couponUser);
+        findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity());
     }
 
     @Transactional
@@ -162,6 +169,7 @@ public class CouponService {
         } else if(couponUserQuantity < couponVo.getCouponUserQuantity()) {
             findCoupon.decreaseCouponQuantity(couponVo.getCouponUserQuantity() - couponUserQuantity);
         }
+
     }
 
     @Transactional
@@ -172,5 +180,13 @@ public class CouponService {
         });
 
         findCouponUser.get().deleteCouponUser(couponVo);
+
+        //Find and check the coupon
+        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
+        findCoupon.orElseThrow(() -> {
+            throw new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
+        });
+
+        findCoupon.get().increaseCouponQuantity(findCouponUser.get().getQuantity());
     }
 }

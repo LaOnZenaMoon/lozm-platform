@@ -220,6 +220,7 @@ public class CouponAPIController {
                 CouponVo couponVo = CouponVo.builder()
                         .couponUserId(dto.getId())
                         .userId(dto.getUserId())
+                        .id(dto.getCouponId())
                         .flag(0)
                         .build();
 

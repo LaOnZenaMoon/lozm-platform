@@ -351,6 +351,7 @@
 					columns: [
 						{title: 'id',       				data: 'id',         		visible: false},
 						{title: 'userId',       			data: 'userId',         	visible: false},
+						{title: 'couponId',       			data: 'couponId',         	visible: false},
 						{title: 'Quantity',     			data: 'quantity',       	width: "10%"},
 						{title: 'User name', 			data: 'userName',   		width: "40%"},
 						{title: 'User identifier',    data: 'userIdentifier',     width: "40%"},
@@ -376,20 +377,20 @@
 								$("#post_couponUser").modal("show");
 							},
 						},
-						{
-							text: '<i class="fa fa-edit"></i>',
-							action: function () {
-								var _selectedRows = couponUser.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length < 1) {
-									lozm.func.alertRowIsSelected();
-									return;
-								}
-
-								couponUser.selectedRows = _selectedRows;
-
-								$("#put_couponUser").modal("show");
-							},
-						},
+						// {
+						// 	text: '<i class="fa fa-edit"></i>',
+						// 	action: function () {
+						// 		var _selectedRows = couponUser.gridTarget().rows({selected: true}).data().toArray();
+						// 		if(_selectedRows.length < 1) {
+						// 			lozm.func.alertRowIsSelected();
+						// 			return;
+						// 		}
+						//
+						// 		couponUser.selectedRows = _selectedRows;
+						//
+						// 		$("#put_couponUser").modal("show");
+						// 	},
+						// },
 						{
 							text: '<i class="fa fa-minus"></i>',
 							action: function () {

@@ -31,7 +31,9 @@ public class StoreService {
 
     public Store findById(StoreVo storeVo) {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
-        findStore.orElseThrow(() -> new APIException("STORE_0002", "The store doesn't exist."));
+        findStore.orElseThrow(() -> {
+            throw new APIException("STORE_0002", "The store doesn't exist.");
+        });
 
         return findStore.get();
     }
@@ -50,7 +52,9 @@ public class StoreService {
     @Transactional
     public void update(StoreVo storeVo) throws Exception {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
-        findStore.orElseThrow(() -> new APIException("STORE_0002", "The store doesn't exist."));
+        findStore.orElseThrow(() -> {
+            throw new APIException("STORE_0002", "The store doesn't exist.");
+        });
 
         findStore.get().updateStore(storeVo);
     }
@@ -58,7 +62,9 @@ public class StoreService {
     @Transactional
     public void delete(StoreVo storeVo) {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
-        findStore.orElseThrow(() -> new APIException("STORE_0002", "The store doesn't exist."));
+        findStore.orElseThrow(() -> {
+            throw new APIException("STORE_0002", "The store doesn't exist.");
+        });
 
         findStore.get().deleteStore(storeVo);
     }

@@ -49,7 +49,9 @@ public class UserService {
     @Transactional
     public void update(UserVo userVo) throws Exception {
         Optional<User> findUser = userRepository.findById(userVo.getId());
-        findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
+        findUser.orElseThrow(() -> {
+            throw new APIException("USER_0002", "User doesn't exist.");
+        });
 
         findUser.get().updateUser(userVo);
     }
@@ -57,7 +59,9 @@ public class UserService {
     @Transactional
     public void delete(UserVo userVo) throws Exception {
         Optional<User> findUser = userRepository.findById(userVo.getId());
-        findUser.orElseThrow(() -> new APIException("USER_0002", "User doesn't exist."));
+        findUser.orElseThrow(() -> {
+            throw new APIException("USER_0002", "User doesn't exist.");
+        });
 
         findUser.get().deleteUser(userVo);
     }

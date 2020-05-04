@@ -31,6 +31,7 @@ public class OrdersAPIController {
             resDto.setSuccess(true);
             resDto.setData(ordersResDto);
         } catch (Exception e) {
+            e.printStackTrace();
             resDto.setSuccess(false);
             resDto.setMessage(e.getMessage());
         }
@@ -44,7 +45,6 @@ public class OrdersAPIController {
 
         try {
             OrdersVo ordersVo = OrdersVo.builder()
-                    .orderedPrice(reqDto.getOrderedPrice())
                     .quantity(reqDto.getQuantity())
                     .userId(reqDto.getUserId())
                     .itemId(reqDto.getItemId())

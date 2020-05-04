@@ -73,10 +73,12 @@ public class ItemService {
 //        )).collect(toList());
     }
 
-    public GetItemDto getItemDetail(ItemVo itemVo) {
+    public GetItemDto getItemDetail(ItemVo itemVo) throws Exception {
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
             Optional<Outer> findItem = outerRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            findItem.orElseThrow(() -> {
+                throw new APIException("ITEM_0002", "Item doesn't exist.");
+            });
             Outer item = findItem.get();
 
             return new GetItemDto(
@@ -92,7 +94,9 @@ public class ItemService {
             );
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
             Optional<Top> findItem = topRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            findItem.orElseThrow(() -> {
+                throw new APIException("ITEM_0002", "Item doesn't exist.");
+            });
             Top item = findItem.get();
 
             return new GetItemDto(
@@ -108,7 +112,9 @@ public class ItemService {
             );
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
             Optional<Bottom> findItem = bottomRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            findItem.orElseThrow(() -> {
+                throw new APIException("ITEM_0002", "Item doesn't exist.");
+            });
             Bottom item = findItem.get();
 
             return new GetItemDto(
@@ -124,7 +130,9 @@ public class ItemService {
             );
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
             Optional<Shoes> findItem = shoesRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+            findItem.orElseThrow(() -> {
+                throw new APIException("ITEM_0002", "Item doesn't exist.");
+            });
             Shoes item = findItem.get();
 
             return new GetItemDto(
@@ -244,7 +252,9 @@ public class ItemService {
     @Transactional
     public void update(ItemVo itemVo) throws Exception {
         Optional<Item> findItem = itemRepository.findById(itemVo.getId());
-        findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+        findItem.orElseThrow(() -> {
+            throw new APIException("ITEM_0002", "Item doesn't exist.");
+        });
 //        findItem.get().updateItem(itemVo);
 
         String itemType = findItem.get().getType();
@@ -266,7 +276,9 @@ public class ItemService {
     @Transactional
     public void delete(ItemVo itemVo) {
         Optional<Item> findItem = itemRepository.findById(itemVo.getId());
-        findItem.orElseThrow(() -> new APIException("ITEM_0002", "Item doesn't exist."));
+        findItem.orElseThrow(() -> {
+            throw new APIException("ITEM_0002", "Item doesn't exist.");
+        });
 
         findItem.get().deleteItem(itemVo);
     }

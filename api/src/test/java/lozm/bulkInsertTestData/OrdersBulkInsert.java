@@ -20,57 +20,73 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-@RequiredArgsConstructor
 public class OrdersBulkInsert {
 
-    private final MockMvc mockMvc;
-    private final ObjectMapper objectMapper;
-    private final UserService userService;
-    private final ItemService itemService;
-    private final CouponService couponService;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ItemService itemService;
+    @Autowired
+    private CouponService couponService;
 
 
     @Test
     public void setOrders() throws Exception {
-        //Get user
-        List<GetUserDto> userList = userService.getUserList();
+        try {
+            //Get user
+            List<GetUserDto> userList = userService.getUserList();
 
+            //Get item
+            List<GetItemDto> itemList = itemService.getItemList();
 
-        //Get item
-        List<GetItemDto> itemList = itemService.getItemList();
+            //Get coupon
+            List<GetCouponDto> couponList = couponService.getCouponList();
 
-        //Get coupon
-        List<GetCouponDto> couponList = couponService.getCouponList();
+            int itemIndex = 0;
+            int couponIndex = 0;
+            int errorCount = 0;
+            //Set orders
+            for (GetUserDto userDto : userList) {
+                try {
+                    Long itemId = itemList.get(itemIndex).getId();
+                    Long couponId = couponList.get(couponIndex).getId();
+                    Long quantity = ThreadLocalRandom.current().nextLong(1, 5);
 
-        int itemIndex = 0;
-        int couponIndex = 0;
-        //Set orders
-        for (GetUserDto getUserDto : userList) {
-            try {
-                Long itemId = itemList.get(itemIndex).getId();
-                Long couponId = couponList.get(couponIndex).getId();
+                    PostOrdersDto.Request reqDto = PostOrdersDto.Request.setRequestTestData(userDto.getId(), itemId, couponId, quantity);
 
-                PostOrdersDto.Request reqDto = PostOrdersDto.Request.setRequestTestData();
+                    ResultActions result = mockMvc.perform(
+                            post("/api/orders")
+                                    .contentType(MediaType.APPLICATION_JSON)
+                                    .content(objectMapper.writeValueAsString(reqDto))
+                    );
 
-                ResultActions result = mockMvc.perform(
-                        post("/api/orders")
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(reqDto))
-                );
+                    result.andExpect(status().is(200));
+                } catch (Exception e) {
+                    errorCount++;
 
-                result.andExpect(status().is(200));
-            } catch (Exception e) {
-                e.printStackTrace();
+                    e.printStackTrace();
+                }
             }
+
+            System.out.println("errorCount = " + errorCount);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
     }
 
 }

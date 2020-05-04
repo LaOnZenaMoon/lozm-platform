@@ -46,12 +46,18 @@ public class OrdersService {
                     o.getId(),
                     o.getOrderDt(),
                     o.getStatus(),
-                    o.getDelivery().getId(),
-                    o.getDelivery().getAddress().getCountry(),
-                    o.getDelivery().getAddress().getZipCode(),
-                    o.getDelivery().getAddress().getCity(),
-                    o.getDelivery().getAddress().getStreet(),
-                    o.getDelivery().getAddress().getEtc(),
+                    0L,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+//                    o.getDelivery().getId(),
+//                    o.getDelivery().getAddress().getCountry(),
+//                    o.getDelivery().getAddress().getZipCode(),
+//                    o.getDelivery().getAddress().getCity(),
+//                    o.getDelivery().getAddress().getStreet(),
+//                    o.getDelivery().getAddress().getEtc(),
                     o.getUser().getId(),
                     o.getUser().getName(),
                     o.getUser().getIdentifier(),
@@ -69,16 +75,22 @@ public class OrdersService {
         Orders orders = new Orders();
 
         Optional<User> findUser = userRepository.findById(ordersVo.getUserId());
-        findUser.orElseThrow(() -> new APIException("ORDERS_SAVE_USER", "User doesn't exist."));
+        findUser.orElseThrow(() -> {
+            throw new APIException("ORDERS_SAVE_USER", "User doesn't exist.");
+        });
 
         Optional<Item> findItem = itemRepository.findById(ordersVo.getItemId());
-        findItem.orElseThrow(() -> new APIException("ORDERS_SAVE_ITEM", "Item doesn't exist."));
+        findItem.orElseThrow(() -> {
+            throw new APIException("ORDERS_SAVE_ITEM", "Item doesn't exist.");
+        });
 
-        Long orderedPrice = ordersVo.getOrderedPrice();
+        Long orderedPrice = findItem.get().getPrice();
         Optional<Coupon> findCoupon = null;
         if(ordersVo.getCouponId() != null) {
             findCoupon = couponRepository.findById(ordersVo.getCouponId());
-            findCoupon.orElseThrow(() -> new APIException("ORDERS_SAVE_COUPON", "Coupon doesn't exist."));
+            findCoupon.orElseThrow(() -> {
+                throw new APIException("ORDERS_SAVE_COUPON", "Coupon doesn't exist.");
+            });
             orderedPrice = findCoupon.get().calculateOrderedPrice(orderedPrice);
         }
 
@@ -100,7 +112,9 @@ public class OrdersService {
     @Transactional
     public void update(OrdersVo ordersVo) throws Exception {
         Optional<Orders> findOrders = ordersRepository.findById(ordersVo.getId());
-        findOrders.orElseThrow(() -> new APIException("ORDERS_0002", "Order doesn't exist."));
+        findOrders.orElseThrow(() -> {
+            throw new APIException("ORDERS_0002", "Order doesn't exist.");
+        });
         findOrders.get().updateOrders(ordersVo);
     }
 }

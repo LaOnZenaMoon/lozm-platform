@@ -52,7 +52,9 @@ public class DeliveryService {
     @Transactional
     public void update(DeliveryVo deliveryVo) throws Exception {
         Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
-        findDelivery.orElseThrow(() -> new APIException("DELIVERY_0002", "Delivery doesn't exist."));
+        findDelivery.orElseThrow(() -> {
+            throw new APIException("DELIVERY_0002", "Delivery doesn't exist.");
+        });
         findDelivery.get().updateDelivery(deliveryVo);
     }
     

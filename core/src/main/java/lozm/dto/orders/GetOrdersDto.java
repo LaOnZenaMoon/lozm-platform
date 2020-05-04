@@ -1,8 +1,10 @@
 package lozm.dto.orders;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lozm.code.OrderStatus;
+import lozm.code.UsersType;
 import org.hibernate.usertype.UserType;
 
 import java.time.LocalDateTime;
@@ -10,28 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class GetOrdersDto {
 
     //Orders
-    private Long id;
+    private Long ordersId;
     private LocalDateTime orderDt;
-    private OrderStatus status;
-
-    //OrdersItem
-    private Long ordersItemId;
-    private Long orderedPrice;
-    private Long quantity;
-
-    //Item
-    private Long itemId;
-    private String itemName;
-    private Long itemPrice;
-    private String type;
-
-    //Store
-    private Long storeId;
-    private String storeName;
-    private String telNumber;
+    private OrderStatus ordersStatus;
 
     //Delivery
     private Long deliveryId;
@@ -45,14 +32,25 @@ public class GetOrdersDto {
     private Long userId;
     private String userName;
     private String identifier;
-    private UserType userType;
+    private UsersType userType;
 
 
-    public GetOrdersDto(Long id, LocalDateTime orderDt, OrderStatus status) {
-        this.id = id;
+    public GetOrdersDto(Long ordersId, LocalDateTime orderDt, OrderStatus ordersStatus, Long deliveryId, String deliveryCountry, String deliveryZipCode, String deliveryCity, String deliveryStreet, String deliveryEtc, Long userId, String userName, String identifier, UsersType userType) {
+        this.ordersId = ordersId;
         this.orderDt = orderDt;
-        this.status = status;
+        this.ordersStatus = ordersStatus;
+        this.deliveryId = deliveryId;
+        this.deliveryCountry = deliveryCountry;
+        this.deliveryZipCode = deliveryZipCode;
+        this.deliveryCity = deliveryCity;
+        this.deliveryStreet = deliveryStreet;
+        this.deliveryEtc = deliveryEtc;
+        this.userId = userId;
+        this.userName = userName;
+        this.identifier = identifier;
+        this.userType = userType;
     }
+
 
     @Getter
     @Setter

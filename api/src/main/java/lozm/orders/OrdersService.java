@@ -18,9 +18,11 @@ import lozm.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.summarizingDouble;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -38,12 +40,28 @@ public class OrdersService {
 
     public List<GetOrdersDto> getOrdersList() {
         List<Orders> ordersList = repositorySupport.selectOrdersList();
+        List<GetOrdersDto> rtnList = new ArrayList<>();
+        for (Orders o : ordersList) {
+            GetOrdersDto dto = new GetOrdersDto(
+                    o.getId(),
+                    o.getOrderDt(),
+                    o.getStatus(),
+                    o.getDelivery().getId(),
+                    o.getDelivery().getAddress().getCountry(),
+                    o.getDelivery().getAddress().getZipCode(),
+                    o.getDelivery().getAddress().getCity(),
+                    o.getDelivery().getAddress().getStreet(),
+                    o.getDelivery().getAddress().getEtc(),
+                    o.getUser().getId(),
+                    o.getUser().getName(),
+                    o.getUser().getIdentifier(),
+                    o.getUser().getType()
+            );
 
-        return ordersList.stream().map(o -> new GetOrdersDto(
-                o.getId(),
-                o.getOrderDt(),
-                o.getStatus())
-        ).collect(toList());
+            rtnList.add(dto);
+        }
+
+        return rtnList;
     }
 
     @Transactional

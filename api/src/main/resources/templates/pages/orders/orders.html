@@ -215,11 +215,18 @@
 				$("#"+orders.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
-						{title: 'id',               	data: 'id',             	visible: false},
-						{title: 'password',             data: 'password',           visible: false},
-						{title: 'Identifier', 			data: 'identifier', 		width: "40%"},
-						{title: 'Name', 				data: 'name', 				width: "40%"},
-						{title: 'Type', 				data: 'type', 				width: "20%"},
+						{title: 'ordersId',               	data: 'ordersId',             	visible: false},
+						{title: 'deliveryId',               data: 'deliveryId',             visible: false},
+						{title: 'userId',               	data: 'userId',             	visible: false},
+						{title: 'userName', 				data: 'userName', 				width: "10%"},
+						{title: 'identifier', 				data: 'identifier', 			width: "10%"},
+						{title: 'orderDt', 					data: 'orderDt', 				width: "10%"},
+						{title: 'ordersStatus', 			data: 'ordersStatus', 			width: "10%"},
+						{title: 'Country', 					data: 'deliveryCountry', 		width: "10%"},
+						{title: 'ZipCode', 					data: 'deliveryZipCode', 		width: "10%"},
+						{title: 'City', 					data: 'deliveryCity', 			width: "10%"},
+						{title: 'Street', 					data: 'deliveryStreet', 		width: "10%"},
+						{title: 'etc', 						data: 'deliveryEtc', 			width: "10%"},
 					],
 					data: [],
 					select: {

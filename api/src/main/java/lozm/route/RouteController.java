@@ -35,12 +35,12 @@ public class RouteController {
     }
 
     @GetMapping(value = "/manage/store")
-    public String managingStore(ModelMap modelMap) {
+    public String manageStore(ModelMap modelMap) {
         return "pages/store/store";
     }
 
     @GetMapping(value = "/manage/store/{storeId}")
-    public String managingItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) {
+    public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) {
         log.debug("Store ID: "+storeId);
 
         APIResponseDto getStoreDetail = storeAPIController.getStoreDetail(storeId);
@@ -71,17 +71,17 @@ public class RouteController {
     }
 
     @GetMapping(value = "/manage/item")
-    public String managingItem(ModelMap modelMap) {
+    public String manageItem(ModelMap modelMap) {
         return "pages/item/item";
     }
 
     @GetMapping(value = "/manage/coupon")
-    public String managingCoupon(ModelMap modelMap) {
+    public String manageCoupon(ModelMap modelMap) {
         return "pages/coupon/coupon";
     }
 
     @GetMapping(value = "/manage/coupon/{couponId}")
-    public String managingCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) {
+    public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) {
 
         APIResponseDto getCouponDetail = couponAPIController.getCouponDetail(couponId);
         GetCouponDto couponDetail = (GetCouponDto) getCouponDetail.getData();
@@ -93,6 +93,11 @@ public class RouteController {
         modelMap.addAttribute("couponUserList", couponUserList);
 
         return "pages/coupon/couponDetail";
+    }
+
+    @GetMapping(value = "/manage/orders")
+    public String manageOrders(ModelMap modelMap) {
+        return "pages/orders/orders";
     }
 
     @GetMapping(value = "/setting/user")

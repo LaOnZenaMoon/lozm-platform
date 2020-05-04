@@ -19,6 +19,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -47,24 +49,30 @@ public class OrdersBulkInsert {
         try {
             //Get user
             List<GetUserDto> userList = userService.getUserList();
+            List<Long> userIdList = new ArrayList<>();
+            for (GetUserDto userDto : userList) {
+                userIdList.add(userDto.getId());
+            }
 
             //Get item
             List<GetItemDto> itemList = itemService.getItemList();
 
             //Get coupon
             List<GetCouponDto> couponList = couponService.getCouponList();
+            List<Long> couponIdList = new ArrayList<>();
+            for (GetCouponDto getCouponDto : couponList) {
+                couponIdList.add(getCouponDto.getId());
+            }
 
-            int itemIndex = 0;
-            int couponIndex = 0;
             int errorCount = 0;
             //Set orders
-            for (GetUserDto userDto : userList) {
+            for (GetItemDto itemDto : itemList) {
                 try {
-                    Long itemId = itemList.get(itemIndex).getId();
-                    Long couponId = couponList.get(couponIndex).getId();
+                    Long userId = ThreadLocalRandom.current().nextLong(Collections.min(userIdList), Collections.max(userIdList));
+                    Long couponId = ThreadLocalRandom.current().nextLong(Collections.min(couponIdList), Collections.max(couponIdList));
                     Long quantity = ThreadLocalRandom.current().nextLong(1, 5);
 
-                    PostOrdersDto.Request reqDto = PostOrdersDto.Request.setRequestTestData(userDto.getId(), itemId, couponId, quantity);
+                    PostOrdersDto.Request reqDto = PostOrdersDto.Request.setRequestTestData(userId, itemDto.getId(), couponId, quantity);
 
                     ResultActions result = mockMvc.perform(
                             post("/api/orders")

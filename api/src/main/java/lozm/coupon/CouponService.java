@@ -118,10 +118,6 @@ public class CouponService {
             throw new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
         });
 
-        findCoupon.get().decreaseCouponQuantity(couponVo.getCouponUserQuantity());
-
-//        couponRepository.save(findCoupon.get());
-
         //Find the user
         Optional<User> findUser = userRepository.findById(couponVo.getUserId());
         findUser.orElseThrow(() -> {
@@ -132,9 +128,8 @@ public class CouponService {
         List<CouponUser> findCouponUserList = couponUserRepository.selectCouponUserByUserIdAndCouponId(couponVo.getUserId(), couponVo.getId());
         if(findCouponUserList.size() > 0) {
             for (CouponUser couponUser : findCouponUserList) {
-                //putCouponUser 의 coupon 증감/차감 공식처럼 공통화해서 적게 업데이트 했을 때는 적용되도록...
+                calculateCouponQuantity(couponVo, findCoupon.get(), couponUser);
                 couponUser.updateCouponUser(couponVo);
-//                couponUserRepository.save(couponUser);
             }
 
             return;
@@ -143,6 +138,8 @@ public class CouponService {
         CouponUser couponUser = new CouponUser();
         couponUser.insertCouponUser(couponVo.getCouponUserQuantity(), findCoupon.get(), findUser.get());
         couponUserRepository.save(couponUser);
+
+        calculateCouponQuantity(couponVo, findCoupon.get(), couponUser);
     }
 
     @Transactional
@@ -152,15 +149,19 @@ public class CouponService {
             throw new APIException("COUPON_USER_0002", "Coupon user doesn't exist.");
         });
 
-        Coupon findCoupon = findCouponUser.get().getCoupon();
-        Long couponUserQuantity = findCouponUser.get().getQuantity();
+        calculateCouponQuantity(couponVo, findCouponUser.get().getCoupon(), findCouponUser.get());
+
+        findCouponUser.get().updateCouponUser(couponVo);
+    }
+
+    private void calculateCouponQuantity(CouponVo couponVo, Coupon findCoupon, CouponUser findCouponUser) {
+        Long couponUserQuantity = findCouponUser.getQuantity();
+
         if(couponUserQuantity > couponVo.getCouponUserQuantity()) {
             findCoupon.increaseCouponQuantity(couponUserQuantity - couponVo.getCouponUserQuantity());
         } else if(couponUserQuantity < couponVo.getCouponUserQuantity()) {
             findCoupon.decreaseCouponQuantity(couponVo.getCouponUserQuantity() - couponUserQuantity);
         }
-
-        findCouponUser.get().updateCouponUser(couponVo);
     }
 
     @Transactional

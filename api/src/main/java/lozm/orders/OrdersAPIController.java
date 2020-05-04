@@ -48,6 +48,7 @@ public class OrdersAPIController {
                     .quantity(reqDto.getQuantity())
                     .userId(reqDto.getUserId())
                     .itemId(reqDto.getItemId())
+                    .deliveryId(reqDto.getDeliveryId())
                     .couponId(reqDto.getCouponId())
                     .build();
 

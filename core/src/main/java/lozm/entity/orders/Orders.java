@@ -37,10 +37,11 @@ public class Orders extends BaseEntity {
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    public void insertOrders(OrdersVo ordersVo, User user) {
+    public void insertOrders(OrdersVo ordersVo, User user, Delivery delivery) {
         this.orderDt = LocalDateTime.now();
         this.status = OrderStatus.PREPARATION;
         this.user = user;
+        this.delivery = delivery;
     }
 
     public void updateOrders(OrdersVo ordersVo) {

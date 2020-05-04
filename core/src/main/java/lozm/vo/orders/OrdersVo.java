@@ -16,6 +16,7 @@ public class OrdersVo {
     private Long quantity;
     private Long userId;
     private Long itemId;
+    private Long deliveryId;
     private Long couponId;
     private String status;
     private int flag;

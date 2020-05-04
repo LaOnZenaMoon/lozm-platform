@@ -2,8 +2,11 @@ package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lozm.coupon.CouponService;
+import lozm.delivery.DeliveryService;
 import lozm.dto.coupon.GetCouponDto;
+import lozm.dto.delivery.GetDeliveryDto;
 import lozm.dto.item.GetItemDto;
 import lozm.dto.orders.PostOrdersDto;
 import lozm.dto.user.GetUserDto;
@@ -27,6 +30,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Slf4j
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -42,6 +46,8 @@ public class OrdersBulkInsert {
     private ItemService itemService;
     @Autowired
     private CouponService couponService;
+    @Autowired
+    private DeliveryService deliveryService;
 
 
     @Test
@@ -64,15 +70,23 @@ public class OrdersBulkInsert {
                 couponIdList.add(getCouponDto.getId());
             }
 
+            //Get delivery
+            List<GetDeliveryDto> deliveryList = deliveryService.getDeliveryList();
+            List<Long> deliveryIdList = new ArrayList<>();
+            for (GetDeliveryDto getDeliveryDto : deliveryList) {
+                deliveryIdList.add(getDeliveryDto.getId());
+            }
+
             int errorCount = 0;
             //Set orders
             for (GetItemDto itemDto : itemList) {
                 try {
                     Long userId = ThreadLocalRandom.current().nextLong(Collections.min(userIdList), Collections.max(userIdList));
                     Long couponId = ThreadLocalRandom.current().nextLong(Collections.min(couponIdList), Collections.max(couponIdList));
+                    Long deliveryId = ThreadLocalRandom.current().nextLong(Collections.min(deliveryIdList), Collections.max(deliveryIdList));
                     Long quantity = ThreadLocalRandom.current().nextLong(1, 5);
 
-                    PostOrdersDto.Request reqDto = PostOrdersDto.Request.setRequestTestData(userId, itemDto.getId(), couponId, quantity);
+                    PostOrdersDto.Request reqDto = PostOrdersDto.Request.setRequestTestData(userId, itemDto.getId(), deliveryId, couponId, quantity);
 
                     ResultActions result = mockMvc.perform(
                             post("/api/orders")
@@ -83,8 +97,7 @@ public class OrdersBulkInsert {
                     result.andExpect(status().is(200));
                 } catch (Exception e) {
                     errorCount++;
-
-                    e.printStackTrace();
+                    log.debug(e.getMessage());
                 }
             }
 

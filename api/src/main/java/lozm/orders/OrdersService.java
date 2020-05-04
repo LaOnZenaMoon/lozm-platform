@@ -2,8 +2,10 @@ package lozm.orders;
 
 import lombok.RequiredArgsConstructor;
 import lozm.dto.orders.GetOrdersDto;
+import lozm.entity.delivery.Delivery;
 import lozm.exception.APIException;
 import lozm.repository.RepositorySupport;
+import lozm.repository.delivery.DeliveryRepository;
 import lozm.vo.orders.OrdersVo;
 import lozm.entity.coupon.Coupon;
 import lozm.entity.item.Item;
@@ -36,7 +38,7 @@ public class OrdersService {
     private final OrdersItemRepository ordersItemRepository;
     private final CouponRepository couponRepository;
     private final RepositorySupport repositorySupport;
-
+    private final DeliveryRepository deliveryRepository;
 
     public List<GetOrdersDto> getOrdersList() {
         List<Orders> ordersList = repositorySupport.selectOrdersList();
@@ -84,6 +86,11 @@ public class OrdersService {
             throw new APIException("ORDERS_SAVE_ITEM", "Item doesn't exist.");
         });
 
+        Optional<Delivery> findDelivery = deliveryRepository.findById(ordersVo.getDeliveryId());
+        findItem.orElseThrow(() -> {
+            throw new APIException("ORDERS_SAVE_DELIVERY", "Delivery doesn't exist.");
+        });
+
         Long orderedPrice = findItem.get().getPrice();
         Optional<Coupon> findCoupon = null;
         if(ordersVo.getCouponId() != null) {
@@ -94,7 +101,7 @@ public class OrdersService {
             orderedPrice = findCoupon.get().calculateOrderedPrice(orderedPrice);
         }
 
-        orders.insertOrders(ordersVo, findUser.get());
+        orders.insertOrders(ordersVo, findUser.get(), findDelivery.get());
 
         ordersRepository.save(orders);
 

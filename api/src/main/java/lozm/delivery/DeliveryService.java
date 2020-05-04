@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import lozm.dto.delivery.GetDeliveryDto;
 import lozm.exception.APIException;
+import lozm.repository.RepositorySupport;
 import lozm.vo.delivery.DeliveryVo;
 import lozm.entity.delivery.Delivery;
 import lozm.repository.delivery.DeliveryRepository;
@@ -21,10 +22,12 @@ import static java.util.stream.Collectors.toList;
 public class DeliveryService {
 
     private final DeliveryRepository deliveryRepository;
+    private final RepositorySupport repositorySupport;
 
 
-    public List<GetDeliveryDto> findAllDeliveries() {
-        List<Delivery> deliveryList = deliveryRepository.findAll();
+    public List<GetDeliveryDto> getDeliveryList() {
+//        List<Delivery> deliveryList = deliveryRepository.findAll();
+        List<Delivery> deliveryList = repositorySupport.selectDeliveryList();
 
         return deliveryList.stream().map(d -> new GetDeliveryDto(
                     d.getId(),

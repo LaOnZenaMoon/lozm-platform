@@ -24,7 +24,7 @@ public class OrdersAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetOrdersDto> result = ordersService.findAllOrders();
+            List<GetOrdersDto> result = ordersService.getOrdersList();
             GetOrdersDto.Response ordersResDto = new GetOrdersDto.Response();
             ordersResDto.setList(result);
 

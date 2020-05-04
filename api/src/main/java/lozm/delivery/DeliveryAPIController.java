@@ -25,7 +25,7 @@ public class DeliveryAPIController {
         APIResponseDto resDto = new APIResponseDto<>();
 
         try {
-            List<GetDeliveryDto> result = deliveryService.findAllDeliveries();
+            List<GetDeliveryDto> result = deliveryService.getDeliveryList();
             GetDeliveryDto.Response deliveryResDto = new GetDeliveryDto.Response();
             deliveryResDto.setList(result);
 

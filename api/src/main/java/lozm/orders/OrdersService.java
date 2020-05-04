@@ -3,6 +3,7 @@ package lozm.orders;
 import lombok.RequiredArgsConstructor;
 import lozm.dto.orders.GetOrdersDto;
 import lozm.exception.APIException;
+import lozm.repository.RepositorySupport;
 import lozm.vo.orders.OrdersVo;
 import lozm.entity.coupon.Coupon;
 import lozm.entity.item.Item;
@@ -32,10 +33,11 @@ public class OrdersService {
     private final UserRepository userRepository;
     private final OrdersItemRepository ordersItemRepository;
     private final CouponRepository couponRepository;
+    private final RepositorySupport repositorySupport;
 
 
-    public List<GetOrdersDto> findAllOrders() {
-        List<Orders> ordersList = ordersRepository.findAll();
+    public List<GetOrdersDto> getOrdersList() {
+        List<Orders> ordersList = repositorySupport.selectOrdersList();
 
         return ordersList.stream().map(o -> new GetOrdersDto(
                 o.getId(),

@@ -1,20 +1,19 @@
 # TODO List
-1. Entity 추가
-=> Store(1) - Item(N) 추가.
+## Entity 추가
 => Image 추가.
   => 연관관계 어떻게 설정할 것인지?
 
-2. 로그인 기능 및 세션 추가
-=> 로그인 페이지 및 세션 추가.
-
-3. 파일 업로드 및 다운로드 API
+## 파일 업로드 및 다운로드 API
 => 캐시 처리.
 
-4. 이외의 관리 화면 만들기
+## 관리 화면 만들기
+=> delivery. 
+=> orders. 
 
-5. API 인증 절차 정의 및 개발
+## API 인증 절차 정의 및 개발
 
-6. B2C 페이지 만들기
+## B2C 페이지 만들기
+
 
 # Database script
 CREATE USER LOZM identified by oracle ;

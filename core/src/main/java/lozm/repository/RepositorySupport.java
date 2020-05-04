@@ -4,11 +4,13 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lozm.code.ItemType;
+import lozm.entity.delivery.Delivery;
 import lozm.entity.inheritance.Bottom;
 import lozm.entity.inheritance.Outer;
 import lozm.entity.inheritance.Shoes;
 import lozm.entity.inheritance.Top;
 import lozm.entity.item.Item;
+import lozm.entity.orders.Orders;
 import lozm.entity.user.User;
 import lozm.exception.APIException;
 import lozm.vo.item.ItemVo;
@@ -19,12 +21,14 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+import static lozm.entity.delivery.QDelivery.delivery;
 import static lozm.entity.inheritance.QBottom.bottom;
 import static lozm.entity.inheritance.QOuter.outer;
 import static lozm.entity.inheritance.QShoes.shoes;
 import static lozm.entity.inheritance.QTop.top;
 import static lozm.entity.user.QUser.user;
 import static lozm.entity.item.QItem.item;
+import static lozm.entity.orders.QOrders.orders;
 
 
 @Repository
@@ -166,6 +170,26 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .from(item)
                 .where(
                         item.flag.eq(1)
+                )
+                .fetch();
+    }
+
+    public List<Delivery> selectDeliveryList() {
+        return jpaQueryFactory
+                .select(delivery)
+                .from(delivery)
+                .where(
+                        delivery.flag.eq(1)
+                )
+                .fetch();
+    }
+
+    public List<Orders> selectOrdersList() {
+        return jpaQueryFactory
+                .select(orders)
+                .from(orders)
+                .where(
+                        orders.flag.eq(1)
                 )
                 .fetch();
     }

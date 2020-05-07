@@ -26,16 +26,15 @@ import static lozm.entity.inheritance.QBottom.bottom;
 import static lozm.entity.inheritance.QOuter.outer;
 import static lozm.entity.inheritance.QShoes.shoes;
 import static lozm.entity.inheritance.QTop.top;
-import static lozm.entity.user.QUser.user;
 import static lozm.entity.item.QItem.item;
 import static lozm.entity.orders.QOrders.orders;
+import static lozm.entity.user.QUser.user;
 
 
 @Repository
 public class RepositorySupport extends QuerydslRepositorySupport {
 
     private final JPAQueryFactory jpaQueryFactory;
-
 
     public RepositorySupport(JPAQueryFactory jpaQueryFactory) {
         super(User.class);

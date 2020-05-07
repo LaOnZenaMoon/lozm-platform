@@ -68,8 +68,6 @@ public class OrdersService {
 
     @Transactional
     public void save(OrdersVo ordersVo) throws Exception {
-        Orders orders = new Orders();
-
         Optional<User> findUser = userRepository.findById(ordersVo.getUserId());
         findUser.orElseThrow(() -> {
             throw new APIException("ORDERS_SAVE_USER", "User doesn't exist.");
@@ -95,8 +93,8 @@ public class OrdersService {
             orderedPrice = findCoupon.get().calculateOrderedPrice(orderedPrice);
         }
 
+        Orders orders = new Orders();
         orders.insertOrders(ordersVo, findUser.get(), findDelivery.get());
-
         ordersRepository.save(orders);
 
         //TODO 주문 고도화
@@ -116,6 +114,7 @@ public class OrdersService {
         findOrders.orElseThrow(() -> {
             throw new APIException("ORDERS_0002", "Order doesn't exist.");
         });
+
         findOrders.get().updateOrders(ordersVo);
     }
 }

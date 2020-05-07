@@ -6,6 +6,9 @@
 ## 파일 업로드 및 다운로드 API
 => 캐시 처리.
 
+## 엑셀 업로드 및 다운로드 API
+
+
 ## 관리 화면 만들기
 => delivery. 
 => orders. 
@@ -14,6 +17,9 @@
 
 ## B2C 페이지 만들기
 
+## (JPQL -> Querydsl) 로 변환 처리
+
+## API 와 Client side 모듈 분리하기
 
 # Database script
 CREATE USER LOZM identified by oracle ;

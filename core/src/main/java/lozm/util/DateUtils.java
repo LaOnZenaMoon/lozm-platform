@@ -9,14 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
-/**
- * <p>KtisDateUtils</p>
- * <p>
- * 날짜 변한 유틸리티
- * </p>
- * 수정시 @version 에 수정일자를 변경하여 commit 해 주세요
- * @version 2020.04.10
- */
+
 public class DateUtils {
 
     public final static DateTimeFormatter HHmm = DateTimeFormatter.ofPattern("HHmm");

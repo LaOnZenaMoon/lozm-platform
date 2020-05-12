@@ -11,14 +11,7 @@ import java.util.List;
 import static lozm.util.TelNumberUtils.Range.R4;
 import static lozm.util.TelNumberUtils.Range.R8;
 
-/**
- * <p>KtisTelNumberUtils</p>
- * <p>
- * 전화번호 변한 유틸리티
- * </p>
- * 수정시 @version 에 수정일자를 변경하여 commit 해 주세요
- * @version 2020.04.10
- */
+
 public class TelNumberUtils {
 
     public static String getDdd(String telNumber) {

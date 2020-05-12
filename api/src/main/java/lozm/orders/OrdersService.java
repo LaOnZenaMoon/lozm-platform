@@ -17,6 +17,7 @@ import lozm.repository.item.ItemRepository;
 import lozm.repository.orders.OrdersRepository;
 import lozm.repository.orders.OrdersItemRepository;
 import lozm.repository.user.UserRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

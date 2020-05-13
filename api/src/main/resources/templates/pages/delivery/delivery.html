@@ -46,25 +46,36 @@
 					<form id="post_deliveryForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="post_name">Name</label>
-								<input type="text" class="form-control" id="post_name" name="name">
+								<label for="post_country">Country</label>
+								<input type="text" class="form-control" id="post_country" name="country">
 							</div>
 
 							<div class="form-group">
-								<label for="post_identifier">Identifier</label>
-								<input type="text" class="form-control" id="post_identifier" name="identifier">
+								<label for="post_zipcode">Zipcode</label>
+								<input type="text" class="form-control" id="post_zipcode" name="zipcode">
 							</div>
 
 							<div class="form-group">
-								<label for="post_password">Identifier</label>
-								<input type="password" class="form-control" id="post_password" name="password">
+								<label for="post_city">City</label>
+								<input type="text" class="form-control" id="post_city" name="city">
 							</div>
 
 							<div class="form-group">
-								<label for="post_type">Type</label>
-								<select class="form-control single-select" id="post_type" name="type">
-									<option value="ADMIN">Admin</option>
-									<option value="USER">User</option>
+								<label for="post_street">Street</label>
+								<input type="text" class="form-control" id="post_street" name="street">
+							</div>
+
+							<div class="form-group">
+								<label for="post_etc">etc</label>
+								<input type="text" class="form-control" id="post_etc" name="etc">
+							</div>
+
+							<div class="form-group">
+								<label for="post_status">Status</label>
+								<select class="form-control single-select" id="post_status" name="status">
+									<option value="PREPARATION">Preparation</option>
+									<option value="PROGRESS">Progress</option>
+									<option value="COMPLETE">Complete</option>
 								</select>
 							</div>
 						</div>
@@ -93,25 +104,36 @@
 							</div>
 
 							<div class="form-group">
-								<label for="put_name">Name</label>
-								<input type="text" class="form-control" id="put_name" name="name">
+								<label for="put_country">Country</label>
+								<input type="text" class="form-control" id="put_country" name="country">
 							</div>
 
 							<div class="form-group">
-								<label for="put_identifier">Identifier</label>
-								<input type="text" class="form-control" id="put_identifier" name="identifier">
+								<label for="put_zipcode">Zipcode</label>
+								<input type="text" class="form-control" id="put_zipcode" name="zipcode">
 							</div>
 
 							<div class="form-group">
-								<label for="put_password">Identifier</label>
-								<input type="password" class="form-control" id="put_password" name="password">
+								<label for="put_city">City</label>
+								<input type="text" class="form-control" id="put_city" name="city">
 							</div>
 
 							<div class="form-group">
-								<label for="put_type">Type</label>
-								<select class="form-control single-select" id="put_type" name="type">
-									<option value="ADMIN">Admin</option>
-									<option value="USER">User</option>
+								<label for="put_street">Street</label>
+								<input type="text" class="form-control" id="put_street" name="street">
+							</div>
+
+							<div class="form-group">
+								<label for="put_etc">etc</label>
+								<input type="text" class="form-control" id="put_etc" name="etc">
+							</div>
+
+							<div class="form-group">
+								<label for="put_status">Status</label>
+								<select class="form-control single-select" id="put_status" name="status">
+									<option value="PREPARATION">Preparation</option>
+									<option value="PROGRESS">Progress</option>
+									<option value="COMPLETE">Complete</option>
 								</select>
 							</div>
 						</div>
@@ -140,30 +162,30 @@
 					delivery.post();
 				},
 				rules: {
-					name: {
+					country: {
 						required: true
 					},
-					identifier: {
+					zipCode: {
 						required: true
 					},
-					password: {
+					city: {
 						required: true
 					},
-					type: {
+					street: {
 						required: true
 					},
 				},
 				message: {
-					name: {
+					country: {
 						required: "Name is required.",
 					},
-					identifier: {
+					zipCode: {
 						required: "identifier is required.",
 					},
-					password: {
+					city: {
 						required: "password is required."
 					},
-					type: {
+					street: {
 						required: "type is required."
 					},
 				},
@@ -175,35 +197,37 @@
 					delivery.put();
 				},
 				rules: {
-					name: {
+					id: {
 						required: true
 					},
-					identifier: {
+					country: {
 						required: true
 					},
-					password: {
+					zipCode: {
 						required: true
 					},
-					type: {
+					city: {
+						required: true
+					},
+					street: {
 						required: true
 					},
 				},
 				message: {
-					name: {
+					country: {
 						required: "Name is required.",
 					},
-					identifier: {
+					zipCode: {
 						required: "identifier is required.",
 					},
-					password: {
+					city: {
 						required: "password is required."
 					},
-					type: {
+					street: {
 						required: "type is required."
 					},
 				},
 			});
-
 		});
 
 		var delivery = {
@@ -307,10 +331,12 @@
 				lozm.func.requestPost({
 					url: /*[[ @{/api/delivery} ]]*/ "",
 					data: {
-						name: $("#post_name").val(),
-						identifier: $("#post_identifier").val(),
-						password: $("#post_password").val(),
-						type: $("#post_type").val()
+						country: $("#post_country").val(),
+						zipcode: $("#post_zipcode").val(),
+						city: $("#post_city").val(),
+						street: $("#post_street").val(),
+						etc: $("#post_etc").val(),
+						status: $("#post_status").val()
 					},
 					callback: {
 						success: function (result) {
@@ -334,10 +360,12 @@
 					url: /*[[ @{/api/delivery} ]]*/ "",
 					data: {
 						id: $("#put_id").val(),
-						name: $("#put_name").val(),
-						identifier: $("#put_identifier").val(),
-						password: $("#put_password").val(),
-						type: $("#put_type").val()
+						country: $("#put_country").val(),
+						zipcode: $("#put_zipcode").val(),
+						city: $("#put_city").val(),
+						street: $("#put_street").val(),
+						etc: $("#put_etc").val(),
+						status: $("#put_status").val()
 					},
 					callback: {
 						success: function (result) {

@@ -3,6 +3,7 @@ package lozm.dto.delivery;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class PutDeliveryDto {
@@ -12,12 +13,16 @@ public class PutDeliveryDto {
         @NotNull
         private Long id;
 
+        @NotEmpty
         private String country;
 
+        @NotEmpty
         private String zipCode;
 
+        @NotEmpty
         private String city;
 
+        @NotEmpty
         private String street;
 
         private String etc;

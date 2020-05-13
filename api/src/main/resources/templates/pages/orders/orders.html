@@ -105,7 +105,7 @@
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="post_delivery" readonly>
 									<div class="input-group-append">
-										<span class="input-group-text"><i class="fa fa-search"></i></span>
+										<span class="input-group-text" onclick='$("#get_delivery").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
 								</div>
 							</div>
@@ -348,6 +348,41 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="get_delivery">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<i class="fa fa-table"></i> Delivery
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="deliveryGrid" class="table table-bordered display modal-grid"></table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success" onclick="delivery.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
 		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
@@ -372,6 +407,9 @@
 
 			coupon.initGrid();
 			coupon.getGridData();
+
+			delivery.initGrid();
+			delivery.getGridData();
 
 			$("#post_ordersForm").validate({
 				submitHandler: function(form) {
@@ -450,18 +488,6 @@
 							},
 						},
 						{
-							text: '<i class="fa fa-minus"></i>',
-							action: function () {
-								var _selectedRows = orders.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length < 1) {
-									lozm.func.alertRowIsSelected();
-									return;
-								}
-
-								if(confirm("Are you sure to delete the data?")) orders.delete(_selectedRows);
-							},
-						},
-						{
 							extend: "csv",
 							text: '<i class="fa fa-download"></i>',
 							charset: 'UTF-16LE',
@@ -501,29 +527,6 @@
 						identifier: $("#post_identifier").val(),
 						password: $("#post_password").val(),
 						type: $("#post_type").val()
-					},
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								lozm.func.alertSuccess();
-								orders.getGridData();
-							} else {
-								lozm.func.alertFail();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			delete: function (list) {
-				lozm.func.requestDelete({
-					url: /*[[ @{/api/orders} ]]*/ "",
-					data: {
-						list: list
 					},
 					callback: {
 						success: function (result) {
@@ -1065,6 +1068,70 @@
 							if(result.success) {
 								coupon.gridTarget().clear().draw();
 								coupon.gridTarget().rows.add(result.data.list).draw();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			setInput: function () {
+				var _selectedRows = coupon.gridTarget().rows({selected: true}).data().toArray();
+				var _target = _selectedRows[0];
+
+				$("#post_coupon_id").val(_target.id);
+				$("#post_coupon").val(_target.name + "(Type: " + _target.type + ", Amount: " + _target.amount + ", Quantity: " + _target.quantity + ")");
+				$("#get_coupon").modal("hide");
+			},
+		};
+
+		var delivery = {
+			gridId: "deliveryGrid",
+			gridTarget: function () {
+				return $("#" + delivery.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+delivery.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',               	data: 'id',             	visible: false},
+						{title: 'Status', 				data: 'status', 			width: "15%"},
+						{title: 'Country', 				data: 'country', 			width: "15%"},
+						{title: 'ZipCode', 				data: 'zipCode', 			width: "15%"},
+						{title: 'City', 				data: 'city', 				width: "15%"},
+						{title: 'Street', 				data: 'street', 			width: "15%"},
+						{title: 'Etc', 					data: 'etc', 				width: "25%"},
+					],
+					data: [],
+					select: {
+						style: 'single',
+					},
+					buttons: [
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+			getGridData: function () {
+				lozm.func.requestGet({
+					url: /*[[ @{/api/delivery} ]]*/ "",
+					callback: {
+						success: function (result) {
+							console.log(result);
+							if(result.success) {
+								delivery.gridTarget().clear().draw();
+								delivery.gridTarget().rows.add(result.data.list).draw();
 							}
 						},
 						error: function (xhr, status, error) {

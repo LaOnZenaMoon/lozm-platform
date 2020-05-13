@@ -46,7 +46,7 @@
 					<form id="post_ordersForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<input type="hidden" id="post_userId">
+								<input type="hidden" id="post_user_id">
 
 								<label for="post_user">User</label>
 								<div class="input-group mb-3">
@@ -58,7 +58,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_storeId">
+								<input type="hidden" id="post_store_id">
 
 								<label for="post_store">Store</label>
 								<div class="input-group mb-3">
@@ -70,7 +70,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_itemId">
+								<input type="hidden" id="post_item_id">
 
 								<label for="post_item">Item</label>
 								<div class="input-group mb-3">
@@ -87,7 +87,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_couponId">
+								<input type="hidden" id="post_coupon_id">
 
 								<label for="post_coupon">Coupon</label>
 								<div class="input-group mb-3">
@@ -99,7 +99,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_deliveryId">
+								<input type="hidden" id="post_delivery_id">
 
 								<label for="post_delivery">Delivery</label>
 								<div class="input-group mb-3">
@@ -330,6 +330,11 @@
 			store.initGrid();
 			store.getGridData();
 
+			itemOuter.initGrid();
+			itemTop.initGrid();
+			itemBottom.initGrid();
+			itemShoes.initGrid();
+
 			$("#post_ordersForm").validate({
 				submitHandler: function(form) {
 					orders.post();
@@ -518,18 +523,9 @@
 					],
 					data: [],
 					select: {
-						// style: 'multi',
 						style: 'single',
 					},
 					buttons: [
-						// {
-						// 	text: '<i class="fa fa-check-square"></i>',
-						// 	action: function () {
-						// 		var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
-						// 		if(_selectedRows.length > 0) user.gridTarget().rows().deselect();
-						// 		else user.gridTarget().rows().select();
-						// 	}
-						// },
 					],
 				});
 			},
@@ -556,7 +552,7 @@
 				var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
 				var _target = _selectedRows[0];
 
-				$("#post_userId").val(_target.id);
+				$("#post_user_id").val(_target.id);
 				$("#post_user").val(_target.name + "(ID: " + _target.identifier + ", Type: " + _target.type + ")");
 				$("#get_user").modal("hide");
 			},
@@ -578,18 +574,9 @@
 					],
 					data: [],
 					select: {
-						// style: 'multi',
 						style: 'single',
 					},
 					buttons: [
-						// {
-						// 	text: '<i class="fa fa-check-square"></i>',
-						// 	action: function () {
-						// 		var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
-						// 		if(_selectedRows.length > 0) store.gridTarget().rows().deselect();
-						// 		else store.gridTarget().rows().select();
-						// 	}
-						// },
 					],
 				});
 			},
@@ -615,7 +602,7 @@
 				var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
 				var _target = _selectedRows[0];
 
-				$("#post_storeId").val(_target.id);
+				$("#post_store_id").val(_target.id);
 				$("#post_store").val(_target.name);
 				$("#get_store").modal("hide");
 			},
@@ -630,7 +617,7 @@
 			},
 			getGridData: function (itemType) {
 				lozm.func.requestGet({
-					url: "/api/store/" + $("#put_store_id").val() + "/clothing/" + itemType,
+					url: "/api/store/" + $("#post_store_id").val() + "/clothing/" + itemType,
 					callback: {
 						success: function(result) {
 							console.log(result);
@@ -654,12 +641,12 @@
 				var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
 				var _target = _selectedRows[0];
 
-				$("#post_itemId").val(_target.id);
+				$("#post_item_id").val(_target.id);
 				$("#post_item").val(_target.name);
 				$("#get_item").modal("hide");
 			},
 			showModal: function () {
-				if(lozm.func.isEmpty($("#post_storeId")).val()) {
+				if(lozm.func.isEmpty($("#post_store_id").val())) {
 					lozm.func.alertWarning("Select store first before selecting item.");
 					return;
 				}

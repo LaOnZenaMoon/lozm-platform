@@ -46,11 +46,11 @@
 					<form id="post_ordersForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<input type="hidden" id="post_user_id" name="userId">
+								<input type="hidden" id="post_user_id">
 
 								<label for="post_user">User</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_user" readonly>
+									<input type="text" class="form-control" id="post_user" readonly name="user">
 									<div class="input-group-append">
 										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
@@ -58,11 +58,11 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_store_id" name="storeId">
+								<input type="hidden" id="post_store_id">
 
 								<label for="post_store">Store</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_store" readonly>
+									<input type="text" class="form-control" id="post_store" readonly name="store">
 									<div class="input-group-append">
 										<span class="input-group-text" onclick='$("#get_store").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
@@ -70,11 +70,11 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_item_id" name="itemId">
+								<input type="hidden" id="post_item_id">
 
 								<label for="post_item">Item</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_item" readonly>
+									<input type="text" class="form-control" id="post_item" readonly name="item">
 									<div class="input-group-append">
 										<span class="input-group-text" onclick="item.showModal()"><i class="fa fa-search"></i></span>
 									</div>
@@ -82,16 +82,16 @@
 							</div>
 
 							<div class="form-group">
-								<label for="post_itemQuantity">Item quantity</label>
-								<input type="number" class="form-control" id="post_itemQuantity" name="itemQuantity" value="1">
+								<label for="post_item_quantity">Item quantity</label>
+								<input type="number" class="form-control" id="post_item_quantity" name="item_quantity" value="1">
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_coupon_id" name="couponId">
+								<input type="hidden" id="post_coupon_id">
 
 								<label for="post_coupon">Coupon</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_coupon" readonly>
+									<input type="text" class="form-control" id="post_coupon" readonly name="coupon">
 									<div class="input-group-append">
 										<span class="input-group-text" onclick='$("#get_coupon").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
@@ -99,11 +99,11 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_delivery_id" name="deliveryId">
+								<input type="hidden" id="post_delivery_id">
 
 								<label for="post_delivery">Delivery</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_delivery" readonly>
+									<input type="text" class="form-control" id="post_delivery" readonly name="delivery">
 									<div class="input-group-append">
 										<span class="input-group-text" onclick='$("#get_delivery").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
@@ -416,42 +416,42 @@
 					orders.post();
 				},
 				rules: {
-					userId: {
+					user: {
 						required: true
 					},
-					storeId: {
+					store: {
 						required: true
 					},
-					itemId: {
+					item: {
 						required: true
 					},
-					itemQuantity: {
+					item_quantity: {
 						required: true
 					},
-					couponId: {
+					coupon: {
 						required: true
 					},
-					deliveryId: {
+					delivery: {
 						required: true
 					},
 				},
 				message: {
-					userId: {
+					user: {
 						required: "userId is required.",
 					},
-					storeId: {
+					store: {
 						required: "storeId is required.",
 					},
-					itemId: {
+					item: {
 						required: "itemId is required.",
 					},
-					itemQuantity: {
+					item_quantity: {
 						required: "item_quantity is required.",
 					},
-					couponId: {
+					coupon: {
 						required: "couponId is required.",
 					},
-					deliveryId: {
+					delivery: {
 						required: "deliveryId is required.",
 					},
 				},
@@ -1169,12 +1169,12 @@
 				});
 			},
 			setInput: function () {
-				var _selectedRows = coupon.gridTarget().rows({selected: true}).data().toArray();
+				var _selectedRows = delivery.gridTarget().rows({selected: true}).data().toArray();
 				var _target = _selectedRows[0];
 
-				$("#post_coupon_id").val(_target.id);
-				$("#post_coupon").val(_target.name + "(Type: " + _target.type + ", Amount: " + _target.amount + ", Quantity: " + _target.quantity + ")");
-				$("#get_coupon").modal("hide");
+				$("#post_delivery_id").val(_target.id);
+				$("#post_delivery").val(_target.zipCode + "(Country: " + _target.country + ", City: " + _target.city + ", Street: " + _target.street + ")");
+				$("#get_delivery").modal("hide");
 			},
 		};
 

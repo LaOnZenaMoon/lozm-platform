@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 public class DeleteOrdersDto {
 
-    private Long id;
+    private Long ordersId;
     private int flag;
 
     @Getter

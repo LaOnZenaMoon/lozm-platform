@@ -131,7 +131,7 @@
 					<form id="put_ordersForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<input type="hidden" id="put_orders_id">
+								<input type="hidden" id="put_ordersId">
 							</div>
 
 							<div class="form-group">
@@ -691,10 +691,10 @@
 				});
 			},
 			put: function () {
-				lozm.func.requestPost({
+				lozm.func.requestPut({
 					url: /*[[ @{/api/orders} ]]*/ "",
 					data: {
-						id: $("#put_orders_id").val(),
+						id: $("#put_ordersId").val(),
 						status: $("#put_ordersStatus").val()
 					},
 					callback: {

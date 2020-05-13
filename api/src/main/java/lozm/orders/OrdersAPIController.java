@@ -92,7 +92,7 @@ public class OrdersAPIController {
         try {
             for (DeleteOrdersDto dto : reqDto.getList()) {
                 OrdersVo ordersVo = OrdersVo.builder()
-                        .id(dto.getId())
+                        .id(dto.getOrdersId())
                         .flag(0)
                         .build();
 

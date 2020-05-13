@@ -14,8 +14,9 @@
     => user 선택
       => n 명의 user 에게 item 을 order 할 수 있도록? 그러면 n 명의 user 에게 delivery 는 어떻게 할당? 각 user 에게 delivery 가 종속되도록?
       => 우선 n 명의 user 에게 1 개의 item 이 order 가능하도록 개발
-      => ** user 1 - item 1 - coupon 1 - delivery 1 로 order 가능하도록 개발 
-    => item 선택
+      => ** user 1 - item 1 - coupon 1 - delivery 1 로 order 가능하도록 개발
+    => store 선택 
+    => ** 해당 store 에 대한 item 선택(store detail 에 있는 것처럼 탭으로 분리할 것인지?)
     => coupon 선택
     => delivery 선택  
   => orders > 수정(detail page)

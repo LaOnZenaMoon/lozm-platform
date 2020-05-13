@@ -207,6 +207,10 @@
         swal("Error", "Failed to process the data. Please check or contact to administrator.", "error");
     };
 
+    lozm.func.alertWarning = function(_contents) {
+        swal("Warning", _contents, "warning");
+    };
+
     lozm.func.alertRowIsSelected = function() {
         swal("Error", "At least select one row.", "error");
     };

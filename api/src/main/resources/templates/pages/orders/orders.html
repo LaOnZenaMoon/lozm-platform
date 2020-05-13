@@ -64,7 +64,7 @@
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="post_store" readonly>
 									<div class="input-group-append">
-										<span class="input-group-text"><i class="fa fa-search"></i></span>
+										<span class="input-group-text" onclick='$("#get_store").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
 								</div>
 							</div>
@@ -76,9 +76,14 @@
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" id="post_item" readonly>
 									<div class="input-group-append">
-										<span class="input-group-text"><i class="fa fa-search"></i></span>
+										<span class="input-group-text" onclick="item.showModal()"><i class="fa fa-search"></i></span>
 									</div>
 								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="post_itemQuantity">Item quantity</label>
+								<input type="number" class="form-control" id="post_itemQuantity" name="itemQuantity">
 							</div>
 
 							<div class="form-group">
@@ -149,6 +154,165 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="get_store">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<i class="fa fa-table"></i> Store
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="storeGrid" class="table table-bordered display modal-grid"></table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success" onclick="store.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="get_item">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<ul class="nav nav-tabs nav-tabs-info nav-justified">
+											<li class="nav-item">
+												<a class="nav-link active" data-toggle="tab" href="#outer"><i class="icon-home"></i> <span class="hidden-xs">Outer</span></a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" data-toggle="tab" href="#top"><i class="icon-user"></i> <span class="hidden-xs">Top</span></a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" data-toggle="tab" href="#bottom"><i class="icon-envelope-open"></i> <span class="hidden-xs">Bottom</span></a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" data-toggle="tab" href="#shoes"><i class="icon-envelope-open"></i> <span class="hidden-xs">Shoes</span></a>
+											</li>
+
+										</ul>
+
+										<!-- Tab panes -->
+										<div class="tab-content">
+											<div id="outer" class="container tab-pane active">
+
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="card">
+															<div class="card-header">
+																<i class="fa fa-table"></i> Item > Outer
+															</div>
+															<div class="card-body">
+																<div class="table-responsive">
+																	<table id="outerGrid" class="table table-bordered display modal-grid"></table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+
+											<div id="top" class="container tab-pane fade">
+
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="card">
+															<div class="card-header">
+																<i class="fa fa-table"></i> Item > Top
+															</div>
+															<div class="card-body">
+																<div class="table-responsive">
+																	<table id="topGrid" class="table table-bordered display modal-grid"></table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+											<div id="bottom" class="container tab-pane fade">
+
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="card">
+															<div class="card-header">
+																<i class="fa fa-table"></i> Item > Bottom
+															</div>
+															<div class="card-body">
+																<div class="table-responsive">
+																	<table id="bottomGrid" class="table table-bordered display modal-grid"></table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+											<div id="shoes" class="container tab-pane fade">
+
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="card">
+															<div class="card-header">
+																<i class="fa fa-table"></i> Item > Shoes
+															</div>
+															<div class="card-body">
+																<div class="table-responsive">
+																	<table id="shoesGrid" class="table table-bordered display modal-grid"></table>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success" onclick="store.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
 		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
@@ -162,6 +326,9 @@
 
 			user.initGrid();
 			user.getGridData();
+
+			store.initGrid();
+			store.getGridData();
 
 			$("#post_ordersForm").validate({
 				submitHandler: function(form) {
@@ -388,10 +555,437 @@
 			setInput: function () {
 				var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
 				var _target = _selectedRows[0];
-				console.log(_target);
+
 				$("#post_userId").val(_target.id);
 				$("#post_user").val(_target.name + "(ID: " + _target.identifier + ", Type: " + _target.type + ")");
 				$("#get_user").modal("hide");
+			},
+		};
+
+		var store = {
+			gridId: "storeGrid",
+			gridTarget: function () {
+				return $("#" + store.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+store.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',               	data: 'id',             visible: false},
+						{title: 'Store name', 			data: 'name', 			width: "20%"},
+						{title: 'Telephone Number', 	data: 'telNumber', 		width: "30%"},
+						{title: 'Information', 			data: 'info', 			width: "40%"},
+					],
+					data: [],
+					select: {
+						// style: 'multi',
+						style: 'single',
+					},
+					buttons: [
+						// {
+						// 	text: '<i class="fa fa-check-square"></i>',
+						// 	action: function () {
+						// 		var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
+						// 		if(_selectedRows.length > 0) store.gridTarget().rows().deselect();
+						// 		else store.gridTarget().rows().select();
+						// 	}
+						// },
+					],
+				});
+			},
+			getGridData: function () {
+				lozm.func.requestGet({
+					url: /*[[ @{/api/store} ]]*/ "",
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								store.gridTarget().clear().draw();
+								store.gridTarget().rows.add(result.data.list).draw();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			setInput: function () {
+				var _selectedRows = store.gridTarget().rows({selected: true}).data().toArray();
+				var _target = _selectedRows[0];
+
+				$("#post_storeId").val(_target.id);
+				$("#post_store").val(_target.name);
+				$("#get_store").modal("hide");
+			},
+		};
+
+		var item = {
+			type: {
+				outer: "OUTER",
+				top: "TOP",
+				bottom: "BOTTOM",
+				shoes: "SHOES"
+			},
+			getGridData: function (itemType) {
+				lozm.func.requestGet({
+					url: "/api/store/" + $("#put_store_id").val() + "/clothing/" + itemType,
+					callback: {
+						success: function(result) {
+							console.log(result);
+							if(result.success === true) {
+								var _gridTarget = $("#" + itemType.toLowerCase() + "Grid").DataTable();
+								_gridTarget.clear().draw();
+								_gridTarget.rows.add(result.data.list).draw();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function(xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			setInput: function () {
+				var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
+				var _target = _selectedRows[0];
+
+				$("#post_itemId").val(_target.id);
+				$("#post_item").val(_target.name);
+				$("#get_item").modal("hide");
+			},
+			showModal: function () {
+				if(lozm.func.isEmpty($("#post_storeId")).val()) {
+					lozm.func.alertWarning("Select store first before selecting item.");
+					return;
+				}
+
+				$("#get_item").modal("show");
+			},
+		};
+
+		var itemOuter = {
+			gridId: "outerGrid",
+			gridTarget: function () {
+				return $("#" + itemOuter.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+itemOuter.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',       data: 'id',         visible: false},
+						{title: 'name',     data: 'name',       width: "30%"},
+						{title: 'contents', data: 'contents',   width: "40%"},
+						{title: 'price',    data: 'price',      width: "10%"},
+						{title: 'size',     data: 'size',       width: "10%"},
+						{title: 'quantity', data: 'quantity',   width: "10%"},
+					],
+					data: /*[[ ${outerList} ]]*/ "",
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemOuter.gridTarget().rows().deselect();
+								else itemOuter.gridTarget().rows().select();
+							}
+						},
+						{
+							text: '<i class="fa fa-plus"></i>',
+							action: function () {
+								$('#post_item_type').val(item.type.outer);
+								$("#post_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-edit"></i>',
+							action: function () {
+								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								} else if(_selectedRows.length > 1) {
+									lozm.func.alertRowsAreSelected();
+									return;
+								}
+
+								console.log(_selectedRows);
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.outer);
+								$("#put_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								}
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.outer);
+							},
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+		};
+
+		var itemTop = {
+			gridId: "topGrid",
+			gridTarget: function () {
+				return $("#" + itemTop.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+itemTop.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',       data: 'id',         visible: false},
+						{title: 'name',     data: 'name',       width: "30%"},
+						{title: 'contents', data: 'contents',   width: "40%"},
+						{title: 'price',    data: 'price',      width: "10%"},
+						{title: 'size',     data: 'size',       width: "10%"},
+						{title: 'quantity', data: 'quantity',   width: "10%"},
+					],
+					data: /*[[ ${topList} ]]*/ "",
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemTop.gridTarget().rows().deselect();
+								else itemTop.gridTarget().rows().select();
+							}
+						},
+						{
+							text: '<i class="fa fa-plus"></i>',
+							action: function () {
+								$('#post_item_type').val(item.type.top);
+								$("#post_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-edit"></i>',
+							action: function () {
+								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								} else if(_selectedRows.length > 1) {
+									lozm.func.alertRowsAreSelected();
+									return;
+								}
+
+								console.log(_selectedRows);
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.top);
+								$("#put_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								}
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.top);
+							},
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+
+		};
+
+		var itemBottom = {
+			gridId: "bottomGrid",
+			gridTarget: function () {
+				return $("#" + itemBottom.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+itemBottom.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',       data: 'id',         visible: false},
+						{title: 'name',     data: 'name',       width: "30%"},
+						{title: 'contents', data: 'contents',   width: "40%"},
+						{title: 'price',    data: 'price',      width: "10%"},
+						{title: 'size',     data: 'size',       width: "10%"},
+						{title: 'quantity', data: 'quantity',   width: "10%"},
+					],
+					data: /*[[ ${bottomList} ]]*/ "",
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemBottom.gridTarget().rows().deselect();
+								else itemBottom.gridTarget().rows().select();
+							}
+						},
+						{
+							text: '<i class="fa fa-plus"></i>',
+							action: function () {
+								$('#post_item_type').val(item.type.bottom);
+								$("#post_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-edit"></i>',
+							action: function () {
+								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								} else if(_selectedRows.length > 1) {
+									lozm.func.alertRowsAreSelected();
+									return;
+								}
+
+								console.log(_selectedRows);
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.bottom);
+								$("#put_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								}
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.bottom);
+							},
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+		};
+
+		var itemShoes = {
+			gridId: "shoesGrid",
+			gridTarget: function () {
+				return $("#" + itemShoes.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+itemShoes.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',       data: 'id',         visible: false},
+						{title: 'name',     data: 'name',       width: "30%"},
+						{title: 'contents', data: 'contents',   width: "40%"},
+						{title: 'price',    data: 'price',      width: "10%"},
+						{title: 'size',     data: 'size',       width: "10%"},
+						{title: 'quantity', data: 'quantity',   width: "10%"},
+					],
+					data: /*[[ ${shoesList} ]]*/ "",
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) itemShoes.gridTarget().rows().deselect();
+								else itemShoes.gridTarget().rows().select();
+							}
+						},
+						{
+							text: '<i class="fa fa-plus"></i>',
+							action: function () {
+								$('#post_item_type').val(item.type.shoes);
+								$("#post_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-edit"></i>',
+							action: function () {
+								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								} else if(_selectedRows.length > 1) {
+									lozm.func.alertRowsAreSelected();
+									return;
+								}
+
+								console.log(_selectedRows);
+								lozm.func.setDetail("put_item_", _selectedRows[0]);
+								$('#put_item_type').val(item.type.shoes);
+								$("#put_item").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								}
+								if(confirm("Are you sure to delete the data?")) item.delete(_selectedRows, item.type.shoes);
+							},
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
 			},
 		};
 

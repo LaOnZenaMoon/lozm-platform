@@ -46,11 +46,13 @@
 					<form id="post_ordersForm">
 						<div class="modal-body">
 							<div class="form-group">
+								<input type="hidden" id="post_userId">
+
 								<label for="post_user">User</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_user">
+									<input type="text" class="form-control" id="post_user" readonly>
 									<div class="input-group-append">
-										<span class="input-group-text"><i class="fa fa-search"></i></span>
+										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
 								</div>
 							</div>
@@ -58,7 +60,7 @@
 							<div class="form-group">
 								<label for="post_item">Item</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_item">
+									<input type="text" class="form-control" id="post_item" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text"><i class="fa fa-search"></i></span>
 									</div>
@@ -68,7 +70,7 @@
 							<div class="form-group">
 								<label for="post_coupon">Coupon</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_coupon">
+									<input type="text" class="form-control" id="post_coupon" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text"><i class="fa fa-search"></i></span>
 									</div>
@@ -78,7 +80,7 @@
 							<div class="form-group">
 								<label for="post_delivery">Delivery</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_delivery">
+									<input type="text" class="form-control" id="post_delivery" readonly>
 									<div class="input-group-append">
 										<span class="input-group-text"><i class="fa fa-search"></i></span>
 									</div>
@@ -103,28 +105,28 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="card">
-										<div class="card-header">
-											<i class="fa fa-table"></i> User
-										</div>
-										<div class="card-body">
-											<div class="table-responsive">
-												<table id="userGrid" class="table table-bordered display modal-grid"></table>
-											</div>
+
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-header">
+										<i class="fa fa-table"></i> User
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="userGrid" class="table table-bordered display modal-grid"></table>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success"><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success" onclick="user.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -139,6 +141,9 @@
 		$(document).ready(function () {
 			orders.initGrid();
 			orders.getGridData();
+
+			user.initGrid();
+			user.getGridData();
 
 			$("#post_ordersForm").validate({
 				submitHandler: function(form) {
@@ -308,6 +313,67 @@
 						}
 					}
 				});
+			},
+		};
+
+		var user = {
+			gridId: "userGrid",
+			gridTarget: function () {
+				return $("#" + user.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+user.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',               	data: 'id',             	visible: false},
+						{title: 'password',             data: 'password',           visible: false},
+						{title: 'Identifier', 			data: 'identifier', 		width: "40%"},
+						{title: 'Name', 				data: 'name', 				width: "40%"},
+						{title: 'Type', 				data: 'type', 				width: "20%"},
+					],
+					data: [],
+					select: {
+						// style: 'multi',
+						style: 'single',
+					},
+					buttons: [
+						// {
+						// 	text: '<i class="fa fa-check-square"></i>',
+						// 	action: function () {
+						// 		var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
+						// 		if(_selectedRows.length > 0) user.gridTarget().rows().deselect();
+						// 		else user.gridTarget().rows().select();
+						// 	}
+						// },
+					],
+				});
+			},
+			getGridData: function () {
+				lozm.func.requestGet({
+					url: /*[[ @{/api/user} ]]*/ "",
+					callback: {
+						success: function (result) {
+							console.log(result);
+							if(result.success) {
+								user.gridTarget().clear().draw();
+								user.gridTarget().rows.add(result.data.list).draw();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			setInput: function () {
+				var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
+				var _target = _selectedRows[0];
+				console.log(_target);
+				$("#post_userId").val(_target.id);
+				$("#post_user").val(_target.name + "(ID: " + _target.identifier + ", Type: " + _target.type + ")");
+				$("#get_user").modal("hide");
 			},
 		};
 

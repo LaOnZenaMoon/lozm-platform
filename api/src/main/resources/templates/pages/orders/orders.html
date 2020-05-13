@@ -534,7 +534,6 @@
 					url: /*[[ @{/api/orders} ]]*/ "",
 					callback: {
 						success: function (result) {
-							console.log(result);
 							if(result.success) {
 								orders.gridTarget().clear().draw();
 								orders.gridTarget().rows.add(result.data.list).draw();
@@ -605,7 +604,6 @@
 					url: /*[[ @{/api/user} ]]*/ "",
 					callback: {
 						success: function (result) {
-							console.log(result);
 							if(result.success) {
 								user.gridTarget().clear().draw();
 								user.gridTarget().rows.add(result.data.list).draw();
@@ -691,7 +689,7 @@
 					url: "/api/store/" + $("#post_store_id").val() + "/clothing/" + itemType,
 					callback: {
 						success: function(result) {
-							console.log(result);
+
 							if(result.success === true) {
 								var _gridTarget = $("#" + itemType.toLowerCase() + "Grid").DataTable();
 								_gridTarget.clear().draw();
@@ -725,7 +723,6 @@
 				}
 
 				var _target = _selectedRows[0];
-				console.log(_target);
 
 				$("#post_item_id").val(_target.id);
 				$("#post_item").val(_target.name);
@@ -790,7 +787,6 @@
 									return;
 								}
 
-								console.log(_selectedRows);
 								lozm.func.setDetail("put_item_", _selectedRows[0]);
 								$('#put_item_type').val(item.type.outer);
 								$("#put_item").modal("show");
@@ -1094,7 +1090,7 @@
 					url: /*[[ @{/api/coupon} ]]*/ "",
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								coupon.gridTarget().clear().draw();
 								coupon.gridTarget().rows.add(result.data.list).draw();
@@ -1158,7 +1154,7 @@
 					url: /*[[ @{/api/delivery} ]]*/ "",
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								delivery.gridTarget().clear().draw();
 								delivery.gridTarget().rows.add(result.data.list).draw();

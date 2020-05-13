@@ -287,7 +287,7 @@
 					url: /*[[ @{/api/user} ]]*/ "",
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								user.gridTarget().clear().draw();
 								user.gridTarget().rows.add(result.data.list).draw();

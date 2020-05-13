@@ -91,7 +91,7 @@
                     url: "/api/item",
                     callback: {
                         success: function(result) {
-                            console.log(result);
+
                             if(result.success === true) {
                                 item.gridTarget().clear().draw();
                                 item.gridTarget().rows.add(result.data.list).draw();

@@ -444,7 +444,7 @@
 					url: "/api/store/" + $("#put_store_id").val() + "/clothing/" + itemType,
 					callback: {
 						success: function(result) {
-							console.log(result);
+
 							if(result.success === true) {
 								var _gridTarget = $("#" + itemType.toLowerCase() + "Grid").DataTable();
 								_gridTarget.clear().draw();
@@ -475,7 +475,7 @@
 					},
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								lozm.func.alertSuccess();
 								item.getGridData(itemType);
@@ -504,7 +504,7 @@
 					},
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								lozm.func.alertSuccess();
 								item.getGridData(itemType);
@@ -528,7 +528,7 @@
 					},
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								lozm.func.alertSuccess();
 								item.getGridData(itemType);
@@ -594,7 +594,6 @@
 									return;
 								}
 
-								console.log(_selectedRows);
 								lozm.func.setDetail("put_item_", _selectedRows[0]);
 								$('#put_item_type').val(item.type.outer);
 								$("#put_item").modal("show");

@@ -313,7 +313,7 @@
 					url: /*[[ @{/api/delivery} ]]*/ "",
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								delivery.gridTarget().clear().draw();
 								delivery.gridTarget().rows.add(result.data.list).draw();

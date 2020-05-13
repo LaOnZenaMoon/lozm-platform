@@ -323,7 +323,7 @@
 					url: "/api/coupon/" + $("#put_coupon_id").val(),
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								debugger;
 								lozm.func.setDetail("put_coupon_", result.data);
@@ -420,7 +420,7 @@
 					url: "/api/coupon/" + $("#put_coupon_id").val() + "/user",
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								coupon.getDetail();
 								couponUser.gridTarget().clear().draw();
@@ -558,7 +558,7 @@
 					url: /*[[ @{/api/user} ]]*/ "",
 					callback: {
 						success: function (result) {
-							console.log(result);
+
 							if(result.success) {
 								user.gridTarget().clear().draw();
 								user.gridTarget().rows.add(result.data.list).draw();

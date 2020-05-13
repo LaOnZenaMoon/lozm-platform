@@ -46,7 +46,7 @@
 					<form id="post_ordersForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<input type="hidden" id="post_user_id">
+								<input type="hidden" id="post_user_id" name="userId">
 
 								<label for="post_user">User</label>
 								<div class="input-group mb-3">
@@ -58,7 +58,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_store_id">
+								<input type="hidden" id="post_store_id" name="storeId">
 
 								<label for="post_store">Store</label>
 								<div class="input-group mb-3">
@@ -70,7 +70,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_item_id">
+								<input type="hidden" id="post_item_id" name="itemId">
 
 								<label for="post_item">Item</label>
 								<div class="input-group mb-3">
@@ -87,7 +87,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_coupon_id">
+								<input type="hidden" id="post_coupon_id" name="couponId">
 
 								<label for="post_coupon">Coupon</label>
 								<div class="input-group mb-3">
@@ -99,7 +99,7 @@
 							</div>
 
 							<div class="form-group">
-								<input type="hidden" id="post_delivery_id">
+								<input type="hidden" id="post_delivery_id" name="deliveryId">
 
 								<label for="post_delivery">Delivery</label>
 								<div class="input-group mb-3">
@@ -416,17 +416,46 @@
 					orders.post();
 				},
 				rules: {
-					name: {
+					userId: {
+						required: true
+					},
+					storeId: {
+						required: true
+					},
+					itemId: {
+						required: true
+					},
+					itemQuantity: {
+						required: true
+					},
+					couponId: {
+						required: true
+					},
+					deliveryId: {
 						required: true
 					},
 				},
 				message: {
-					name: {
-						required: "Name is required.",
+					userId: {
+						required: "userId is required.",
+					},
+					storeId: {
+						required: "storeId is required.",
+					},
+					itemId: {
+						required: "itemId is required.",
+					},
+					itemQuantity: {
+						required: "item_quantity is required.",
+					},
+					couponId: {
+						required: "couponId is required.",
+					},
+					deliveryId: {
+						required: "deliveryId is required.",
 					},
 				},
 			});
-
 		});
 
 		var orders = {

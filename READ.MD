@@ -22,7 +22,8 @@
   => orders > 수정(detail page)
   => orders > 삭제
   
-=> delivery 
+=> delivery
+  => 현재, 엔티티 관계가 (delivery 1 : orders 1) 로 설정되어있는데, 이것이 맞는 것인지?
 
 ## API 인증 절차 정의 및 개발
 
@@ -38,6 +39,8 @@
 ## B2C 페이지 개발
 
 ## API 날짜 및 번호 리턴 포맷 맞춤 처리
+
+## 등록일. 수정일. 등록자. 수정자. 공통 처리
 
 # Database script
 CREATE USER LOZM identified by oracle ;

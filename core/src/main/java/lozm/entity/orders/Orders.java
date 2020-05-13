@@ -48,4 +48,8 @@ public class Orders extends BaseEntity {
         this.status = OrderStatus.valueOf(ordersVo.getStatus());
         this.setBaseEntity("", ordersVo.getFlag());
     }
+
+    public void deleteOrders(OrdersVo ordersVo) {
+        this.setBaseEntity("", ordersVo.getFlag());
+    }
 }

@@ -119,6 +119,103 @@
 			</div>
 		</div>
 
+		<div class="modal fade" id="put_orders">
+			<div class="modal-dialog modal-custom">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="put_ordersForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="hidden" id="put_orders_id">
+							</div>
+
+							<div class="form-group">
+								<label for="put_ordersStatus">Status</label>
+								<select class="form-control single-select" id="put_ordersStatus" name="ordersStatus">
+									<option value="PREPARATION">Preparation</option>
+									<option value="PROGRESS">Progress</option>
+									<option value="COMPLETE">Complete</option>
+								</select>
+							</div>
+<!--							<div class="form-group">-->
+<!--								<input type="hidden" id="put_user_id">-->
+
+<!--								<label for="put_user">User</label>-->
+<!--								<div class="input-group mb-3">-->
+<!--									<input type="text" class="form-control" id="put_user" readonly name="user">-->
+<!--									<div class="input-group-append">-->
+<!--										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+
+<!--							<div class="form-group">-->
+<!--								<input type="hidden" id="put_store_id">-->
+
+<!--								<label for="put_store">Store</label>-->
+<!--								<div class="input-group mb-3">-->
+<!--									<input type="text" class="form-control" id="put_store" readonly name="store">-->
+<!--									<div class="input-group-append">-->
+<!--										<span class="input-group-text" onclick='$("#get_store").modal("show")'><i class="fa fa-search"></i></span>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+
+<!--							<div class="form-group">-->
+<!--								<input type="hidden" id="put_item_id">-->
+
+<!--								<label for="put_item">Item</label>-->
+<!--								<div class="input-group mb-3">-->
+<!--									<input type="text" class="form-control" id="put_item" readonly name="item">-->
+<!--									<div class="input-group-append">-->
+<!--										<span class="input-group-text" onclick="item.showModal()"><i class="fa fa-search"></i></span>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+
+<!--							<div class="form-group">-->
+<!--								<label for="put_item_quantity">Item quantity</label>-->
+<!--								<input type="number" class="form-control" id="put_item_quantity" name="item_quantity" value="1">-->
+<!--							</div>-->
+
+<!--							<div class="form-group">-->
+<!--								<input type="hidden" id="put_coupon_id">-->
+
+<!--								<label for="put_coupon">Coupon</label>-->
+<!--								<div class="input-group mb-3">-->
+<!--									<input type="text" class="form-control" id="put_coupon" readonly name="coupon">-->
+<!--									<div class="input-group-append">-->
+<!--										<span class="input-group-text" onclick='$("#get_coupon").modal("show")'><i class="fa fa-search"></i></span>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+
+<!--							<div class="form-group">-->
+<!--								<input type="hidden" id="put_delivery_id">-->
+
+<!--								<label for="put_delivery">Delivery</label>-->
+<!--								<div class="input-group mb-3">-->
+<!--									<input type="text" class="form-control" id="put_delivery" readonly name="delivery">-->
+<!--									<div class="input-group-append">-->
+<!--										<span class="input-group-text" onclick='$("#get_delivery").modal("show")'><i class="fa fa-search"></i></span>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
 		<div class="modal fade" id="get_user">
 			<div class="modal-dialog modal-custom">
 				<div class="modal-content slideInUp">
@@ -435,24 +532,30 @@
 						required: true
 					},
 				},
-				message: {
+			});
+
+			$("#put_ordersForm").validate({
+				submitHandler: function(form) {
+					orders.put();
+				},
+				rules: {
 					user: {
-						required: "userId is required.",
+						required: true
 					},
 					store: {
-						required: "storeId is required.",
+						required: true
 					},
 					item: {
-						required: "itemId is required.",
+						required: true
 					},
 					item_quantity: {
-						required: "item_quantity is required.",
+						required: true
 					},
 					coupon: {
-						required: "couponId is required.",
+						required: true
 					},
 					delivery: {
-						required: "deliveryId is required.",
+						required: true
 					},
 				},
 			});
@@ -511,11 +614,24 @@
 									return;
 								}
 
+								console.log(_selectedRows[0]);
 								lozm.func.setDetail("put_", _selectedRows[0]);
 
 								$("#put_orders").modal("show");
 							},
 						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = orders.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								}
+
+								if(confirm("Are you sure to delete the data?")) orders.delete(_selectedRows);
+							},
+						},	
 						{
 							extend: "csv",
 							text: '<i class="fa fa-download"></i>',
@@ -556,6 +672,53 @@
 						quantity: $("#post_item_quantity").val(),
 						couponId: $("#post_coupon_id").val(),
 						deliveryId: $("#post_delivery_id").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								orders.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			put: function () {
+				lozm.func.requestPost({
+					url: /*[[ @{/api/orders} ]]*/ "",
+					data: {
+						id: $("#put_orders_id").val(),
+						status: $("#put_ordersStatus").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								orders.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			delete: function (list) {
+				lozm.func.requestDelete({
+					url: /*[[ @{/api/orders} ]]*/ "",
+					data: {
+						list: list
 					},
 					callback: {
 						success: function (result) {

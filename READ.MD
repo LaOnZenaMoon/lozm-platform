@@ -19,7 +19,8 @@
     => ** 해당 store 에 대한 item 선택(store detail 에 있는 것처럼 탭으로 분리할 것인지?)
     => coupon 선택
     => delivery 선택  
-  => orders > 수정(detail page)
+  => orders > 수정
+    => modal 에서 status 만 수정가능하도록 우선 처리. 기타 수정 기능은 복잡하여 차후에 구현하도록 계획.
   => orders > 삭제
   
 => delivery

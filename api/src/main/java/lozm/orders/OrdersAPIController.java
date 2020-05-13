@@ -2,6 +2,7 @@ package lozm.orders;
 
 import lombok.RequiredArgsConstructor;
 import lozm.dto.APIResponseDto;
+import lozm.dto.orders.DeleteOrdersDto;
 import lozm.dto.orders.GetOrdersDto;
 import lozm.dto.orders.PostOrdersDto;
 import lozm.dto.orders.PutOrdersDto;
@@ -75,6 +76,29 @@ public class OrdersAPIController {
                     .build();
 
             ordersService.update(ordersVo);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @DeleteMapping
+    public APIResponseDto deleteOrders(@RequestBody @Valid DeleteOrdersDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            for (DeleteOrdersDto dto : reqDto.getList()) {
+                OrdersVo ordersVo = OrdersVo.builder()
+                        .id(dto.getId())
+                        .flag(0)
+                        .build();
+
+                ordersService.delete(ordersVo);
+            }
+
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

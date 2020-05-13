@@ -118,4 +118,14 @@ public class OrdersService {
 
         findOrders.get().updateOrders(ordersVo);
     }
+
+    @Transactional
+    public void delete(OrdersVo ordersVo) {
+        Optional<Orders> findOrders = ordersRepository.findById(ordersVo.getId());
+        findOrders.orElseThrow(() -> {
+            throw new APIException("ORDERS_0002", "Order doesn't exist.");
+        });
+
+        findOrders.get().deleteOrders(ordersVo);
+    }
 }

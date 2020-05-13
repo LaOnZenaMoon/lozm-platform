@@ -26,7 +26,6 @@ public class DeliveryService {
 
 
     public List<GetDeliveryDto> getDeliveryList() {
-//        List<Delivery> deliveryList = deliveryRepository.findAll();
         List<Delivery> deliveryList = repositorySupport.selectDeliveryList();
 
         return deliveryList.stream().map(d -> new GetDeliveryDto(

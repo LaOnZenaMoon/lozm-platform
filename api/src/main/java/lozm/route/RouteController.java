@@ -95,6 +95,11 @@ public class RouteController {
         return "pages/coupon/couponDetail";
     }
 
+    @GetMapping(value = "/manage/delivery")
+    public String manageDelivery(ModelMap modelMap) {
+        return "pages/delivery/delivery";
+    }
+
     @GetMapping(value = "/manage/orders")
     public String manageOrders(ModelMap modelMap) {
         return "pages/orders/orders";

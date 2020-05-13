@@ -15,10 +15,10 @@ public class PostOrdersDto {
         @NotNull
         private Long itemId;
 
+        private Long couponId;
+
         @NotNull
         private Long deliveryId;
-
-        private Long couponId;
 
         @NotNull
         private Long quantity;

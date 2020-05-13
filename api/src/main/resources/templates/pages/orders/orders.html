@@ -552,10 +552,11 @@
 				lozm.func.requestPost({
 					url: /*[[ @{/api/orders} ]]*/ "",
 					data: {
-						name: $("#post_name").val(),
-						identifier: $("#post_identifier").val(),
-						password: $("#post_password").val(),
-						type: $("#post_type").val()
+						userId: $("#post_user_id").val(),
+						itemId: $("#post_item_id").val(),
+						quantity: $("#post_item_quantity").val(),
+						couponId: $("#post_coupon_id").val(),
+						deliveryId: $("#post_delivery_id").val()
 					},
 					callback: {
 						success: function (result) {

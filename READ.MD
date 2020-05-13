@@ -42,6 +42,10 @@
 
 ## 등록일. 수정일. 등록자. 수정자. 공통 처리
 
+## API 통신구간 암호화
+
+## user password 암호화
+
 # Database script
 CREATE USER LOZM identified by oracle ;
 GRANT CONNECT, RESOURCE TO LOZM

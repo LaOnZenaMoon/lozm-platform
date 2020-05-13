@@ -54,7 +54,16 @@ public class DeliveryService {
         findDelivery.orElseThrow(() -> {
             throw new APIException("DELIVERY_0002", "Delivery doesn't exist.");
         });
+
         findDelivery.get().updateDelivery(deliveryVo);
     }
-    
+
+    public void delete(DeliveryVo deliveryVo) {
+        Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
+        findDelivery.orElseThrow(() -> {
+            throw new APIException("DELIVERY_0002", "Delivery doesn't exist.");
+        });
+
+        findDelivery.get().deleteDelivery(deliveryVo);
+    }
 }

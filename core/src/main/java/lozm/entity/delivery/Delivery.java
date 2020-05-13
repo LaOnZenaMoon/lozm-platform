@@ -49,4 +49,8 @@ public class Delivery extends BaseEntity {
         this.status = DeliveryStatus.valueOf(deliveryVo.getStatus());
         this.setBaseEntity("", deliveryVo.getFlag());
     }
+
+    public void deleteDelivery(DeliveryVo deliveryVo) {
+        this.setBaseEntity("", deliveryVo.getFlag());
+    }
 }

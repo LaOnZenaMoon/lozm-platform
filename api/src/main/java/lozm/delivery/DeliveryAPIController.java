@@ -3,6 +3,7 @@ package lozm.delivery;
 import lombok.RequiredArgsConstructor;
 import lozm.dto.APIResponseDto;
 
+import lozm.dto.delivery.DeleteDeliveryDto;
 import lozm.dto.delivery.GetDeliveryDto;
 import lozm.dto.delivery.PostDeliveryDto;
 import lozm.dto.delivery.PutDeliveryDto;
@@ -81,6 +82,29 @@ public class DeliveryAPIController {
                     .build();
 
             deliveryService.update(deliveryVo);
+            resDto.setSuccess(true);
+        } catch (Exception e) {
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @DeleteMapping
+    public APIResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) {
+        APIResponseDto resDto = new APIResponseDto<>();
+
+        try {
+            for (DeleteDeliveryDto dto : reqDto.getList()) {
+                DeliveryVo deliveryVo = DeliveryVo.builder()
+                        .id(dto.getId())
+                        .flag(0)
+                        .build();
+
+                deliveryService.delete(deliveryVo);
+            }
+
             resDto.setSuccess(true);
         } catch (Exception e) {
             resDto.setSuccess(false);

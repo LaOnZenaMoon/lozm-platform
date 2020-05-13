@@ -38,14 +38,19 @@ public class OrdersBulkInsert {
 
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     private ObjectMapper objectMapper;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private ItemService itemService;
+
     @Autowired
     private CouponService couponService;
+
     @Autowired
     private DeliveryService deliveryService;
 

@@ -83,7 +83,7 @@
 
 							<div class="form-group">
 								<label for="post_itemQuantity">Item quantity</label>
-								<input type="number" class="form-control" id="post_itemQuantity" name="itemQuantity">
+								<input type="number" class="form-control" id="post_itemQuantity" name="itemQuantity" value="1">
 							</div>
 
 							<div class="form-group">
@@ -207,16 +207,16 @@
 									<div class="card-body">
 										<ul class="nav nav-tabs nav-tabs-info nav-justified">
 											<li class="nav-item">
-												<a class="nav-link active" data-toggle="tab" href="#outer"><i class="icon-home"></i> <span class="hidden-xs">Outer</span></a>
+												<a class="nav-link active" data-toggle="tab" href="#outer" onclick="item.getGridData(item.type.outer)"><i class="icon-home"></i> <span class="hidden-xs">Outer</span></a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" data-toggle="tab" href="#top"><i class="icon-user"></i> <span class="hidden-xs">Top</span></a>
+												<a class="nav-link" data-toggle="tab" href="#top" onclick="item.getGridData(item.type.top)"><i class="icon-user"></i> <span class="hidden-xs">Top</span></a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" data-toggle="tab" href="#bottom"><i class="icon-envelope-open"></i> <span class="hidden-xs">Bottom</span></a>
+												<a class="nav-link" data-toggle="tab" href="#bottom" onclick="item.getGridData(item.type.bottom)"><i class="icon-envelope-open"></i> <span class="hidden-xs">Bottom</span></a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" data-toggle="tab" href="#shoes"><i class="icon-envelope-open"></i> <span class="hidden-xs">Shoes</span></a>
+												<a class="nav-link" data-toggle="tab" href="#shoes" onclick="item.getGridData(item.type.shoes)"><i class="icon-envelope-open"></i> <span class="hidden-xs">Shoes</span></a>
 											</li>
 
 										</ul>
@@ -306,7 +306,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="store.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
+						<button type="submit" class="btn btn-success" onclick="item.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
 					</div>
 
 				</div>
@@ -638,8 +638,23 @@
 				});
 			},
 			setInput: function () {
-				var _selectedRows = item.gridTarget().rows({selected: true}).data().toArray();
+				var _activeType = item.type[$(".nav-link.active").attr("href").replace("#","")];
+
+				var _selectedRows = null;
+				if(_activeType === item.type.outer) {
+					_selectedRows = itemOuter.gridTarget().rows({selected: true}).data().toArray();
+				} else if(_activeType === item.type.top) {
+					_selectedRows = itemTop.gridTarget().rows({selected: true}).data().toArray();
+				} else if(_activeType === item.type.bottom) {
+					_selectedRows = itemBottom.gridTarget().rows({selected: true}).data().toArray();
+				} else if(_activeType === item.type.shoes) {
+					_selectedRows = itemShoes.gridTarget().rows({selected: true}).data().toArray();
+				} else {
+					lozm.func.alertWarning("While selecting the item, error has occured.");
+				}
+
 				var _target = _selectedRows[0];
+				console.log(_target);
 
 				$("#post_item_id").val(_target.id);
 				$("#post_item").val(_target.name);
@@ -647,10 +662,11 @@
 			},
 			showModal: function () {
 				if(lozm.func.isEmpty($("#post_store_id").val())) {
-					lozm.func.alertWarning("Select store first before selecting item.");
+					lozm.func.alertWarning("Select the store before selecting the item.");
 					return;
 				}
 
+				item.getGridData(item.type.outer);
 				$("#get_item").modal("show");
 			},
 		};

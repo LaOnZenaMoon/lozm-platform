@@ -58,6 +58,7 @@ public class DeliveryService {
         findDelivery.get().updateDelivery(deliveryVo);
     }
 
+    @Transactional
     public void delete(DeliveryVo deliveryVo) {
         Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
         findDelivery.orElseThrow(() -> {

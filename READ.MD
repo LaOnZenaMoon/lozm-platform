@@ -42,6 +42,7 @@
 ## API 날짜 및 번호 리턴 포맷 맞춤 처리
 
 ## 등록일. 수정일. 등록자. 수정자. 공통 처리
+=> Spring Data JPA > Auditing Entity 기능 + Spring Security 기능 활용하여, 로그인 세션 정보 담기.
 
 ## API 통신구간 암호화
 

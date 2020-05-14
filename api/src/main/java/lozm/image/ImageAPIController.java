@@ -8,10 +8,7 @@ import lozm.vo.image.ImageVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
@@ -27,33 +24,32 @@ import java.util.Map;
 public class ImageAPIController {
 
     private static Map<String, byte[]> imageCash;
-
     private final ImageService imageService;
 
 
-    public void getImage(HttpServletResponse response, @ModelAttribute ImageDto.Request reqDto) {
-        //TODO 리팩토링 필요
-        //imageVo 가 null 일 때 처리
-        if (imageCash == null) {
-            imageCash = new HashMap<String, byte[]>();
-        }
-
+    @GetMapping("/{fileName:.+}")
+    public void getImage(@PathVariable String fileName, HttpServletResponse response) {
         try {
-            ImageVo imageVo = ImageVo.builder()
-                    .imageName(reqDto.getImageName())
-                    .imageSize(reqDto.getImageSize())
-                    .imageData(reqDto.getImageData())
-                    .imageFileType(reqDto.getImageFileType())
-                    .imageRotation(reqDto.getImageRotation())
-                    .build();
+            if (imageCash == null) {
+                imageCash = new HashMap<String, byte[]>();
+            }
 
-            imageVo = StringUtils.isEmpty(reqDto.getImageName()) ? null : imageService.getImage(imageVo);
+            byte[] imageFileToByte = null;
+            if(imageCash.containsKey(fileName)) {
+                imageFileToByte = imageCash.get(fileName);
+            } else {
+                ImageVo imageVo = ImageVo.builder()
+                        .imageName(fileName)
+                        .build();
 
-            byte[] imageFileToByte = Files.readAllBytes(imageVo.getImageFile().toPath());
-            imageCash.put(reqDto.getImageName(), imageFileToByte);
+                imageVo = StringUtils.isEmpty(fileName) ? null : imageService.getImage(imageVo);
+
+                imageFileToByte = Files.readAllBytes(imageVo.getImageFile().toPath());
+                imageCash.put(fileName, imageFileToByte);
+            }
 
             InputStream imageFileStream = new ByteArrayInputStream(imageFileToByte);
-//            response.setContentType("png");
+            //response.setContentType("png");
             StreamUtils.copy(imageFileStream, response.getOutputStream());
             imageFileStream.close();
         } catch (Exception e) {

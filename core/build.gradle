@@ -11,6 +11,8 @@ dependencies {
 
     // Image Rotation
     implementation 'org.imgscalr:imgscalr-lib:4.2'
+
+    implementation 'org.apache.commons:commons-lang3:3.10'
 }
 
 // QueryDSL -- start

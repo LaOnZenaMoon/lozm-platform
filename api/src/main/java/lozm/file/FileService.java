@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lozm.exception.APIException;
 import lozm.props.FileProps;
+import lozm.vo.file.FileVo;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.mock.web.MockMultipartFile;
@@ -24,15 +25,17 @@ public class FileService {
     private final FileProps fileProps;
 
 
-    public String saveFile(MultipartFile file, String path, String fileName) throws Exception {
+    public String saveFile(MultipartFile file, FileVo fileVo) throws Exception {
 //        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = fileVo.getName();
+        String filePath = fileVo.getPath();
 
         try {
             if (fileName.contains("..")) {
                 throw new APIException("FILE001001", "File name has a problem.");
             }
 
-            Path sourcePath = fileProps.getSourcePath(path);
+            Path sourcePath = fileProps.getSourcePath(filePath);
             fileProps.createFilesDirectories(sourcePath);
             Path targetPath = sourcePath.resolve(fileName).normalize();
 
@@ -48,11 +51,14 @@ public class FileService {
         }
     }
 
-    public Resource downloadFile(String path, String fileName) throws Exception {
+    public Resource downloadFile(FileVo fileVo) throws Exception {
+        String fileName = fileVo.getName();
+        String filePath = fileVo.getPath();
+
         try {
-            Path filePath = fileProps.getSourcePath(path).resolve(fileName)
+            Path path = fileProps.getSourcePath(filePath).resolve(fileName)
                     .normalize();
-            Resource resource = new UrlResource(filePath.toUri());
+            Resource resource = new UrlResource(path.toUri());
 
             if (resource.exists()) {
                 return resource;
@@ -68,12 +74,16 @@ public class FileService {
         }
     }
 
-    public MultipartFile convertFileToMultipartFile(String path, String fileName, String contentType) {
+    public MultipartFile convertFileToMultipartFile(FileVo fileVo) {
+        String fileName = fileVo.getName();
+        String filePath = fileVo.getPath();
+        String contentType = fileVo.getContentType();
+
         try {
-            Path filePath = fileProps.getSourcePath(path).resolve(fileName)
+            Path path = fileProps.getSourcePath(filePath).resolve(fileName)
                     .normalize();
-            File rtnFile = filePath.toFile();
-            byte[] rtnFileContent = Files.readAllBytes(filePath);
+            File rtnFile = path.toFile();
+            byte[] rtnFileContent = Files.readAllBytes(path);
 
             if (rtnFile.exists()) {
                 return new MockMultipartFile(fileName, fileName, contentType, rtnFileContent);

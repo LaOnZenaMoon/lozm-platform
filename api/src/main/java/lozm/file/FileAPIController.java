@@ -3,7 +3,9 @@ package lozm.file;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lozm.dto.APIResponseDto;
+import lozm.dto.file.FileDto;
 import lozm.props.FileProps;
+import lozm.vo.file.FileVo;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,33 +33,38 @@ public class FileAPIController {
     @PostMapping(value = "/uploadSingleFile")
     public APIResponseDto uploadSingleFile(@RequestParam("file") MultipartFile file) {
         APIResponseDto resDto = new APIResponseDto<>();
+        FileDto.Response dto = new FileDto.Response();
 
         try {
+            FileVo fileVo = FileVo.builder()
+                    .name(file.getOriginalFilename())
+                    .path(fileProps.getUploadPath())
+                    .build();
 
-
-            String fileName = fileService.saveFile(file, fileProps.getUploadPath(), file.getOriginalFilename());
-            resDto.setFileName(fileName);
+            String fileName = fileService.saveFile(file, fileVo);
+            dto.setFileName(fileName);
 
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
                 .path(fileName)
                 .toUriString();
-            resDto.setFileDownloadUri(fileDownloadUri);
-            resDto.setFileType(file.getContentType());
-            resDto.setFileSize(file.getSize());
+            dto.setFileDownloadUri(fileDownloadUri);
+            dto.setFileType(file.getContentType());
+            dto.setFileSize(file.getSize());
 
-            resDto.setEvType("S");
+            resDto.setSuccess(true);
+            resDto.setData(dto);
         } catch (Exception e) {
-            log.debug(e.getMessage());
-            resDto.setEvType("E");
-            resDto.setEvMsg(e.getMessage());
+            e.printStackTrace();
+            resDto.setSuccess(false);
+            resDto.setMessage(e.getMessage());
         }
 
         return resDto;
     }
 
     @PostMapping(value = "/uploadMultipleFile")
-    public List<FileDto.Response> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) {
+    public List<APIResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
             .stream()
             .map(file -> uploadSingleFile(file))
@@ -70,7 +77,12 @@ public class FileAPIController {
         String contentType = null;
 
         try {
-            resource = fileService.downloadFile(fileProps.getUploadPath(), fileName);
+            FileVo fileVo = FileVo.builder()
+                    .name(fileName)
+                    .path(fileProps.getUploadPath())
+                    .build();
+
+            resource = fileService.downloadFile(fileVo);
 
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
             if(contentType == null) contentType = "application/octet-stream";

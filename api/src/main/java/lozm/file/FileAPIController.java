@@ -30,7 +30,7 @@ public class FileAPIController {
     private final FileProps fileProps;
 
 
-    @PostMapping(value = "/uploadSingleFile")
+    @PostMapping(value = "/upload/single")
     public APIResponseDto uploadSingleFile(@RequestParam("file") MultipartFile file) {
         APIResponseDto resDto = new APIResponseDto<>();
         FileDto.Response dto = new FileDto.Response();
@@ -63,7 +63,7 @@ public class FileAPIController {
         return resDto;
     }
 
-    @PostMapping(value = "/uploadMultipleFile")
+    @PostMapping(value = "/upload/multi")
     public List<APIResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
             .stream()
@@ -71,7 +71,7 @@ public class FileAPIController {
             .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/downloadFile/{fileName:.+}")
+    @GetMapping(value = "/download/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         Resource resource = null;
         String contentType = null;
@@ -87,10 +87,9 @@ public class FileAPIController {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
             if(contentType == null) contentType = "application/octet-stream";
         } catch (IOException ex) {
-            log.debug("Could not determine file type.");
-            log.debug(ex.getMessage());
+            ex.printStackTrace();
         } catch (Exception e) {
-            log.debug(e.getMessage());
+            e.printStackTrace();
         }
 
         return ResponseEntity.ok()

@@ -1,11 +1,9 @@
 package lozm.image;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import lozm.dto.APIResponseDto;
 import lozm.dto.image.ImageDto;
 import lozm.vo.image.ImageVo;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +15,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-@Slf4j
-@Controller
+@RestController
 @RequestMapping(value = "/api/image")
 @RequiredArgsConstructor
 public class ImageAPIController {

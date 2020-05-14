@@ -5,11 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import lozm.dto.APIResponseDto;
 import lozm.dto.image.ImageDto;
 import lozm.vo.image.ImageVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;

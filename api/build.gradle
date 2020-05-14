@@ -13,19 +13,21 @@ dependencies {
     implementation 'org.springframework.hateoas:spring-hateoas'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 
-    //thymeleaf
+    // Thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    // Upload the file - MockMultipartFile
+    implementation 'org.springframework:spring-mock:2.0.8'
+
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    testCompile project(':core')
-
     // Spring REST Docs
-//    testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
+//    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
     // BulkInsert Test data
-    testImplementation('com.github.javafaker:javafaker:0.12')
+    testImplementation 'com.github.javafaker:javafaker:0.12'
 }
 
 // asciidoctor -- start

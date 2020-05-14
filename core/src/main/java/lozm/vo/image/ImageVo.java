@@ -24,4 +24,12 @@ public class ImageVo {
     private String imageFilePath;
     private File imageFile;
 
+    public void setImageFile(File imageFile) {
+        this.imageFile = imageFile;
+    }
+
+    public void setImageFilePath(String imageFilePath) {
+        this.imageFilePath = imageFilePath;
+    }
+
 }

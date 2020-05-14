@@ -1,6 +1,7 @@
 package lozm.image;
 
 import lombok.RequiredArgsConstructor;
+import lozm.props.ImageProps;
 import lozm.vo.image.ImageVo;
 import org.springframework.stereotype.Service;
 

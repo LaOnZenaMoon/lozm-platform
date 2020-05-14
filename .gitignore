@@ -41,3 +41,7 @@ log/
 
 ### Query DSL ###
 **/generated/**
+
+### Upload path ###
+/file
+/image

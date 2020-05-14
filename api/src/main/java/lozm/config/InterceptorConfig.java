@@ -26,6 +26,7 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
                 || reqUri.contains("/layout")
                 || reqUri.contains("/error")
                 || reqUri.contains("/sign")
+                || reqUri.contains("/download")
         ) {
             return super.preHandle(request, response, handler);
         }

@@ -45,7 +45,7 @@ public class FileAPIController {
             dto.setFileName(fileName);
 
             String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/api/file/download/")
                 .path(fileName)
                 .toUriString();
             dto.setFileDownloadUri(fileDownloadUri);

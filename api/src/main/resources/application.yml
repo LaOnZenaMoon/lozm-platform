@@ -25,11 +25,11 @@ spring:
     output:
         ansi:
             enabled: always
-        servlet:
-            multipart:
-                enabled: true
-                max-file-size: 200MB
-                max-request-size: 215MB
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 200MB
+            max-request-size: 215MB
 
 logging.level:
     org.hibernate.SQL: debug

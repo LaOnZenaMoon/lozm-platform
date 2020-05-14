@@ -48,6 +48,8 @@
 
 ## user password 암호화
 
+## 채팅 모듈 만들기
+
 # Database script
 CREATE USER LOZM identified by oracle ;
 GRANT CONNECT, RESOURCE TO LOZM

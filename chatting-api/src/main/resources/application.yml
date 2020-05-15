@@ -1,11 +1,18 @@
+spring:
+    profiles:
+        active: local
+
+server:
+    port: 8084
+
 chatting:
     topic_removal_time: 10
 
 rabbitmq:
     setting:
         url: http://localhost:8083/lozm-chat
-        relay_host: 192.168.10.3
-        relay_port: 61613
+        relay_host: 127.0.0.1
+        relay_port: 8085
         client_id: lozm
         client_password: lozm
 

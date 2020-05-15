@@ -39,6 +39,7 @@ ALTER USER SYSTEM QUOTA 100M ON SYSTEM;
 GRANT UNLIMITED TABLESPACE TO SYSTEM;
 
 # API script
+sudo docker run -d --name rabbitmq -p 5672:5672 -p 8085:15672 --restart=unless-stopped -e RABBITMQ_DEFAULT_USER=lozm -e RABBITMQ_DEFAULT_PASS=lozm rabbitmq:management
 
 # Remember list
 ## 관리 화면 개발

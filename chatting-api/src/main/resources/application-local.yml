@@ -1,0 +1,55 @@
+spring:
+    datasource:
+        driverClassName: oracle.jdbc.driver.OracleDriver
+        url: jdbc:oracle:thin:@//127.0.0.1:1521/XE
+        username: system
+        password: oracle
+        testQuery: "SELECT 1 FROM DUAL"
+        hikari:
+            maximum-pool-size: 5
+    jpa:
+        database-platform: org.hibernate.dialect.Oracle10gDialect
+        hibernate:
+#            ddl-auto: create-drop
+#            ddl-auto: create
+            ddl-auto: update
+        properties:
+            hibernate:
+                default_batch_fetch_size: 500
+                jdbc:
+                    batch_size: 100
+                    order_inserts: true
+            format_sql: true
+#        show-sql: true
+#        generate-ddl: true
+    output:
+        ansi:
+            enabled: always
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 200MB
+            max-request-size: 215MB
+    mvc:
+        contentnegotiation:
+            favor-parameter: true
+            favor-path-extension: true
+            media-types:
+                xls: application/vnd.ms-excel
+
+logging.level:
+    org.hibernate.SQL: debug
+#    org.hibernate.type: trace
+
+
+server:
+    port: 8082
+
+image:
+    uploadPath: ./image/upload
+    width: 160
+    height: 160
+    defaultUserImage: user2-160x160.jpg
+
+file:
+    uploadPath: ./file/upload

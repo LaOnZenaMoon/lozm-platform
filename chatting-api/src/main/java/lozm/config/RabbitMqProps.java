@@ -14,6 +14,7 @@ public class RabbitMqProps {
     private SettingProps setting;
     private TopicProps topic;
 
+    //TODO properties depth 처리
     @Getter
     @Setter
     public class SettingProps {

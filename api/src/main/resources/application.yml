@@ -30,6 +30,12 @@ spring:
             enabled: true
             max-file-size: 200MB
             max-request-size: 215MB
+    mvc:
+        contentnegotiation:
+            favor-parameter: true
+            favor-path-extension: true
+            media-types:
+                xls: application/vnd.ms-excel
 
 logging.level:
     org.hibernate.SQL: debug

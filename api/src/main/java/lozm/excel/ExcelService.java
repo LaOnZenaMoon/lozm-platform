@@ -1,7 +1,6 @@
 package lozm.excel;
 
 import lombok.RequiredArgsConstructor;
-import lombok.val;
 import lozm.dto.orders.GetOrdersDto;
 import lozm.entity.delivery.Delivery;
 import lozm.exception.APIException;
@@ -14,11 +13,11 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -28,12 +27,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ExcelService {
 
     private final OrdersService ordersService;
     private final DeliveryRepository deliveryRepository;
 
 
+    @Transactional
     public Sheet getSampleList(Workbook workbook) throws Exception {
         //Get the list
         List<GetOrdersDto> ordersList = ordersService.getOrdersList();
@@ -75,14 +76,16 @@ public class ExcelService {
         return sheet;
     }
 
+    @Transactional
     public void uploadExcel(MultipartFile file) {
         List<Delivery> deliveryList = new ArrayList<>();
 
-        //Read the file to list using Workbook
         try {
+            //Read the file using Workbook
             OPCPackage opcPackage = OPCPackage.open(file.getInputStream());
             XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
 
+            //Insert the entity to DB
             XSSFSheet sheet = workbook.getSheetAt(0);
             for (int i = 1; i < sheet.getLastRowNum(); i++) {
                 XSSFRow row = sheet.getRow(i);
@@ -95,6 +98,9 @@ public class ExcelService {
                         .build();
 
                 Delivery delivery = new Delivery();
+                delivery.insertDelivery(vo);
+
+                System.out.println("delivery = " + delivery);
                 deliveryList.add(delivery);
             }
 
@@ -107,4 +113,5 @@ public class ExcelService {
             e.printStackTrace();
         }
     }
+
 }

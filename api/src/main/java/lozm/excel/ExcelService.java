@@ -3,16 +3,27 @@ package lozm.excel;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
 import lozm.dto.orders.GetOrdersDto;
+import lozm.entity.delivery.Delivery;
 import lozm.exception.APIException;
 import lozm.orders.OrdersService;
+import lozm.repository.delivery.DeliveryRepository;
+import lozm.vo.delivery.DeliveryVo;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +31,7 @@ import java.util.List;
 public class ExcelService {
 
     private final OrdersService ordersService;
+    private final DeliveryRepository deliveryRepository;
 
 
     public Sheet getSampleList(Workbook workbook) throws Exception {
@@ -61,18 +73,38 @@ public class ExcelService {
         }
 
         return sheet;
-//        for (int i = 0; i < ordersList.size(); i++) {
-//            Row row = sheet.createRow(i + 1);
-//            GetOrdersDto item = ordersList.get(i);
-//            Field[] itemDeclaredFields = item.getClass().getDeclaredFields();
-//            for (int j = 0; j < itemDeclaredFields.length; j++) {
-//                Cell cell = row.createCell(j);
-//                System.out.println("cell = " + cell);
-////                String name = String.valueOf(itemDeclaredFields[j]);
-////                Field field = item.getClass().getField(name);
-////                cell.setCellValue(field1);
-//            }
-//        }
     }
 
+    public void uploadExcel(MultipartFile file) {
+        List<Delivery> deliveryList = new ArrayList<>();
+
+        //Read the file to list using Workbook
+        try {
+            OPCPackage opcPackage = OPCPackage.open(file.getInputStream());
+            XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
+
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            for (int i = 1; i < sheet.getLastRowNum(); i++) {
+                XSSFRow row = sheet.getRow(i);
+                DeliveryVo vo = DeliveryVo.builder()
+                        .country(row.getCell(4).toString())
+                        .zipCode(row.getCell(5).toString())
+                        .city(row.getCell(6).toString())
+                        .street(row.getCell(7).toString())
+                        .etc(row.getCell(8).toString())
+                        .build();
+
+                Delivery delivery = new Delivery();
+                deliveryList.add(delivery);
+            }
+
+            deliveryRepository.saveAll(deliveryList);
+        } catch (InvalidFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,7 +1,6 @@
 package lozm.file;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import lozm.dto.APIResponseDto;
 import lozm.dto.file.FileDto;
 import lozm.props.FileProps;
@@ -20,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
+
 @RequestMapping(value = "/api/file")
 @RestController
 @RequiredArgsConstructor

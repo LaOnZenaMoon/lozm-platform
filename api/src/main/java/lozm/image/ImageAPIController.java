@@ -15,8 +15,9 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+
 @RequestMapping(value = "/api/image")
+@RestController
 @RequiredArgsConstructor
 public class ImageAPIController {
 

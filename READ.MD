@@ -1,12 +1,14 @@
 # TODO List
 ## Entity 추가
 => Image 추가.
-  => 연관관계 어떻게 설정할 것인지?
+  => 연관관계 어떻게 설정할 것인지? 이미지가 필요한 엔티티 마다 엮어주는 방법?
 
-## 파일 업로드 및 다운로드 API
+## Image & File 캐시 처리
 => 캐시 처리
 
 ## 엑셀 업로드 및 다운로드 API
+=> upload: 특정 테이블에 데이터 bulk insert.
+=> download: 특정 테이블에 select -> download.
 
 ## 관리 화면 개발
 => orders

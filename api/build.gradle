@@ -20,6 +20,9 @@ dependencies {
     // Upload the file - MockMultipartFile
     implementation 'org.springframework:spring-mock:2.0.8'
 
+    // Upload & download the Excel
+    implementation 'org.apache.poi:poi:4.1.1'
+    implementation 'org.apache.poi:poi-ooxml:4.1.1'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 

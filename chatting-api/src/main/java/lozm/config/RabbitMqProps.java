@@ -16,7 +16,7 @@ public class RabbitMqProps {
 
     @Getter
     @Setter
-    private class SettingProps {
+    public class SettingProps {
         private String url;
         private String host;
         private int port;
@@ -26,7 +26,7 @@ public class RabbitMqProps {
 
     @Getter
     @Setter
-    private class TopicProps {
+    public class TopicProps {
         private String consultantList;
         private String consultantStatus;
     }

@@ -29,7 +29,7 @@ public class ExcelService {
         if(ordersList.size() == 0) throw new APIException("EXCEL_DOWNLOAD_NO_LIST", "There is no result.");
 
         //Make the workbook
-        SXSSFWorkbook wb = (SXSSFWorkbook) workbook;
+        Workbook wb =  workbook;
         Sheet sheet = wb.createSheet();
 
         //Set the header

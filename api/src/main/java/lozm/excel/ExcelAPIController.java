@@ -17,13 +17,6 @@ public class ExcelAPIController {
 
     @GetMapping(value = "/download", produces = "application/vnd.ms-excel")
     public ModelAndView downloadExcel() {
-
-        try {
-            excelService.getSampleList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return new ModelAndView("excelView");
     }
 

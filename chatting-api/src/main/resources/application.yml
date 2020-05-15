@@ -1,0 +1,14 @@
+chatting:
+    topic_removal_time: 10
+
+rabbitmq:
+    setting:
+        url: http://localhost:8083/lozm-chat
+        relay_host: 192.168.10.3
+        relay_port: 61613
+        client_id: lozm
+        client_password: lozm
+
+    topic:
+        consultant_list: /topic/consultant/list
+        consultant_status: /topic/consultant/status

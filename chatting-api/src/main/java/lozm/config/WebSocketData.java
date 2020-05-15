@@ -1,18 +1,16 @@
 package lozm.config;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashMap;
 
 @Getter
-@Setter
+@Builder
 public class WebSocketData {
 
     private long topicRemovalTime;
-    private HashMap<String, Object> msgFilterMap;
-    private HashMap<String, Object> systemMsgMap;
-    private HashMap<String, Object> autoCompleteAllMsgMap;
-    private HashMap<String, Object> autoCompletePersonalMsgMap;
+    private HashMap<String, Object> filteringMessage;
+    private HashMap<String, Object> systemMessage;
 
 }

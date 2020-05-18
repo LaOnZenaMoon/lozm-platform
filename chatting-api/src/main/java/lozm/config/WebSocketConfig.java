@@ -23,7 +23,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     private final ChannelInterceptorConfig channelInterceptor;
     private final ChattingProps chattingProps;
-    private final RabbitMqProps rabbitMqProps;
+    private final RabbitMqSettingProps rabbitMqSettingProps;
+    private final RabbitMqTopicProps rabbitMqTopicProps;
 
 
     @Bean
@@ -46,10 +47,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry registry) {
 //    	registry.enableSimpleBroker("/topic");
     	registry.enableStompBrokerRelay("/topic")
-    	        .setRelayHost(rabbitMqProps.getSetting().getHost())
-                .setRelayPort(rabbitMqProps.getSetting().getPort())
-                .setClientLogin(rabbitMqProps.getSetting().getClientId())
-                .setClientPasscode(rabbitMqProps.getSetting().getClientPassword());
+    	        .setRelayHost(rabbitMqSettingProps.getHost())
+                .setRelayPort(rabbitMqSettingProps.getPort())
+                .setClientLogin(rabbitMqSettingProps.getClientId())
+                .setClientPasscode(rabbitMqSettingProps.getClientPassword());
     	
     	registry.setApplicationDestinationPrefixes("/publish");
     }

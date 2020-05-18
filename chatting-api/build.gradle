@@ -15,4 +15,6 @@ dependencies {
     implementation 'io.projectreactor:reactor-core:3.3.5.RELEASE'
     implementation 'io.projectreactor:reactor-net:2.0.8.RELEASE'
     implementation 'io.projectreactor.ipc:reactor-netty:0.7.15.RELEASE'
+    implementation 'io.projectreactor.netty:reactor-netty:0.9.7.RELEASE'
+
 }

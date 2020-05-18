@@ -12,4 +12,7 @@ dependencies {
     implementation 'org.webjars:stomp-websocket:2.3.3'
     implementation 'org.webjars:bootstrap:4.3.1'
     implementation 'org.webjars:jquery:3.4.1'
+    implementation 'io.projectreactor:reactor-core:3.3.5.RELEASE'
+    implementation 'io.projectreactor:reactor-net:2.0.8.RELEASE'
+    implementation 'io.projectreactor.ipc:reactor-netty:0.7.15.RELEASE'
 }

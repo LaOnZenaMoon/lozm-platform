@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 public class RabbitMqSettingProps {
 
     private String url;
-    private String host;
-    private int port;
+    private String relayHost;
+    private int relayPort;
     private String clientId;
     private String clientPassword;
 

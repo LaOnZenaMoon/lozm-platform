@@ -47,8 +47,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureMessageBroker(MessageBrokerRegistry registry) {
 //    	registry.enableSimpleBroker("/topic");
     	registry.enableStompBrokerRelay("/topic")
-    	        .setRelayHost(rabbitMqSettingProps.getHost())
-                .setRelayPort(rabbitMqSettingProps.getPort())
+    	        .setRelayHost(rabbitMqSettingProps.getRelayHost())
+                .setRelayPort(rabbitMqSettingProps.getRelayPort())
                 .setClientLogin(rabbitMqSettingProps.getClientId())
                 .setClientPasscode(rabbitMqSettingProps.getClientPassword());
     	

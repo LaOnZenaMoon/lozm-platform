@@ -3,6 +3,7 @@ package lozm.chatting.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,21 +46,6 @@ public class WebSocketAPIController {
 //
 //    @MessageMapping("/chat/message")
 //    public void sendMessageToTopic(ChatMsgDto chatMsgDto) {
-//		ChatMsgDto modifiedDto = null;
-//
-//		if(chatMsgDto.getClassName().contains("SYS")) {
-//			//1. 시스템 메시지 유무 확인
-//			modifiedDto = setSystemMessage(chatMsgDto);
-//		} else {
-//			//2. 필터링 메시지 유무 확인
-//			modifiedDto = doFilterMsg(chatMsgDto);
-//		}
-//
-//    	boolean modifyFlag = webSocketMetadata.modifyTopicMap(modifiedDto);
-//    	if(modifyFlag) {
-//			template.convertAndSend(getStringDecrypt(rabbitMqProperties.getConsultListTopic()), webSocketMetadata.getTopicMap());
-//    	}
-//
 //		template.convertAndSend("/topic/"+chatMsgDto.getTid(), modifiedDto);
 //    }
 

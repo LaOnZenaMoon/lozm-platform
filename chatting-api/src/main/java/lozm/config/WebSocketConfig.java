@@ -2,6 +2,9 @@ package lozm.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lozm.props.ChattingProps;
+import lozm.props.RabbitMqSettingProps;
+import lozm.props.RabbitMqTopicProps;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;

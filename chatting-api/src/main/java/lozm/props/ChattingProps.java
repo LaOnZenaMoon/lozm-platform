@@ -1,4 +1,4 @@
-package lozm.config;
+package lozm.props;
 
 import lombok.Getter;
 import lombok.Setter;

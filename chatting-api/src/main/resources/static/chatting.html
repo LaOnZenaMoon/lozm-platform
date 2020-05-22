@@ -76,13 +76,15 @@
 		stompClient = Stomp.over(sock);
 
 	    stompClient.connect({}, function (frame) {
+            debugger;
 	    	setConnected(true);
 	        console.log('Connected: '+frame);
 
-            stompClient.subscribe('/topic/' + _roomId.val(), function (chat) {
-                var content = JSON.parse(chat.body);
-                showChatMsg(content);
-            });
+            // stompClient.subscribe('http://127.0.0.1:8084/topic/' + _roomId.val(), function (chat) {
+            //     debugger;
+            //     var content = JSON.parse(chat.body);
+            //     showChatMsg(content);
+            // });
 	    });
 	}
 
@@ -121,7 +123,7 @@
 	    $("#connect").click(function() { connect(); });
 	    $("#disconnect").click(function() { disconnect(); });
 	    $("#send").click(function() {
-			stompClient.send('/publish/chat/message'
+			stompClient.send('http://127.0.0.1:8084/publish/chat/message'
 				, {}
 				, JSON.stringify({
 					topicId: _roomId.val()

@@ -12,7 +12,7 @@ rabbitmq:
     setting:
         url: http://127.0.0.1:8084/lozm-chat
         relay_host: 127.0.0.1
-        relay_port: 8085
+        relay_port: 5672
         client_id: lozm
         client_password: lozm
 

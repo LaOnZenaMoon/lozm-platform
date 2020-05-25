@@ -72,20 +72,22 @@
 	var _writer = $("#name");
 
 	function connect() {
-        var sock = new SockJS("http://127.0.0.1:8084/lozm-chat");
-		stompClient = Stomp.over(sock);
+	    try {
+            var sock = new SockJS("http://127.0.0.1:8084/lozm-chat");
+            stompClient = Stomp.over(sock);
 
-	    stompClient.connect({}, function (frame) {
-            debugger;
-	    	setConnected(true);
-	        console.log('Connected: '+frame);
+            stompClient.connect({}, function (frame) {
+                setConnected(true);
+                console.log('Connected: '+frame);
 
-            // stompClient.subscribe('http://127.0.0.1:8084/topic/' + _roomId.val(), function (chat) {
-            //     debugger;
-            //     var content = JSON.parse(chat.body);
-            //     showChatMsg(content);
-            // });
-	    });
+                stompClient.subscribe('http://127.0.0.1:8084/topic/' + _roomId.val(), function (chat) {
+                    var content = JSON.parse(chat.body);
+                    showChatMsg(content);
+                });
+            });
+        } catch (e) {
+            console.log(e);
+        }
 	}
 
 	function setConnected(connected) {

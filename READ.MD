@@ -3,8 +3,6 @@
 ## 채팅 모듈 만들기
 => chatting-api 모듈 > RabbitMQ + STOMP 프로토콜 활용하여, 서버 개발
 
-
-
 ## Entity 추가
 => Image 추가.
   => 연관관계 어떻게 설정할 것인지? 이미지가 필요한 엔티티 마다 엮어주는 방법?
@@ -31,6 +29,8 @@
 
 ## user password 암호화
 
+## Gateway server 만들기.
+=> 통합인증 및 endpoint 처리 등 기능 개발.
 
 # Database script
 CREATE USER LOZM identified by oracle ;

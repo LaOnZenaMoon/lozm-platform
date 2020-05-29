@@ -1,4 +1,4 @@
-rootProject.name = 'shop'
-include 'api'
-include 'core'
+rootProject.name = 'platform'
+include 'admin-api'
 include 'chatting-api'
+include 'core'

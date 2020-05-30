@@ -50,11 +50,12 @@ public class SignAPIController {
     private String setSessionInfo(SignVo SignVo) {
         httpSession.setAttribute(USER.name(), SignVo);
 
-        if( StringUtils.isEmpty(httpSession.getAttribute(PREV_PAGE.name())) ) {
+        String previousPage = httpSession.getAttribute(PREV_PAGE.name()).toString();
+        if( StringUtils.isEmpty(previousPage) || "/".equals(previousPage)) {
             return "/home";
         }
 
-        return httpSession.getAttribute(PREV_PAGE.name()).toString();
+        return previousPage;
     }
 
 }

@@ -37,7 +37,8 @@ out/
 log/
 
 ### template ###
-**/dashtreme/
+#**/dashtreme/
+assets/**.html
 
 ### Query DSL ###
 **/generated/**

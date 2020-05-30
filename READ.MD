@@ -1,5 +1,7 @@
 # TODO List
 
+## library 정리.
+
 ## 채팅 모듈 만들기
 => chatting-api 모듈 > RabbitMQ + STOMP 프로토콜 활용하여, 서버 개발
 

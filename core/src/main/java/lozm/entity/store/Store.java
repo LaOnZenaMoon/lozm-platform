@@ -3,7 +3,7 @@ package lozm.entity.store;
 import lombok.Getter;
 import lozm.entity.BaseEntity;
 import lozm.entity.item.Item;
-import lozm.vo.store.StoreVo;
+import lozm.object.vo.store.StoreVo;
 
 import javax.persistence.*;
 import java.util.List;

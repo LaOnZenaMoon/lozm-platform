@@ -2,8 +2,8 @@ package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lozm.code.CouponType;
-import lozm.dto.coupon.PostCouponDto;
+import lozm.object.code.CouponType;
+import lozm.object.dto.coupon.PostCouponDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

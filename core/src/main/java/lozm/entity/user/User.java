@@ -1,11 +1,11 @@
 package lozm.entity.user;
 
 import lombok.Getter;
-import lozm.code.UsersType;
+import lozm.object.code.UsersType;
 import lozm.entity.BaseEntity;
 import lozm.entity.coupon.CouponUser;
 import lozm.entity.orders.Orders;
-import lozm.vo.user.UserVo;
+import lozm.object.vo.user.UserVo;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;

@@ -3,7 +3,7 @@ package lozm.entity.coupon;
 import lombok.Getter;
 import lozm.entity.BaseEntity;
 import lozm.entity.user.User;
-import lozm.vo.coupon.CouponVo;
+import lozm.object.vo.coupon.CouponVo;
 
 import javax.persistence.*;
 

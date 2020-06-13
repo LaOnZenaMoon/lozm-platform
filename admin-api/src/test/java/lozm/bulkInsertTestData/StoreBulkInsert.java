@@ -2,8 +2,7 @@ package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lozm.dto.store.PostStoreDto;
-import lozm.dto.user.PostUserDto;
+import lozm.object.dto.store.PostStoreDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

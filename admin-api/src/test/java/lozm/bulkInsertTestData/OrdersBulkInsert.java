@@ -1,17 +1,16 @@
 package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lozm.coupon.CouponService;
-import lozm.delivery.DeliveryService;
-import lozm.dto.coupon.GetCouponDto;
-import lozm.dto.delivery.GetDeliveryDto;
-import lozm.dto.item.GetItemDto;
-import lozm.dto.orders.PostOrdersDto;
-import lozm.dto.user.GetUserDto;
-import lozm.item.ItemService;
-import lozm.user.UserService;
+import lozm.api.coupon.CouponService;
+import lozm.api.delivery.DeliveryService;
+import lozm.object.dto.coupon.GetCouponDto;
+import lozm.object.dto.delivery.GetDeliveryDto;
+import lozm.object.dto.item.GetItemDto;
+import lozm.object.dto.orders.PostOrdersDto;
+import lozm.object.dto.user.GetUserDto;
+import lozm.api.item.ItemService;
+import lozm.api.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

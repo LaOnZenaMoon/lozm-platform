@@ -4,7 +4,7 @@ import lombok.Getter;
 import lozm.entity.embedded.Clothing;
 import lozm.entity.item.Item;
 import lozm.entity.store.Store;
-import lozm.vo.item.ItemVo;
+import lozm.object.vo.item.ItemVo;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Embedded;

@@ -1,11 +1,11 @@
 package lozm.entity.orders;
 
 import lombok.Getter;
-import lozm.code.OrderStatus;
+import lozm.object.code.OrderStatus;
 import lozm.entity.BaseEntity;
 import lozm.entity.delivery.Delivery;
 import lozm.entity.user.User;
-import lozm.vo.orders.OrdersVo;
+import lozm.object.vo.orders.OrdersVo;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

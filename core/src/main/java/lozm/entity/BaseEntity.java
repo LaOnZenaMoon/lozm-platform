@@ -1,11 +1,9 @@
 package lozm.entity;
 
-import lozm.code.UsersType;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lozm.object.code.UsersType;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 

@@ -1,7 +1,7 @@
 package lozm.util;
 
 import lombok.extern.slf4j.Slf4j;
-import lozm.vo.image.ImageVo;
+import lozm.object.vo.image.ImageVo;
 import org.imgscalr.Scalr;
 
 import javax.imageio.ImageIO;

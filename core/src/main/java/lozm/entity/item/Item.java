@@ -4,7 +4,7 @@ import lombok.Getter;
 import lozm.entity.BaseEntity;
 import lozm.entity.store.Store;
 import lozm.exception.APIException;
-import lozm.vo.item.ItemVo;
+import lozm.object.vo.item.ItemVo;
 
 import javax.persistence.*;
 

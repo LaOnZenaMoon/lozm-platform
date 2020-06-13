@@ -1,10 +1,10 @@
 package lozm.entity.delivery;
 
 import lombok.Getter;
-import lozm.code.DeliveryStatus;
+import lozm.object.code.DeliveryStatus;
 import lozm.entity.BaseEntity;
 import lozm.entity.embedded.Address;
-import lozm.vo.delivery.DeliveryVo;
+import lozm.object.vo.delivery.DeliveryVo;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;

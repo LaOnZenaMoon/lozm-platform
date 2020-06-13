@@ -33,15 +33,34 @@ public class DateUtils {
     public final static DateTimeFormatter IOS_yyyyMMdd_HH = DateTimeFormatter.ofPattern("yyyy-MM-dd HH");
     public final static DateTimeFormatter IOS_yyyyMMdd_HHmm = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     public final static DateTimeFormatter IOS_yyyyMMdd_HHmmss = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    public final static DateTimeFormatter IOS_yyyyMMdd_HHmmssSSS = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+    public final static DateTimeFormatter IOS_yyyyMMdd_HHmmssSSS = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[.SSS][.SS][.S]");
 
-    public static boolean checkDate(String date) {
+    public static boolean isNotValid(String date) {
         try {
+
             parseDateTime(date);
-            return true;
-        } catch (Exception e) {
             return false;
+        } catch (Exception e) {
+            return true;
         }
+    }
+
+    public static boolean contains(LocalDateTime fromDateTime, LocalDateTime toDateTime) {
+        return contains(fromDateTime, toDateTime, LocalDateTime.now());
+    }
+
+    public static boolean contains(LocalDateTime fromDateTime, LocalDateTime toDateTime, LocalDateTime checkDateTime) {
+        return (checkDateTime.equals(fromDateTime) || checkDateTime.isAfter(fromDateTime))
+                && (checkDateTime.equals(toDateTime) || checkDateTime.isBefore(toDateTime));
+    }
+
+    public static boolean contains(LocalDate fromDate, LocalDate toDate) {
+        return contains(fromDate, toDate, LocalDate.now());
+    }
+
+    public static boolean contains(LocalDate fromDate, LocalDate toDate, LocalDate checkDate) {
+        return (checkDate.equals(fromDate) || checkDate.isAfter(fromDate))
+                && (checkDate.equals(toDate) || checkDate.isBefore(toDate));
     }
 
     public static String format(String date, String toFormat) {
@@ -111,7 +130,7 @@ public class DateUtils {
                     return IOS_yyyyMMdd_HHmm;
                 if (length == 19)
                     return IOS_yyyyMMdd_HHmmss;
-                if (length == 23)
+                if (length == 21 || length == 22 || length == 23)
                     return IOS_yyyyMMdd_HHmmssSSS;
             }
 

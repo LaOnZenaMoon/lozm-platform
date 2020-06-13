@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <property name="APPLICATION_LOG_FILE_NAME" value="application"/>
+    <property name="ERROR_LOG_FILE_NAME" value="error"/>
+    <property name="LOG_CHARSET" value="UTF-8"/>
+    <springProperty scope="context" name="LOG_LEVEL" source="logging.level.root" defaultValue="info"/>
+    <springProperty scope="context" name="LOG_PATH" source="logging.file.path" defaultValue="logs"/>
+    <springProperty scope="context" name="APPLICATION_NAME" source="spring.application.name" defaultValue="unknown-app"/>
+    <springProperty scope="context" name="PROFILES" source="spring.profiles.active" defaultValue="unknown"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>${LOG_CHARSET}</charset>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+<!--    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
+<!--        <destination>10.110.50.66:4560</destination>-->
+
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />-->
+<!--    </appender>-->
+
+<!--    <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <File>${LOG_PATH}/${APPLICATION_LOG_FILE_NAME}-json.log</File>-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            <FileNamePattern>${LOG_PATH}/${APPLICATION_LOG_FILE_NAME}_%d{yyyy-MM-dd}.%i.json</FileNamePattern>-->
+<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+<!--                <maxFileSize>5MB</maxFileSize>-->
+<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
+<!--            <maxHistory>30</maxHistory>-->
+<!--        </rollingPolicy>-->
+<!--    </appender>-->
+
+    <springProfile name="local">
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="CONSOLE"/>
+<!--            <appender-ref ref="JSON_FILE"/>-->
+<!--            <appender-ref ref="LOGSTASH"/>-->
+        </root>
+    </springProfile>
+
+    <springProfile name="dev, prod">
+        <include resource="logback/application-appender.xml"/>
+        <include resource="logback/error-appender.xml"/>
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="APPLICATION"/>
+            <appender-ref ref="ERROR"/>
+        </root>
+    </springProfile>
+</configuration>

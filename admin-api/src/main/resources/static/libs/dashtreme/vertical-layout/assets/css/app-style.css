@@ -487,6 +487,10 @@ hr {
      transition: background .3s;
 }
 
+.bg-theme-default {
+    background: linear-gradient(45deg, #87CEEB, #0350c5)!important;
+}
+
 .switcher {
   list-style: none;
   margin: 0;

@@ -1,7 +1,7 @@
 <th:block th:fragment="header" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <header class="topbar-nav">
-        <nav id="header-setting" class="navbar navbar-expand fixed-top">
+        <nav id="header-setting" class="navbar navbar-expand fixed-top bg-theme-default">
             <ul class="navbar-nav mr-auto align-items-center">
                 <li class="nav-item">
                     <a class="nav-link toggle-menu" href="javascript:void();">
@@ -29,7 +29,10 @@
                             <li class="list-group-item">
                                 <a href="javaScript:void();">
                                     <div class="media">
-                                        <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                        <div class="avatar"><img class="align-self-start mr-3"
+                                                                 src="https://via.placeholder.com/110x110"
+                                                                 th:src="@{/images/agent.png}"
+                                                                 alt="user avatar"></div>
                                         <div class="media-body">
                                             <h6 class="mt-0 msg-title">Jhon Deo</h6>
                                             <p class="msg-info">Lorem ipsum dolor sit amet...</p>
@@ -141,7 +144,10 @@
                         <li class="dropdown-item user-details">
                             <a href="javaScript:void();">
                                 <div class="media">
-                                    <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                    <div class="avatar"><img class="align-self-start mr-3"
+                                                             src="https://via.placeholder.com/110x110"
+                                                             th:src="@{/images/agent.png}"
+                                                             alt="user avatar"></div>
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title" th:text="${session.USER.name}">Administrator</h6>
                                         <p class="user-subtitle" th:text="${session.USER.identifier}">Administrator</p>
@@ -156,7 +162,7 @@
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
                         <li class="dropdown-divider"></li>
-                        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                        <li class="dropdown-item"><a href="/sign/out"><i class="icon-power mr-2"></i> Logout</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,4 +1,4 @@
-package lozm.api.route;
+package lozm.global.service;
 
 import lozm.object.dto.ApiException;
 import lozm.object.dto.ApiResponseDto;

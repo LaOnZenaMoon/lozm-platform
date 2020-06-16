@@ -2,7 +2,6 @@ package lozm.api.route;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.coupon.GetCouponDto;
 import lozm.object.dto.coupon.GetCouponUserDto;
 import lozm.object.dto.item.GetClothingDto;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 import static lozm.object.code.SessionType.USER;
 
@@ -71,14 +69,11 @@ public class RouteController {
     @GetMapping(value = "/manage/coupon/{couponId}")
     public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) throws Exception {
 
-        ApiResponseDto getCouponDetail = routeService.getCouponDetail(couponId);
-        GetCouponDto couponDetail = (GetCouponDto) getCouponDetail.getData();
-        modelMap.addAttribute("couponDetail", couponDetail);
+        GetCouponDto getCouponDetail = routeService.getCouponDetail(couponId);
+        modelMap.addAttribute("couponDetail", getCouponDetail);
 
-        ApiResponseDto getCouponUser = routeService.getCouponUser(couponId);
-        GetCouponUserDto.Response couponUser = (GetCouponUserDto.Response) getCouponUser.getData();
-        List<GetCouponUserDto> couponUserList = couponUser.getList();
-        modelMap.addAttribute("couponUserList", couponUserList);
+        GetCouponUserDto.Response getCouponUser = routeService.getCouponUser(couponId);
+        modelMap.addAttribute("couponUserList", getCouponUser.getList());
 
         return "pages/coupon/couponDetail";
     }

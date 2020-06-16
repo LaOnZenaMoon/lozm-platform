@@ -2,7 +2,10 @@ package lozm.api.route;
 
 import lombok.RequiredArgsConstructor;
 import lozm.global.properties.AdminApiProps;
+import lozm.global.service.BaseService;
 import lozm.object.dto.ApiResponseDto;
+import lozm.object.dto.coupon.GetCouponDto;
+import lozm.object.dto.coupon.GetCouponUserDto;
 import lozm.object.dto.item.GetClothingDto;
 import lozm.object.dto.store.GetStoreDto;
 import org.springframework.core.ParameterizedTypeReference;
@@ -46,11 +49,31 @@ public class RouteService {
         return responseBody.getData();
     }
 
-    public ApiResponseDto getCouponDetail(Long couponId) {
+    public GetCouponDto getCouponDetail(Long couponId) {
+        String url = adminApiProps.getUrl() + adminApiProps.getCoupon() + "/" + couponId;
+        ApiResponseDto<GetCouponDto> responseBody = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<ApiResponseDto<GetCouponDto>>() {
+                }
+        ).getBody();
 
+        BaseService.checkResponseBody(responseBody, "");
+        return responseBody.getData();
     }
 
-    public ApiResponseDto getCouponUser(Long couponId) {
+    public GetCouponUserDto.Response getCouponUser(Long couponId) {
+        String url = adminApiProps.getUrl() + adminApiProps.getCoupon() + "/" + couponId + "/user";
+        ApiResponseDto<GetCouponUserDto.Response> responseBody = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<ApiResponseDto<GetCouponUserDto.Response>>() {
+                }
+        ).getBody();
 
+        BaseService.checkResponseBody(responseBody, "");
+        return responseBody.getData();
     }
 }

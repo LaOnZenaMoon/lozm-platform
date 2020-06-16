@@ -1,14 +1,10 @@
-package lozm.api.store;
+package lozm.api.item;
 
 import lombok.RequiredArgsConstructor;
 import lozm.global.properties.AdminApiProps;
 import lozm.global.service.BaseService;
 import lozm.object.dto.ApiResponseDto;
-import lozm.object.dto.item.GetClothingDto;
-import lozm.object.dto.store.DeleteStoreDto;
-import lozm.object.dto.store.GetStoreDto;
-import lozm.object.dto.store.PostStoreDto;
-import lozm.object.dto.store.PutStoreDto;
+import lozm.object.dto.item.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -19,82 +15,82 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class StoreService {
+public class ItemService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
-    private final String STORE_URL = adminApiProps.getUrl() + adminApiProps.getStore();
+    private final String ITEM_URL = adminApiProps.getUrl() + adminApiProps.getItem();
 
 
-    public GetStoreDto.Response getStore() {
-        ApiResponseDto<GetStoreDto.Response> responseBody = restTemplate.exchange(
-                STORE_URL,
+    public GetItemDto.Response getItemList() {
+        ApiResponseDto<GetItemDto.Response> responseBody = restTemplate.exchange(
+                ITEM_URL,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<ApiResponseDto<GetStoreDto.Response>>() {}
+                new ParameterizedTypeReference<ApiResponseDto<GetItemDto.Response>>() {}
         ).getBody();
 
-        BaseService.checkResponseBody(responseBody, "Failed to interface getStore API.");
+        BaseService.checkResponseBody(responseBody, "Failed to interface getItemList API.");
         return responseBody.getData();
     }
 
-    public GetStoreDto getStoreDetail(Long storeId) {
-        ApiResponseDto<GetStoreDto> responseBody = restTemplate.exchange(
-                STORE_URL + "/" + storeId,
+    public GetItemDto getItemDetail(Long itemId) {
+        ApiResponseDto<GetItemDto> responseBody = restTemplate.exchange(
+                ITEM_URL + "/" + itemId,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<ApiResponseDto<GetStoreDto>>() {}
+                new ParameterizedTypeReference<ApiResponseDto<GetItemDto>>() {}
         ).getBody();
 
-        BaseService.checkResponseBody(responseBody, "Failed to interface getStoreDetail API.");
+        BaseService.checkResponseBody(responseBody, "Failed to interface getItemDetail API.");
         return responseBody.getData();
     }
 
-    public GetClothingDto.Response getStoreClothing(Long storeId, String itemType) {
+    public GetClothingDto.Response getClothing(String itemType) {
         ApiResponseDto<GetClothingDto.Response> responseBody = restTemplate.exchange(
-                STORE_URL + "/" + storeId + "/clothing/" + itemType,
+                ITEM_URL + "/clothing/" + itemType,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetClothingDto.Response>>() {}
         ).getBody();
 
-        BaseService.checkResponseBody(responseBody, "Failed to interface getStoreClothing API.");
+        BaseService.checkResponseBody(responseBody, "Failed to interface getClothing API.");
         return responseBody.getData();
     }
 
-    public ApiResponseDto postStore(PostStoreDto.Request reqDto) {
+    public ApiResponseDto postItem(PostItemDto.Request reqDto) {
         ApiResponseDto responseBody = restTemplate.exchange(
-                STORE_URL,
+                ITEM_URL,
                 HttpMethod.POST,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
         ).getBody();
 
-        BaseService.checkResponseBody(responseBody, "Failed to interface postStore API.");
+        BaseService.checkResponseBody(responseBody, "Failed to interface postItem API.");
         return responseBody;
     }
 
-    public ApiResponseDto putStore(PutStoreDto.Request reqDto) {
+    public ApiResponseDto putItem(PutItemDto.Request reqDto) {
         ApiResponseDto responseBody = restTemplate.exchange(
-                STORE_URL,
+                ITEM_URL,
                 HttpMethod.PUT,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
         ).getBody();
 
-        BaseService.checkResponseBody(responseBody, "Failed to interface putStore API.");
+        BaseService.checkResponseBody(responseBody, "Failed to interface putItem API.");
         return responseBody;
     }
 
-    public ApiResponseDto deleteStore(DeleteStoreDto.Request reqDto) {
+    public ApiResponseDto deleteItem(DeleteItemDto.Request reqDto) {
         ApiResponseDto responseBody = restTemplate.exchange(
-                STORE_URL,
+                ITEM_URL,
                 HttpMethod.DELETE,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
         ).getBody();
 
-        BaseService.checkResponseBody(responseBody, "Failed to interface deleteStore API.");
+        BaseService.checkResponseBody(responseBody, "Failed to interface deleteItem API.");
         return responseBody;
     }
 

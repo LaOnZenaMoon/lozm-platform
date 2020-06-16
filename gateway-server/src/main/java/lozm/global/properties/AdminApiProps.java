@@ -14,5 +14,6 @@ public class AdminApiProps {
 	private String url;
 	private String store;
 	private String coupon;
+	private String item;
 
 }

@@ -1,20 +1,14 @@
 package lozm.api.store;
 
 import lombok.RequiredArgsConstructor;
-import lozm.entity.store.Store;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
-import lozm.object.dto.item.GetClothingDto;
 import lozm.object.dto.store.DeleteStoreDto;
-import lozm.object.dto.store.GetStoreDto;
 import lozm.object.dto.store.PostStoreDto;
 import lozm.object.dto.store.PutStoreDto;
-import lozm.object.vo.item.ItemVo;
-import lozm.object.vo.store.StoreVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RequestMapping(value = "/store")
 @RestController

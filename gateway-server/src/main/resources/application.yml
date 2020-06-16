@@ -45,3 +45,4 @@ file:
 admin-api:
   store: /api/store
   coupon: /api/coupon
+  item: /api/item

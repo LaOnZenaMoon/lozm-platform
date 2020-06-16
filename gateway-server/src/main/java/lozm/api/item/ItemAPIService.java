@@ -15,14 +15,14 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ItemService {
+public class ItemAPIService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
     private final String ITEM_URL = adminApiProps.getUrl() + adminApiProps.getItem();
 
 
-    public GetItemDto.Response getItemList() {
+    public GetItemDto.Response getItemList() throws Exception {
         ApiResponseDto<GetItemDto.Response> responseBody = restTemplate.exchange(
                 ITEM_URL,
                 HttpMethod.GET,
@@ -34,7 +34,7 @@ public class ItemService {
         return responseBody.getData();
     }
 
-    public GetItemDto getItemDetail(Long itemId) {
+    public GetItemDto getItemDetail(Long itemId) throws Exception {
         ApiResponseDto<GetItemDto> responseBody = restTemplate.exchange(
                 ITEM_URL + "/" + itemId,
                 HttpMethod.GET,
@@ -46,7 +46,7 @@ public class ItemService {
         return responseBody.getData();
     }
 
-    public GetClothingDto.Response getClothing(String itemType) {
+    public GetClothingDto.Response getClothing(String itemType) throws Exception {
         ApiResponseDto<GetClothingDto.Response> responseBody = restTemplate.exchange(
                 ITEM_URL + "/clothing/" + itemType,
                 HttpMethod.GET,
@@ -58,7 +58,7 @@ public class ItemService {
         return responseBody.getData();
     }
 
-    public ApiResponseDto postItem(PostItemDto.Request reqDto) {
+    public ApiResponseDto postItem(PostItemDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 ITEM_URL,
                 HttpMethod.POST,
@@ -70,7 +70,7 @@ public class ItemService {
         return responseBody;
     }
 
-    public ApiResponseDto putItem(PutItemDto.Request reqDto) {
+    public ApiResponseDto putItem(PutItemDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 ITEM_URL,
                 HttpMethod.PUT,
@@ -82,7 +82,7 @@ public class ItemService {
         return responseBody;
     }
 
-    public ApiResponseDto deleteItem(DeleteItemDto.Request reqDto) {
+    public ApiResponseDto deleteItem(DeleteItemDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 ITEM_URL,
                 HttpMethod.DELETE,

@@ -15,37 +15,37 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class ItemController {
 
-    private final ItemService itemService;
+    private final ItemAPIService itemAPIService;
 
 
     @GetMapping
     public ApiResponseDto getItemList() throws Exception {
-        return ApiResponseDto.createException(ApiResponseCode.OK, itemService.getItemList());
+        return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.getItemList());
     }
 
     @GetMapping(value = "/{itemId}")
     public ApiResponseDto getItemDetail(@PathVariable(value = "itemId") Long itemId) throws Exception {
-        return ApiResponseDto.createException(ApiResponseCode.OK, itemService.getItemDetail(itemId));
+        return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.getItemDetail(itemId));
     }
 
     @GetMapping(value = "/clothing/{itemType}")
     public ApiResponseDto getClothing(@PathVariable(value = "itemType") String itemType) throws Exception {
-        return ApiResponseDto.createException(ApiResponseCode.OK, itemService.getClothing(itemType));
+        return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.getClothing(itemType));
     }
 
     @PostMapping
     public ApiResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) throws Exception {
-        return ApiResponseDto.createException(ApiResponseCode.OK, itemService.postItem(reqDto));
+        return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.postItem(reqDto));
     }
 
     @PutMapping
     public ApiResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) throws Exception {
-        return ApiResponseDto.createException(ApiResponseCode.OK, itemService.putItem(reqDto));
+        return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.putItem(reqDto));
     }
 
     @DeleteMapping
     public ApiResponseDto deleteItem(@RequestBody @Valid DeleteItemDto.Request reqDto) throws Exception {
-        return ApiResponseDto.createException(ApiResponseCode.OK, itemService.deleteItem(reqDto));
+        return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.deleteItem(reqDto));
     }
 
 }

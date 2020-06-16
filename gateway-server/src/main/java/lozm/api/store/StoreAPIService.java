@@ -19,14 +19,14 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class StoreService {
+public class StoreAPIService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
     private final String STORE_URL = adminApiProps.getUrl() + adminApiProps.getStore();
 
 
-    public GetStoreDto.Response getStore() {
+    public GetStoreDto.Response getStore() throws Exception {
         ApiResponseDto<GetStoreDto.Response> responseBody = restTemplate.exchange(
                 STORE_URL,
                 HttpMethod.GET,
@@ -38,7 +38,7 @@ public class StoreService {
         return responseBody.getData();
     }
 
-    public GetStoreDto getStoreDetail(Long storeId) {
+    public GetStoreDto getStoreDetail(Long storeId) throws Exception {
         ApiResponseDto<GetStoreDto> responseBody = restTemplate.exchange(
                 STORE_URL + "/" + storeId,
                 HttpMethod.GET,
@@ -50,7 +50,7 @@ public class StoreService {
         return responseBody.getData();
     }
 
-    public GetClothingDto.Response getStoreClothing(Long storeId, String itemType) {
+    public GetClothingDto.Response getStoreClothing(Long storeId, String itemType) throws Exception {
         ApiResponseDto<GetClothingDto.Response> responseBody = restTemplate.exchange(
                 STORE_URL + "/" + storeId + "/clothing/" + itemType,
                 HttpMethod.GET,
@@ -62,7 +62,7 @@ public class StoreService {
         return responseBody.getData();
     }
 
-    public ApiResponseDto postStore(PostStoreDto.Request reqDto) {
+    public ApiResponseDto postStore(PostStoreDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 STORE_URL,
                 HttpMethod.POST,
@@ -74,7 +74,7 @@ public class StoreService {
         return responseBody;
     }
 
-    public ApiResponseDto putStore(PutStoreDto.Request reqDto) {
+    public ApiResponseDto putStore(PutStoreDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 STORE_URL,
                 HttpMethod.PUT,
@@ -86,7 +86,7 @@ public class StoreService {
         return responseBody;
     }
 
-    public ApiResponseDto deleteStore(DeleteStoreDto.Request reqDto) {
+    public ApiResponseDto deleteStore(DeleteStoreDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 STORE_URL,
                 HttpMethod.DELETE,

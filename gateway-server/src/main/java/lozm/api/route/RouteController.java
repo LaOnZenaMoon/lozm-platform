@@ -25,8 +25,7 @@ import static lozm.object.code.SessionType.USER;
 public class RouteController {
 
     private final HttpSession httpSession;
-    private final StoreAPIController storeAPIController;
-    private final CouponAPIController couponAPIController;
+    private final RouteService routeService;
 
 
     @GetMapping(value = "/home")
@@ -43,26 +42,26 @@ public class RouteController {
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
         log.debug("Store ID: "+storeId);
 
-        ApiResponseDto getStoreDetail = storeAPIController.getStoreDetail(storeId);
+        ApiResponseDto getStoreDetail = routeService.getStoreDetail(storeId);
         GetStoreDto storeDetail = (GetStoreDto) getStoreDetail.getData();
         modelMap.addAttribute("storeDetail", storeDetail);
 
-        ApiResponseDto getOuter = storeAPIController.getStoreClothing(storeId, "OUTER");
+        ApiResponseDto getOuter = routeService.getStoreClothing(storeId, "OUTER");
         GetClothingDto.Response outer = (GetClothingDto.Response) getOuter.getData();
         List<GetClothingDto> outerList = outer.getList();
         modelMap.addAttribute("outerList", outerList);
 
-        ApiResponseDto getTop = storeAPIController.getStoreClothing(storeId, "TOP");
+        ApiResponseDto getTop = routeService.getStoreClothing(storeId, "TOP");
         GetClothingDto.Response top = (GetClothingDto.Response) getTop.getData();
         List<GetClothingDto> topList = top.getList();
         modelMap.addAttribute("topList", topList);
 
-        ApiResponseDto getBottom = storeAPIController.getStoreClothing(storeId, "BOTTOM");
+        ApiResponseDto getBottom = routeService.getStoreClothing(storeId, "BOTTOM");
         GetClothingDto.Response bottom = (GetClothingDto.Response) getBottom.getData();
         List<GetClothingDto> bottomList = bottom.getList();
         modelMap.addAttribute("bottomList", bottomList);
 
-        ApiResponseDto getShoes = storeAPIController.getStoreClothing(storeId, "SHOES");
+        ApiResponseDto getShoes = routeService.getStoreClothing(storeId, "SHOES");
         GetClothingDto.Response shoes = (GetClothingDto.Response) getShoes.getData();
         List<GetClothingDto> shoesList = shoes.getList();
         modelMap.addAttribute("shoesList", shoesList);
@@ -83,11 +82,11 @@ public class RouteController {
     @GetMapping(value = "/manage/coupon/{couponId}")
     public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) throws Exception {
 
-        ApiResponseDto getCouponDetail = couponAPIController.getCouponDetail(couponId);
+        ApiResponseDto getCouponDetail = routeService.getCouponDetail(couponId);
         GetCouponDto couponDetail = (GetCouponDto) getCouponDetail.getData();
         modelMap.addAttribute("couponDetail", couponDetail);
 
-        ApiResponseDto getCouponUser = couponAPIController.getCouponUser(couponId);
+        ApiResponseDto getCouponUser = routeService.getCouponUser(couponId);
         GetCouponUserDto.Response couponUser = (GetCouponUserDto.Response) getCouponUser.getData();
         List<GetCouponUserDto> couponUserList = couponUser.getList();
         modelMap.addAttribute("couponUserList", couponUserList);

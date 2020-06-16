@@ -2,6 +2,7 @@ package lozm.api.sign;
 
 import lombok.RequiredArgsConstructor;
 import static lozm.object.code.SessionType.*;
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
@@ -41,7 +42,9 @@ public class SignAPIController {
     private String setSessionInfo(SignVo SignVo) throws Exception {
         httpSession.setAttribute(USER.name(), SignVo);
 
-        String previousPage = httpSession.getAttribute(PREV_PAGE.name()).toString();
+        Object attribute = httpSession.getAttribute(PREV_PAGE.name());
+        String previousPage = isEmpty(attribute) ? "" : attribute.toString();
+
         if( StringUtils.isEmpty(previousPage) || "/".equals(previousPage)) {
             return "/home";
         }

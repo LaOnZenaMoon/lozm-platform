@@ -60,10 +60,10 @@
     };
 
     var ajaxDefault = function(options) {
-        if(checkJwt(options)) {
-            location.href = "/sign/out";
-            return;
-        }
+        // if(checkJwt(options)) {
+        //     location.href = "/sign/out";
+        //     return;
+        // }
 
         var ajaxOptions = $.extend({
             url: null

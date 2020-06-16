@@ -4,16 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.delivery.DeleteDeliveryDto;
-import lozm.object.dto.delivery.GetDeliveryDto;
 import lozm.object.dto.delivery.PostDeliveryDto;
 import lozm.object.dto.delivery.PutDeliveryDto;
-import lozm.object.vo.delivery.DeliveryVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
-@RequestMapping(value = "/api/delivery")
+@RequestMapping(value = "/delivery")
 @RestController
 @RequiredArgsConstructor
 public class DeliveryController {

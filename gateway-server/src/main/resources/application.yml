@@ -47,3 +47,4 @@ admin-api:
   coupon: /api/coupon
   item: /api/item
   delivery: /api/delivery
+  orders: /api/orders

@@ -1,6 +1,7 @@
 package lozm.api.coupon;
 
 import lombok.RequiredArgsConstructor;
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.coupon.*;
 import lozm.object.dto.user.GetUserDto;
@@ -19,222 +20,137 @@ public class CouponAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getCoupon() {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto getCoupon() throws Exception {
+        List<GetCouponDto> result = couponService.getCouponList();
 
-        try {
-            List<GetCouponDto> result = couponService.getCouponList();
-            GetCouponDto.Response couponResDto = new GetCouponDto.Response();
-            couponResDto.setList(result);
+        GetCouponDto.Response resDto = new GetCouponDto.Response();
+        resDto.setList(result);
 
-            resDto.setData(couponResDto);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @GetMapping("/{couponId}")
-    public ApiResponseDto getCouponDetail(@PathVariable(value = "couponId") Long couponId) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto getCouponDetail(@PathVariable(value = "couponId") Long couponId) throws Exception {
+        CouponVo couponVo = CouponVo.builder()
+                .id(couponId)
+                .build();
 
-        try {
-            CouponVo couponVo = CouponVo.builder()
-                    .id(couponId)
-                    .build();
+        GetCouponDto resDto = couponService.getCouponDetail(couponVo);
 
-            GetCouponDto result = couponService.getCouponDetail(couponVo);
-
-            resDto.setData(result);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @PostMapping
-    public ApiResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) throws Exception {
+        CouponVo couponVo = CouponVo.builder()
+                .name(reqDto.getName())
+                .contents(reqDto.getContents())
+                .type(reqDto.getType())
+                .amount(reqDto.getAmount())
+                .quantity(reqDto.getQuantity())
+                .startDt(reqDto.getStartDt())
+                .endDt(reqDto.getEndDt())
+                .flag(1)
+                .build();
 
-        try {
-            CouponVo couponVo = CouponVo.builder()
-                    .name(reqDto.getName())
-                    .contents(reqDto.getContents())
-                    .type(reqDto.getType())
-                    .amount(reqDto.getAmount())
-                    .quantity(reqDto.getQuantity())
-                    .startDt(reqDto.getStartDt())
-                    .endDt(reqDto.getEndDt())
-                    .flag(1)
-                    .build();
+        couponService.save(couponVo);
 
-            couponService.save(couponVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @PutMapping
-    public ApiResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) throws Exception {
+        CouponVo couponVo = CouponVo.builder()
+                .id(reqDto.getId())
+                .name(reqDto.getName())
+                .contents(reqDto.getContents())
+                .type(reqDto.getType())
+                .amount(reqDto.getAmount())
+                .quantity(reqDto.getQuantity())
+                .startDt(reqDto.getStartDt())
+                .endDt(reqDto.getEndDt())
+                .flag(1)
+                .build();
 
-        try {
-            CouponVo couponVo = CouponVo.builder()
-                    .id(reqDto.getId())
-                    .name(reqDto.getName())
-                    .contents(reqDto.getContents())
-                    .type(reqDto.getType())
-                    .amount(reqDto.getAmount())
-                    .quantity(reqDto.getQuantity())
-                    .startDt(reqDto.getStartDt())
-                    .endDt(reqDto.getEndDt())
-                    .flag(1)
-                    .build();
+        couponService.update(couponVo);
 
-            couponService.update(couponVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) throws Exception {
+        for(DeleteCouponDto dto : reqDto.getList()) {
+            CouponVo couponVo = CouponVo.builder()
+                    .id(dto.getId())
+                    .flag(0)
+                    .build();
 
-        try {
-            for(DeleteCouponDto dto : reqDto.getList()) {
-                CouponVo couponVo = CouponVo.builder()
-                        .id(dto.getId())
-                        .flag(0)
-                        .build();
-
-                couponService.delete(couponVo);
-            }
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+            couponService.delete(couponVo);
         }
 
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @GetMapping(value = "/{couponId}/user")
-    public ApiResponseDto getCouponUser(@PathVariable(value = "couponId") Long couponId) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto getCouponUser(@PathVariable(value = "couponId") Long couponId) throws Exception {
+        CouponVo couponVo = CouponVo.builder()
+                .id(couponId)
+                .build();
 
-        try {
-            CouponVo couponVo = CouponVo.builder()
-                    .id(couponId)
-                    .build();
+        List<GetCouponUserDto> couponUserList = couponService.getCouponUserList(couponVo);
 
-            List<GetCouponUserDto> couponUserList = couponService.getCouponUserList(couponVo);
-            GetCouponUserDto.Response couponUserResDto = new GetCouponUserDto.Response();
-            couponUserResDto.setList(couponUserList);
+        GetCouponUserDto.Response resDto = new GetCouponUserDto.Response();
+        resDto.setList(couponUserList);
 
-            resDto.setData(couponUserResDto);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @PostMapping(value = "/user")
-    public ApiResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) throws Exception {
+        for (GetUserDto dto : reqDto.getUserList()) {
+            CouponVo couponVo = CouponVo.builder()
+                    .id(reqDto.getCouponId())
+                    .userId(dto.getId())
+                    .couponUserQuantity(reqDto.getCouponUserQuantity())
+                    .flag(1)
+                    .build();
 
-        try {
-            for (GetUserDto dto : reqDto.getUserList()) {
-                CouponVo couponVo = CouponVo.builder()
-                        .id(reqDto.getCouponId())
-                        .userId(dto.getId())
-                        .couponUserQuantity(reqDto.getCouponUserQuantity())
-                        .flag(1)
-                        .build();
-
-                couponService.postCouponUser(couponVo);
-            }
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+            couponService.postCouponUser(couponVo);
         }
 
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @PutMapping(value = "/user")
-    public ApiResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) throws Exception {
+        for (GetCouponUserDto dto : reqDto.getList()) {
+            CouponVo couponVo = CouponVo.builder()
+                    .couponUserId(dto.getId())
+                    .userId(dto.getUserId())
+                    .couponUserQuantity(reqDto.getCouponUserQuantity())
+                    .flag(1)
+                    .build();
 
-        try {
-            for (GetCouponUserDto dto : reqDto.getList()) {
-                CouponVo couponVo = CouponVo.builder()
-                        .couponUserId(dto.getId())
-                        .userId(dto.getUserId())
-                        .couponUserQuantity(reqDto.getCouponUserQuantity())
-                        .flag(1)
-                        .build();
-
-                couponService.putCouponUser(couponVo);
-            }
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+            couponService.putCouponUser(couponVo);
         }
 
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @DeleteMapping(value = "/user")
-    public ApiResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) throws Exception {
+        for (GetCouponUserDto dto : reqDto.getList()) {
+            CouponVo couponVo = CouponVo.builder()
+                    .couponUserId(dto.getId())
+                    .userId(dto.getUserId())
+                    .id(dto.getCouponId())
+                    .flag(0)
+                    .build();
 
-        try {
-            for (GetCouponUserDto dto : reqDto.getList()) {
-                CouponVo couponVo = CouponVo.builder()
-                        .couponUserId(dto.getId())
-                        .userId(dto.getUserId())
-                        .id(dto.getCouponId())
-                        .flag(0)
-                        .build();
-
-                couponService.deleteCouponUser(couponVo);
-            }
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+            couponService.deleteCouponUser(couponVo);
         }
 
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
 }

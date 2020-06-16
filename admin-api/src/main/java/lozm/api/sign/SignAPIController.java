@@ -3,6 +3,7 @@ package lozm.api.sign;
 import lombok.RequiredArgsConstructor;
 import static lozm.object.code.SessionType.*;
 
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.sign.PostSignDto;
 import lozm.object.vo.sign.SignVo;
@@ -26,28 +27,18 @@ public class SignAPIController {
 
 
     @PostMapping(value = "/in")
-    public ApiResponseDto signIn(@RequestBody @Valid PostSignDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto signIn(@RequestBody @Valid PostSignDto.Request reqDto) throws Exception {
+        SignVo signVo = SignVo.builder()
+                .identifier(reqDto.getIdentifier())
+                .password(reqDto.getPassword())
+                .build();
 
-        try {
-            SignVo signVo = SignVo.builder()
-                    .identifier(reqDto.getIdentifier())
-                    .password(reqDto.getPassword())
-                    .build();
-            List<SignVo> result = signService.signIn(signVo);
+        List<SignVo> result = signService.signIn(signVo);
 
-            resDto.setMessage(setSessionInfo(result.get(0)));
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setMessage(e.getMessage());
-            resDto.setSuccess(false);
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, result.get(0));
     }
 
-    private String setSessionInfo(SignVo SignVo) {
+    private String setSessionInfo(SignVo SignVo) throws Exception {
         httpSession.setAttribute(USER.name(), SignVo);
 
         String previousPage = httpSession.getAttribute(PREV_PAGE.name()).toString();

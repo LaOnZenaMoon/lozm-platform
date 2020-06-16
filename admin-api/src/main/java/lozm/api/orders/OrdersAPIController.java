@@ -1,6 +1,7 @@
 package lozm.api.orders;
 
 import lombok.RequiredArgsConstructor;
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.orders.DeleteOrdersDto;
 import lozm.object.dto.orders.GetOrdersDto;
@@ -21,91 +22,55 @@ public class OrdersAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getOrders() {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto getOrders() throws Exception {
+        List<GetOrdersDto> result = ordersService.getOrdersList();
 
-        try {
-            List<GetOrdersDto> result = ordersService.getOrdersList();
-            GetOrdersDto.Response ordersResDto = new GetOrdersDto.Response();
-            ordersResDto.setList(result);
+        GetOrdersDto.Response resDto = new GetOrdersDto.Response();
+        resDto.setList(result);
 
-            resDto.setSuccess(true);
-            resDto.setData(ordersResDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @PostMapping
-    public ApiResponseDto postOrders(@RequestBody @Valid PostOrdersDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto postOrders(@RequestBody @Valid PostOrdersDto.Request reqDto) throws Exception {
+        OrdersVo ordersVo = OrdersVo.builder()
+                .quantity(reqDto.getQuantity())
+                .userId(reqDto.getUserId())
+                .itemId(reqDto.getItemId())
+                .deliveryId(reqDto.getDeliveryId())
+                .couponId(reqDto.getCouponId())
+                .build();
 
-        try {
-            OrdersVo ordersVo = OrdersVo.builder()
-                    .quantity(reqDto.getQuantity())
-                    .userId(reqDto.getUserId())
-                    .itemId(reqDto.getItemId())
-                    .deliveryId(reqDto.getDeliveryId())
-                    .couponId(reqDto.getCouponId())
-                    .build();
+        ordersService.save(ordersVo);
 
-            ordersService.save(ordersVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, reqDto);
     }
 
     @PutMapping
-    public ApiResponseDto putOrders(@RequestBody @Valid PutOrdersDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto putOrders(@RequestBody @Valid PutOrdersDto.Request reqDto) throws Exception {
+        OrdersVo ordersVo = OrdersVo.builder()
+                .id(reqDto.getId())
+                .status(reqDto.getStatus())
+                .flag(1)
+                .build();
 
-        try {
-            OrdersVo ordersVo = OrdersVo.builder()
-                    .id(reqDto.getId())
-                    .status(reqDto.getStatus())
-                    .flag(1)
-                    .build();
+        ordersService.update(ordersVo);
 
-            ordersService.update(ordersVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteOrders(@RequestBody @Valid DeleteOrdersDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto deleteOrders(@RequestBody @Valid DeleteOrdersDto.Request reqDto) throws Exception {
+        for (DeleteOrdersDto dto : reqDto.getList()) {
+            OrdersVo ordersVo = OrdersVo.builder()
+                    .id(dto.getOrdersId())
+                    .flag(0)
+                    .build();
 
-        try {
-            for (DeleteOrdersDto dto : reqDto.getList()) {
-                OrdersVo ordersVo = OrdersVo.builder()
-                        .id(dto.getOrdersId())
-                        .flag(0)
-                        .build();
-
-                ordersService.delete(ordersVo);
-            }
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+            ordersService.delete(ordersVo);
         }
 
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
 }

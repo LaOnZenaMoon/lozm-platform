@@ -1,6 +1,7 @@
 package lozm.api.delivery;
 
 import lombok.RequiredArgsConstructor;
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 
 import lozm.object.dto.delivery.DeleteDeliveryDto;
@@ -22,96 +23,61 @@ public class DeliveryAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getDelivery() {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto getDelivery() throws Exception {
+        List<GetDeliveryDto> result = deliveryService.getDeliveryList();
 
-        try {
-            List<GetDeliveryDto> result = deliveryService.getDeliveryList();
-            GetDeliveryDto.Response deliveryResDto = new GetDeliveryDto.Response();
-            deliveryResDto.setList(result);
+        GetDeliveryDto.Response resDto = new GetDeliveryDto.Response();
+        resDto.setList(result);
 
-            resDto.setSuccess(true);
-            resDto.setData(deliveryResDto);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @PostMapping
-    public ApiResponseDto postDelivery(@RequestBody @Valid PostDeliveryDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto postDelivery(@RequestBody @Valid PostDeliveryDto.Request reqDto) throws Exception {
+        DeliveryVo deliveryVo = DeliveryVo.builder()
+                .country(reqDto.getCountry())
+                .zipCode(reqDto.getZipCode())
+                .city(reqDto.getCity())
+                .street(reqDto.getStreet())
+                .etc(reqDto.getEtc())
+                .status(reqDto.getStatus())
+                .build();
 
-        try {
-            DeliveryVo deliveryVo = DeliveryVo.builder()
-                    .country(reqDto.getCountry())
-                    .zipCode(reqDto.getZipCode())
-                    .city(reqDto.getCity())
-                    .street(reqDto.getStreet())
-                    .etc(reqDto.getEtc())
-                    .status(reqDto.getStatus())
-                    .build();
+        deliveryService.save(deliveryVo);
 
-            deliveryService.save(deliveryVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @PutMapping
-    public ApiResponseDto putDelivery(@RequestBody @Valid PutDeliveryDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto putDelivery(@RequestBody @Valid PutDeliveryDto.Request reqDto) throws Exception {
+        DeliveryVo deliveryVo = DeliveryVo.builder()
+                .id(reqDto.getId())
+                .country(reqDto.getCountry())
+                .zipCode(reqDto.getZipCode())
+                .city(reqDto.getCity())
+                .street(reqDto.getStreet())
+                .etc(reqDto.getEtc())
+                .status(reqDto.getStatus())
+                .flag(1)
+                .build();
 
-        try {
-            DeliveryVo deliveryVo = DeliveryVo.builder()
-                    .id(reqDto.getId())
-                    .country(reqDto.getCountry())
-                    .zipCode(reqDto.getZipCode())
-                    .city(reqDto.getCity())
-                    .street(reqDto.getStreet())
-                    .etc(reqDto.getEtc())
-                    .status(reqDto.getStatus())
-                    .flag(1)
-                    .build();
+        deliveryService.update(deliveryVo);
 
-            deliveryService.update(deliveryVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) throws Exception {
+        for (DeleteDeliveryDto dto : reqDto.getList()) {
+            DeliveryVo deliveryVo = DeliveryVo.builder()
+                    .id(dto.getId())
+                    .flag(0)
+                    .build();
 
-        try {
-            for (DeleteDeliveryDto dto : reqDto.getList()) {
-                DeliveryVo deliveryVo = DeliveryVo.builder()
-                        .id(dto.getId())
-                        .flag(0)
-                        .build();
-
-                deliveryService.delete(deliveryVo);
-            }
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+            deliveryService.delete(deliveryVo);
         }
 
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
 }

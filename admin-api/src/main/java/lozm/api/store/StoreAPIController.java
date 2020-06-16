@@ -1,6 +1,7 @@
 package lozm.api.store;
 
 import lombok.RequiredArgsConstructor;
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.item.GetClothingDto;
 import lozm.object.dto.store.DeleteStoreDto;
@@ -26,139 +27,85 @@ public class StoreAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getStore() {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto getStore() throws Exception {
+        List<GetStoreDto> storeList = storeService.getStoreList();
 
-        try {
-            List<GetStoreDto> storeList = storeService.getStoreList();
-            GetStoreDto.Response storeResDto = new GetStoreDto.Response();
-            storeResDto.setList(storeList);
+        GetStoreDto.Response resDto = new GetStoreDto.Response();
+        resDto.setList(storeList);
 
-            resDto.setSuccess(true);
-            resDto.setData(storeResDto);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @GetMapping(value = "/{storeId}")
-    public ApiResponseDto getStoreDetail(@PathVariable(value = "storeId") Long storeId) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto getStoreDetail(@PathVariable(value = "storeId") Long storeId) throws Exception {
+        StoreVo storeVo = StoreVo.builder()
+                .id(storeId)
+                .build();
 
-        try {
-            StoreVo storeVo = StoreVo.builder()
-                    .id(storeId)
-                    .build();
+        Store store = storeService.findById(storeVo);
+        GetStoreDto resDto = new GetStoreDto(store.getId(), store.getName(), store.getTelNumber(), store.getInfo());
 
-            Store store = storeService.findById(storeVo);
-            GetStoreDto storeResDto = new GetStoreDto(store.getId(), store.getName(), store.getTelNumber(), store.getInfo());
-            resDto.setData(storeResDto);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @GetMapping(value = "/{storeId}/clothing/{itemType}")
     public ApiResponseDto getStoreClothing(
             @PathVariable(value = "storeId") Long storeId,
             @PathVariable(value = "itemType") String itemType
-    ) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    ) throws Exception {
+        ItemVo itemVo = ItemVo.builder()
+                .storeId(storeId)
+                .type(itemType)
+                .build();
 
-        try {
-            ItemVo itemVo = ItemVo.builder()
-                    .storeId(storeId)
-                    .type(itemType)
-                    .build();
+        List<GetClothingDto> clothingList = itemService.getClothingList(itemVo);
 
-            List<GetClothingDto> clothingList = itemService.getClothingList(itemVo);
-            GetClothingDto.Response clothingResDto = new GetClothingDto.Response();
-            clothingResDto.setList(clothingList);
+        GetClothingDto.Response resDto = new GetClothingDto.Response();
+        resDto.setList(clothingList);
 
-            resDto.setSuccess(true);
-            resDto.setData(clothingResDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @PostMapping
-    public ApiResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) throws Exception {
+        StoreVo storeVo = StoreVo.builder()
+                .name(reqDto.getName())
+                .telNumber(reqDto.getTelNumber())
+                .info(reqDto.getInfo())
+                .build();
 
-        try {
-            StoreVo storeVo = StoreVo.builder()
-                    .name(reqDto.getName())
-                    .telNumber(reqDto.getTelNumber())
-                    .info(reqDto.getInfo())
-                    .build();
+        storeService.save(storeVo);
 
-            storeService.save(storeVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @PutMapping
-    public ApiResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) throws Exception {
+        StoreVo storeVo = StoreVo.builder()
+                .id(reqDto.getId())
+                .name(reqDto.getName())
+                .telNumber(reqDto.getTelNumber())
+                .info(reqDto.getInfo())
+                .flag(1)
+                .build();
 
-        try {
-            StoreVo storeVo = StoreVo.builder()
-                    .id(reqDto.getId())
-                    .name(reqDto.getName())
-                    .telNumber(reqDto.getTelNumber())
-                    .info(reqDto.getInfo())
-                    .flag(1)
-                    .build();
+        storeService.update(storeVo);
 
-            storeService.update(storeVo);
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) throws Exception {
+        for(DeleteStoreDto dto : reqDto.getList()) {
+            StoreVo storeVo = StoreVo.builder()
+                .id(dto.getId())
+                .flag(0)
+                .build();
 
-        try {
-            for(DeleteStoreDto dto : reqDto.getList()) {
-                StoreVo storeVo = StoreVo.builder()
-                    .id(dto.getId())
-                    .flag(0)
-                    .build();
-
-                storeService.delete(storeVo);
-            }
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+            storeService.delete(storeVo);
         }
 
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
 }

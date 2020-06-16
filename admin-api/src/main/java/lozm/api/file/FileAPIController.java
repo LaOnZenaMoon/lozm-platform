@@ -1,6 +1,7 @@
 package lozm.api.file;
 
 import lombok.RequiredArgsConstructor;
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.file.FileDto;
 import lozm.global.props.FileProps;
@@ -31,7 +32,7 @@ public class FileAPIController {
 
     @PostMapping(value = "/upload/single")
     public ApiResponseDto uploadSingleFile(@RequestParam("file") MultipartFile file) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+        ApiResponseDto resDto = null;
         FileDto.Response dto = new FileDto.Response();
 
         try {
@@ -51,19 +52,18 @@ public class FileAPIController {
             dto.setFileType(file.getContentType());
             dto.setFileSize(file.getSize());
 
-            resDto.setSuccess(true);
-            resDto.setData(dto);
+            resDto = ApiResponseDto.createException(ApiResponseCode.OK, dto);
         } catch (Exception e) {
             e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
+
+            resDto = ApiResponseDto.createException(ApiResponseCode.SERVER_ERROR, dto);
         }
 
         return resDto;
     }
 
     @PostMapping(value = "/upload/multi")
-    public List<ApiResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) {
+    public List<ApiResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) throws Exception {
         return Arrays.asList(files)
             .stream()
             .map(file -> uploadSingleFile(file))
@@ -71,7 +71,7 @@ public class FileAPIController {
     }
 
     @GetMapping(value = "/download/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) throws Exception {
         Resource resource = null;
         String contentType = null;
 

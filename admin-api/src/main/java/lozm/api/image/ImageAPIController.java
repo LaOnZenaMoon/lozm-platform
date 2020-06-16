@@ -1,6 +1,7 @@
 package lozm.api.image;
 
 import lombok.RequiredArgsConstructor;
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.image.ImageDto;
 import lozm.object.vo.image.ImageVo;
@@ -56,28 +57,18 @@ public class ImageAPIController {
     }
 
     @PostMapping(value = "/upload")
-    public ApiResponseDto uploadSingleImage(@RequestBody ImageDto.Request reqDto) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto uploadSingleImage(@RequestBody ImageDto.Request reqDto) throws Exception {
+        ImageVo imageVo = ImageVo.builder()
+                .imageName(reqDto.getImageName())
+                .imageSize(reqDto.getImageSize())
+                .imageData(reqDto.getImageData())
+                .imageFileType(reqDto.getImageFileType())
+                .imageRotation(reqDto.getImageRotation())
+                .build();
 
-        try {
-            ImageVo imageVo = ImageVo.builder()
-                    .imageName(reqDto.getImageName())
-                    .imageSize(reqDto.getImageSize())
-                    .imageData(reqDto.getImageData())
-                    .imageFileType(reqDto.getImageFileType())
-                    .imageRotation(reqDto.getImageRotation())
-                    .build();
+        imageService.uploadSingleImage(imageVo);
 
-            imageService.uploadSingleImage(imageVo);
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
 }

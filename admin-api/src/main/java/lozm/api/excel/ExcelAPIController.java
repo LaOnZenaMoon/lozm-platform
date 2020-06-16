@@ -1,6 +1,7 @@
 package lozm.api.excel;
 
 import lombok.RequiredArgsConstructor;
+import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.api.file.FileAPIController;
 import lozm.api.file.FileService;
@@ -22,31 +23,21 @@ public class ExcelAPIController {
 
 
     @GetMapping(value = "/download", produces = "application/vnd.ms-excel")
-    public ModelAndView downloadExcel() {
+    public ModelAndView downloadExcel() throws Exception {
         return new ModelAndView("excelView");
     }
 
     @PostMapping(value = "/upload")
-    public ApiResponseDto uploadExcel(@RequestParam("file") MultipartFile file) {
-        ApiResponseDto resDto = new ApiResponseDto<>();
+    public ApiResponseDto uploadExcel(@RequestParam("file") MultipartFile file) throws Exception {
+        FileVo fileVo = FileVo.builder()
+                .name(file.getOriginalFilename())
+                .path(fileProps.getUploadPath())
+                .build();
+        String fileName = fileService.saveFile(file, fileVo);
 
-        try {
-            FileVo fileVo = FileVo.builder()
-                    .name(file.getOriginalFilename())
-                    .path(fileProps.getUploadPath())
-                    .build();
-            String fileName = fileService.saveFile(file, fileVo);
+        excelService.uploadExcel(file);
 
-            excelService.uploadExcel(file);
-
-            resDto.setSuccess(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resDto.setSuccess(false);
-            resDto.setMessage(e.getMessage());
-        }
-
-        return resDto;
+        return ApiResponseDto.createException(ApiResponseCode.OK, fileName);
     }
 
 }

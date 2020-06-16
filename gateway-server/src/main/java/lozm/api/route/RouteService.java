@@ -3,6 +3,7 @@ package lozm.api.route;
 import lombok.RequiredArgsConstructor;
 import lozm.global.properties.AdminApiProps;
 import lozm.object.dto.ApiResponseDto;
+import lozm.object.dto.item.GetClothingDto;
 import lozm.object.dto.store.GetStoreDto;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -31,8 +32,18 @@ public class RouteService {
         return responseBody.getData();
     }
 
-    public ApiResponseDto getStoreClothing(Long storeId, String outer) {
+    public GetClothingDto.Response getStoreClothing(Long storeId, String outer) {
+        String url = adminApiProps.getUrl() + adminApiProps.getStore() + "/" + storeId + "/clothing/" + outer;
+        ApiResponseDto<GetClothingDto.Response> responseBody = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<ApiResponseDto<GetClothingDto.Response>>() {
+                }
+        ).getBody();
 
+        BaseService.checkResponseBody(responseBody, "");
+        return responseBody.getData();
     }
 
     public ApiResponseDto getCouponDetail(Long couponId) {

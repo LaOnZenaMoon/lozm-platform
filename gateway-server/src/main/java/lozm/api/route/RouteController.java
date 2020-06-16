@@ -43,25 +43,17 @@ public class RouteController {
         GetStoreDto.Response getStoreDetail = routeService.getStoreDetail(storeId);
         modelMap.addAttribute("storeDetail", getStoreDetail);
 
-        ApiResponseDto getOuter = routeService.getStoreClothing(storeId, "OUTER");
-        GetClothingDto.Response outer = (GetClothingDto.Response) getOuter.getData();
-        List<GetClothingDto> outerList = outer.getList();
-        modelMap.addAttribute("outerList", outerList);
+        GetClothingDto.Response getOuter = routeService.getStoreClothing(storeId, "OUTER");
+        modelMap.addAttribute("outerList", getOuter.getList());
 
-        ApiResponseDto getTop = routeService.getStoreClothing(storeId, "TOP");
-        GetClothingDto.Response top = (GetClothingDto.Response) getTop.getData();
-        List<GetClothingDto> topList = top.getList();
-        modelMap.addAttribute("topList", topList);
+        GetClothingDto.Response getTop = routeService.getStoreClothing(storeId, "TOP");
+        modelMap.addAttribute("topList", getTop.getList());
 
-        ApiResponseDto getBottom = routeService.getStoreClothing(storeId, "BOTTOM");
-        GetClothingDto.Response bottom = (GetClothingDto.Response) getBottom.getData();
-        List<GetClothingDto> bottomList = bottom.getList();
-        modelMap.addAttribute("bottomList", bottomList);
+        GetClothingDto.Response getBottom = routeService.getStoreClothing(storeId, "BOTTOM");
+        modelMap.addAttribute("bottomList", getBottom.getList());
 
-        ApiResponseDto getShoes = routeService.getStoreClothing(storeId, "SHOES");
-        GetClothingDto.Response shoes = (GetClothingDto.Response) getShoes.getData();
-        List<GetClothingDto> shoesList = shoes.getList();
-        modelMap.addAttribute("shoesList", shoesList);
+        GetClothingDto.Response getShoes = routeService.getStoreClothing(storeId, "SHOES");
+        modelMap.addAttribute("shoesList", getShoes.getList());
 
         return "pages/store/storeDetail";
     }

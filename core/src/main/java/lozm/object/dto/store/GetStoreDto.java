@@ -1,12 +1,14 @@
 package lozm.object.dto.store;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class GetStoreDto {
 
     private Long id;

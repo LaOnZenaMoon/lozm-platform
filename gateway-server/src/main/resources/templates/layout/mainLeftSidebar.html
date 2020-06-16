@@ -14,7 +14,7 @@
                 <div class="avatar"><img class="mr-3 side-user-img" src="https://via.placeholder.com/110x110" th:src="@{/images/agent.png}"
                                          alt="user avatar"></div>
                 <div class="media-body">
-                    <h6 class="side-user-name" th:text="${session.USER.name}">Administrator</h6>
+                    <h6 class="side-user-name" th:if="${session.USER != null}" th:text="${session.USER.name}">Administrator</h6>
                 </div>
             </div>
             <div id="user-dropdown" class="collapse">

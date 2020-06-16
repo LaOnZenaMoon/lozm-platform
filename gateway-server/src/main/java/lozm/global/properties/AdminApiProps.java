@@ -18,4 +18,24 @@ public class AdminApiProps {
 	private String delivery;
 	private String orders;
 
+	public String getStoreUrl() {
+		return url + store;
+	}
+
+	public String getCouponUrl() {
+		return url + coupon;
+	}
+
+	public String getItemUrl() {
+		return url + item;
+	}
+
+	public String getDeliveryUrl() {
+		return url + delivery;
+	}
+
+	public String getOrdersUrl() {
+		return url + orders;
+	}
+
 }

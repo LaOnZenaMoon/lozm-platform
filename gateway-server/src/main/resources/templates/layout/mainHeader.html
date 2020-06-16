@@ -152,8 +152,8 @@
                                                              th:src="@{/images/agent.png}"
                                                              alt="user avatar"></div>
                                     <div class="media-body">
-                                        <h6 class="mt-2 user-title" th:text="${session.USER.name}">Administrator</h6>
-                                        <p class="user-subtitle" th:text="${session.USER.identifier}">Administrator</p>
+                                        <h6 class="mt-2 user-title" th:if="${session.USER != null}" th:text="${session.USER.name}">Administrator</h6>
+                                        <p class="user-subtitle" th:if="${session.USER != null}" th:text="${session.USER.identifier}">Administrator</p>
                                     </div>
                                 </div>
                             </a>

@@ -22,12 +22,11 @@ public class OrdersAPIService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
-    private final String ORDERS_URL = adminApiProps.getUrl() + adminApiProps.getOrders();
 
 
     public GetOrdersDto.Response getOrders() throws Exception {
         ApiResponseDto<GetOrdersDto.Response> responseBody = restTemplate.exchange(
-                ORDERS_URL,
+                adminApiProps.getOrdersUrl(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetOrdersDto.Response>>() {}
@@ -39,7 +38,7 @@ public class OrdersAPIService {
 
     public ApiResponseDto postOrders(PostOrdersDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                ORDERS_URL,
+                adminApiProps.getOrdersUrl(),
                 HttpMethod.POST,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -51,7 +50,7 @@ public class OrdersAPIService {
 
     public ApiResponseDto putOrders(PutOrdersDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                ORDERS_URL,
+                adminApiProps.getOrdersUrl(),
                 HttpMethod.PUT,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -63,7 +62,7 @@ public class OrdersAPIService {
 
     public ApiResponseDto deleteOrders(DeleteOrdersDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                ORDERS_URL,
+                adminApiProps.getOrdersUrl(),
                 HttpMethod.DELETE,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}

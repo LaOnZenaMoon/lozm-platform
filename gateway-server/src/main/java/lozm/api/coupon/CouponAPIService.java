@@ -19,12 +19,11 @@ public class CouponAPIService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
-    private final String COUPON_URL = adminApiProps.getUrl() + adminApiProps.getCoupon();
 
 
     public GetCouponDto.Response getCoupon() throws Exception {
         ApiResponseDto<GetCouponDto.Response> responseBody = restTemplate.exchange(
-                COUPON_URL,
+                adminApiProps.getCouponUrl(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetCouponDto.Response>>() {}
@@ -36,7 +35,7 @@ public class CouponAPIService {
 
     public GetCouponDto getCouponDetail(Long couponId) throws Exception {
         ApiResponseDto<GetCouponDto> responseBody = restTemplate.exchange(
-                COUPON_URL + "/" + couponId,
+                adminApiProps.getCouponUrl() + "/" + couponId,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetCouponDto>>() {}
@@ -48,7 +47,7 @@ public class CouponAPIService {
 
     public ApiResponseDto postCoupon(PostCouponDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                COUPON_URL,
+                adminApiProps.getCouponUrl(),
                 HttpMethod.POST,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -60,7 +59,7 @@ public class CouponAPIService {
 
     public ApiResponseDto putCoupon(PutCouponDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                COUPON_URL,
+                adminApiProps.getCouponUrl(),
                 HttpMethod.PUT,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -72,7 +71,7 @@ public class CouponAPIService {
 
     public ApiResponseDto deleteCoupon(DeleteCouponDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                COUPON_URL,
+                adminApiProps.getCouponUrl(),
                 HttpMethod.DELETE,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -84,7 +83,7 @@ public class CouponAPIService {
 
     public GetCouponUserDto.Response getCouponUser(Long couponId) throws Exception {
         ApiResponseDto<GetCouponUserDto.Response> responseBody = restTemplate.exchange(
-                COUPON_URL + "/" + couponId + "/user",
+                adminApiProps.getCouponUrl() + "/" + couponId + "/user",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetCouponUserDto.Response>>() {}
@@ -96,7 +95,7 @@ public class CouponAPIService {
 
     public ApiResponseDto postCouponUser(PostCouponUserDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                COUPON_URL + "/user",
+                adminApiProps.getCouponUrl() + "/user",
                 HttpMethod.POST,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -108,7 +107,7 @@ public class CouponAPIService {
 
     public ApiResponseDto putCouponUser(PutCouponUserDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                COUPON_URL + "/user",
+                adminApiProps.getCouponUrl() + "/user",
                 HttpMethod.PUT,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -120,7 +119,7 @@ public class CouponAPIService {
 
     public ApiResponseDto deleteCouponUser(DeleteCouponUserDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                COUPON_URL + "/user",
+                adminApiProps.getCouponUrl() + "/user",
                 HttpMethod.DELETE,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}

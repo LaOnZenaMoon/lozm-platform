@@ -1,6 +1,7 @@
 package lozm.object.dto.delivery;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lozm.object.code.DeliveryStatus;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class GetDeliveryDto {
 
     private Long id;

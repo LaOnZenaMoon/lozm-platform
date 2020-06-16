@@ -19,12 +19,11 @@ public class ItemAPIService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
-    private final String ITEM_URL = adminApiProps.getUrl() + adminApiProps.getItem();
 
 
     public GetItemDto.Response getItemList() throws Exception {
         ApiResponseDto<GetItemDto.Response> responseBody = restTemplate.exchange(
-                ITEM_URL,
+                adminApiProps.getItemUrl(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetItemDto.Response>>() {}
@@ -36,7 +35,7 @@ public class ItemAPIService {
 
     public GetItemDto getItemDetail(Long itemId) throws Exception {
         ApiResponseDto<GetItemDto> responseBody = restTemplate.exchange(
-                ITEM_URL + "/" + itemId,
+                adminApiProps.getItemUrl() + "/" + itemId,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetItemDto>>() {}
@@ -48,7 +47,7 @@ public class ItemAPIService {
 
     public GetClothingDto.Response getClothing(String itemType) throws Exception {
         ApiResponseDto<GetClothingDto.Response> responseBody = restTemplate.exchange(
-                ITEM_URL + "/clothing/" + itemType,
+                adminApiProps.getItemUrl() + "/clothing/" + itemType,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetClothingDto.Response>>() {}
@@ -60,7 +59,7 @@ public class ItemAPIService {
 
     public ApiResponseDto postItem(PostItemDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                ITEM_URL,
+                adminApiProps.getItemUrl(),
                 HttpMethod.POST,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -72,7 +71,7 @@ public class ItemAPIService {
 
     public ApiResponseDto putItem(PutItemDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                ITEM_URL,
+                adminApiProps.getItemUrl(),
                 HttpMethod.PUT,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -84,7 +83,7 @@ public class ItemAPIService {
 
     public ApiResponseDto deleteItem(DeleteItemDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                ITEM_URL,
+                adminApiProps.getItemUrl(),
                 HttpMethod.DELETE,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}

@@ -23,12 +23,11 @@ public class StoreAPIService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
-    private final String STORE_URL = adminApiProps.getUrl() + adminApiProps.getStore();
 
 
     public GetStoreDto.Response getStore() throws Exception {
         ApiResponseDto<GetStoreDto.Response> responseBody = restTemplate.exchange(
-                STORE_URL,
+                adminApiProps.getStoreUrl(),
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetStoreDto.Response>>() {}
@@ -40,7 +39,7 @@ public class StoreAPIService {
 
     public GetStoreDto getStoreDetail(Long storeId) throws Exception {
         ApiResponseDto<GetStoreDto> responseBody = restTemplate.exchange(
-                STORE_URL + "/" + storeId,
+                adminApiProps.getStoreUrl() + "/" + storeId,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetStoreDto>>() {}
@@ -52,7 +51,7 @@ public class StoreAPIService {
 
     public GetClothingDto.Response getStoreClothing(Long storeId, String itemType) throws Exception {
         ApiResponseDto<GetClothingDto.Response> responseBody = restTemplate.exchange(
-                STORE_URL + "/" + storeId + "/clothing/" + itemType,
+                adminApiProps.getStoreUrl() + "/" + storeId + "/clothing/" + itemType,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetClothingDto.Response>>() {}
@@ -64,7 +63,7 @@ public class StoreAPIService {
 
     public ApiResponseDto postStore(PostStoreDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                STORE_URL,
+                adminApiProps.getStoreUrl(),
                 HttpMethod.POST,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -76,7 +75,7 @@ public class StoreAPIService {
 
     public ApiResponseDto putStore(PutStoreDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                STORE_URL,
+                adminApiProps.getStoreUrl(),
                 HttpMethod.PUT,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}
@@ -88,7 +87,7 @@ public class StoreAPIService {
 
     public ApiResponseDto deleteStore(DeleteStoreDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
-                STORE_URL,
+                adminApiProps.getStoreUrl(),
                 HttpMethod.DELETE,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}

@@ -35,7 +35,7 @@ public class SignAPIController {
 
         List<SignVo> result = signService.signIn(signVo);
 
-        return ApiResponseDto.createException(ApiResponseCode.OK, result.get(0));
+        return ApiResponseDto.createException(ApiResponseCode.OK, setSessionInfo(result.get(0)));
     }
 
     private String setSessionInfo(SignVo SignVo) throws Exception {

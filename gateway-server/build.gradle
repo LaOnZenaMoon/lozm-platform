@@ -1,0 +1,23 @@
+bootJar { enabled = true }
+jar { enabled = true }
+
+dependencies {
+    compile project(':core')
+    compile files('src/libs/ojdbc6.jar')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.hateoas:spring-hateoas'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+
+    // Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    // httpclient
+    implementation 'org.apache.httpcomponents:httpclient:4.5.10'
+
+    // log4jdbc
+    runtime 'net.logstash.logback:logstash-logback-encoder:6.3'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1'
+    implementation 'net.logstash.logback:logstash-logback-encoder:6.3'
+}

@@ -310,7 +310,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/delivery} ]]*/ "",
+					url: /*[[ @{/delivery} ]]*/ "",
 					callback: {
 						success: function (result) {
 
@@ -329,7 +329,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/api/delivery} ]]*/ "",
+					url: /*[[ @{/delivery} ]]*/ "",
 					data: {
 						country: $("#post_country").val(),
 						zipCode: $("#post_zipCode").val(),
@@ -357,7 +357,7 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/api/delivery} ]]*/ "",
+					url: /*[[ @{/delivery} ]]*/ "",
 					data: {
 						id: $("#put_id").val(),
 						country: $("#put_country").val(),
@@ -386,7 +386,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/api/delivery} ]]*/ "",
+					url: /*[[ @{/delivery} ]]*/ "",
 					data: {
 						list: list
 					},

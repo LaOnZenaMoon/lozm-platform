@@ -188,7 +188,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/store} ]]*/ "",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -206,7 +206,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/store} ]]*/ "",
 					data: {
 						name: $("#post_name").val(),
 						telNumber: $("#post_telNumber").val(),
@@ -232,7 +232,7 @@
 
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/store} ]]*/ "",
 					data: {
 						list: list
 					},

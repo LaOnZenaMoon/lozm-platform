@@ -647,7 +647,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/orders} ]]*/ "",
+					url: /*[[ @{/orders} ]]*/ "",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -665,7 +665,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/api/orders} ]]*/ "",
+					url: /*[[ @{/orders} ]]*/ "",
 					data: {
 						userId: $("#post_user_id").val(),
 						itemId: $("#post_item_id").val(),
@@ -692,7 +692,7 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/api/orders} ]]*/ "",
+					url: /*[[ @{/orders} ]]*/ "",
 					data: {
 						id: $("#put_ordersId").val(),
 						status: $("#put_ordersStatus").val()
@@ -716,7 +716,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/api/orders} ]]*/ "",
+					url: /*[[ @{/orders} ]]*/ "",
 					data: {
 						list: list
 					},
@@ -764,7 +764,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/user} ]]*/ "",
+					url: /*[[ @{/user} ]]*/ "",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -814,7 +814,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/store} ]]*/ "",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -849,7 +849,7 @@
 			},
 			getGridData: function (itemType) {
 				lozm.func.requestGet({
-					url: "/api/store/" + $("#post_store_id").val() + "/clothing/" + itemType,
+					url: "/store/" + $("#post_store_id").val() + "/clothing/" + itemType,
 					callback: {
 						success: function(result) {
 
@@ -1250,7 +1250,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/coupon} ]]*/ "",
+					url: /*[[ @{/coupon} ]]*/ "",
 					callback: {
 						success: function (result) {
 
@@ -1314,7 +1314,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/delivery} ]]*/ "",
+					url: /*[[ @{/delivery} ]]*/ "",
 					callback: {
 						success: function (result) {
 

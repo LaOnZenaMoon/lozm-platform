@@ -252,7 +252,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/coupon} ]]*/ "",
+					url: /*[[ @{/coupon} ]]*/ "",
 					callback: {
 						success: function (result) {
 
@@ -271,7 +271,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/api/coupon} ]]*/ "",
+					url: /*[[ @{/coupon} ]]*/ "",
 					data: {
 						name: $("#post_name").val(),
 						contents: $("#post_contents").val(),
@@ -300,7 +300,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/api/coupon} ]]*/ "",
+					url: /*[[ @{/coupon} ]]*/ "",
 					data: {
 						list: list
 					},

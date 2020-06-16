@@ -291,7 +291,7 @@
 		var coupon = {
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/api/coupon} ]]*/ "",
+					url: /*[[ @{/coupon} ]]*/ "",
 					data: {
 						id: $("#put_coupon_id").val(),
 						name: $("#put_coupon_name").val(),
@@ -320,7 +320,7 @@
 			},
 			getDetail: function () {
 				lozm.func.requestGet({
-					url: "/api/coupon/" + $("#put_coupon_id").val(),
+					url: "/coupon/" + $("#put_coupon_id").val(),
 					callback: {
 						success: function (result) {
 
@@ -417,7 +417,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: "/api/coupon/" + $("#put_coupon_id").val() + "/user",
+					url: "/coupon/" + $("#put_coupon_id").val() + "/user",
 					callback: {
 						success: function (result) {
 
@@ -437,7 +437,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/api/coupon/user} ]]*/ "",
+					url: /*[[ @{/coupon/user} ]]*/ "",
 					data: {
 						couponId: $("#put_coupon_id").val(),
 						userList: user.getSelectedRows(),
@@ -463,7 +463,7 @@
 			},
 			put: function (list) {
 				lozm.func.requestPut({
-					url: /*[[ @{/api/coupon/user} ]]*/ "",
+					url: /*[[ @{/coupon/user} ]]*/ "",
 					data: {
 						list: list,
 						couponUserQuantity: $("#put_couponUserQuantity").val()
@@ -488,7 +488,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/api/coupon/user} ]]*/ "",
+					url: /*[[ @{/coupon/user} ]]*/ "",
 					data: {
 						list: list
 					},
@@ -555,7 +555,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/api/user} ]]*/ "",
+					url: /*[[ @{/user} ]]*/ "",
 					callback: {
 						success: function (result) {
 

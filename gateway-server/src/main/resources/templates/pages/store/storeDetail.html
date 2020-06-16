@@ -407,7 +407,7 @@
 		var store = {
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/api/store} ]]*/ "",
+					url: /*[[ @{/store} ]]*/ "",
 					data: {
 						id: $("#put_store_id").val(),
 						name: $("#put_store_name").val(),
@@ -441,7 +441,7 @@
 			},
 			getGridData: function (itemType) {
 				lozm.func.requestGet({
-					url: "/api/store/" + $("#put_store_id").val() + "/clothing/" + itemType,
+					url: "/store/" + $("#put_store_id").val() + "/clothing/" + itemType,
 					callback: {
 						success: function(result) {
 
@@ -463,7 +463,7 @@
 			},
 			post: function (itemType) {
 				lozm.func.requestPost({
-					url: "/api/item",
+					url: "/item",
 					data: {
 						name: $("#post_item_name").val(),
 						price: $("#post_item_price").val(),
@@ -493,7 +493,7 @@
 			},
 			put: function (itemType) {
 				lozm.func.requestPut({
-					url: "/api/item",
+					url: "/item",
 					data: {
 						id: $("#put_item_id").val(),
 						name: $("#put_item_name").val(),
@@ -522,7 +522,7 @@
 			},
 			delete: function (list, itemType) {
 				lozm.func.requestDelete({
-					url: "/api/item",
+					url: "/item",
 					data: {
 						list: list
 					},

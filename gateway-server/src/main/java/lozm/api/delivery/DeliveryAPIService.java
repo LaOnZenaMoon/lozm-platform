@@ -25,7 +25,7 @@ public class DeliveryAPIService {
     private final String DELIVERY_URL = adminApiProps.getUrl() + adminApiProps.getDelivery();
 
 
-    public GetDeliveryDto.Response getDelivery() {
+    public GetDeliveryDto.Response getDelivery() throws Exception {
         ApiResponseDto<GetDeliveryDto.Response> responseBody = restTemplate.exchange(
                 DELIVERY_URL,
                 HttpMethod.GET,
@@ -37,7 +37,7 @@ public class DeliveryAPIService {
         return responseBody.getData();
     }
 
-    public ApiResponseDto postDelivery(PostDeliveryDto.Request reqDto) {
+    public ApiResponseDto postDelivery(PostDeliveryDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 DELIVERY_URL,
                 HttpMethod.POST,
@@ -49,7 +49,7 @@ public class DeliveryAPIService {
         return responseBody;
     }
 
-    public ApiResponseDto putDelivery(PutDeliveryDto.Request reqDto) {
+    public ApiResponseDto putDelivery(PutDeliveryDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 DELIVERY_URL,
                 HttpMethod.PUT,
@@ -61,7 +61,7 @@ public class DeliveryAPIService {
         return responseBody;
     }
 
-    public ApiResponseDto deleteDelivery(DeleteDeliveryDto.Request reqDto) {
+    public ApiResponseDto deleteDelivery(DeleteDeliveryDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 DELIVERY_URL,
                 HttpMethod.DELETE,

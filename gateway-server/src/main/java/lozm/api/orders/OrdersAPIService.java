@@ -25,7 +25,7 @@ public class OrdersAPIService {
     private final String ORDERS_URL = adminApiProps.getUrl() + adminApiProps.getOrders();
 
 
-    public GetOrdersDto.Response getOrders() {
+    public GetOrdersDto.Response getOrders() throws Exception {
         ApiResponseDto<GetOrdersDto.Response> responseBody = restTemplate.exchange(
                 ORDERS_URL,
                 HttpMethod.GET,
@@ -37,7 +37,7 @@ public class OrdersAPIService {
         return responseBody.getData();
     }
 
-    public ApiResponseDto postOrders(PostOrdersDto.Request reqDto) {
+    public ApiResponseDto postOrders(PostOrdersDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 ORDERS_URL,
                 HttpMethod.POST,
@@ -49,7 +49,7 @@ public class OrdersAPIService {
         return responseBody;
     }
 
-    public ApiResponseDto putOrders(PutOrdersDto.Request reqDto) {
+    public ApiResponseDto putOrders(PutOrdersDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 ORDERS_URL,
                 HttpMethod.PUT,
@@ -61,7 +61,7 @@ public class OrdersAPIService {
         return responseBody;
     }
 
-    public ApiResponseDto deleteOrders(DeleteOrdersDto.Request reqDto) {
+    public ApiResponseDto deleteOrders(DeleteOrdersDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 ORDERS_URL,
                 HttpMethod.DELETE,

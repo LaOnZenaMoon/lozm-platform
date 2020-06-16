@@ -2,8 +2,8 @@ package lozm.api.delivery;
 
 import lombok.RequiredArgsConstructor;
 
+import lozm.global.exception.ServiceException;
 import lozm.object.dto.delivery.GetDeliveryDto;
-import lozm.exception.APIException;
 import lozm.repository.RepositorySupport;
 import lozm.object.vo.delivery.DeliveryVo;
 import lozm.entity.delivery.Delivery;
@@ -52,7 +52,7 @@ public class DeliveryService {
     public void update(DeliveryVo deliveryVo) throws Exception {
         Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
         findDelivery.orElseThrow(() -> {
-            throw new APIException("DELIVERY_0002", "Delivery doesn't exist.");
+            throw new ServiceException("DELIVERY_0002", "Delivery doesn't exist.");
         });
 
         findDelivery.get().updateDelivery(deliveryVo);
@@ -62,7 +62,7 @@ public class DeliveryService {
     public void delete(DeliveryVo deliveryVo) {
         Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
         findDelivery.orElseThrow(() -> {
-            throw new APIException("DELIVERY_0002", "Delivery doesn't exist.");
+            throw new ServiceException("DELIVERY_0002", "Delivery doesn't exist.");
         });
 
         findDelivery.get().deleteDelivery(deliveryVo);

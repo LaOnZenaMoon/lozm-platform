@@ -40,7 +40,7 @@ public class RouteController {
     }
 
     @GetMapping(value = "/manage/store/{storeId}")
-    public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) {
+    public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
         log.debug("Store ID: "+storeId);
 
         ApiResponseDto getStoreDetail = storeAPIController.getStoreDetail(storeId);
@@ -81,7 +81,7 @@ public class RouteController {
     }
 
     @GetMapping(value = "/manage/coupon/{couponId}")
-    public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) {
+    public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) throws Exception {
 
         ApiResponseDto getCouponDetail = couponAPIController.getCouponDetail(couponId);
         GetCouponDto couponDetail = (GetCouponDto) getCouponDetail.getData();

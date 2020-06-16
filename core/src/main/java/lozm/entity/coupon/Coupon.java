@@ -1,9 +1,9 @@
 package lozm.entity.coupon;
 
 import lombok.Getter;
+import lozm.global.exception.ServiceException;
 import lozm.object.code.CouponType;
 import lozm.entity.BaseEntity;
-import lozm.exception.APIException;
 import lozm.object.vo.coupon.CouponVo;
 
 import javax.persistence.*;
@@ -68,7 +68,7 @@ public class Coupon extends BaseEntity {
 
         LocalDateTime sysdateTime = LocalDateTime.now();
         if(sysdateTime.isBefore(this.startDt) || sysdateTime.isAfter(this.endDt)) {
-            throw new APIException("ORDERS_SAVE_NOT_COUPON_PERIOD", "It is not the period that coupon is available.");
+            throw new ServiceException("ORDERS_SAVE_NOT_COUPON_PERIOD", "It is not the period that coupon is available.");
         }
 
         if (CouponType.RATIO.equals(this.type)) {
@@ -76,24 +76,24 @@ public class Coupon extends BaseEntity {
         } else if(CouponType.PRICE.equals(this.type)) {
             rtnVal = orderedPrice - this.amount;
         } else {
-            throw new APIException("ORDERS_SAVE_NO_COUPON_TYPE", "Coupon type doesn't exist.");
+            throw new ServiceException("ORDERS_SAVE_NO_COUPON_TYPE", "Coupon type doesn't exist.");
         }
 
         if(rtnVal < 0) {
-            throw new APIException("ORDERS_SAVE_COUPON_CALC_PRICE", "Discounted price can't be lower than 0.");
+            throw new ServiceException("ORDERS_SAVE_COUPON_CALC_PRICE", "Discounted price can't be lower than 0.");
         }
 
         return rtnVal;
     }
 
-    public void increaseCouponQuantity(Long couponQuantity) throws APIException {
+    public void increaseCouponQuantity(Long couponQuantity) throws ServiceException {
         this.quantity += couponQuantity;
-        if(this.quantity < 0) throw new APIException("USER_SAVE_NO_COUPON_QUANTITY", "Coupon quantity is insufficient.");
+        if(this.quantity < 0) throw new ServiceException("USER_SAVE_NO_COUPON_QUANTITY", "Coupon quantity is insufficient.");
     }
 
-    public void decreaseCouponQuantity(Long couponQuantity) throws APIException {
+    public void decreaseCouponQuantity(Long couponQuantity) throws ServiceException {
         this.quantity -= couponQuantity;
-        if(this.quantity < 0) throw new APIException("USER_SAVE_NO_COUPON_QUANTITY", "Coupon quantity is insufficient.");
+        if(this.quantity < 0) throw new ServiceException("USER_SAVE_NO_COUPON_QUANTITY", "Coupon quantity is insufficient.");
     }
 
     public void deleteCoupon(CouponVo couponVo) {

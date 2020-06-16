@@ -1,9 +1,9 @@
 package lozm.api.excel;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.exception.ServiceException;
 import lozm.object.dto.orders.GetOrdersDto;
 import lozm.entity.delivery.Delivery;
-import lozm.exception.APIException;
 import lozm.api.orders.OrdersService;
 import lozm.repository.delivery.DeliveryRepository;
 import lozm.object.vo.delivery.DeliveryVo;
@@ -39,7 +39,7 @@ public class ExcelService {
         //Get the list
         List<GetOrdersDto> ordersList = ordersService.getOrdersList();
 
-        if(ordersList.size() == 0) throw new APIException("EXCEL_DOWNLOAD_NO_LIST", "There is no result.");
+        if(ordersList.size() == 0) throw new ServiceException("EXCEL_DOWNLOAD_NO_LIST", "There is no result.");
 
         //Make the workbook
         Workbook wb =  workbook;

@@ -1,6 +1,7 @@
 package lozm.api.item;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.exception.ServiceException;
 import lozm.object.code.ItemType;
 import lozm.object.dto.item.GetClothingDto;
 import lozm.object.dto.item.GetItemDto;
@@ -10,7 +11,6 @@ import lozm.entity.inheritance.Shoes;
 import lozm.entity.inheritance.Top;
 import lozm.entity.item.Item;
 import lozm.entity.store.Store;
-import lozm.exception.APIException;
 import lozm.repository.RepositorySupport;
 import lozm.repository.item.ItemRepository;
 import lozm.repository.item.inherit.BottomRepository;
@@ -77,7 +77,7 @@ public class ItemService {
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
             Optional<Outer> findItem = outerRepository.findById(itemVo.getId());
             findItem.orElseThrow(() -> {
-                throw new APIException("ITEM_0002", "Item doesn't exist.");
+                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
             });
             Outer item = findItem.get();
 
@@ -95,7 +95,7 @@ public class ItemService {
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
             Optional<Top> findItem = topRepository.findById(itemVo.getId());
             findItem.orElseThrow(() -> {
-                throw new APIException("ITEM_0002", "Item doesn't exist.");
+                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
             });
             Top item = findItem.get();
 
@@ -113,7 +113,7 @@ public class ItemService {
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
             Optional<Bottom> findItem = bottomRepository.findById(itemVo.getId());
             findItem.orElseThrow(() -> {
-                throw new APIException("ITEM_0002", "Item doesn't exist.");
+                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
             });
             Bottom item = findItem.get();
 
@@ -131,7 +131,7 @@ public class ItemService {
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
             Optional<Shoes> findItem = shoesRepository.findById(itemVo.getId());
             findItem.orElseThrow(() -> {
-                throw new APIException("ITEM_0002", "Item doesn't exist.");
+                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
             });
             Shoes item = findItem.get();
 
@@ -147,7 +147,7 @@ public class ItemService {
                     item.getStore().getName()
             );
         } else {
-            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
+            throw new ServiceException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
         }
     }
 
@@ -215,7 +215,7 @@ public class ItemService {
                     o.getClothing().getSizes()
             )).collect(toList());
         } else {
-            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
+            throw new ServiceException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
         }
     }
 
@@ -245,7 +245,7 @@ public class ItemService {
             shoes.insertShoes(itemVo, findStore);
             shoesRepository.save(shoes);
         } else {
-            throw new APIException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
+            throw new ServiceException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
         }
     }
 
@@ -253,7 +253,7 @@ public class ItemService {
     public void update(ItemVo itemVo) throws Exception {
         Optional<Item> findItem = itemRepository.findById(itemVo.getId());
         findItem.orElseThrow(() -> {
-            throw new APIException("ITEM_0002", "Item doesn't exist.");
+            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
         });
 //        findItem.get().updateItem(itemVo);
 
@@ -277,7 +277,7 @@ public class ItemService {
     public void delete(ItemVo itemVo) {
         Optional<Item> findItem = itemRepository.findById(itemVo.getId());
         findItem.orElseThrow(() -> {
-            throw new APIException("ITEM_0002", "Item doesn't exist.");
+            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
         });
 
         findItem.get().deleteItem(itemVo);

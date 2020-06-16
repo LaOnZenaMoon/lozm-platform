@@ -1,9 +1,9 @@
 package lozm.api.coupon;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.exception.ServiceException;
 import lozm.object.dto.coupon.GetCouponDto;
 import lozm.object.dto.coupon.GetCouponUserDto;
-import lozm.exception.APIException;
 import lozm.object.vo.coupon.CouponVo;
 import lozm.entity.coupon.Coupon;
 import lozm.entity.coupon.CouponUser;
@@ -48,7 +48,7 @@ public class CouponService {
     public GetCouponDto getCouponDetail(CouponVo couponVo) {
         Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> {
-            throw new APIException("COUPON_0002", "Coupon doesn't exist.");
+            throw new ServiceException("COUPON_0002", "Coupon doesn't exist.");
         });
 
         Coupon coupon = findCoupon.get();
@@ -76,7 +76,7 @@ public class CouponService {
     public void update(CouponVo couponVo) throws Exception {
         Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> {
-            throw new APIException("COUPON_0002", "Coupon doesn't exist.");
+            throw new ServiceException("COUPON_0002", "Coupon doesn't exist.");
         });
 
         findCoupon.get().updateCoupon(couponVo);
@@ -86,7 +86,7 @@ public class CouponService {
     public void delete(CouponVo couponVo) throws Exception {
         Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> {
-            throw new APIException("COUPON_0002", "Coupon doesn't exist.");
+            throw new ServiceException("COUPON_0002", "Coupon doesn't exist.");
         });
 
         findCoupon.get().deleteCoupon(couponVo);
@@ -116,13 +116,13 @@ public class CouponService {
         //Find and check the coupon
         Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> {
-            throw new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
+            throw new ServiceException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
         });
 
         //Find the user
         Optional<User> findUser = userRepository.findById(couponVo.getUserId());
         findUser.orElseThrow(() -> {
-            throw new APIException("USER_0002", "User doesn't exist.");
+            throw new ServiceException("USER_0002", "User doesn't exist.");
         });
 
         //Find the coupon user
@@ -153,7 +153,7 @@ public class CouponService {
     public void putCouponUser(CouponVo couponVo) throws Exception {
         Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponVo.getCouponUserId());
         findCouponUser.orElseThrow(() -> {
-            throw new APIException("COUPON_USER_0002", "Coupon user doesn't exist.");
+            throw new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist.");
         });
 
         calculateCouponQuantity(couponVo, findCouponUser.get().getCoupon(), findCouponUser.get());
@@ -176,7 +176,7 @@ public class CouponService {
     public void deleteCouponUser(CouponVo couponVo) throws Exception {
         Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponVo.getCouponUserId());
         findCouponUser.orElseThrow(() -> {
-            throw new APIException("COUPON_USER_0002", "Coupon user doesn't exist.");
+            throw new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist.");
         });
 
         findCouponUser.get().deleteCouponUser(couponVo);
@@ -184,7 +184,7 @@ public class CouponService {
         //Find and check the coupon
         Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
         findCoupon.orElseThrow(() -> {
-            throw new APIException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
+            throw new ServiceException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
         });
 
         findCoupon.get().increaseCouponQuantity(findCouponUser.get().getQuantity());

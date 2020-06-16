@@ -2,7 +2,7 @@ package lozm.api.sign;
 
 import lombok.RequiredArgsConstructor;
 import lozm.entity.user.User;
-import lozm.exception.APIException;
+import lozm.global.exception.ServiceException;
 import lozm.repository.RepositorySupport;
 import lozm.object.vo.sign.SignVo;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class SignService {
 
     public List<SignVo> signIn(SignVo signVo) throws Exception {
         List<User> userList = repositorySupport.selectUserDetail(signVo);
-        if(userList.size() < 1) throw new APIException("USER_0002", "User doesn't exist.");
+        if(userList.size() < 1) throw new ServiceException("USER_0002", "User doesn't exist.");
 
         return userList.stream().map(u -> new SignVo(
                 u.getName(),

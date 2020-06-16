@@ -3,7 +3,7 @@ package lozm.entity.item;
 import lombok.Getter;
 import lozm.entity.BaseEntity;
 import lozm.entity.store.Store;
-import lozm.exception.APIException;
+import lozm.global.exception.ServiceException;
 import lozm.object.vo.item.ItemVo;
 
 import javax.persistence.*;
@@ -55,7 +55,7 @@ public class Item extends BaseEntity {
 
     public void decreaseItemQuantity(Long quantity) throws Exception {
         this.quantity -= quantity;
-        if(this.quantity < 0) throw new APIException("ORDERS_SAVE_ITEM_NO_QUANTITY", "Item quantity is insufficient.");
+        if(this.quantity < 0) throw new ServiceException("ORDERS_SAVE_ITEM_NO_QUANTITY", "Item quantity is insufficient.");
     }
 
 }

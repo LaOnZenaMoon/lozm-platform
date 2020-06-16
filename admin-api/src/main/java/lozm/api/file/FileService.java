@@ -2,7 +2,7 @@ package lozm.api.file;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lozm.exception.APIException;
+import lozm.global.exception.ServiceException;
 import lozm.global.props.FileProps;
 import lozm.object.vo.file.FileVo;
 import org.springframework.core.io.Resource;
@@ -32,7 +32,7 @@ public class FileService {
 
         try {
             if (fileName.contains("..")) {
-                throw new APIException("FILE001001", "File name has a problem.");
+                throw new ServiceException("FILE001001", "File name has a problem.");
             }
 
             Path sourcePath = fileProps.getSourcePath(filePath);
@@ -42,12 +42,12 @@ public class FileService {
             Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
 
             return fileName;
-        } catch (APIException apie) {
+        } catch (ServiceException apie) {
             apie.printStackTrace();
-            throw new APIException("VVB000000", apie.getMessage());
+            throw new ServiceException("VVB000000", apie.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            throw new APIException("VVB001000", e.getMessage());
+            throw new ServiceException("VVB001000", e.getMessage());
         }
     }
 
@@ -63,14 +63,14 @@ public class FileService {
             if (resource.exists()) {
                 return resource;
             } else {
-                throw new APIException("FILE002001", "Resource has a problem.");
+                throw new ServiceException("FILE002001", "Resource has a problem.");
             }
         } catch (MalformedURLException mue) {
-            throw new APIException("FILE002001", mue.getMessage());
-        } catch (APIException apie) {
-            throw new APIException("FILE002001", apie.getMessage());
+            throw new ServiceException("FILE002001", mue.getMessage());
+        } catch (ServiceException apie) {
+            throw new ServiceException("FILE002001", apie.getMessage());
         } catch (Exception e) {
-            throw new APIException("FILE002001", e.getMessage());
+            throw new ServiceException("FILE002001", e.getMessage());
         }
     }
 
@@ -88,12 +88,12 @@ public class FileService {
             if (rtnFile.exists()) {
                 return new MockMultipartFile(fileName, fileName, contentType, rtnFileContent);
             } else {
-                throw new APIException("FILE002001", "File is already exists.");
+                throw new ServiceException("FILE002001", "File is already exists.");
             }
-        } catch (APIException apie) {
-            throw new APIException("FILE002001", apie.getMessage());
+        } catch (ServiceException apie) {
+            throw new ServiceException("FILE002001", apie.getMessage());
         } catch (Exception e) {
-            throw new APIException("FILE002001", e.getMessage());
+            throw new ServiceException("FILE002001", e.getMessage());
         }
     }
 

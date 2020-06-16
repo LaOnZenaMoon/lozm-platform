@@ -1,7 +1,7 @@
 package lozm.global.props;
 
 import lombok.extern.slf4j.Slf4j;
-import lozm.exception.APIException;
+import lozm.global.exception.ServiceException;
 
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -25,7 +25,7 @@ public class CommonProps {
 			return;
 		} catch (Exception e) {
 			log.debug(e.getMessage());
-			throw new APIException("FILE001002", e.getMessage());
+			throw new ServiceException("FILE001002", e.getMessage());
 		}
 	}
 

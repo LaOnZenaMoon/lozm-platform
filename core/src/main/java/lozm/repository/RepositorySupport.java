@@ -3,6 +3,7 @@ package lozm.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lozm.global.exception.ServiceException;
 import lozm.object.code.ItemType;
 import lozm.entity.delivery.Delivery;
 import lozm.entity.inheritance.Bottom;
@@ -12,7 +13,6 @@ import lozm.entity.inheritance.Top;
 import lozm.entity.item.Item;
 import lozm.entity.orders.Orders;
 import lozm.entity.user.User;
-import lozm.exception.APIException;
 import lozm.object.vo.item.ItemVo;
 import lozm.object.vo.sign.SignVo;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -157,7 +157,7 @@ public class RepositorySupport extends QuerydslRepositorySupport {
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
             rtnVal = shoes.store.id.eq(itemVo.getStoreId());
         } else {
-            throw new APIException("GET_CLOTHING_ITEM_TYPE", "ItemType doesn't exist.");
+            throw new ServiceException("GET_CLOTHING_ITEM_TYPE", "ItemType doesn't exist.");
         }
 
         return rtnVal;

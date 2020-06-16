@@ -1,9 +1,9 @@
 package lozm.api.orders;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.exception.ServiceException;
 import lozm.object.dto.orders.GetOrdersDto;
 import lozm.entity.delivery.Delivery;
-import lozm.exception.APIException;
 import lozm.repository.RepositorySupport;
 import lozm.repository.delivery.DeliveryRepository;
 import lozm.object.vo.orders.OrdersVo;
@@ -67,17 +67,17 @@ public class OrdersService {
     public void save(OrdersVo ordersVo) throws Exception {
         Optional<User> findUser = userRepository.findById(ordersVo.getUserId());
         findUser.orElseThrow(() -> {
-            throw new APIException("ORDERS_SAVE_USER", "User doesn't exist.");
+            throw new ServiceException("ORDERS_SAVE_USER", "User doesn't exist.");
         });
 
         Optional<Item> findItem = itemRepository.findById(ordersVo.getItemId());
         findItem.orElseThrow(() -> {
-            throw new APIException("ORDERS_SAVE_ITEM", "Item doesn't exist.");
+            throw new ServiceException("ORDERS_SAVE_ITEM", "Item doesn't exist.");
         });
 
         Optional<Delivery> findDelivery = deliveryRepository.findById(ordersVo.getDeliveryId());
         findItem.orElseThrow(() -> {
-            throw new APIException("ORDERS_SAVE_DELIVERY", "Delivery doesn't exist.");
+            throw new ServiceException("ORDERS_SAVE_DELIVERY", "Delivery doesn't exist.");
         });
 
         Long orderedPrice = findItem.get().getPrice();
@@ -85,7 +85,7 @@ public class OrdersService {
         if(ordersVo.getCouponId() != null) {
             findCoupon = couponRepository.findById(ordersVo.getCouponId());
             findCoupon.orElseThrow(() -> {
-                throw new APIException("ORDERS_SAVE_COUPON", "Coupon doesn't exist.");
+                throw new ServiceException("ORDERS_SAVE_COUPON", "Coupon doesn't exist.");
             });
             orderedPrice = findCoupon.get().calculateOrderedPrice(orderedPrice);
         }
@@ -109,7 +109,7 @@ public class OrdersService {
     public void update(OrdersVo ordersVo) throws Exception {
         Optional<Orders> findOrders = ordersRepository.findById(ordersVo.getId());
         findOrders.orElseThrow(() -> {
-            throw new APIException("ORDERS_0002", "Order doesn't exist.");
+            throw new ServiceException("ORDERS_0002", "Order doesn't exist.");
         });
 
         findOrders.get().updateOrders(ordersVo);
@@ -119,7 +119,7 @@ public class OrdersService {
     public void delete(OrdersVo ordersVo) {
         Optional<Orders> findOrders = ordersRepository.findById(ordersVo.getId());
         findOrders.orElseThrow(() -> {
-            throw new APIException("ORDERS_0002", "Order doesn't exist.");
+            throw new ServiceException("ORDERS_0002", "Order doesn't exist.");
         });
 
         findOrders.get().deleteOrders(ordersVo);

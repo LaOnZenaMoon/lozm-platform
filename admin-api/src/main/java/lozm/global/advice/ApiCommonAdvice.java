@@ -2,6 +2,7 @@ package lozm.global.advice;
 
 import lombok.extern.slf4j.Slf4j;
 import lozm.global.exception.NotFoundException;
+import lozm.global.exception.ServiceException;
 import lozm.object.dto.ApiException;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
@@ -36,6 +37,12 @@ public class ApiCommonAdvice {
         return ApiResponseDto.createException(e);
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler
+    public ApiResponseDto<String> handleBaseException(ServiceException e) {
+        log.error("[{}] {}", ApiResponseCode.SERVER_ERROR.getId(), e);
+        return ApiResponseDto.createException(ApiResponseCode.SERVER_ERROR, e.getMessage());
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler({ConstraintViolationException.class})

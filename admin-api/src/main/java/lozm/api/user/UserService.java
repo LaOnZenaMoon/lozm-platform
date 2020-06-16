@@ -1,8 +1,8 @@
 package lozm.api.user;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.exception.ServiceException;
 import lozm.object.dto.user.GetUserDto;
-import lozm.exception.APIException;
 import lozm.object.vo.user.UserVo;
 import lozm.entity.user.User;
 import lozm.repository.user.UserRepository;
@@ -41,7 +41,7 @@ public class UserService {
 
         //1. check ID duplicated
         List<User> findUsersIdDuplicated = userRepository.findByIdentifier(user.getIdentifier());
-        if(findUsersIdDuplicated.size() > 0) throw new APIException("USER_0001", "User Identifier is duplicated.");
+        if(findUsersIdDuplicated.size() > 0) throw new ServiceException("USER_0001", "User Identifier is duplicated.");
 
         userRepository.save(user);
     }
@@ -50,7 +50,7 @@ public class UserService {
     public void update(UserVo userVo) throws Exception {
         Optional<User> findUser = userRepository.findById(userVo.getId());
         findUser.orElseThrow(() -> {
-            throw new APIException("USER_0002", "User doesn't exist.");
+            throw new ServiceException("USER_0002", "User doesn't exist.");
         });
 
         findUser.get().updateUser(userVo);
@@ -60,7 +60,7 @@ public class UserService {
     public void delete(UserVo userVo) throws Exception {
         Optional<User> findUser = userRepository.findById(userVo.getId());
         findUser.orElseThrow(() -> {
-            throw new APIException("USER_0002", "User doesn't exist.");
+            throw new ServiceException("USER_0002", "User doesn't exist.");
         });
 
         findUser.get().deleteUser(userVo);

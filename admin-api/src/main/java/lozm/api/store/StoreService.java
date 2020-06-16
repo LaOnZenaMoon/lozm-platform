@@ -1,9 +1,9 @@
 package lozm.api.store;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.exception.ServiceException;
 import lozm.object.dto.store.GetStoreDto;
 import lozm.entity.store.Store;
-import lozm.exception.APIException;
 import lozm.repository.store.StoreRepository;
 import lozm.object.vo.store.StoreVo;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class StoreService {
     public Store findById(StoreVo storeVo) {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
         findStore.orElseThrow(() -> {
-            throw new APIException("STORE_0002", "The store doesn't exist.");
+            throw new ServiceException("STORE_0002", "The store doesn't exist.");
         });
 
         return findStore.get();
@@ -44,7 +44,7 @@ public class StoreService {
         store.insertStore(storeVo);
 
         List<Store> findStoreNameDuplicated = storeRepository.findByName(store.getName());
-        if(findStoreNameDuplicated.size() > 0) throw new APIException("STORE_0001", "Store name is duplicated.");
+        if(findStoreNameDuplicated.size() > 0) throw new ServiceException("STORE_0001", "Store name is duplicated.");
 
         storeRepository.save(store);
     }
@@ -53,7 +53,7 @@ public class StoreService {
     public void update(StoreVo storeVo) throws Exception {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
         findStore.orElseThrow(() -> {
-            throw new APIException("STORE_0002", "The store doesn't exist.");
+            throw new ServiceException("STORE_0002", "The store doesn't exist.");
         });
 
         findStore.get().updateStore(storeVo);
@@ -63,7 +63,7 @@ public class StoreService {
     public void delete(StoreVo storeVo) {
         Optional<Store> findStore = storeRepository.findById(storeVo.getId());
         findStore.orElseThrow(() -> {
-            throw new APIException("STORE_0002", "The store doesn't exist.");
+            throw new ServiceException("STORE_0002", "The store doesn't exist.");
         });
 
         findStore.get().deleteStore(storeVo);

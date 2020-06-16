@@ -19,6 +19,7 @@
     var lozm = function (selector) {
         return new lozm.func.init(selector);
     };
+    var JWT_TOKEN = "jwtToken";
 
     lozm.func = lozm.prototype = {
         version: version
@@ -59,6 +60,11 @@
     };
 
     var ajaxDefault = function(options) {
+        if(checkJwt(options)) {
+            location.href = "/sign/out";
+            return;
+        }
+
         var ajaxOptions = $.extend({
             url: null
             , type: "GET"
@@ -67,7 +73,9 @@
             , contentType: "application/x-www-form-urlencoded;"
             , async: true
             , success: null
-            , headers: null
+            , headers: {
+                Authorization: getJwt()
+            }
             , beforeSend: function(xhr) {
                 // xhr.setRequestHeader(tokenHeader, token);
             }
@@ -223,6 +231,59 @@
         $("#"+_id).datetimepicker({
             format:'yyyy-mm-ddThh:ii:ss',
         });
+    }
+
+    var checkJwt = lozm.func.checkJwt = function (_options) {
+        try {
+            if(_options === undefined || _options.url === "/api/login/signIn") {
+                return false;
+            }
+            const _jwtToken = window.localStorage.getItem(JWT_TOKEN)
+            const _decodedToken = jwt_decode(_jwtToken)
+            const _now = Date.now().valueOf() / 1000
+            if (typeof _decodedToken.exp !== 'undefined' && _decodedToken.exp < _now) {
+                return true;
+            }
+            if (typeof _decodedToken._now !== 'undefined' && _decodedToken.nbf > _now) {
+                return true;
+            }
+            return false;
+        } catch (e) {
+            console.log(e);
+            return true;
+        }
+    }
+
+    var getJwt = lozm.func.getJwt = function() {
+        var _jwtToken = window.localStorage.getItem(JWT_TOKEN);
+        return _jwtToken == null ? null : "Bearer " + _jwtToken;
+    }
+
+    //Insert JWT
+    lozm.func.insertJwt = function(_token) {
+        try{
+            window.localStorage.setItem(JWT_TOKEN, _token);
+            return true;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    }
+
+    //Delete JWT
+    var deleteJwt = lozm.func.deleteJwt = function() {
+        try{
+            window.localStorage.removeItem(JWT_TOKEN);
+            return true;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    }
+
+    lozm.func.signOut = function () {
+        deleteJwt();
+        location.href = "/sign/out";
     }
 
     init.prototype = lozm.func;

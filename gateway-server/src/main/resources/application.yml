@@ -41,3 +41,6 @@ image:
 
 file:
   uploadPath: ./file/upload
+
+admin-api:
+  store: /api/store

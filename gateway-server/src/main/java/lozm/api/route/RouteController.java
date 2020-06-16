@@ -2,13 +2,11 @@ package lozm.api.route;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lozm.api.coupon.CouponAPIController;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.coupon.GetCouponDto;
 import lozm.object.dto.coupon.GetCouponUserDto;
 import lozm.object.dto.item.GetClothingDto;
 import lozm.object.dto.store.GetStoreDto;
-import lozm.api.store.StoreAPIController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,9 +40,8 @@ public class RouteController {
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
         log.debug("Store ID: "+storeId);
 
-        ApiResponseDto getStoreDetail = routeService.getStoreDetail(storeId);
-        GetStoreDto storeDetail = (GetStoreDto) getStoreDetail.getData();
-        modelMap.addAttribute("storeDetail", storeDetail);
+        GetStoreDto.Response getStoreDetail = routeService.getStoreDetail(storeId);
+        modelMap.addAttribute("storeDetail", getStoreDetail);
 
         ApiResponseDto getOuter = routeService.getStoreClothing(storeId, "OUTER");
         GetClothingDto.Response outer = (GetClothingDto.Response) getOuter.getData();

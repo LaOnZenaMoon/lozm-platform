@@ -7,3 +7,6 @@ spring:
     testQuery: "SELECT 1 FROM DUAL"
     hikari:
       maximum-pool-size: 5
+
+admin-api:
+  url: http://127.0.0.1:8082

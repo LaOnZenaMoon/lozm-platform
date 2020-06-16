@@ -1,7 +1,7 @@
 package lozm.api.coupon;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.coupon.*;
 import lozm.object.dto.user.GetUserDto;
 import lozm.object.vo.coupon.CouponVo;
@@ -19,8 +19,8 @@ public class CouponAPIController {
 
 
     @GetMapping
-    public APIResponseDto getCoupon() {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getCoupon() {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             List<GetCouponDto> result = couponService.getCouponList();
@@ -38,8 +38,8 @@ public class CouponAPIController {
     }
 
     @GetMapping("/{couponId}")
-    public APIResponseDto getCouponDetail(@PathVariable(value = "couponId") Long couponId) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getCouponDetail(@PathVariable(value = "couponId") Long couponId) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             CouponVo couponVo = CouponVo.builder()
@@ -59,8 +59,8 @@ public class CouponAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             CouponVo couponVo = CouponVo.builder()
@@ -86,8 +86,8 @@ public class CouponAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             CouponVo couponVo = CouponVo.builder()
@@ -113,8 +113,8 @@ public class CouponAPIController {
     }
 
     @DeleteMapping
-    public APIResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for(DeleteCouponDto dto : reqDto.getList()) {
@@ -136,8 +136,8 @@ public class CouponAPIController {
     }
 
     @GetMapping(value = "/{couponId}/user")
-    public APIResponseDto getCouponUser(@PathVariable(value = "couponId") Long couponId) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getCouponUser(@PathVariable(value = "couponId") Long couponId) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             CouponVo couponVo = CouponVo.builder()
@@ -160,8 +160,8 @@ public class CouponAPIController {
     }
 
     @PostMapping(value = "/user")
-    public APIResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for (GetUserDto dto : reqDto.getUserList()) {
@@ -186,8 +186,8 @@ public class CouponAPIController {
     }
 
     @PutMapping(value = "/user")
-    public APIResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for (GetCouponUserDto dto : reqDto.getList()) {
@@ -212,8 +212,8 @@ public class CouponAPIController {
     }
 
     @DeleteMapping(value = "/user")
-    public APIResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for (GetCouponUserDto dto : reqDto.getList()) {

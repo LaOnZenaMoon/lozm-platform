@@ -1,7 +1,7 @@
 package lozm.api.store;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.item.GetClothingDto;
 import lozm.object.dto.store.DeleteStoreDto;
 import lozm.object.dto.store.GetStoreDto;
@@ -26,8 +26,8 @@ public class StoreAPIController {
 
 
     @GetMapping
-    public APIResponseDto getStore() {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getStore() {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             List<GetStoreDto> storeList = storeService.getStoreList();
@@ -45,8 +45,8 @@ public class StoreAPIController {
     }
 
     @GetMapping(value = "/{storeId}")
-    public APIResponseDto getStoreDetail(@PathVariable(value = "storeId") Long storeId) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getStoreDetail(@PathVariable(value = "storeId") Long storeId) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             StoreVo storeVo = StoreVo.builder()
@@ -66,11 +66,11 @@ public class StoreAPIController {
     }
 
     @GetMapping(value = "/{storeId}/clothing/{itemType}")
-    public APIResponseDto getStoreClothing(
+    public ApiResponseDto getStoreClothing(
             @PathVariable(value = "storeId") Long storeId,
             @PathVariable(value = "itemType") String itemType
     ) {
-        APIResponseDto resDto = new APIResponseDto<>();
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             ItemVo itemVo = ItemVo.builder()
@@ -94,8 +94,8 @@ public class StoreAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             StoreVo storeVo = StoreVo.builder()
@@ -116,8 +116,8 @@ public class StoreAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             StoreVo storeVo = StoreVo.builder()
@@ -139,8 +139,8 @@ public class StoreAPIController {
     }
 
     @DeleteMapping
-    public APIResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for(DeleteStoreDto dto : reqDto.getList()) {

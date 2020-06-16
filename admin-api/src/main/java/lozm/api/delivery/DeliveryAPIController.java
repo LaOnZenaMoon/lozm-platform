@@ -1,7 +1,7 @@
 package lozm.api.delivery;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 
 import lozm.object.dto.delivery.DeleteDeliveryDto;
 import lozm.object.dto.delivery.GetDeliveryDto;
@@ -22,8 +22,8 @@ public class DeliveryAPIController {
 
 
     @GetMapping
-    public APIResponseDto getDelivery() {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getDelivery() {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             List<GetDeliveryDto> result = deliveryService.getDeliveryList();
@@ -41,8 +41,8 @@ public class DeliveryAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postDelivery(@RequestBody @Valid PostDeliveryDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto postDelivery(@RequestBody @Valid PostDeliveryDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             DeliveryVo deliveryVo = DeliveryVo.builder()
@@ -66,8 +66,8 @@ public class DeliveryAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putDelivery(@RequestBody @Valid PutDeliveryDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto putDelivery(@RequestBody @Valid PutDeliveryDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             DeliveryVo deliveryVo = DeliveryVo.builder()
@@ -92,8 +92,8 @@ public class DeliveryAPIController {
     }
 
     @DeleteMapping
-    public APIResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for (DeleteDeliveryDto dto : reqDto.getList()) {

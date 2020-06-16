@@ -1,6 +1,10 @@
 package lozm.global.advice;
 
 import lombok.extern.slf4j.Slf4j;
+import lozm.global.exception.NotFoundException;
+import lozm.object.dto.ApiException;
+import lozm.object.dto.ApiResponseCode;
+import lozm.object.dto.ApiResponseDto;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

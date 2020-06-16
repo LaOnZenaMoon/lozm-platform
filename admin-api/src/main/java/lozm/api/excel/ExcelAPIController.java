@@ -1,7 +1,7 @@
 package lozm.api.excel;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.api.file.FileAPIController;
 import lozm.api.file.FileService;
 import lozm.global.props.FileProps;
@@ -27,8 +27,8 @@ public class ExcelAPIController {
     }
 
     @PostMapping(value = "/upload")
-    public APIResponseDto uploadExcel(@RequestParam("file") MultipartFile file) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto uploadExcel(@RequestParam("file") MultipartFile file) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             FileVo fileVo = FileVo.builder()

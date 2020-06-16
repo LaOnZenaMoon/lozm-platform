@@ -3,7 +3,7 @@ package lozm.api.sign;
 import lombok.RequiredArgsConstructor;
 import static lozm.object.code.SessionType.*;
 
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.sign.PostSignDto;
 import lozm.object.vo.sign.SignVo;
 import org.springframework.util.StringUtils;
@@ -26,8 +26,8 @@ public class SignAPIController {
 
 
     @PostMapping(value = "/in")
-    public APIResponseDto signIn(@RequestBody @Valid PostSignDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto signIn(@RequestBody @Valid PostSignDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             SignVo signVo = SignVo.builder()

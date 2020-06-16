@@ -1,7 +1,7 @@
 package lozm.api.item;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.item.*;
 import lozm.object.vo.item.ItemVo;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +18,8 @@ public class ItemAPIController {
 
 
     @GetMapping
-    public APIResponseDto getItemList() {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getItemList() {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             List<GetItemDto> itemList = itemService.getItemList();
@@ -37,8 +37,8 @@ public class ItemAPIController {
     }
 
     @GetMapping(value = "/{itemId}")
-    public APIResponseDto getItemDetail(@PathVariable(value = "itemId") Long itemId) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getItemDetail(@PathVariable(value = "itemId") Long itemId) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             ItemVo itemVo = ItemVo.builder()
@@ -60,8 +60,8 @@ public class ItemAPIController {
 
 
     @GetMapping(value = "/clothing/{itemType}")
-    public APIResponseDto getClothing(@PathVariable(value = "itemType") String itemType) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getClothing(@PathVariable(value = "itemType") String itemType) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             ItemVo itemVo = ItemVo.builder()
@@ -82,8 +82,8 @@ public class ItemAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             ItemVo itemVo = ItemVo.builder()
@@ -108,8 +108,8 @@ public class ItemAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             ItemVo itemVo = ItemVo.builder()
@@ -133,8 +133,8 @@ public class ItemAPIController {
     }
 
     @DeleteMapping
-    public APIResponseDto deleteItem(@RequestBody @Valid DeleteItemDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto deleteItem(@RequestBody @Valid DeleteItemDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for(DeleteItemDto dto : reqDto.getList()) {

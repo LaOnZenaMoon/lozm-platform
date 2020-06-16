@@ -1,7 +1,7 @@
 package lozm.api.orders;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.orders.DeleteOrdersDto;
 import lozm.object.dto.orders.GetOrdersDto;
 import lozm.object.dto.orders.PostOrdersDto;
@@ -21,8 +21,8 @@ public class OrdersAPIController {
 
 
     @GetMapping
-    public APIResponseDto getOrders() {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getOrders() {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             List<GetOrdersDto> result = ordersService.getOrdersList();
@@ -41,8 +41,8 @@ public class OrdersAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postOrders(@RequestBody @Valid PostOrdersDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto postOrders(@RequestBody @Valid PostOrdersDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             OrdersVo ordersVo = OrdersVo.builder()
@@ -65,8 +65,8 @@ public class OrdersAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putOrders(@RequestBody @Valid PutOrdersDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto putOrders(@RequestBody @Valid PutOrdersDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             OrdersVo ordersVo = OrdersVo.builder()
@@ -86,8 +86,8 @@ public class OrdersAPIController {
     }
 
     @DeleteMapping
-    public APIResponseDto deleteOrders(@RequestBody @Valid DeleteOrdersDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto deleteOrders(@RequestBody @Valid DeleteOrdersDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for (DeleteOrdersDto dto : reqDto.getList()) {

@@ -3,7 +3,7 @@ package lozm.api.route;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lozm.api.coupon.CouponAPIController;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.coupon.GetCouponDto;
 import lozm.object.dto.coupon.GetCouponUserDto;
 import lozm.object.dto.item.GetClothingDto;
@@ -43,26 +43,26 @@ public class RouteController {
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) {
         log.debug("Store ID: "+storeId);
 
-        APIResponseDto getStoreDetail = storeAPIController.getStoreDetail(storeId);
+        ApiResponseDto getStoreDetail = storeAPIController.getStoreDetail(storeId);
         GetStoreDto storeDetail = (GetStoreDto) getStoreDetail.getData();
         modelMap.addAttribute("storeDetail", storeDetail);
 
-        APIResponseDto getOuter = storeAPIController.getStoreClothing(storeId, "OUTER");
+        ApiResponseDto getOuter = storeAPIController.getStoreClothing(storeId, "OUTER");
         GetClothingDto.Response outer = (GetClothingDto.Response) getOuter.getData();
         List<GetClothingDto> outerList = outer.getList();
         modelMap.addAttribute("outerList", outerList);
 
-        APIResponseDto getTop = storeAPIController.getStoreClothing(storeId, "TOP");
+        ApiResponseDto getTop = storeAPIController.getStoreClothing(storeId, "TOP");
         GetClothingDto.Response top = (GetClothingDto.Response) getTop.getData();
         List<GetClothingDto> topList = top.getList();
         modelMap.addAttribute("topList", topList);
 
-        APIResponseDto getBottom = storeAPIController.getStoreClothing(storeId, "BOTTOM");
+        ApiResponseDto getBottom = storeAPIController.getStoreClothing(storeId, "BOTTOM");
         GetClothingDto.Response bottom = (GetClothingDto.Response) getBottom.getData();
         List<GetClothingDto> bottomList = bottom.getList();
         modelMap.addAttribute("bottomList", bottomList);
 
-        APIResponseDto getShoes = storeAPIController.getStoreClothing(storeId, "SHOES");
+        ApiResponseDto getShoes = storeAPIController.getStoreClothing(storeId, "SHOES");
         GetClothingDto.Response shoes = (GetClothingDto.Response) getShoes.getData();
         List<GetClothingDto> shoesList = shoes.getList();
         modelMap.addAttribute("shoesList", shoesList);
@@ -83,11 +83,11 @@ public class RouteController {
     @GetMapping(value = "/manage/coupon/{couponId}")
     public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) {
 
-        APIResponseDto getCouponDetail = couponAPIController.getCouponDetail(couponId);
+        ApiResponseDto getCouponDetail = couponAPIController.getCouponDetail(couponId);
         GetCouponDto couponDetail = (GetCouponDto) getCouponDetail.getData();
         modelMap.addAttribute("couponDetail", couponDetail);
 
-        APIResponseDto getCouponUser = couponAPIController.getCouponUser(couponId);
+        ApiResponseDto getCouponUser = couponAPIController.getCouponUser(couponId);
         GetCouponUserDto.Response couponUser = (GetCouponUserDto.Response) getCouponUser.getData();
         List<GetCouponUserDto> couponUserList = couponUser.getList();
         modelMap.addAttribute("couponUserList", couponUserList);

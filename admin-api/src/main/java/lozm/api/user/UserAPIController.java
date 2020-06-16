@@ -1,7 +1,7 @@
 package lozm.api.user;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.user.DeleteUserDto;
 import lozm.object.dto.user.GetUserDto;
 import lozm.object.dto.user.PostUserDto;
@@ -21,8 +21,8 @@ public class UserAPIController {
 
 
     @GetMapping()
-    public APIResponseDto getUser() {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto getUser() {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             List<GetUserDto> result = userService.getUserList();
@@ -40,8 +40,8 @@ public class UserAPIController {
     }
 
     @PostMapping
-    public APIResponseDto postUser(@RequestBody @Valid PostUserDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto postUser(@RequestBody @Valid PostUserDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             UserVo userVo = UserVo.builder()
@@ -63,8 +63,8 @@ public class UserAPIController {
     }
 
     @PutMapping
-    public APIResponseDto putUser(@RequestBody @Valid PutUserDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto putUser(@RequestBody @Valid PutUserDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             UserVo userVo = UserVo.builder()
@@ -87,8 +87,8 @@ public class UserAPIController {
     }
 
     @DeleteMapping
-    public APIResponseDto deleteUser(@RequestBody @Valid DeleteUserDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto deleteUser(@RequestBody @Valid DeleteUserDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             for(DeleteUserDto dto : reqDto.getList()) {

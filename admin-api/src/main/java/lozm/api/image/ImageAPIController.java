@@ -1,7 +1,7 @@
 package lozm.api.image;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.image.ImageDto;
 import lozm.object.vo.image.ImageVo;
 import org.springframework.util.StreamUtils;
@@ -56,8 +56,8 @@ public class ImageAPIController {
     }
 
     @PostMapping(value = "/upload")
-    public APIResponseDto uploadSingleImage(@RequestBody ImageDto.Request reqDto) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto uploadSingleImage(@RequestBody ImageDto.Request reqDto) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
 
         try {
             ImageVo imageVo = ImageVo.builder()

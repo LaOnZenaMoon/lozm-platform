@@ -1,7 +1,7 @@
 package lozm.api.file;
 
 import lombok.RequiredArgsConstructor;
-import lozm.object.dto.APIResponseDto;
+import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.file.FileDto;
 import lozm.global.props.FileProps;
 import lozm.object.vo.file.FileVo;
@@ -30,8 +30,8 @@ public class FileAPIController {
 
 
     @PostMapping(value = "/upload/single")
-    public APIResponseDto uploadSingleFile(@RequestParam("file") MultipartFile file) {
-        APIResponseDto resDto = new APIResponseDto<>();
+    public ApiResponseDto uploadSingleFile(@RequestParam("file") MultipartFile file) {
+        ApiResponseDto resDto = new ApiResponseDto<>();
         FileDto.Response dto = new FileDto.Response();
 
         try {
@@ -63,7 +63,7 @@ public class FileAPIController {
     }
 
     @PostMapping(value = "/upload/multi")
-    public List<APIResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) {
+    public List<ApiResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
             .stream()
             .map(file -> uploadSingleFile(file))

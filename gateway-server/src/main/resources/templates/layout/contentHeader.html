@@ -6,22 +6,10 @@
             <th:block th:if="${depth1 != ''}">
                 <ol class="breadcrumb">
                     <th:block th:if="${depth1 != ''}">
-                        <li class="breadcrumb-item"><a href="javaScript:void();" th:text="${depth1}"></a></li>
+                        <li class="breadcrumb-item"><a class="page-sub-title" href="javaScript:void();" th:text="${depth1}"></a></li>
                     </th:block>
 
-                    <th:block th:if="${depth2 != ''}">
-                        <li class="breadcrumb-item"><a href="javaScript:void();" th:text="${depth2}"></a></li>
-                    </th:block>
-
-                    <th:block th:if="${depth3 != ''}">
-                        <li class="breadcrumb-item"><a href="javaScript:void();" th:text="${depth3}"></a></li>
-                    </th:block>
-
-                    <th:block th:if="${depth4 != ''}">
-                        <li class="breadcrumb-item"><a href="javaScript:void();" th:text="${depth4}"></a></li>
-                    </th:block>
-
-                    <li class="breadcrumb-item active" aria-current="page" th:text="${page}"></li>
+                    <li class="breadcrumb-item active page-sub-title" aria-current="page" th:text="${page}"></li>
                 </ol>
             </th:block>
         </div>

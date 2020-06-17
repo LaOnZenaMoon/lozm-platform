@@ -3,5 +3,9 @@
 }
 
 .modal-grid {
-    width: 100% !important;;
+    width: 100% !important;
+}
+
+.icon-custom {
+    color: white !important;
 }

@@ -109,9 +109,9 @@
                     }
                     , callback: {
                         success: function (result) {
-                            debugger;
                             if(result.success) {
-                                location.href = result.message;
+                                lozm.func.insertJwt(result.data.token);
+                                location.href = result.data.previousPage;
                             } else {
                                 lozm.func.alertFail();
                             }

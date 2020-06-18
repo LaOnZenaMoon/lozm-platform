@@ -192,4 +192,20 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 )
                 .fetch();
     }
+
+    public List<User> selectUserInfoForJwt(SignVo signVo) {
+        return jpaQueryFactory
+                .select(Projections.fields(
+                        User.class,
+                        user.id,
+                        user.name,
+                        user.identifier,
+                        user.type
+                ))
+                .from(user)
+                .where(
+                        user.flag.eq(1)
+                        .and(user.identifier.eq(signVo.getIdentifier()))
+                ).fetch();
+    }
 }

@@ -48,3 +48,4 @@ admin-api:
   item: /api/item
   delivery: /api/delivery
   orders: /api/orders
+  user: /api/user

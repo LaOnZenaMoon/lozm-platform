@@ -1,7 +1,4 @@
 # TODO List
-
-## library 정리.
-
 ## 채팅 모듈 만들기
 => chatting-api 모듈 > RabbitMQ + STOMP 프로토콜 활용하여, 서버 개발
 
@@ -12,11 +9,7 @@
 ## Image & File 캐시 처리
 => 캐시 처리
 
-## API 인증 절차 정의 및 개발
-
 ## (JPQL -> Querydsl) 로 변환 처리
-
-## API 와 Client side 모듈 분리
 
 ## fetch join 으로 JPA 수정
 
@@ -29,10 +22,7 @@
 
 ## API 통신구간 암호화
 
-## user password 암호화
 
-## Gateway server 만들기.
-=> 통합인증 및 endpoint 처리 등 기능 개발.
 
 # Database script
 CREATE USER LOZM identified by oracle ;

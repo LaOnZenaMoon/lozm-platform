@@ -35,6 +35,7 @@ out/
 
 ### Log ###
 log/
+spy.log
 
 ### template ###
 #**/dashtreme/

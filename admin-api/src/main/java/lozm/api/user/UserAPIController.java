@@ -8,7 +8,6 @@ import lozm.object.dto.user.GetUserDto;
 import lozm.object.dto.user.PostUserDto;
 import lozm.object.dto.user.PutUserDto;
 import lozm.object.vo.user.UserVo;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +19,6 @@ import java.util.List;
 public class UserAPIController {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
 
     @GetMapping()
@@ -38,7 +36,7 @@ public class UserAPIController {
         UserVo userVo = UserVo.builder()
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
-                .password(passwordEncoder.encode(reqDto.getPassword()))
+                .password(reqDto.getPassword())
                 .type(reqDto.getType())
                 .build();
 
@@ -53,7 +51,7 @@ public class UserAPIController {
                 .id(reqDto.getId())
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
-                .password(passwordEncoder.encode(reqDto.getPassword()))
+                .password(reqDto.getPassword())
                 .type(reqDto.getType())
                 .flag(1)
                 .build();

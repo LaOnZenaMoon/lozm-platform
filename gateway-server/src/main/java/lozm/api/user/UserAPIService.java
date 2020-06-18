@@ -11,6 +11,7 @@ import lozm.object.dto.user.PutUserDto;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +23,7 @@ public class UserAPIService {
 
     private final RestTemplate restTemplate;
     private final AdminApiProps adminApiProps;
+    private final PasswordEncoder passwordEncoder;
 
 
     public GetUserDto.Response getUser() {
@@ -37,6 +39,8 @@ public class UserAPIService {
     }
 
     public ApiResponseDto postUser(PostUserDto.Request reqDto) {
+        reqDto.setPassword(passwordEncoder.encode(reqDto.getPassword()));
+
         ApiResponseDto responseBody = restTemplate.exchange(
                 adminApiProps.getUserUrl(),
                 HttpMethod.POST,
@@ -49,6 +53,8 @@ public class UserAPIService {
     }
 
     public ApiResponseDto putUser(PutUserDto.Request reqDto) {
+        reqDto.setPassword(passwordEncoder.encode(reqDto.getPassword()));
+
         ApiResponseDto responseBody = restTemplate.exchange(
                 adminApiProps.getUserUrl(),
                 HttpMethod.PUT,

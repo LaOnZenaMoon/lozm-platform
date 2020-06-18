@@ -1,6 +1,7 @@
 package lozm.object.dto.user;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,6 +16,7 @@ public class PutUserDto {
 
         private String identifier;
 
+        @Setter
         private String password;
 
         private String type;

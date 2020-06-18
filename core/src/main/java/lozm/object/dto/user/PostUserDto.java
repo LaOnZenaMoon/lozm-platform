@@ -1,6 +1,7 @@
 package lozm.object.dto.user;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -15,6 +16,7 @@ public class PostUserDto {
         private String identifier;
 
         @NotEmpty
+        @Setter
         private String password;
 
         @NotEmpty

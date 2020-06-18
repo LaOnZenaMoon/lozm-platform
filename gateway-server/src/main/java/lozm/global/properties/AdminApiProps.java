@@ -17,6 +17,8 @@ public class AdminApiProps {
 	private String item;
 	private String delivery;
 	private String orders;
+	private String user;
+
 
 	public String getStoreUrl() {
 		return url + store;
@@ -36,6 +38,10 @@ public class AdminApiProps {
 
 	public String getOrdersUrl() {
 		return url + orders;
+	}
+
+	public String getUserUrl() {
+		return url + user;
 	}
 
 }

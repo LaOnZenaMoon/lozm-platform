@@ -1,14 +1,16 @@
 package lozm.entity;
 
 import lozm.object.code.UsersType;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-//@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
     @Column(name = "CREATED_DT", updatable = false)
@@ -17,10 +19,10 @@ public class BaseEntity {
     @Column(name = "MODIFIED_DT")
     private LocalDateTime modifiedDt;
 
-    @Column(name = "CREATED_BY", updatable = false)
+    @Column(name = "CREATED_BY", updatable = false, nullable = false)
     private String createdBy = UsersType.API_SYSTEM.toString();
 
-    @Column(name = "MODIFY_BY")
+    @Column(name = "MODIFY_BY", nullable = false)
     private String modifiedBy;
 
     @Column(name = "FLAG")

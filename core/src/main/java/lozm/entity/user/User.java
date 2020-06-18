@@ -51,13 +51,19 @@ public class User extends BaseEntity {
     public void updateUser(UserVo userVo) {
         this.name = userVo.getName();
         this.identifier = userVo.getIdentifier();
-        this.password = userVo.getPassword();
+        if(!checkPassword(userVo.getPassword(), this.password)) {
+            this.password = userVo.getPassword();
+        }
         this.type = StringUtils.isEmpty(userVo.getType()) ? null : UsersType.valueOf(userVo.getType());
         this.setBaseEntity("", userVo.getFlag());
     }
 
     public void deleteUser(UserVo userVo) {
         this.setBaseEntity("", userVo.getFlag());
+    }
+
+    private boolean checkPassword(String source, String target) {
+        return source.equals(target);
     }
 
 }

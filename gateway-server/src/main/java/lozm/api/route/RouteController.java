@@ -38,7 +38,7 @@ public class RouteController {
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
         log.debug("Store ID: "+storeId);
 
-        GetStoreDto.Response getStoreDetail = routeService.getStoreDetail(storeId);
+        GetStoreDto getStoreDetail = routeService.getStoreDetail(storeId);
         modelMap.addAttribute("storeDetail", getStoreDetail);
 
         GetClothingDto.Response getOuter = routeService.getStoreClothing(storeId, "OUTER");

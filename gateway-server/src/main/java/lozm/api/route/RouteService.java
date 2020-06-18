@@ -21,13 +21,13 @@ public class RouteService {
     private final AdminApiProps adminApiProps;
 
 
-    public GetStoreDto.Response getStoreDetail(Long storeId) throws Exception {
+    public GetStoreDto getStoreDetail(Long storeId) throws Exception {
         String url = adminApiProps.getUrl() + adminApiProps.getStore() + "/" + storeId;
-        ApiResponseDto<GetStoreDto.Response> responseBody = restTemplate.exchange(
+        ApiResponseDto<GetStoreDto> responseBody = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<ApiResponseDto<GetStoreDto.Response>>() {
+                new ParameterizedTypeReference<ApiResponseDto<GetStoreDto>>() {
                 }
         ).getBody();
 

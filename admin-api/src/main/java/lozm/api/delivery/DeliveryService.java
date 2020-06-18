@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,13 +32,12 @@ public class DeliveryService {
         return deliveryList.stream().map(d -> new GetDeliveryDto(
                     d.getId(),
                     d.getStatus(),
-                    d.getAddress().getCountry(),
-                    d.getAddress().getZipCode(),
-                    d.getAddress().getCity(),
-                    d.getAddress().getStreet(),
-                    d.getAddress().getEtc()
-                ))
-                .collect(toList());
+                    isEmpty(d.getAddress()) ? null : d.getAddress().getCountry(),
+                    isEmpty(d.getAddress()) ? null : d.getAddress().getZipCode(),
+                    isEmpty(d.getAddress()) ? null : d.getAddress().getCity(),
+                    isEmpty(d.getAddress()) ? null : d.getAddress().getStreet(),
+                    isEmpty(d.getAddress()) ? null : d.getAddress().getEtc()
+        )).collect(toList());
     }
 
     @Transactional

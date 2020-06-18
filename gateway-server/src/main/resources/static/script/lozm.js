@@ -235,7 +235,7 @@
 
     var checkJwt = lozm.func.checkJwt = function (_options) {
         try {
-            if(_options === undefined || _options.url === "/api/login/signIn") {
+            if(_options === undefined || _options.url === "/api/sign/in") {
                 return false;
             }
             const _jwtToken = window.localStorage.getItem(JWT_TOKEN)

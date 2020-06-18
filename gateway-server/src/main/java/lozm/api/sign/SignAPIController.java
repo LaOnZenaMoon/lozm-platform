@@ -1,13 +1,12 @@
 package lozm.api.sign;
 
 import lombok.RequiredArgsConstructor;
-import static lozm.object.code.SessionType.*;
-import static org.springframework.util.ObjectUtils.isEmpty;
-
+import lozm.global.jwt.JwtAuthenticationService;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.sign.PostSignDto;
 import lozm.object.vo.sign.SignVo;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,12 +17,16 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
+import static lozm.object.code.SessionType.PREV_PAGE;
+import static lozm.object.code.SessionType.USER;
+import static org.springframework.util.ObjectUtils.isEmpty;
+
 @RequestMapping(value = "/api/sign")
 @RestController
 @RequiredArgsConstructor
 public class SignAPIController {
 
-    private final SignService signService;
+    private final JwtAuthenticationService jwtAuthenticationService;
     private final HttpSession httpSession;
 
 
@@ -34,9 +37,12 @@ public class SignAPIController {
                 .password(reqDto.getPassword())
                 .build();
 
-        List<SignVo> result = signService.signIn(signVo);
+        SignVo jwt = jwtAuthenticationService.getToken(signVo);
+        PostSignDto.Response resDto = new PostSignDto.Response();
+        resDto.setToken(jwt.getToken());
+        resDto.setPreviousPage(setSessionInfo(jwt));
 
-        return ApiResponseDto.createException(ApiResponseCode.OK, setSessionInfo(result.get(0)));
+        return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     private String setSessionInfo(SignVo SignVo) throws Exception {

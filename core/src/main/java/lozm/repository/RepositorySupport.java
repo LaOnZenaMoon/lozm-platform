@@ -200,6 +200,7 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                         user.id,
                         user.name,
                         user.identifier,
+                        user.password,
                         user.type
                 ))
                 .from(user)

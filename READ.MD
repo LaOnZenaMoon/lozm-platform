@@ -1,4 +1,6 @@
 # TODO List
+## NBAMANIA 같은 관리자 - B2C 사이트 만들기.
+
 ## 채팅 모듈 만들기
 => chatting-api 모듈 > RabbitMQ + STOMP 프로토콜 활용하여, 서버 개발
 
@@ -21,7 +23,6 @@
 => Spring Data JPA > Auditing Entity 기능 + Spring Security 기능 활용하여, 로그인 세션 정보 담기.
 
 ## API 통신구간 암호화
-
 
 
 # Database script

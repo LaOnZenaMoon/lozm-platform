@@ -6,6 +6,7 @@ import lozm.object.dto.user.GetUserDto;
 import lozm.object.vo.user.UserVo;
 import lozm.entity.user.User;
 import lozm.repository.user.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     public List<GetUserDto> getUserList() throws Exception {
@@ -54,6 +56,9 @@ public class UserService {
         });
 
         findUser.get().updateUser(userVo);
+        if(passwordEncoder.matches(userVo.getPassword(), findUser.get().getPassword())) {
+            findUser.get().updateUserPassword(userVo);
+        }
     }
 
     @Transactional

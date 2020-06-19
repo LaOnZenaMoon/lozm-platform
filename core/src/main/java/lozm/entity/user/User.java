@@ -51,26 +51,15 @@ public class User extends BaseEntity {
     public void updateUser(UserVo userVo) {
         this.name = userVo.getName();
         this.identifier = userVo.getIdentifier();
-        //TODO
-        //1. core 모듈에 PasswordEncoder 라이브러리 추가하여 비교처리할 것인지
-        //2. gateway-server 모듈에서 암호화, 비암호화된 패스워드 필드값을 동시에 넘겨 비교처리할 것인지
-//        if(!checkPassword(userVo.getPassword(), this.password)) {
-//            this.password = userVo.getPassword();
-//        }
+        if(!StringUtils.isEmpty(userVo.getPassword())) {
+            this.password = userVo.getPassword();
+        }
         this.type = StringUtils.isEmpty(userVo.getType()) ? null : UsersType.valueOf(userVo.getType());
         this.setBaseEntity("", userVo.getFlag());
     }
 
-    public void updateUserPassword(UserVo userVo) {
-        this.password = userVo.getPassword();
-    }
-
     public void deleteUser(UserVo userVo) {
         this.setBaseEntity("", userVo.getFlag());
-    }
-
-    private boolean checkPassword(String source, String target) {
-        return source.equals(target);
     }
 
 }

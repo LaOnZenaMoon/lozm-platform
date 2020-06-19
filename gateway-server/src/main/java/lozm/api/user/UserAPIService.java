@@ -14,6 +14,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -39,7 +40,7 @@ public class UserAPIService {
     }
 
     public ApiResponseDto postUser(PostUserDto.Request reqDto) {
-        reqDto.setPassword(passwordEncoder.encode(reqDto.getPassword()));
+        reqDto.setPassword(encode(reqDto.getPassword()));
 
         ApiResponseDto responseBody = restTemplate.exchange(
                 adminApiProps.getUserUrl(),
@@ -53,7 +54,7 @@ public class UserAPIService {
     }
 
     public ApiResponseDto putUser(PutUserDto.Request reqDto) {
-        reqDto.setPassword(passwordEncoder.encode(reqDto.getPassword()));
+        reqDto.setPassword(encode(reqDto.getPassword()));
 
         ApiResponseDto responseBody = restTemplate.exchange(
                 adminApiProps.getUserUrl(),
@@ -77,4 +78,9 @@ public class UserAPIService {
         BaseService.checkResponseBody(responseBody, "Failed to interface deleteUser API.");
         return responseBody;
     }
+
+    private String encode(String source) {
+        return StringUtils.isEmpty(source) ? null : passwordEncoder.encode(source);
+    }
+
 }

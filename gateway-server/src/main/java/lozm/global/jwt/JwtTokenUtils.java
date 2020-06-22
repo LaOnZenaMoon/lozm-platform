@@ -23,6 +23,10 @@ public class JwtTokenUtils implements Serializable {
     private final JwtProps jwtProps;
 
 
+    public Long getId(String token) {
+        return Long.valueOf(getAllClaimsFromToken(token).get("id", Integer.class));
+    }
+
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);

@@ -95,7 +95,7 @@
     display: block;
     width: auto;
     margin: 0 0.5em 0.5em;
-    padding: 8px 20px;
+    padding: 1em 1em;
     text-decoration: none;
 
     -webkit-border-radius: 5px;
@@ -107,8 +107,8 @@
 .wizard > .steps .disabled a:hover,
 .wizard > .steps .disabled a:active
 {
-    background: rgba(255, 255, 255, 0.5);
-    color: #fff;
+    background: #f3f4fa;
+    color: #aaa;
     cursor: default;
 }
 
@@ -116,8 +116,8 @@
 .wizard > .steps .current a:hover,
 .wizard > .steps .current a:active
 {
-    background: #ffffff;
-    color: #5f5b5b;
+    background: #008cff;
+    color: #fff;
     cursor: default;
 }
 
@@ -125,7 +125,7 @@
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active
 {
-    background: rgba(0, 0, 0, 0.35);
+    background: #9dc8e2;
     color: #fff;
 }
 
@@ -139,7 +139,7 @@
 
 .wizard > .content
 {
-    background: rgba(0,0,0,.2);
+    background: #f3f4fa;
     display: block;
     margin: 0.5em;
     min-height: 35em;
@@ -189,7 +189,7 @@
 .wizard > .content > .body input
 {
     display: block;
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid #ccc;
 }
 
 .wizard > .content > .body input[type="checkbox"]
@@ -199,8 +199,8 @@
 
 .wizard > .content > .body input.error
 {
-    background: rgba(19, 10, 10, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgb(251, 227, 228);
+    border: 1px solid #fbc2c4;
     color: #8a1f11;
 }
 
@@ -212,7 +212,7 @@
 
 .wizard > .content > .body label.error
 {
-    color: #ff5656;
+    color: #8a1f11;
     display: inline-block;
     margin-left: 1.5em;
 }
@@ -253,8 +253,8 @@
 .wizard > .actions a:hover,
 .wizard > .actions a:active
 {
-    background: #ffffff;
-    color: #150e0f;
+    background: #008cff;
+    color: #fff;
     display: block;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -268,8 +268,8 @@
 .wizard > .actions .disabled a:hover,
 .wizard > .actions .disabled a:active
 {
-    background: #ffffff40;
-    color: #fff;
+    background: #f3f4fa;
+    color: #aaa;
 }
 
 .wizard > .loading

@@ -1,5 +1,8 @@
 # TODO List
 ## NBAMANIA 같은 관리자 - B2C 사이트 만들기.
+=> Board, Comment Entity 추가 개발.
+=> 우선 Admin 에서 관리가능하도록 개발.
+=> 이후 B2C 페이지에서 CRUD 가능하도록 개발.
 
 ## 채팅 모듈 만들기
 => chatting-api 모듈 > RabbitMQ + STOMP 프로토콜 활용하여, 서버 개발
@@ -23,6 +26,11 @@
 => Spring Data JPA > Auditing Entity 기능 + Spring Security 기능 활용하여, 로그인 세션 정보 담기.
 
 ## API 통신구간 암호화
+
+## Kibana + elastic search + Spring boot + Sleuth 개발 관련.
+=> “114_cloud_infra” + “114_basic_project” 프로젝트 참조.
+=> 현재 마켓컬리에서 사용중.
+
 
 
 # Database script

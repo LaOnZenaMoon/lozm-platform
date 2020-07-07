@@ -11,8 +11,8 @@ public class BaseVo {
 
     private LocalDateTime createdDt;
     private LocalDateTime modifiedDt;
-    private String createdBy;
-    private String modifiedBy;
+    private Long createdBy;
+    private Long modifiedBy;
     private int flag = 1;
 
 }

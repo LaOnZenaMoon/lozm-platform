@@ -16,7 +16,7 @@ public class BoardVo extends BaseVo {
     private String content;
 
     @Builder
-    public BoardVo(LocalDateTime createdDt, LocalDateTime modifiedDt, String createdBy, String modifiedBy, int flag, Long id, String boardType, String contentType, String title, String content) {
+    public BoardVo(LocalDateTime createdDt, LocalDateTime modifiedDt, Long createdBy, Long modifiedBy, int flag, Long id, String boardType, String contentType, String title, String content) {
         super(createdDt, modifiedDt, createdBy, modifiedBy, flag);
         this.id = id;
         this.boardType = boardType;

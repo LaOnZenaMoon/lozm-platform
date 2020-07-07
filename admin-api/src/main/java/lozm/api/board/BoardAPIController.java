@@ -48,6 +48,7 @@ public class BoardAPIController {
                 .contentType(reqDto.getContentType())
                 .title(reqDto.getTitle())
                 .content(reqDto.getContent())
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         boardService.save(boardVo);
@@ -61,6 +62,7 @@ public class BoardAPIController {
                 .id(reqDto.getId())
                 .title(reqDto.getTitle())
                 .content(reqDto.getContent())
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         boardService.update(boardVo);
@@ -74,6 +76,7 @@ public class BoardAPIController {
             BoardVo boardVo = BoardVo.builder()
                     .id(dto.getId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             boardService.delete(boardVo);
@@ -98,6 +101,7 @@ public class BoardAPIController {
                 .boardId(reqDto.getBoardId())
                 .commentType(reqDto.getCommentType())
                 .content(reqDto.getContent())
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         boardService.save(commentVo);
@@ -111,6 +115,7 @@ public class BoardAPIController {
                 .id(reqDto.getId())
                 .commentType(reqDto.getCommentType())
                 .content(reqDto.getContent())
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         boardService.update(commentVo);
@@ -124,6 +129,7 @@ public class BoardAPIController {
             CommentVo commentVo = CommentVo.builder()
                     .id(dto.getId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             boardService.delete(commentVo);

@@ -16,7 +16,7 @@ public class CommentVo extends BaseVo {
     private Long boardId;
 
     @Builder
-    public CommentVo(LocalDateTime createdDt, LocalDateTime modifiedDt, String createdBy, String modifiedBy, int flag, Long id, String commentType, String content, Long boardId) {
+    public CommentVo(LocalDateTime createdDt, LocalDateTime modifiedDt, Long createdBy, Long modifiedBy, int flag, Long id, String commentType, String content, Long boardId) {
         super(createdDt, modifiedDt, createdBy, modifiedBy, flag);
         this.id = id;
         this.commentType = commentType;

@@ -2,7 +2,6 @@ package lozm.entity.board;
 
 import lombok.Getter;
 import lozm.entity.BaseEntity;
-import lozm.object.vo.board.BoardVo;
 import lozm.object.vo.board.CommentVo;
 
 import javax.persistence.*;
@@ -26,6 +25,7 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BOARD_ID")
     private Board board;
+
 
     public void insertComment(CommentVo commentVo, Board board) {
         this.commentType = commentVo.getCommentType();

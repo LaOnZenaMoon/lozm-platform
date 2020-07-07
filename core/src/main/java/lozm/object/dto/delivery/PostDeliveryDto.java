@@ -1,13 +1,14 @@
 package lozm.object.dto.delivery;
 
 import lombok.Getter;
+import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 
 public class PostDeliveryDto {
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         @NotEmpty
         private String country;
 

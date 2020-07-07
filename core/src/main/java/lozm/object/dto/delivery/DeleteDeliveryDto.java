@@ -1,6 +1,7 @@
 package lozm.object.dto.delivery;
 
 import lombok.Getter;
+import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class DeleteDeliveryDto {
     private int flag;
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         @Size(min = 1)
         private List<DeleteDeliveryDto> list = new ArrayList<>();
     }

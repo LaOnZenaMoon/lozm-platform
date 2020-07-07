@@ -41,6 +41,7 @@ public class DeliveryAPIController {
                 .street(reqDto.getStreet())
                 .etc(reqDto.getEtc())
                 .status(reqDto.getStatus())
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         deliveryService.save(deliveryVo);
@@ -58,7 +59,7 @@ public class DeliveryAPIController {
                 .street(reqDto.getStreet())
                 .etc(reqDto.getEtc())
                 .status(reqDto.getStatus())
-                .flag(1)
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         deliveryService.update(deliveryVo);
@@ -72,6 +73,7 @@ public class DeliveryAPIController {
             DeliveryVo deliveryVo = DeliveryVo.builder()
                     .id(dto.getId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             deliveryService.delete(deliveryVo);

@@ -1,15 +1,15 @@
 package lozm.object.dto.delivery;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lozm.object.code.DeliveryStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetDeliveryDto {
 
     private Long id;
@@ -19,16 +19,6 @@ public class GetDeliveryDto {
     private String city;
     private String street;
     private String etc;
-
-    public GetDeliveryDto(Long id, DeliveryStatus status, String country, String zipCode, String city, String street, String etc) {
-        this.id = id;
-        this.status = status;
-        this.country = country;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.street = street;
-        this.etc = etc;
-    }
 
     @Getter
     @Setter

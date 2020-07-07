@@ -11,11 +11,13 @@ import lozm.repository.delivery.DeliveryRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
-import static org.springframework.util.ObjectUtils.isEmpty;
+import static net.logstash.logback.encoder.org.apache.commons.lang3.ObjectUtils.isEmpty;
+//import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,16 +30,22 @@ public class DeliveryService {
 
     public List<GetDeliveryDto> getDeliveryList() {
         List<Delivery> deliveryList = repositorySupport.selectDeliveryList();
+        List<GetDeliveryDto> rtnList = new ArrayList<>();
+        for (Delivery delivery : deliveryList) {
+            GetDeliveryDto dto = GetDeliveryDto.builder()
+                    .id(delivery.getId())
+                    .status(delivery.getStatus())
+                    .country(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getCountry())
+                    .zipCode(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getZipCode())
+                    .city(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getCity())
+                    .street(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getStreet())
+                    .etc(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getEtc())
+                    .build();
 
-        return deliveryList.stream().map(d -> new GetDeliveryDto(
-                    d.getId(),
-                    d.getStatus(),
-                    isEmpty(d.getAddress()) ? null : d.getAddress().getCountry(),
-                    isEmpty(d.getAddress()) ? null : d.getAddress().getZipCode(),
-                    isEmpty(d.getAddress()) ? null : d.getAddress().getCity(),
-                    isEmpty(d.getAddress()) ? null : d.getAddress().getStreet(),
-                    isEmpty(d.getAddress()) ? null : d.getAddress().getEtc()
-        )).collect(toList());
+            rtnList.add(dto);
+        }
+
+        return rtnList;
     }
 
     @Transactional
@@ -50,21 +58,22 @@ public class DeliveryService {
 
     @Transactional
     public void update(DeliveryVo deliveryVo) throws Exception {
-        Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
-        findDelivery.orElseThrow(() -> {
-            throw new ServiceException("DELIVERY_0002", "Delivery doesn't exist.");
-        });
-
+        Optional<Delivery> findDelivery = findDelivery(deliveryVo.getId());
         findDelivery.get().updateDelivery(deliveryVo);
     }
 
     @Transactional
     public void delete(DeliveryVo deliveryVo) {
-        Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryVo.getId());
+        Optional<Delivery> findDelivery = findDelivery(deliveryVo.getId());
+        findDelivery.get().deleteDelivery(deliveryVo);
+    }
+
+    private Optional<Delivery> findDelivery(Long deliveryId) {
+        Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryId);
         findDelivery.orElseThrow(() -> {
             throw new ServiceException("DELIVERY_0002", "Delivery doesn't exist.");
         });
-
-        findDelivery.get().deleteDelivery(deliveryVo);
+        return findDelivery;
     }
+
 }

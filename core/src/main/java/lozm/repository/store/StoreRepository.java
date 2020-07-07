@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
     @Query("SELECT S FROM Store S WHERE S.name = :name")

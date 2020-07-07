@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface TopRepository extends JpaRepository<Top, Long> {
 
     @Query("SELECT I FROM Top I WHERE I.flag = 1 AND I.type = :type AND I.store.id = :storeId")

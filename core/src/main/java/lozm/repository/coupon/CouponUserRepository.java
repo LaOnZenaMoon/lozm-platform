@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface CouponUserRepository extends JpaRepository<CouponUser, Long> {
 
     @Query("SELECT CU FROM CouponUser CU WHERE CU.flag = 1 AND CU.coupon.id = :couponId")

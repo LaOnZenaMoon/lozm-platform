@@ -2,9 +2,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.Oracle10gDialect
     hibernate:
-      #            ddl-auto: create-drop
-      #            ddl-auto: create
-      ddl-auto: update
+      ddl-auto: create-drop
+#      ddl-auto: create
+#      ddl-auto: update
     properties:
       hibernate:
         default_batch_fetch_size: 500

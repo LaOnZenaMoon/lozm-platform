@@ -1,13 +1,22 @@
 package lozm.object.dto.sign;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lozm.object.code.UsersType;
 import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostSignDto {
+
+    private Long id;
+    private String name;
+    private String identifier;
+    private UsersType type;
 
     @Getter
     public static class Request extends BaseUserDto {

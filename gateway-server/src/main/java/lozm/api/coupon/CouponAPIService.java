@@ -105,6 +105,7 @@ public class CouponAPIService {
         return responseBody;
     }
 
+
     public ApiResponseDto putCouponUser(PutCouponUserDto.Request reqDto) throws Exception {
         ApiResponseDto responseBody = restTemplate.exchange(
                 adminApiProps.getCouponUrl() + "/user",

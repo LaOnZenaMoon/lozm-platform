@@ -72,6 +72,7 @@ public class StoreAPIController {
                 .name(reqDto.getName())
                 .telNumber(reqDto.getTelNumber())
                 .info(reqDto.getInfo())
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         storeService.save(storeVo);
@@ -86,7 +87,7 @@ public class StoreAPIController {
                 .name(reqDto.getName())
                 .telNumber(reqDto.getTelNumber())
                 .info(reqDto.getInfo())
-                .flag(1)
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         storeService.update(storeVo);
@@ -100,6 +101,7 @@ public class StoreAPIController {
             StoreVo storeVo = StoreVo.builder()
                 .id(dto.getId())
                 .flag(0)
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
             storeService.delete(storeVo);

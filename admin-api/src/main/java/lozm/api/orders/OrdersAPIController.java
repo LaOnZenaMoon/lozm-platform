@@ -39,6 +39,7 @@ public class OrdersAPIController {
                 .itemId(reqDto.getItemId())
                 .deliveryId(reqDto.getDeliveryId())
                 .couponId(reqDto.getCouponId())
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         ordersService.save(ordersVo);
@@ -51,7 +52,7 @@ public class OrdersAPIController {
         OrdersVo ordersVo = OrdersVo.builder()
                 .id(reqDto.getId())
                 .status(reqDto.getStatus())
-                .flag(1)
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         ordersService.update(ordersVo);
@@ -65,6 +66,7 @@ public class OrdersAPIController {
             OrdersVo ordersVo = OrdersVo.builder()
                     .id(dto.getOrdersId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             ordersService.delete(ordersVo);

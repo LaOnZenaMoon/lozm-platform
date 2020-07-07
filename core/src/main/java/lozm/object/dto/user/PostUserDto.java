@@ -2,13 +2,14 @@ package lozm.object.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 
 public class PostUserDto {
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         @NotEmpty
         private String name;
 

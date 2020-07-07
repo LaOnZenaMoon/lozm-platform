@@ -1,17 +1,14 @@
 package lozm.object.vo.store;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lozm.object.vo.BaseVo;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class StoreVo {
+public class StoreVo extends BaseVo {
 
     private Long id;
     private String name;
@@ -20,5 +17,17 @@ public class StoreVo {
     private int flag;
 
     private List<StoreVo> storeList;
+
+
+    @Builder
+    public StoreVo(LocalDateTime createdDt, LocalDateTime modifiedDt, Long createdBy, Long modifiedBy, int flag, Long id, String name, String telNumber, String info, int flag1, List<StoreVo> storeList) {
+        super(createdDt, modifiedDt, createdBy, modifiedBy, flag);
+        this.id = id;
+        this.name = name;
+        this.telNumber = telNumber;
+        this.info = info;
+        this.flag = flag1;
+        this.storeList = storeList;
+    }
 
 }

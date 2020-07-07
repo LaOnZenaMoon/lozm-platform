@@ -37,25 +37,26 @@ public class OrdersService {
     private final RepositorySupport repositorySupport;
     private final DeliveryRepository deliveryRepository;
 
+
     public List<GetOrdersDto> getOrdersList() {
         List<Orders> ordersList = repositorySupport.selectOrdersList();
         List<GetOrdersDto> rtnList = new ArrayList<>();
         for (Orders o : ordersList) {
-            GetOrdersDto dto = new GetOrdersDto(
-                    o.getId(),
-                    o.getOrderDt(),
-                    o.getStatus(),
-                    o.getDelivery().getId(),
-                    o.getDelivery().getAddress().getCountry(),
-                    o.getDelivery().getAddress().getZipCode(),
-                    o.getDelivery().getAddress().getCity(),
-                    o.getDelivery().getAddress().getStreet(),
-                    o.getDelivery().getAddress().getEtc(),
-                    o.getUser().getId(),
-                    o.getUser().getName(),
-                    o.getUser().getIdentifier(),
-                    o.getUser().getType()
-            );
+            GetOrdersDto dto = GetOrdersDto.builder()
+                    .ordersId(o.getId())
+                    .orderDt(o.getOrderDt())
+                    .ordersStatus(o.getStatus())
+                    .deliveryId(o.getDelivery().getId())
+                    .deliveryCountry(o.getDelivery().getAddress().getCountry())
+                    .deliveryZipCode(o.getDelivery().getAddress().getZipCode())
+                    .deliveryCity(o.getDelivery().getAddress().getCity())
+                    .deliveryStreet(o.getDelivery().getAddress().getStreet())
+                    .deliveryEtc(o.getDelivery().getAddress().getEtc())
+                    .userId(o.getUser().getId())
+                    .userName(o.getUser().getName())
+                    .identifier(o.getUser().getIdentifier())
+                    .userType(o.getUser().getType())
+                    .build();
 
             rtnList.add(dto);
         }
@@ -65,28 +66,14 @@ public class OrdersService {
 
     @Transactional
     public void save(OrdersVo ordersVo) throws Exception {
-        Optional<User> findUser = userRepository.findById(ordersVo.getUserId());
-        findUser.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_SAVE_USER", "User doesn't exist.");
-        });
-
-        Optional<Item> findItem = itemRepository.findById(ordersVo.getItemId());
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_SAVE_ITEM", "Item doesn't exist.");
-        });
-
-        Optional<Delivery> findDelivery = deliveryRepository.findById(ordersVo.getDeliveryId());
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_SAVE_DELIVERY", "Delivery doesn't exist.");
-        });
+        Optional<User> findUser = findUser(ordersVo.getUserId());
+        Optional<Item> findItem = findItem(ordersVo.getItemId());
+        Optional<Delivery> findDelivery = findDelivery(ordersVo.getDeliveryId());
 
         Long orderedPrice = findItem.get().getPrice();
         Optional<Coupon> findCoupon = null;
         if(ordersVo.getCouponId() != null) {
-            findCoupon = couponRepository.findById(ordersVo.getCouponId());
-            findCoupon.orElseThrow(() -> {
-                throw new ServiceException("ORDERS_SAVE_COUPON", "Coupon doesn't exist.");
-            });
+            findCoupon = findCoupon(ordersVo.getCouponId());
             orderedPrice = findCoupon.get().calculateOrderedPrice(orderedPrice);
         }
 
@@ -107,22 +94,55 @@ public class OrdersService {
 
     @Transactional
     public void update(OrdersVo ordersVo) throws Exception {
-        Optional<Orders> findOrders = ordersRepository.findById(ordersVo.getId());
-        findOrders.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_0002", "Order doesn't exist.");
-        });
-
+        Optional<Orders> findOrders = findOrders(ordersVo.getId());
         findOrders.get().updateOrders(ordersVo);
     }
 
     @Transactional
     public void delete(OrdersVo ordersVo) {
-        Optional<Orders> findOrders = ordersRepository.findById(ordersVo.getId());
+        Optional<Orders> findOrders = findOrders(ordersVo.getId());
+        findOrders.get().deleteOrders(ordersVo);
+    }
+
+    private Optional<Orders> findOrders(Long ordersId) {
+        Optional<Orders> findOrders = ordersRepository.findById(ordersId);
         findOrders.orElseThrow(() -> {
             throw new ServiceException("ORDERS_0002", "Order doesn't exist.");
         });
+        return findOrders;
+    }
 
-        findOrders.get().deleteOrders(ordersVo);
+    private Optional<Coupon> findCoupon(Long couponId) {
+        Optional<Coupon> findCoupon;
+        findCoupon = couponRepository.findById(couponId);
+        findCoupon.orElseThrow(() -> {
+            throw new ServiceException("ORDERS_SAVE_COUPON", "Coupon doesn't exist.");
+        });
+        return findCoupon;
+    }
+
+    private Optional<Delivery> findDelivery(Long deliveryId) {
+        Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryId);
+        findDelivery.orElseThrow(() -> {
+            throw new ServiceException("ORDERS_SAVE_DELIVERY", "Delivery doesn't exist.");
+        });
+        return findDelivery;
+    }
+
+    private Optional<Item> findItem(Long itemId) {
+        Optional<Item> findItem = itemRepository.findById(itemId);
+        findItem.orElseThrow(() -> {
+            throw new ServiceException("ORDERS_SAVE_ITEM", "Item doesn't exist.");
+        });
+        return findItem;
+    }
+
+    private Optional<User> findUser(Long userId) {
+        Optional<User> findUser = userRepository.findById(userId);
+        findUser.orElseThrow(() -> {
+            throw new ServiceException("ORDERS_SAVE_USER", "User doesn't exist.");
+        });
+        return findUser;
     }
 
 }

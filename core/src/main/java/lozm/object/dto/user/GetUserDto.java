@@ -1,15 +1,15 @@
 package lozm.object.dto.user;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lozm.object.code.UsersType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetUserDto {
 
     private Long id;
@@ -18,13 +18,6 @@ public class GetUserDto {
     private String password;
     private UsersType type;
 
-    public GetUserDto(Long id, String name, String identifier, String password, UsersType type) {
-        this.id = id;
-        this.name = name;
-        this.identifier = identifier;
-        this.password = password;
-        this.type = type;
-    }
 
     @Getter
     @Setter

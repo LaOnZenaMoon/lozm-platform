@@ -38,6 +38,7 @@ public class UserAPIController {
                 .identifier(reqDto.getIdentifier())
                 .password(reqDto.getPassword())
                 .type(reqDto.getType())
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         userService.save(userVo);
@@ -53,7 +54,7 @@ public class UserAPIController {
                 .identifier(reqDto.getIdentifier())
                 .password(reqDto.getPassword())
                 .type(reqDto.getType())
-                .flag(1)
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         userService.update(userVo);
@@ -67,6 +68,7 @@ public class UserAPIController {
             UserVo userVo = UserVo.builder()
                     .id(dto.getId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             userService.delete(userVo);

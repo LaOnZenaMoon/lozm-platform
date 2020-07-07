@@ -9,6 +9,7 @@ import lozm.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,15 +24,20 @@ public class UserService {
 
     public List<GetUserDto> getUserList() throws Exception {
         List<User> userList = userRepository.selectUserList();
+        List<GetUserDto> rtnList = new ArrayList<>();
+        for (User user : userList) {
+            GetUserDto dto = GetUserDto.builder()
+                    .id(user.getId())
+                    .name(user.getName())
+                    .identifier(user.getIdentifier())
+                    .password(null)
+                    .type(user.getType())
+                    .build();
 
-        return userList.stream()
-                .map(u -> new GetUserDto(
-                        u.getId(),
-                        u.getName(),
-                        u.getIdentifier(),
-                        null,
-                        u.getType())
-                ).collect(Collectors.toList());
+            rtnList.add(dto);
+        }
+
+        return rtnList;
     }
 
     @Transactional
@@ -48,22 +54,23 @@ public class UserService {
 
     @Transactional
     public void update(UserVo userVo) throws Exception {
-        Optional<User> findUser = userRepository.findById(userVo.getId());
-        findUser.orElseThrow(() -> {
-            throw new ServiceException("USER_0002", "User doesn't exist.");
-        });
-
+        Optional<User> findUser = findUser(userVo.getId());
         findUser.get().updateUser(userVo);
     }
 
     @Transactional
     public void delete(UserVo userVo) throws Exception {
-        Optional<User> findUser = userRepository.findById(userVo.getId());
+        Optional<User> findUser = findUser(userVo.getId());
+        findUser.get().deleteUser(userVo);
+    }
+
+    private Optional<User> findUser(Long userId) {
+        Optional<User> findUser = userRepository.findById(userId);
         findUser.orElseThrow(() -> {
             throw new ServiceException("USER_0002", "User doesn't exist.");
         });
-
-        findUser.get().deleteUser(userVo);
+        return findUser;
     }
+
 }
 

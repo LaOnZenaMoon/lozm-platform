@@ -9,6 +9,7 @@ import lozm.object.vo.store.StoreVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,18 +25,23 @@ public class StoreService {
 
     public List<GetStoreDto> getStoreList() {
         List<Store> storeList = storeRepository.selectStoreList();
+        List<GetStoreDto> rtnList = new ArrayList<>();
+        for (Store store : storeList) {
+            GetStoreDto dto = GetStoreDto.builder()
+                    .id(store.getId())
+                    .name(store.getName())
+                    .telNumber(store.getTelNumber())
+                    .info(store.getInfo())
+                    .build();
 
-        return storeList.stream().map(s -> new GetStoreDto(s.getId(), s.getName(), s.getTelNumber(), s.getInfo()))
-                .collect(toList());
+            rtnList.add(dto);
+        }
+
+        return rtnList;
     }
 
     public Store findById(StoreVo storeVo) {
-        Optional<Store> findStore = storeRepository.findById(storeVo.getId());
-        findStore.orElseThrow(() -> {
-            throw new ServiceException("STORE_0002", "The store doesn't exist.");
-        });
-
-        return findStore.get();
+        return findStore(storeVo.getId()).get();
     }
 
     @Transactional
@@ -51,21 +57,22 @@ public class StoreService {
 
     @Transactional
     public void update(StoreVo storeVo) throws Exception {
-        Optional<Store> findStore = storeRepository.findById(storeVo.getId());
-        findStore.orElseThrow(() -> {
-            throw new ServiceException("STORE_0002", "The store doesn't exist.");
-        });
-
+        Optional<Store> findStore = findStore(storeVo.getId());
         findStore.get().updateStore(storeVo);
     }
 
     @Transactional
     public void delete(StoreVo storeVo) {
-        Optional<Store> findStore = storeRepository.findById(storeVo.getId());
+        Optional<Store> findStore = findStore(storeVo.getId());
+        findStore.get().deleteStore(storeVo);
+    }
+
+    private Optional<Store> findStore(Long storeId) {
+        Optional<Store> findStore = storeRepository.findById(storeId);
         findStore.orElseThrow(() -> {
             throw new ServiceException("STORE_0002", "The store doesn't exist.");
         });
-
-        findStore.get().deleteStore(storeVo);
+        return findStore;
     }
+
 }

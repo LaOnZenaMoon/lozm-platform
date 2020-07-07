@@ -44,108 +44,75 @@ public class ItemService {
 
 
     public List<GetItemDto> getItemList() {
-//        List<Item> itemList = itemRepository.selectItemList();
         List<Item> itemList = repositorySupport.selectItemList();
-        List<GetItemDto> rtnList = new ArrayList<>();
-        for (Item item : itemList) {
-            rtnList.add(
-                    new GetItemDto(
-                            item.getId(),
-                            item.getName(),
-                            item.getPrice(),
-                            item.getQuantity(),
-                            item.getType(),
-                            item.getStore().getId(),
-                            item.getStore().getName()
-                    )
-            );
-        }
-
-        return rtnList;
-
-//        return itemList.stream().map(o -> new GetItemDto(
-//                o.getId(),
-//                o.getName(),
-//                o.getPrice(),
-//                o.getQuantity(),
-//                o.getType(),
-//                o.getStore()
-//        )).collect(toList());
+        return getItemDtoList(itemList);
     }
 
     public GetItemDto getItemDetail(ItemVo itemVo) throws Exception {
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
-            Optional<Outer> findItem = outerRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> {
-                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-            });
+            Optional<Outer> findItem = findOuter(itemVo.getId());
             Outer item = findItem.get();
 
-            return new GetItemDto(
-                    item.getId(),
-                    item.getName(),
-                    item.getPrice(),
-                    item.getQuantity(),
-                    item.getType(),
-                    item.getClothing().getContents(),
-                    item.getClothing().getSizes(),
-                    item.getStore().getId(),
-                    item.getStore().getName()
-            );
+            return GetItemDto.builder()
+                    .id(item.getId())
+                    .name(item.getName())
+                    .price(item.getPrice())
+                    .quantity(item.getQuantity())
+                    .type(item.getType())
+                    .contents(item.getClothing().getContents())
+                    .sizes(item.getClothing().getSizes())
+                    .storeId(item.getStore().getId())
+                    .storeName(item.getStore().getName())
+                    .build();
+
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
-            Optional<Top> findItem = topRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> {
-                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-            });
+            Optional<Top> findItem = findTop(itemVo.getId());
             Top item = findItem.get();
 
-            return new GetItemDto(
-                    item.getId(),
-                    item.getName(),
-                    item.getPrice(),
-                    item.getQuantity(),
-                    item.getType(),
-                    item.getClothing().getContents(),
-                    item.getClothing().getSizes(),
-                    item.getStore().getId(),
-                    item.getStore().getName()
-            );
+            return GetItemDto.builder()
+                    .id(item.getId())
+                    .name(item.getName())
+                    .price(item.getPrice())
+                    .quantity(item.getQuantity())
+                    .type(item.getType())
+                    .contents(item.getClothing().getContents())
+                    .sizes(item.getClothing().getSizes())
+                    .storeId(item.getStore().getId())
+                    .storeName(item.getStore().getName())
+                    .build();
+
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
-            Optional<Bottom> findItem = bottomRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> {
-                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-            });
+            Optional<Bottom> findItem = findBottom(itemVo.getId());
             Bottom item = findItem.get();
 
-            return new GetItemDto(
-                    item.getId(),
-                    item.getName(),
-                    item.getPrice(),
-                    item.getQuantity(),
-                    item.getType(),
-                    item.getClothing().getContents(),
-                    item.getClothing().getSizes(),
-                    item.getStore().getId(),
-                    item.getStore().getName()
-            );
+            return GetItemDto.builder()
+                    .id(item.getId())
+                    .name(item.getName())
+                    .price(item.getPrice())
+                    .quantity(item.getQuantity())
+                    .type(item.getType())
+                    .contents(item.getClothing().getContents())
+                    .sizes(item.getClothing().getSizes())
+                    .storeId(item.getStore().getId())
+                    .storeName(item.getStore().getName())
+                    .build();
+
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
-            Optional<Shoes> findItem = shoesRepository.findById(itemVo.getId());
-            findItem.orElseThrow(() -> {
-                throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-            });
+            Optional<Shoes> findItem = findShoes(itemVo.getId());
             Shoes item = findItem.get();
 
-            return new GetItemDto(
-                    item.getId(),
-                    item.getName(),
-                    item.getPrice(),
-                    item.getQuantity(),
-                    item.getType(),
-                    item.getClothing().getContents(),
-                    item.getClothing().getSizes(),
-                    item.getStore().getId(),
-                    item.getStore().getName()
-            );
+            return GetItemDto.builder()
+                    .id(item.getId())
+                    .name(item.getName())
+                    .price(item.getPrice())
+                    .quantity(item.getQuantity())
+                    .type(item.getType())
+                    .contents(item.getClothing().getContents())
+                    .sizes(item.getClothing().getSizes())
+                    .storeId(item.getStore().getId())
+                    .storeName(item.getStore().getName())
+                    .build();
+
         } else {
             throw new ServiceException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
         }
@@ -153,67 +120,80 @@ public class ItemService {
 
     public List<GetItemDto> getItemListByStoreId(ItemVo itemVo) {
         List<Item> itemList = itemRepository.selectItemListByStoreId(itemVo.getStoreId());
-
-        return itemList.stream().map(o -> new GetItemDto(
-                o.getId(),
-                o.getName(),
-                o.getPrice(),
-                o.getQuantity(),
-                o.getType(),
-                o.getStore().getId(),
-                o.getStore().getName()
-        )).collect(toList());
+        return getItemDtoList(itemList);
     }
 
     public List<GetClothingDto> getClothingList(ItemVo itemVo) throws Exception {
+        List<GetClothingDto> rtnList = new ArrayList<>();
+
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
-//            List<Outer> itemList = outerRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
             List<Outer> itemList = repositorySupport.selectOuterList(itemVo);
+            for (Outer outer : itemList) {
+                GetClothingDto dto = GetClothingDto.builder()
+                        .id(outer.getId())
+                        .name(outer.getName())
+                        .price(outer.getPrice())
+                        .quantity(outer.getQuantity())
+                        .contents(outer.getClothing().getContents())
+                        .size(outer.getClothing().getSizes())
+                        .build();
 
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
+                rtnList.add(dto);
+            }
+
+            return rtnList;
+            
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
-//            List<Top> itemList = topRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
             List<Top> itemList = repositorySupport.selectTopList(itemVo);
+            for (Top top : itemList) {
+                GetClothingDto dto = GetClothingDto.builder()
+                        .id(top.getId())
+                        .name(top.getName())
+                        .price(top.getPrice())
+                        .quantity(top.getQuantity())
+                        .contents(top.getClothing().getContents())
+                        .size(top.getClothing().getSizes())
+                        .build();
 
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
+                rtnList.add(dto);
+            }
+
+            return rtnList;
+            
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
-//            List<Bottom> itemList = bottomRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
             List<Bottom> itemList = repositorySupport.selectBottomList(itemVo);
+            for (Bottom bottom : itemList) {
+                GetClothingDto dto = GetClothingDto.builder()
+                        .id(bottom.getId())
+                        .name(bottom.getName())
+                        .price(bottom.getPrice())
+                        .quantity(bottom.getQuantity())
+                        .contents(bottom.getClothing().getContents())
+                        .size(bottom.getClothing().getSizes())
+                        .build();
 
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
+                rtnList.add(dto);
+            }
+
+            return rtnList;
+            
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
-//            List<Shoes> itemList = shoesRepository.selectClothingList(itemVo.getType(), itemVo.getStoreId());
             List<Shoes> itemList = repositorySupport.selectShoesList(itemVo);
+            for (Shoes shoes : itemList) {
+                GetClothingDto dto = GetClothingDto.builder()
+                        .id(shoes.getId())
+                        .name(shoes.getName())
+                        .price(shoes.getPrice())
+                        .quantity(shoes.getQuantity())
+                        .contents(shoes.getClothing().getContents())
+                        .size(shoes.getClothing().getSizes())
+                        .build();
 
-            return itemList.stream().map(o -> new GetClothingDto(
-                    o.getId(),
-                    o.getName(),
-                    o.getPrice(),
-                    o.getQuantity(),
-                    o.getClothing().getContents(),
-                    o.getClothing().getSizes()
-            )).collect(toList());
+                rtnList.add(dto);
+            }
+
+            return rtnList;
+
         } else {
             throw new ServiceException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
         }
@@ -251,13 +231,9 @@ public class ItemService {
 
     @Transactional
     public void update(ItemVo itemVo) throws Exception {
-        Optional<Item> findItem = itemRepository.findById(itemVo.getId());
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-        });
-//        findItem.get().updateItem(itemVo);
-
+        Optional<Item> findItem = findItem(itemVo.getId());
         String itemType = findItem.get().getType();
+
         if(ItemType.OUTER.toString().equals(itemType)) {
             Optional<Outer> findOuter = outerRepository.findById(itemVo.getId());
             findOuter.get().updateOuter(itemVo);
@@ -274,13 +250,67 @@ public class ItemService {
     }
 
     @Transactional
-    public void delete(ItemVo itemVo) {
-        Optional<Item> findItem = itemRepository.findById(itemVo.getId());
+    public void delete(ItemVo itemVo) throws Exception {
+        Optional<Item> findItem = findItem(itemVo.getId());
+        findItem.get().deleteItem(itemVo);
+    }
+
+    private List<GetItemDto> getItemDtoList(List<Item> itemList) {
+        List<GetItemDto> rtnList = new ArrayList<>();
+        for (Item item : itemList) {
+            GetItemDto dto = GetItemDto.builder()
+                    .id(item.getId())
+                    .name(item.getName())
+                    .price(item.getPrice())
+                    .quantity(item.getQuantity())
+                    .type(item.getType())
+                    .storeId(item.getStore().getId())
+                    .storeName(item.getStore().getName())
+                    .build();
+
+            rtnList.add(dto);
+        }
+        return rtnList;
+    }
+
+    private Optional<Item> findItem(Long itemId) {
+        Optional<Item> findItem = itemRepository.findById(itemId);
         findItem.orElseThrow(() -> {
             throw new ServiceException("ITEM_0002", "Item doesn't exist.");
         });
+        return findItem;
+    }
 
-        findItem.get().deleteItem(itemVo);
+    private Optional<Shoes> findShoes(Long itemId) {
+        Optional<Shoes> findItem = shoesRepository.findById(itemId);
+        findItem.orElseThrow(() -> {
+            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
+        });
+        return findItem;
+    }
+
+    private Optional<Bottom> findBottom(Long itemId) {
+        Optional<Bottom> findItem = bottomRepository.findById(itemId);
+        findItem.orElseThrow(() -> {
+            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
+        });
+        return findItem;
+    }
+
+    private Optional<Top> findTop(Long itemId) {
+        Optional<Top> findItem = topRepository.findById(itemId);
+        findItem.orElseThrow(() -> {
+            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
+        });
+        return findItem;
+    }
+
+    private Optional<Outer> findOuter(Long itemId) {
+        Optional<Outer> findItem = outerRepository.findById(itemId);
+        findItem.orElseThrow(() -> {
+            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
+        });
+        return findItem;
     }
 
 }

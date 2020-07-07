@@ -1,6 +1,7 @@
 package lozm.object.dto.item;
 
 import lombok.Getter;
+import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class PostItemDto {
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         @NotEmpty
         private String name;
 

@@ -1,14 +1,14 @@
 package lozm.object.dto.item;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetClothingDto {
 
     private Long id;
@@ -18,15 +18,6 @@ public class GetClothingDto {
     private String contents;
     private String size;
 
-
-    public GetClothingDto(Long id, String name, Long price, Long quantity, String contents, String size) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.contents = contents;
-        this.size = size;
-    }
 
     @Getter
     @Setter

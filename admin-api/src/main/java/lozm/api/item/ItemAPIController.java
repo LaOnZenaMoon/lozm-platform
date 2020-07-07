@@ -39,8 +39,6 @@ public class ItemAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
-
-
     @GetMapping(value = "/clothing/{itemType}")
     public ApiResponseDto getClothing(@PathVariable(value = "itemType") String itemType) throws Exception {
         ItemVo itemVo = ItemVo.builder()
@@ -64,6 +62,7 @@ public class ItemAPIController {
                 .contents(reqDto.getContents())
                 .size(reqDto.getSize())
                 .storeId(reqDto.getStoreId())
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         itemService.save(itemVo);
@@ -80,7 +79,7 @@ public class ItemAPIController {
                 .quantity(reqDto.getQuantity())
                 .contents(reqDto.getContents())
                 .size(reqDto.getSize())
-                .flag(1)
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         itemService.update(itemVo);
@@ -94,6 +93,7 @@ public class ItemAPIController {
             ItemVo itemVo = ItemVo.builder()
                     .id(dto.getId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             itemService.delete(itemVo);

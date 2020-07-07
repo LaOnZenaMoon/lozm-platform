@@ -1,14 +1,14 @@
 package lozm.object.dto.item;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetItemDto {
 
     private Long id;
@@ -21,28 +21,6 @@ public class GetItemDto {
     private Long storeId;
     private String storeName;
 
-
-    public GetItemDto(Long id, String name, Long price, Long quantity, String type, Long storeId, String storeName) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.type = type;
-        this.storeId = storeId;
-        this.storeName = storeName;
-    }
-
-    public GetItemDto(Long id, String name, Long price, Long quantity, String type, String contents, String sizes, Long storeId, String storeName) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.type = type;
-        this.contents = contents;
-        this.sizes = sizes;
-        this.storeId = storeId;
-        this.storeName = storeName;
-    }
 
     @Getter
     @Setter

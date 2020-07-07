@@ -1,13 +1,14 @@
 package lozm.object.dto.item;
 
 import lombok.Getter;
+import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotNull;
 
 public class PutItemDto {
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         @NotNull
         private Long id;
 

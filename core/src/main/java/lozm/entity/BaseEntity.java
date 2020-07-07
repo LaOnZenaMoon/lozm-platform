@@ -1,6 +1,7 @@
 package lozm.entity;
 
 import lozm.object.code.UsersType;
+import lozm.object.vo.board.BoardVo;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.StringUtils;
 

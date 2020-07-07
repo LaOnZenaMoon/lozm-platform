@@ -9,6 +9,9 @@ public class PostCommentDto {
     @Getter
     public static class Request {
         @NotEmpty
+        private Long boardId;
+
+        @NotEmpty
         private String commentType;
 
         @NotEmpty

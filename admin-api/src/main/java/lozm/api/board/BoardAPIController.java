@@ -61,7 +61,6 @@ public class BoardAPIController {
                 .id(reqDto.getId())
                 .title(reqDto.getTitle())
                 .content(reqDto.getContent())
-                .flag(1)
                 .build();
 
         boardService.update(boardVo);
@@ -96,6 +95,7 @@ public class BoardAPIController {
     @PostMapping
     public ApiResponseDto postComment(@RequestBody @Valid PostCommentDto.Request reqDto) throws Exception {
         CommentVo commentVo = CommentVo.builder()
+                .boardId(reqDto.getBoardId())
                 .commentType(reqDto.getCommentType())
                 .content(reqDto.getContent())
                 .build();

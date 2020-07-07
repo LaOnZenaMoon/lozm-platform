@@ -1,19 +1,15 @@
 package lozm.object.dto.board;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lozm.entity.board.Comment;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetBoardDto {
 
     private Long id;
@@ -22,15 +18,6 @@ public class GetBoardDto {
     private String title;
     private String content;
     private List<Comment> comments;
-
-    public GetBoardDto(Long id, String boardType, String contentType, String title, String content, List<Comment> comments) {
-        this.id = id;
-        this.boardType = boardType;
-        this.contentType = contentType;
-        this.title = title;
-        this.content = content;
-        this.comments = comments;
-    }
 
     @Getter
     @Setter

@@ -50,7 +50,7 @@ public class CouponAPIController {
                 .quantity(reqDto.getQuantity())
                 .startDt(reqDto.getStartDt())
                 .endDt(reqDto.getEndDt())
-                .flag(1)
+                .createdBy(reqDto.getCreatedBy())
                 .build();
 
         couponService.save(couponVo);
@@ -69,7 +69,7 @@ public class CouponAPIController {
                 .quantity(reqDto.getQuantity())
                 .startDt(reqDto.getStartDt())
                 .endDt(reqDto.getEndDt())
-                .flag(1)
+                .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
         couponService.update(couponVo);
@@ -83,6 +83,7 @@ public class CouponAPIController {
             CouponVo couponVo = CouponVo.builder()
                     .id(dto.getId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             couponService.delete(couponVo);
@@ -112,7 +113,7 @@ public class CouponAPIController {
                     .id(reqDto.getCouponId())
                     .userId(dto.getId())
                     .couponUserQuantity(reqDto.getCouponUserQuantity())
-                    .flag(1)
+                    .createdBy(reqDto.getCreatedBy())
                     .build();
 
             couponService.postCouponUser(couponVo);
@@ -128,7 +129,7 @@ public class CouponAPIController {
                     .couponUserId(dto.getId())
                     .userId(dto.getUserId())
                     .couponUserQuantity(reqDto.getCouponUserQuantity())
-                    .flag(1)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             couponService.putCouponUser(couponVo);
@@ -145,6 +146,7 @@ public class CouponAPIController {
                     .userId(dto.getUserId())
                     .id(dto.getCouponId())
                     .flag(0)
+                    .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
             couponService.deleteCouponUser(couponVo);

@@ -19,6 +19,7 @@ public class GetBoardDto {
     private String content;
     private List<Comment> comments;
 
+
     @Getter
     @Setter
     public static class Response {

@@ -2,6 +2,7 @@ package lozm.object.dto.coupon;
 
 import lombok.Getter;
 import lombok.Setter;
+import lozm.object.dto.BaseUserDto;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 public class PostCouponDto {
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         @NotEmpty
         private String name;
 

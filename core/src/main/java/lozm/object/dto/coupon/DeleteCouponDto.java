@@ -1,6 +1,7 @@
 package lozm.object.dto.coupon;
 
 import lombok.Getter;
+import lozm.object.dto.BaseUserDto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class DeleteCouponDto {
     private int flag;
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         private List<DeleteCouponDto> list = new ArrayList<>();
     }
 

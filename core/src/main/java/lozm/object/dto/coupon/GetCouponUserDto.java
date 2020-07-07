@@ -1,15 +1,15 @@
 package lozm.object.dto.coupon;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lozm.object.code.UsersType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetCouponUserDto {
 
     private Long id;
@@ -20,15 +20,6 @@ public class GetCouponUserDto {
     private String userIdentifier;
     private UsersType userType;
 
-    public GetCouponUserDto(Long id, Long quantity, Long userId, Long couponId, String userName, String userIdentifier, UsersType userType) {
-        this.id = id;
-        this.quantity = quantity;
-        this.userId = userId;
-        this.couponId = couponId;
-        this.userName = userName;
-        this.userIdentifier = userIdentifier;
-        this.userType = userType;
-    }
 
     @Getter
     @Setter

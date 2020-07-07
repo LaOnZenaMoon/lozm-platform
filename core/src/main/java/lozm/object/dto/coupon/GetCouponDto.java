@@ -1,15 +1,15 @@
 package lozm.object.dto.coupon;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GetCouponDto {
 
     private Long id;
@@ -20,26 +20,6 @@ public class GetCouponDto {
     private Long quantity;
     private LocalDateTime startDt;
     private LocalDateTime endDt;
-
-//    public GetCouponDto(Long id, String name, String contents, CouponType type, Long amount) {
-//        this.id = id;
-//        this.name = name;
-//        this.contents = contents;
-//        this.type = type;
-//        this.amount = amount;
-//    }
-
-
-    public GetCouponDto(Long id, String name, String contents, String type, Long amount, Long quantity, LocalDateTime startDt, LocalDateTime endDt) {
-        this.id = id;
-        this.name = name;
-        this.contents = contents;
-        this.type = type;
-        this.amount = amount;
-        this.quantity = quantity;
-        this.startDt = startDt;
-        this.endDt = endDt;
-    }
 
     @Getter
     @Setter

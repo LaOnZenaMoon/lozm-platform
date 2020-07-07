@@ -32,36 +32,38 @@ public class CouponService {
 
     public List<GetCouponDto> getCouponList() {
         List<Coupon> couponList = couponRepository.selectCouponList();
+        List<GetCouponDto> rtnList = new ArrayList<>();
+        for (Coupon coupon : couponList) {
+            GetCouponDto dto = GetCouponDto.builder()
+                    .id(coupon.getId())
+                    .name(coupon.getName())
+                    .contents(coupon.getContents())
+                    .type(String.valueOf(coupon.getType()))
+                    .amount(coupon.getAmount())
+                    .quantity(coupon.getQuantity())
+                    .startDt(coupon.getStartDt())
+                    .endDt(coupon.getEndDt())
+                    .build();
 
-        return couponList.stream().map(c -> new GetCouponDto(
-                c.getId(),
-                c.getName(),
-                c.getContents(),
-                c.getType().name(),
-                c.getAmount(),
-                c.getQuantity(),
-                c.getStartDt(),
-                c.getEndDt()
-        )).collect(toList());
+            rtnList.add(dto);
+        }
+
+        return rtnList;
     }
 
     public GetCouponDto getCouponDetail(CouponVo couponVo) {
-        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
-        findCoupon.orElseThrow(() -> {
-            throw new ServiceException("COUPON_0002", "Coupon doesn't exist.");
-        });
-
+        Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "COUPON_0002");
         Coupon coupon = findCoupon.get();
-        return new GetCouponDto(
-                coupon.getId(),
-                coupon.getName(),
-                coupon.getContents(),
-                coupon.getType().name(),
-                coupon.getAmount(),
-                coupon.getQuantity(),
-                coupon.getStartDt(),
-                coupon.getEndDt()
-        );
+        return GetCouponDto.builder()
+                .id(coupon.getId())
+                .name(coupon.getName())
+                .contents(coupon.getContents())
+                .type(String.valueOf(coupon.getType()))
+                .amount(coupon.getAmount())
+                .quantity(coupon.getQuantity())
+                .startDt(coupon.getStartDt())
+                .endDt(coupon.getEndDt())
+                .build();
     }
 
     @Transactional
@@ -74,21 +76,13 @@ public class CouponService {
 
     @Transactional
     public void update(CouponVo couponVo) throws Exception {
-        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
-        findCoupon.orElseThrow(() -> {
-            throw new ServiceException("COUPON_0002", "Coupon doesn't exist.");
-        });
-
+        Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "COUPON_0002");
         findCoupon.get().updateCoupon(couponVo);
     }
 
     @Transactional
     public void delete(CouponVo couponVo) throws Exception {
-        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
-        findCoupon.orElseThrow(() -> {
-            throw new ServiceException("COUPON_0002", "Coupon doesn't exist.");
-        });
-
+        Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "COUPON_0002");
         findCoupon.get().deleteCoupon(couponVo);
     }
 
@@ -96,15 +90,15 @@ public class CouponService {
         List<CouponUser> couponUserList = couponUserRepository.selectCouponUserList(couponVo.getId());
         List<GetCouponUserDto> rtnList = new ArrayList<>();
         for (CouponUser couponUser : couponUserList) {
-            GetCouponUserDto dto = new GetCouponUserDto(
-                    couponUser.getId(),
-                    couponUser.getQuantity(),
-                    couponUser.getUser().getId(),
-                    couponUser.getCoupon().getId(),
-                    couponUser.getUser().getName(),
-                    couponUser.getUser().getIdentifier(),
-                    couponUser.getUser().getType()
-            );
+            GetCouponUserDto dto = GetCouponUserDto.builder()
+                    .id(couponUser.getId())
+                    .quantity(couponUser.getQuantity())
+                    .userId(couponUser.getUser().getId())
+                    .couponId(couponUser.getCoupon().getId())
+                    .userName(couponUser.getUser().getName())
+                    .userIdentifier(couponUser.getUser().getIdentifier())
+                    .userType(couponUser.getUser().getType())
+                    .build();
             rtnList.add(dto);
         }
 
@@ -114,10 +108,7 @@ public class CouponService {
     @Transactional
     public void postCouponUser(CouponVo couponVo) throws Exception {
         //Find and check the coupon
-        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
-        findCoupon.orElseThrow(() -> {
-            throw new ServiceException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
-        });
+        Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "USER_SAVE_NO_COUPON");
 
         //Find the user
         Optional<User> findUser = userRepository.findById(couponVo.getUserId());
@@ -151,14 +142,19 @@ public class CouponService {
 
     @Transactional
     public void putCouponUser(CouponVo couponVo) throws Exception {
-        Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponVo.getCouponUserId());
-        findCouponUser.orElseThrow(() -> {
-            throw new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist.");
-        });
-
+        Optional<CouponUser> findCouponUser = findCouponUser(couponVo.getId());
         calculateCouponQuantity(couponVo, findCouponUser.get().getCoupon(), findCouponUser.get());
-
         findCouponUser.get().updateCouponUser(couponVo);
+    }
+
+    @Transactional
+    public void deleteCouponUser(CouponVo couponVo) throws Exception {
+        Optional<CouponUser> findCouponUser = findCouponUser(couponVo.getId());
+        findCouponUser.get().deleteCouponUser(couponVo);
+
+        //Find and check the coupon
+        Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "USER_SAVE_NO_COUPON");
+        findCoupon.get().increaseCouponQuantity(findCouponUser.get().getQuantity());
     }
 
     private void calculateCouponQuantity(CouponVo couponVo, Coupon findCoupon, CouponUser findCouponUser) {
@@ -169,24 +165,22 @@ public class CouponService {
         } else if(couponUserQuantity < couponVo.getCouponUserQuantity()) {
             findCoupon.decreaseCouponQuantity(couponVo.getCouponUserQuantity() - couponUserQuantity);
         }
-
     }
 
-    @Transactional
-    public void deleteCouponUser(CouponVo couponVo) throws Exception {
-        Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponVo.getCouponUserId());
+    private Optional<Coupon> findCoupon(Long couponId, String exceptionCode) {
+        Optional<Coupon> findCoupon = couponRepository.findById(couponId);
+        findCoupon.orElseThrow(() -> {
+            throw new ServiceException(exceptionCode, "Coupon doesn't exist.");
+        });
+        return findCoupon;
+    }
+
+    private Optional<CouponUser> findCouponUser(Long couponId) {
+        Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponId);
         findCouponUser.orElseThrow(() -> {
             throw new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist.");
         });
-
-        findCouponUser.get().deleteCouponUser(couponVo);
-
-        //Find and check the coupon
-        Optional<Coupon> findCoupon = couponRepository.findById(couponVo.getId());
-        findCoupon.orElseThrow(() -> {
-            throw new ServiceException("USER_SAVE_NO_COUPON", "Coupon doesn't exist.");
-        });
-
-        findCoupon.get().increaseCouponQuantity(findCouponUser.get().getQuantity());
+        return findCouponUser;
     }
+
 }

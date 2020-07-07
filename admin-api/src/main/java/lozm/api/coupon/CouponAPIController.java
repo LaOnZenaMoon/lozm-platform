@@ -82,7 +82,6 @@ public class CouponAPIController {
         for(DeleteCouponDto dto : reqDto.getList()) {
             CouponVo couponVo = CouponVo.builder()
                     .id(dto.getId())
-                    .flag(0)
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
@@ -145,7 +144,6 @@ public class CouponAPIController {
                     .couponUserId(dto.getId())
                     .userId(dto.getUserId())
                     .id(dto.getCouponId())
-                    .flag(0)
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 

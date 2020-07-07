@@ -75,7 +75,7 @@ public class BoardAPIController {
         for(DeleteBoardDto dto : reqDto.getList()) {
             BoardVo boardVo = BoardVo.builder()
                     .id(dto.getId())
-                    .flag(0)
+
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
@@ -128,7 +128,7 @@ public class BoardAPIController {
         for(DeleteCommentDto dto : reqDto.getList()) {
             CommentVo commentVo = CommentVo.builder()
                     .id(dto.getId())
-                    .flag(0)
+
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 

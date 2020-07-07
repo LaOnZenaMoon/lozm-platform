@@ -92,7 +92,6 @@ public class ItemAPIController {
         for(DeleteItemDto dto : reqDto.getList()) {
             ItemVo itemVo = ItemVo.builder()
                     .id(dto.getId())
-                    .flag(0)
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 

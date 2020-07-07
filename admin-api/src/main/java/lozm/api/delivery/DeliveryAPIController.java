@@ -72,7 +72,6 @@ public class DeliveryAPIController {
         for (DeleteDeliveryDto dto : reqDto.getList()) {
             DeliveryVo deliveryVo = DeliveryVo.builder()
                     .id(dto.getId())
-                    .flag(0)
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 

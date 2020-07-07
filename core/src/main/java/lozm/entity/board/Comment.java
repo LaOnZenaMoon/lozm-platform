@@ -36,11 +36,11 @@ public class Comment extends BaseEntity {
     public void updateComment(CommentVo commentVo) {
         this.commentType = commentVo.getCommentType();
         this.content = commentVo.getContent();
-        this.setBaseEntity("", commentVo.getFlag());
+        this.setBaseEntity(commentVo.getModifiedBy(), commentVo.getFlag());
     }
 
     public void deleteComment(CommentVo commentVo) {
-        this.setBaseEntity("", commentVo.getFlag());
+        this.setBaseEntity(commentVo.getModifiedBy(), 0);
     }
 
 }

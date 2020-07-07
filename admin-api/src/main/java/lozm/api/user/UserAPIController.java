@@ -67,7 +67,6 @@ public class UserAPIController {
         for(DeleteUserDto dto : reqDto.getList()) {
             UserVo userVo = UserVo.builder()
                     .id(dto.getId())
-                    .flag(0)
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 

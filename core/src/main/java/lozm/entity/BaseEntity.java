@@ -2,6 +2,7 @@ package lozm.entity;
 
 import lozm.object.code.UsersType;
 import lozm.object.vo.board.BoardVo;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.StringUtils;
 
@@ -21,17 +22,17 @@ public abstract class BaseEntity {
     private LocalDateTime modifiedDt;
 
     @Column(name = "CREATED_BY", updatable = false, nullable = false)
-    private String createdBy = UsersType.API_SYSTEM.toString();
+    private Long createdBy = -1L;
 
     @Column(name = "MODIFY_BY", nullable = false)
-    private String modifiedBy;
+    private Long modifiedBy;
 
     @Column(name = "FLAG")
     private int flag = 1;
 
-    public void setBaseEntity(String modifiedBy, int flag) {
+    public void setBaseEntity(Long modifiedBy, int flag) {
         this.modifiedDt = LocalDateTime.now();
-        this.modifiedBy = StringUtils.isEmpty(modifiedBy) ? UsersType.API_SYSTEM.toString() : modifiedBy;
+        this.modifiedBy = ObjectUtils.isEmpty(modifiedBy) ? -1L : modifiedBy;
         if(!StringUtils.isEmpty(flag)) this.flag = flag;
     }
 

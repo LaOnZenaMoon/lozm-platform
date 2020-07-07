@@ -65,7 +65,6 @@ public class OrdersAPIController {
         for (DeleteOrdersDto dto : reqDto.getList()) {
             OrdersVo ordersVo = OrdersVo.builder()
                     .id(dto.getOrdersId())
-                    .flag(0)
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 

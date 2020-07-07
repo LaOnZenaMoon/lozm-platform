@@ -45,11 +45,11 @@ public class Board extends BaseEntity {
         this.contentType = boardVo.getContentType();
         this.title = boardVo.getTitle();
         this.content = boardVo.getContent();
-        this.setBaseEntity("", boardVo.getFlag());
+        this.setBaseEntity(boardVo.getModifiedBy(), boardVo.getFlag());
     }
 
     public void deleteBoard(BoardVo boardVo) {
-        this.setBaseEntity("", boardVo.getFlag());
+        this.setBaseEntity(boardVo.getModifiedBy(), 0);
     }
 
 }

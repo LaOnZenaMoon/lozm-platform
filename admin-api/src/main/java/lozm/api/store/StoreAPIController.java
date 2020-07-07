@@ -100,7 +100,6 @@ public class StoreAPIController {
         for(DeleteStoreDto dto : reqDto.getList()) {
             StoreVo storeVo = StoreVo.builder()
                 .id(dto.getId())
-                .flag(0)
                 .modifiedBy(reqDto.getModifiedBy())
                 .build();
 

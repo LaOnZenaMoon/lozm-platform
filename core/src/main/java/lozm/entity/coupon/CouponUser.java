@@ -36,10 +36,10 @@ public class CouponUser extends BaseEntity {
 
     public void updateCouponUser(CouponVo couponVo) {
         this.quantity = couponVo.getCouponUserQuantity();
-        this.setBaseEntity("", couponVo.getFlag());
+        this.setBaseEntity(couponVo.getModifiedBy(), couponVo.getFlag());
     }
 
     public void deleteCouponUser(CouponVo couponVo) {
-        this.setBaseEntity("", couponVo.getFlag());
+        this.setBaseEntity(couponVo.getModifiedBy(), 0);
     }
 }

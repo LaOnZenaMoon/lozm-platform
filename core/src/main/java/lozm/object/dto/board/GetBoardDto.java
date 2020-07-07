@@ -3,7 +3,11 @@ package lozm.object.dto.board;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lozm.entity.board.Comment;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,32 +17,19 @@ import java.util.List;
 public class GetBoardDto {
 
     private Long id;
-    private String name;
-    private String contents;
-    private String type;
-    private Long amount;
-    private Long quantity;
-    private LocalDateTime startDt;
-    private LocalDateTime endDt;
+    private String boardType;
+    private String contentType;
+    private String title;
+    private String content;
+    private List<Comment> comments;
 
-//    public GetCouponDto(Long id, String name, String contents, CouponType type, Long amount) {
-//        this.id = id;
-//        this.name = name;
-//        this.contents = contents;
-//        this.type = type;
-//        this.amount = amount;
-//    }
-
-
-    public GetBoardDto(Long id, String name, String contents, String type, Long amount, Long quantity, LocalDateTime startDt, LocalDateTime endDt) {
+    public GetBoardDto(Long id, String boardType, String contentType, String title, String content, List<Comment> comments) {
         this.id = id;
-        this.name = name;
-        this.contents = contents;
-        this.type = type;
-        this.amount = amount;
-        this.quantity = quantity;
-        this.startDt = startDt;
-        this.endDt = endDt;
+        this.boardType = boardType;
+        this.contentType = contentType;
+        this.title = title;
+        this.content = content;
+        this.comments = comments;
     }
 
     @Getter

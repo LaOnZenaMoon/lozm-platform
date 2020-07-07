@@ -1,31 +1,24 @@
 package lozm.object.vo.board;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lozm.object.vo.BaseVo;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class CommentVo {
+public class CommentVo extends BaseVo {
 
     private Long id;
-    private String name;
-    private String contents;
-    private String type;
-    private Long amount;
-    private Long quantity;
-    private LocalDateTime startDt;
-    private LocalDateTime endDt;
-    private int flag;
+    private String commentType;
+    private String content;
 
-    private Long userId;
-
-    private Long couponUserId;
-    private Long couponUserQuantity;
+    @Builder
+    public CommentVo(LocalDateTime createdDt, LocalDateTime modifiedDt, String createdBy, String modifiedBy, int flag, Long id, String commentType, String content) {
+        super(createdDt, modifiedDt, createdBy, modifiedBy, flag);
+        this.id = id;
+        this.commentType = commentType;
+        this.content = content;
+    }
 
 }

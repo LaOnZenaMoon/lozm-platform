@@ -12,21 +12,9 @@ public class PutBoardDto {
         @NotNull
         private Long id;
 
-        private String name;
+        private String title;
 
-        private String contents;
-
-        private String type;
-
-        private Long amount;
-
-        private Long quantity;
-
-        private LocalDateTime startDt;
-
-        private LocalDateTime endDt;
-
-        private int flag;
+        private String content;
     }
 
 }

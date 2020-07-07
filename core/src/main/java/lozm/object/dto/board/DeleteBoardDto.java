@@ -10,14 +10,6 @@ import java.util.List;
 public class DeleteBoardDto {
 
     private Long id;
-    private String name;
-    private String contents;
-    private String type;
-    private Long amount;
-    private Long quantity;
-    private LocalDateTime startDt;
-    private LocalDateTime endDt;
-    private int flag;
 
     @Getter
     public static class Request {

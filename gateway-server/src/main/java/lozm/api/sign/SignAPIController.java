@@ -2,6 +2,7 @@ package lozm.api.sign;
 
 import lombok.RequiredArgsConstructor;
 import lozm.global.jwt.JwtAuthenticationService;
+import lozm.global.jwt.SignInfo;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.sign.PostSignDto;

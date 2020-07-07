@@ -1,6 +1,7 @@
 package lozm.api.coupon;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.jwt.SignInfo;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.coupon.*;
@@ -14,6 +15,7 @@ import javax.validation.Valid;
 public class CouponController {
 
     private final CouponAPIService couponAPIService;
+    private final SignInfo signInfo;
 
 
     @GetMapping
@@ -28,16 +30,19 @@ public class CouponController {
 
     @PostMapping
     public ApiResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) throws Exception {
+        reqDto.setCreatedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, couponAPIService.postCoupon(reqDto));
     }
 
     @PutMapping
     public ApiResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, couponAPIService.putCoupon(reqDto));
     }
 
     @DeleteMapping
     public ApiResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, couponAPIService.deleteCoupon(reqDto));
     }
 
@@ -48,16 +53,19 @@ public class CouponController {
 
     @PostMapping(value = "/user")
     public ApiResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) throws Exception {
+        reqDto.setCreatedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, couponAPIService.postCouponUser(reqDto));
     }
 
     @PutMapping(value = "/user")
     public ApiResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, couponAPIService.putCouponUser(reqDto));
     }
 
     @DeleteMapping(value = "/user")
     public ApiResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, couponAPIService.deleteCouponUser(reqDto));
     }
 

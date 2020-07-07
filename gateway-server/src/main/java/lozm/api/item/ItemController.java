@@ -1,6 +1,7 @@
 package lozm.api.item;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.jwt.SignInfo;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.item.DeleteItemDto;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class ItemController {
 
     private final ItemAPIService itemAPIService;
+    private final SignInfo signInfo;
 
 
     @GetMapping
@@ -35,16 +37,19 @@ public class ItemController {
 
     @PostMapping
     public ApiResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) throws Exception {
+        reqDto.setCreatedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.postItem(reqDto));
     }
 
     @PutMapping
     public ApiResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.putItem(reqDto));
     }
 
     @DeleteMapping
     public ApiResponseDto deleteItem(@RequestBody @Valid DeleteItemDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, itemAPIService.deleteItem(reqDto));
     }
 

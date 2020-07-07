@@ -1,6 +1,7 @@
 package lozm.api.user;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.jwt.SignInfo;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.user.DeleteUserDto;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserAPIService userAPIService;
+    private final SignInfo signInfo;
 
 
     @GetMapping()
@@ -25,16 +27,19 @@ public class UserController {
 
     @PostMapping
     public ApiResponseDto postUser(@RequestBody @Valid PostUserDto.Request reqDto) throws Exception {
+        reqDto.setCreatedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, userAPIService.postUser(reqDto));
     }
 
     @PutMapping
     public ApiResponseDto putUser(@RequestBody @Valid PutUserDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, userAPIService.putUser(reqDto));
     }
 
     @DeleteMapping
     public ApiResponseDto deleteUser(@RequestBody @Valid DeleteUserDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, userAPIService.deleteUser(reqDto));
     }
 

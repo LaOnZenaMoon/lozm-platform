@@ -2,6 +2,7 @@ package lozm.object.dto.sign;
 
 import lombok.Getter;
 import lombok.Setter;
+import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.io.Serializable;
 public class PostSignDto {
 
     @Getter
-    public static class Request {
+    public static class Request extends BaseUserDto {
         @NotEmpty
         private String identifier;
 

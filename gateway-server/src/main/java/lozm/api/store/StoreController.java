@@ -1,6 +1,7 @@
 package lozm.api.store;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.jwt.SignInfo;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.store.DeleteStoreDto;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class StoreController {
 
     private final StoreAPIService storeAPIService;
+    private final SignInfo signInfo;
 
 
     @GetMapping
@@ -38,16 +40,19 @@ public class StoreController {
 
     @PostMapping
     public ApiResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) throws Exception {
+        reqDto.setCreatedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, storeAPIService.postStore(reqDto));
     }
 
     @PutMapping
     public ApiResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, storeAPIService.putStore(reqDto));
     }
 
     @DeleteMapping
     public ApiResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, storeAPIService.deleteStore(reqDto));
     }
 

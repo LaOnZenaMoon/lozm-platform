@@ -1,6 +1,7 @@
 package lozm.api.delivery;
 
 import lombok.RequiredArgsConstructor;
+import lozm.global.jwt.SignInfo;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.delivery.DeleteDeliveryDto;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 public class DeliveryController {
 
     private final DeliveryAPIService deliveryAPIService;
+    private final SignInfo signInfo;
 
 
     @GetMapping
@@ -25,16 +27,19 @@ public class DeliveryController {
 
     @PostMapping
     public ApiResponseDto postDelivery(@RequestBody @Valid PostDeliveryDto.Request reqDto) throws Exception {
+        reqDto.setCreatedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, deliveryAPIService.postDelivery(reqDto));
     }
 
     @PutMapping
     public ApiResponseDto putDelivery(@RequestBody @Valid PutDeliveryDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, deliveryAPIService.putDelivery(reqDto));
     }
 
     @DeleteMapping
     public ApiResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) throws Exception {
+        reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, deliveryAPIService.deleteDelivery(reqDto));
     }
 

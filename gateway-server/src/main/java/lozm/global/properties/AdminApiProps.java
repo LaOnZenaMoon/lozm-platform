@@ -18,7 +18,16 @@ public class AdminApiProps {
 	private String delivery;
 	private String orders;
 	private String user;
+	private String board;
+	private String comment;
 
+	public String getCommentUrl() {
+		return url + comment;
+	}
+
+	public String getBoardUrl() {
+		return url + board;
+	}
 
 	public String getStoreUrl() {
 		return url + store;

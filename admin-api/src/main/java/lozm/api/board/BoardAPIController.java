@@ -85,7 +85,7 @@ public class BoardAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
-    @GetMapping("/{boardId}")
+    @GetMapping("/{boardId}/comment")
     public ApiResponseDto getComment(@PathVariable(value = "boardId") Long boardId) throws Exception {
         List<GetCommentDto> result = boardService.getCommentList(boardId);
 
@@ -95,7 +95,7 @@ public class BoardAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
-    @PostMapping
+    @PostMapping("/comment")
     public ApiResponseDto postComment(@RequestBody @Valid PostCommentDto.Request reqDto) throws Exception {
         CommentVo commentVo = CommentVo.builder()
                 .boardId(reqDto.getBoardId())
@@ -109,7 +109,7 @@ public class BoardAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
-    @PutMapping
+    @PutMapping("/comment")
     public ApiResponseDto putComment(@RequestBody @Valid PutCommentDto.Request reqDto) throws Exception {
         CommentVo commentVo = CommentVo.builder()
                 .id(reqDto.getId())
@@ -123,7 +123,7 @@ public class BoardAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/comment")
     public ApiResponseDto deleteComment(@RequestBody @Valid DeleteCommentDto.Request reqDto) throws Exception {
         for(DeleteCommentDto dto : reqDto.getList()) {
             CommentVo commentVo = CommentVo.builder()

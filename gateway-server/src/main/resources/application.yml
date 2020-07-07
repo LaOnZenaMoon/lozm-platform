@@ -49,6 +49,8 @@ admin-api:
   delivery: /api/delivery
   orders: /api/orders
   user: /api/user
+  board: /api/board
+  comment: /api/comment
 
 jwt:
   secret: hashing-jwt-token-secret-key-test

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@RequestMapping(value = "/coupon")
+@RequestMapping(value = "/board")
 @RestController
 @RequiredArgsConstructor
 public class BoardController {
@@ -49,24 +49,24 @@ public class BoardController {
         return ApiResponseDto.createException(ApiResponseCode.OK, boardAPIService.deleteBoard(reqDto));
     }
 
-    @GetMapping("/{boardId}")
+    @GetMapping("/{boardId}/comment")
     public ApiResponseDto getComment(@PathVariable(value = "boardId") Long boardId) throws Exception {
         return ApiResponseDto.createException(ApiResponseCode.OK, boardAPIService.getComment(boardId));
     }
 
-    @PostMapping
+    @PostMapping("/comment")
     public ApiResponseDto postComment(@RequestBody @Valid PostCommentDto.Request reqDto) throws Exception {
         reqDto.setCreatedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, boardAPIService.postComment(reqDto));
     }
 
-    @PutMapping
+    @PutMapping("/comment")
     public ApiResponseDto putComment(@RequestBody @Valid PutCommentDto.Request reqDto) throws Exception {
         reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, boardAPIService.putComment(reqDto));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/comment")
     public ApiResponseDto deleteComment(@RequestBody @Valid DeleteCommentDto.Request reqDto) throws Exception {
         reqDto.setModifiedBy(signInfo.getId());
         return ApiResponseDto.createException(ApiResponseCode.OK, boardAPIService.deleteComment(reqDto));

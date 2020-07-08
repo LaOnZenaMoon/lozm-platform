@@ -16,7 +16,7 @@ public class BaseUserDto {
     }
 
     public void setModifiedBy(Long id) {
-        this.createdBy = ObjectUtils.isEmpty(id) ? -1L : id;
+        this.modifiedBy = ObjectUtils.isEmpty(id) ? -1L : id;
     }
 
 }

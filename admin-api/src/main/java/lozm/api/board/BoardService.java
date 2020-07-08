@@ -56,6 +56,7 @@ public class BoardService {
                 .build();
     }
 
+    @Transactional
     public void save(BoardVo boardVo) {
         Board board = new Board();
         board.insertBoard(boardVo);
@@ -63,11 +64,13 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional
     public void update(BoardVo boardVo) {
         Optional<Board> findBoard = findBoard(boardVo.getId());
         findBoard.get().updateBoard(boardVo);
     }
 
+    @Transactional
     public void delete(BoardVo boardVo) {
         Optional<Board> findBoard = findBoard(boardVo.getId());
         findBoard.get().deleteBoard(boardVo);
@@ -89,6 +92,7 @@ public class BoardService {
         return rtnList;
     }
 
+    @Transactional
     public void save(CommentVo commentVo) {
         Optional<Board> findBoard = findBoard(commentVo.getBoardId());
 
@@ -98,13 +102,13 @@ public class BoardService {
         commentRepository.save(comment);
     }
 
+    @Transactional
     public void update(CommentVo commentVo) {
         Optional<Comment> findComment = findComment(commentVo.getId());
         findComment.get().updateComment(commentVo);
     }
 
-
-
+    @Transactional
     public void delete(CommentVo commentVo) {
         Optional<Comment> findComment = findComment(commentVo.getId());
         findComment.get().deleteComment(commentVo);

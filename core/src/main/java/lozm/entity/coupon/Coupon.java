@@ -50,6 +50,7 @@ public class Coupon extends BaseEntity {
         this.quantity = couponVo.getQuantity();
         this.startDt = couponVo.getStartDt();
         this.endDt = couponVo.getEndDt();
+        this.setBaseEntity(couponVo.getCreatedBy(), null, couponVo.getFlag());
     }
 
     public void updateCoupon(CouponVo couponVo) {
@@ -60,7 +61,7 @@ public class Coupon extends BaseEntity {
         this.quantity = couponVo.getQuantity();
         this.startDt = couponVo.getStartDt();
         this.endDt = couponVo.getEndDt();
-        this.setBaseEntity(couponVo.getModifiedBy(), couponVo.getFlag());
+        this.setBaseEntity(null, couponVo.getModifiedBy(), couponVo.getFlag());
     }
 
     public Long calculateOrderedPrice(Long orderedPrice) throws Exception {
@@ -97,6 +98,6 @@ public class Coupon extends BaseEntity {
     }
 
     public void deleteCoupon(CouponVo couponVo) {
-        this.setBaseEntity(couponVo.getModifiedBy(), 0);
+        this.setBaseEntity(null, couponVo.getModifiedBy(), 0);
     }
 }

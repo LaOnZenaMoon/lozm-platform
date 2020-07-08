@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity {
 
     @Column(name = "CREATED_DT", updatable = false)
-    private LocalDateTime createdDt = LocalDateTime.now();
+    private LocalDateTime createdDt;
 
     @Column(name = "MODIFIED_DT")
     private LocalDateTime modifiedDt;
@@ -30,7 +30,9 @@ public abstract class BaseEntity {
     @Column(name = "FLAG")
     private int flag = 1;
 
-    public void setBaseEntity(Long modifiedBy, int flag) {
+    public void setBaseEntity(Long createdBy, Long modifiedBy, int flag) {
+        this.createdDt = LocalDateTime.now();
+        this.createdBy = ObjectUtils.isEmpty(createdBy) ? -1L : createdBy;
         this.modifiedDt = LocalDateTime.now();
         this.modifiedBy = ObjectUtils.isEmpty(modifiedBy) ? -1L : modifiedBy;
         if(!StringUtils.isEmpty(flag)) this.flag = flag;

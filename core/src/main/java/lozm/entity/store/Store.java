@@ -33,17 +33,18 @@ public class Store extends BaseEntity {
         this.name = storeVo.getName();
         this.telNumber = storeVo.getTelNumber();
         this.info = storeVo.getInfo();
+        this.setBaseEntity(storeVo.getCreatedBy(), null, storeVo.getFlag());
     }
 
     public void updateStore(StoreVo storeVo) {
         this.name = storeVo.getName();
         this.telNumber = storeVo.getTelNumber();
         this.info = storeVo.getInfo();
-        this.setBaseEntity(storeVo.getModifiedBy(), storeVo.getFlag());
+        this.setBaseEntity(null, storeVo.getModifiedBy(), storeVo.getFlag());
     }
 
     public void deleteStore(StoreVo storeVo) {
-        this.setBaseEntity(storeVo.getModifiedBy(), 0);
+        this.setBaseEntity(null, storeVo.getModifiedBy(), 0);
     }
 
 }

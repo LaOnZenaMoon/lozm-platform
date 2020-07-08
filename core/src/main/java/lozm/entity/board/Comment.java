@@ -31,16 +31,17 @@ public class Comment extends BaseEntity {
         this.commentType = commentVo.getCommentType();
         this.content = commentVo.getContent();
         this.board = board;
+        this.setBaseEntity(commentVo.getCreatedBy(), null, commentVo.getFlag());
     }
 
     public void updateComment(CommentVo commentVo) {
         this.commentType = commentVo.getCommentType();
         this.content = commentVo.getContent();
-        this.setBaseEntity(commentVo.getModifiedBy(), commentVo.getFlag());
+        this.setBaseEntity(null, commentVo.getModifiedBy(), commentVo.getFlag());
     }
 
     public void deleteComment(CommentVo commentVo) {
-        this.setBaseEntity(commentVo.getModifiedBy(), 0);
+        this.setBaseEntity(null, commentVo.getModifiedBy(), 0);
     }
 
 }

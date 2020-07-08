@@ -40,17 +40,18 @@ public class Item extends BaseEntity {
         this.price = itemVo.getPrice();
         this.quantity = itemVo.getQuantity();
         this.store = store;
+        this.setBaseEntity(itemVo.getCreatedBy(), null, itemVo.getFlag());
     }
 
     public void updateItem(ItemVo itemVo) {
         this.name = itemVo.getName();
         this.price = itemVo.getPrice();
         this.quantity = itemVo.getQuantity();
-        this.setBaseEntity(itemVo.getModifiedBy(), itemVo.getFlag());
+        this.setBaseEntity(null, itemVo.getModifiedBy(), itemVo.getFlag());
     }
 
     public void deleteItem(ItemVo itemVo) {
-        this.setBaseEntity(itemVo.getModifiedBy(), 0);
+        this.setBaseEntity(null, itemVo.getModifiedBy(), 0);
     }
 
     public void decreaseItemQuantity(Long quantity) throws Exception {

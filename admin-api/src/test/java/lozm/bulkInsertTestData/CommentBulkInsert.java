@@ -6,7 +6,6 @@ import lozm.api.board.BoardService;
 import lozm.api.user.UserService;
 import lozm.object.code.ContentType;
 import lozm.object.dto.board.GetBoardDto;
-import lozm.object.dto.board.PostBoardDto;
 import lozm.object.dto.board.PostCommentDto;
 import lozm.object.dto.user.GetUserDto;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @ExtendWith(SpringExtension.class)

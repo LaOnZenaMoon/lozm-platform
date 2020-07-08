@@ -1,7 +1,6 @@
 package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import lozm.api.coupon.CouponService;
 import lozm.api.delivery.DeliveryService;
 import lozm.api.item.ItemService;
@@ -29,7 +28,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Slf4j
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @SpringBootTest

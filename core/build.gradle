@@ -3,7 +3,6 @@ jar { enabled = true }
 
 dependencies {
     implementation 'jakarta.validation:jakarta.validation-api'
-    implementation('org.springframework.boot:spring-boot-starter-test')
 
     // QueryDSL
     implementation("com.querydsl:querydsl-jpa")
@@ -12,11 +11,8 @@ dependencies {
     // Image Rotation
     implementation 'org.imgscalr:imgscalr-lib:4.2'
 
-    implementation 'org.apache.commons:commons-lang3:3.10'
-
     // JPA Auditing
 //    implementation 'org.springframework.data:spring-data-envers:2.3.1.RELEASE'
-
 }
 
 // QueryDSL -- start

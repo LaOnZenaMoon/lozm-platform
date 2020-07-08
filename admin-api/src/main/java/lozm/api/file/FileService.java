@@ -7,7 +7,7 @@ import lozm.global.props.FileProps;
 import lozm.object.vo.file.FileVo;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.mock.web.MockMultipartFile;
+//import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -74,27 +74,27 @@ public class FileService {
         }
     }
 
-    public MultipartFile convertFileToMultipartFile(FileVo fileVo) {
-        String fileName = fileVo.getName();
-        String filePath = fileVo.getPath();
-        String contentType = fileVo.getContentType();
-
-        try {
-            Path path = fileProps.getSourcePath(filePath).resolve(fileName)
-                    .normalize();
-            File rtnFile = path.toFile();
-            byte[] rtnFileContent = Files.readAllBytes(path);
-
-            if (rtnFile.exists()) {
-                return new MockMultipartFile(fileName, fileName, contentType, rtnFileContent);
-            } else {
-                throw new ServiceException("FILE002001", "File is already exists.");
-            }
-        } catch (ServiceException apie) {
-            throw new ServiceException("FILE002001", apie.getMessage());
-        } catch (Exception e) {
-            throw new ServiceException("FILE002001", e.getMessage());
-        }
-    }
+//    public MultipartFile convertFileToMultipartFile(FileVo fileVo) {
+//        String fileName = fileVo.getName();
+//        String filePath = fileVo.getPath();
+//        String contentType = fileVo.getContentType();
+//
+//        try {
+//            Path path = fileProps.getSourcePath(filePath).resolve(fileName)
+//                    .normalize();
+//            File rtnFile = path.toFile();
+//            byte[] rtnFileContent = Files.readAllBytes(path);
+//
+//            if (rtnFile.exists()) {
+//                return new MockMultipartFile(fileName, fileName, contentType, rtnFileContent);
+//            } else {
+//                throw new ServiceException("FILE002001", "File is already exists.");
+//            }
+//        } catch (ServiceException apie) {
+//            throw new ServiceException("FILE002001", apie.getMessage());
+//        } catch (Exception e) {
+//            throw new ServiceException("FILE002001", e.getMessage());
+//        }
+//    }
 
 }

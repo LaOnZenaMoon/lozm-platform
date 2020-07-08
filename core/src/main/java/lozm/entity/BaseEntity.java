@@ -24,8 +24,8 @@ public abstract class BaseEntity {
     @Column(name = "CREATED_BY", updatable = false, nullable = false)
     private Long createdBy = -1L;
 
-    @Column(name = "MODIFY_BY", nullable = false)
-    private Long modifiedBy;
+    @Column(name = "MODIFY_BY")
+    private Long modifiedBy = -1L;
 
     @Column(name = "FLAG")
     private int flag = 1;

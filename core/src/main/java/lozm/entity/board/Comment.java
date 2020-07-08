@@ -7,13 +7,13 @@ import lozm.object.vo.board.CommentVo;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "LOZM", name = "COMMENT")
+@Table(schema = "LOZM", name = "COMMENTS")
 @Getter
 public class Comment extends BaseEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "DELIVERY_ID")
+    @Column(name = "COMMENT_ID")
     private Long id;
 
     @Column(name = "COMMENT_TYPE")

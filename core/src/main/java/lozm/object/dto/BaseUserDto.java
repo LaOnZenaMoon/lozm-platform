@@ -12,11 +12,11 @@ public class BaseUserDto {
 
 
     public void setCreatedBy(Long id) {
-        this.createdBy = ObjectUtils.isEmpty(id) ? Long.valueOf(UsersType.API_SYSTEM.toString()) : id;
+        this.createdBy = ObjectUtils.isEmpty(id) ? -1L : id;
     }
 
     public void setModifiedBy(Long id) {
-        this.createdBy = ObjectUtils.isEmpty(id) ? Long.valueOf(UsersType.API_SYSTEM.toString()) : id;
+        this.createdBy = ObjectUtils.isEmpty(id) ? -1L : id;
     }
 
 }

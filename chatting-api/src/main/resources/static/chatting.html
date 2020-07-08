@@ -73,19 +73,21 @@
 
 	function connect() {
 	    try {
-            var sock = new SockJS("http://127.0.0.1:8084/lozm-chat");
+            var sock = new SockJS("http://127.0.0.1:8083/lozm-chat");
             stompClient = Stomp.over(sock);
 
             stompClient.connect({}, function (frame) {
                 setConnected(true);
                 console.log('Connected: '+frame);
 
-                stompClient.subscribe('http://127.0.0.1:8084/topic/' + _roomId.val(), function (chat) {
+                stompClient.subscribe('http://127.0.0.1:8083/topic/' + _roomId.val(), function (chat) {
+                    console.log(chat);
                     var content = JSON.parse(chat.body);
                     showChatMsg(content);
                 });
             });
         } catch (e) {
+	        debugger;
             console.log(e);
         }
 	}
@@ -114,6 +116,7 @@
 	}
 
 	function showChatMsg(result) {
+	    console.log("recv message: "+result);
 	    $("#chatMsg").append("<tr><td>" + result.writer + " : " + result.message + "</td></tr>");
 	}
 
@@ -125,7 +128,7 @@
 	    $("#connect").click(function() { connect(); });
 	    $("#disconnect").click(function() { disconnect(); });
 	    $("#send").click(function() {
-			stompClient.send('http://127.0.0.1:8084/publish/chat/message'
+			stompClient.send('http://127.0.0.1:8083/topic/chat/message'
 				, {}
 				, JSON.stringify({
 					topicId: _roomId.val()

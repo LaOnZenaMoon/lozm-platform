@@ -18,10 +18,9 @@ import org.springframework.web.socket.config.annotation.WebSocketTransportRegist
 import java.util.HashMap;
 
 @Slf4j
-@CrossOrigin
 @Configuration
-@EnableWebSocketMessageBroker
 @RequiredArgsConstructor
+@EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     private final ChannelInterceptorConfig channelInterceptor;
@@ -48,14 +47,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-//    	registry.enableSimpleBroker("/topic");
-    	registry.enableStompBrokerRelay("/topic")
-    	        .setRelayHost(rabbitMqSettingProps.getRelayHost())
-                .setRelayPort(rabbitMqSettingProps.getRelayPort())
-                .setClientLogin(rabbitMqSettingProps.getClientId())
-                .setClientPasscode(rabbitMqSettingProps.getClientPassword());
-    	
+    	registry.enableSimpleBroker("/topic");
     	registry.setApplicationDestinationPrefixes("/publish");
+
+//        registry.enableStompBrokerRelay("/topic")
+//    	        .setRelayHost(rabbitMqSettingProps.getRelayHost())
+//                .setRelayPort(rabbitMqSettingProps.getRelayPort())
+//                .setClientLogin(rabbitMqSettingProps.getClientId())
+//                .setClientPasscode(rabbitMqSettingProps.getClientPassword());
     }
 
     @Override
@@ -66,11 +65,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureClientOutboundChannel(ChannelRegistration registration) {
         registration.interceptors(channelInterceptor);
-    }
-    
-    @Override
-    public void configureWebSocketTransport(WebSocketTransportRegistration registry) {
-    	
     }
     
 }

@@ -21,24 +21,24 @@ public class ChannelInterceptorConfig implements ChannelInterceptor {
         // SEND    -> destination 의 값 중 하나라도 Repository 에 존재 하면 SEND 처리
         StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
 
-        if( accessor.getCommand() != null ) {
-            switch (accessor.getCommand()) {
-                case SEND:
-                    break;
-
-                case SUBSCRIBE:
-                    break;
-
-                case CONNECT:
-                    break;
-
-                case DISCONNECT:
-                    break;
-
-                default:
-                    break;
-            }
-        }
+//        if( accessor.getCommand() != null ) {
+//            switch (accessor.getCommand()) {
+//                case SEND:
+//                    break;
+//
+//                case SUBSCRIBE:
+//                    break;
+//
+//                case CONNECT:
+//                    break;
+//
+//                case DISCONNECT:
+//                    break;
+//
+//                default:
+//                    break;
+//            }
+//        }
 
         return message;
     }

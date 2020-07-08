@@ -1,6 +1,5 @@
 package lozm.bulkInsertTestData;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lozm.api.user.UserService;
@@ -72,6 +71,5 @@ public class BoardBulkInsert {
                         .content(objectMapper.writeValueAsString(reqDto))
         );
     }
-
 
 }

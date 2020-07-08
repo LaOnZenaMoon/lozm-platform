@@ -17,6 +17,16 @@ public class PostCommentDto {
 
         @NotEmpty
         private String content;
+
+        public static PostCommentDto.Request setRequestTestData(Long boardId, String commentType, String content, Long userId) {
+            PostCommentDto.Request reqDto = new PostCommentDto.Request();
+            reqDto.boardId = boardId;
+            reqDto.commentType = commentType;
+            reqDto.content = content;
+            reqDto.setCreatedBy(userId);
+
+            return reqDto;
+        }
     }
 
 }

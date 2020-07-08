@@ -20,6 +20,17 @@ public class PostBoardDto {
 
         @NotNull
         private String content;
+
+        public static PostBoardDto.Request setRequestTestData(String boardType, String contentType, String title, String content, Long userId) {
+            PostBoardDto.Request reqDto = new PostBoardDto.Request();
+            reqDto.boardType = boardType;
+            reqDto.contentType = contentType;
+            reqDto.title = title;
+            reqDto.content = content;
+            reqDto.setCreatedBy(userId);
+
+            return reqDto;
+        }
     }
 
 }

@@ -82,7 +82,6 @@
 
                 stompClient.subscribe('/topic/' + _roomId.val(), function (chat) {
                 // stompClient.subscribe('http://127.0.0.1:8083/tozpic/test', function (chat) {
-                    debugger;
                     console.log(chat);
                     var content = JSON.parse(chat.body);
                     showChatMsg(content);

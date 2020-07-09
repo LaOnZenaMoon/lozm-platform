@@ -21,9 +21,9 @@ public class BoardAPIService {
     private final AdminApiProps adminApiProps;
 
 
-    public GetBoardDto.Response getBoard(Long boardType) {
+    public GetBoardDto.Response getBoard(String boardType) {
         ApiResponseDto<GetBoardDto.Response> responseBody = restTemplate.exchange(
-                adminApiProps.getBoardUrl() + "/" + boardType,
+                adminApiProps.getBoardUrl() + "/boardType/" + boardType,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<ApiResponseDto<GetBoardDto.Response>>() {}

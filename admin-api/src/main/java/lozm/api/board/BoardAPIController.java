@@ -20,7 +20,7 @@ public class BoardAPIController {
     private final BoardService boardService;
 
 
-    @GetMapping("/{boardType}")
+    @GetMapping("/boardType/{boardType}")
     public ApiResponseDto getBoard(@PathVariable(value = "boardType") String boardType) throws Exception {
         List<GetBoardDto> result = boardService.getBoardList(boardType);
 

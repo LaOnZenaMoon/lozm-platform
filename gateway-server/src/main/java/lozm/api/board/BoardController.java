@@ -21,8 +21,8 @@ public class BoardController {
     private final SignInfo signInfo;
 
 
-    @GetMapping("/{boardType}")
-    public ApiResponseDto getBoard(@PathVariable(value = "boardType") Long boardType) throws Exception {
+    @GetMapping("/boardType/{boardType}")
+    public ApiResponseDto getBoard(@PathVariable(value = "boardType") String boardType) throws Exception {
         return ApiResponseDto.createException(ApiResponseCode.OK, boardAPIService.getBoard(boardType));
     }
 

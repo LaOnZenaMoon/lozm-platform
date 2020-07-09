@@ -29,6 +29,11 @@ public class RouteController {
         return "pages/home";
     }
 
+    @GetMapping(value = "/manage/board")
+    public String manageBoard(ModelMap modelMap) {
+        return "pages/board/board";
+    }
+
     @GetMapping(value = "/manage/store")
     public String manageStore(ModelMap modelMap) {
         return "pages/store/store";

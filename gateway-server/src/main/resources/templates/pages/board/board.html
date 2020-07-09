@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
+
+<th:block layout:fragment="content">
+	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+
+	<div id="wrapper">
+		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
+		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
+		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Board','Board management','','','')"></th:block>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-header">
+								<i class="fa fa-table"></i> Board
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="boardGrid" class="table table-bordered display">
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="post_board">
+			<div class="modal-dialog">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="post_boardForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="post_name">Name</label>
+								<input type="text" class="form-control" id="post_name" name="name">
+							</div>
+
+							<div class="form-group">
+								<label for="post_identifier">Identifier</label>
+								<input type="text" class="form-control" id="post_identifier" name="identifier">
+							</div>
+
+							<div class="form-group">
+								<label for="post_password">Password</label>
+								<input type="password" class="form-control" id="post_password" name="password">
+							</div>
+
+							<div class="form-group">
+								<label for="post_type">Type</label>
+								<select class="form-control single-select" id="post_type" name="type">
+									<option value="ADMIN">Admin</option>
+									<option value="board">board</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="put_board">
+			<div class="modal-dialog">
+				<div class="modal-content slideInUp">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form id="put_boardForm">
+						<div class="modal-body">
+							<div class="form-group">
+								<input type="hidden" id="put_id">
+							</div>
+
+							<div class="form-group">
+								<label for="put_name">Name</label>
+								<input type="text" class="form-control" id="put_name" name="name">
+							</div>
+
+							<div class="form-group">
+								<label for="put_identifier">Identifier</label>
+								<input type="text" class="form-control" id="put_identifier" name="identifier">
+							</div>
+
+							<div class="form-group">
+								<label for="put_password">Password</label>
+								<input type="password" class="form-control" id="put_password" name="password">
+							</div>
+
+							<div class="form-group">
+								<label for="put_type">Type</label>
+								<select class="form-control single-select" id="put_type" name="type">
+									<option value="ADMIN">Admin</option>
+									<option value="board">board</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
+		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
+	</div>
+</th:block>
+
+<th:block layout:fragment="customScript">
+	<script th:inline="javascript" type="text/javascript">
+		$(document).ready(function () {
+			board.initGrid();
+			board.getGridData();
+
+			$("#post_boardForm").validate({
+				submitHandler: function(form) {
+					board.post();
+				},
+				rules: {
+					name: {
+						required: true
+					},
+					identifier: {
+						required: true
+					},
+					password: {
+						required: true
+					},
+					type: {
+						required: true
+					},
+				},
+				message: {
+					name: {
+						required: "Name is required.",
+					},
+					identifier: {
+						required: "identifier is required.",
+					},
+					password: {
+						required: "password is required."
+					},
+					type: {
+						required: "type is required."
+					},
+				},
+			});
+
+
+			$("#put_boardForm").validate({
+				submitHandler: function(form) {
+					board.put();
+				},
+				rules: {
+					name: {
+						required: true
+					},
+					identifier: {
+						required: true
+					},
+					type: {
+						required: true
+					},
+				},
+				message: {
+					name: {
+						required: "Name is required.",
+					},
+					identifier: {
+						required: "identifier is required.",
+					},
+					type: {
+						required: "type is required."
+					},
+				},
+			});
+
+		});
+
+		var board = {
+			gridId: "boardGrid",
+			gridTarget: function () {
+				return $("#" + board.gridId).DataTable();
+			},
+			initGrid: function () {
+				$("#"+board.gridId).DataTable({
+					dom: 'Bftrip',
+					columns: [
+						{title: 'id',               	data: 'id',             	visible: false},
+						{title: 'boardType', 			data: 'boardType', 			width: "40%"},
+						{title: 'contentType', 			data: 'contentType', 		width: "40%"},
+						{title: 'title', 				data: 'title', 				width: "40%"},
+						{title: 'content', 				data: 'content', 			width: "20%"},
+					],
+					data: [],
+					select: {
+						style: 'multi',
+					},
+					buttons: [
+						{
+							text: '<i class="fa fa-check-square"></i>',
+							action: function () {
+								var _selectedRows = board.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) board.gridTarget().rows().deselect();
+								else board.gridTarget().rows().select();
+							}
+						},
+						{
+							text: '<i class="fa fa-plus"></i>',
+							action: function () {
+								$("#post_board").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-edit"></i>',
+							action: function () {
+								var _selectedRows = board.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								} else if(_selectedRows.length > 1) {
+									lozm.func.alertRowsAreSelected();
+									return;
+								}
+
+								lozm.func.setDetail("put_", _selectedRows[0]);
+
+								$("#put_board").modal("show");
+							},
+						},
+						{
+							text: '<i class="fa fa-minus"></i>',
+							action: function () {
+								var _selectedRows = board.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length < 1) {
+									lozm.func.alertRowIsSelected();
+									return;
+								}
+
+								if(confirm("Are you sure to delete the data?")) board.delete(_selectedRows);
+							},
+						},
+						{
+							extend: "csv",
+							text: '<i class="fa fa-download"></i>',
+							charset: 'UTF-16LE',
+						},
+						{
+							extend: "excel",
+							text: '<i class="fa fa-file-excel-o"></i>',
+							charset: 'UTF-16LE',
+						}
+					],
+				});
+			},
+			getGridData: function () {
+				lozm.func.requestGet({
+					url: /*[[ @{/board/boardType/NEWS} ]]*/ "",
+					callback: {
+						success: function (result) {
+
+							if(result.success) {
+								board.gridTarget().clear().draw();
+								board.gridTarget().rows.add(result.data.list).draw();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			post: function () {
+				lozm.func.requestPost({
+					url: /*[[ @{/board} ]]*/ "",
+					data: {
+						name: $("#post_name").val(),
+						identifier: $("#post_identifier").val(),
+						password: $("#post_password").val(),
+						type: $("#post_type").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								board.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			put: function () {
+				lozm.func.requestPut({
+					url: /*[[ @{/board} ]]*/ "",
+					data: {
+						id: $("#put_id").val(),
+						name: $("#put_name").val(),
+						identifier: $("#put_identifier").val(),
+						password: $("#put_password").val(),
+						type: $("#put_type").val()
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								board.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+			delete: function (list) {
+				lozm.func.requestDelete({
+					url: /*[[ @{/board} ]]*/ "",
+					data: {
+						list: list
+					},
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.alertSuccess();
+								board.getGridData();
+							} else {
+								lozm.func.alertFail();
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+						}
+					}
+				});
+			},
+		};
+
+	</script>
+</th:block>
+</html>

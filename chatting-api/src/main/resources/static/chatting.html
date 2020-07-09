@@ -66,13 +66,13 @@
 </body>
 
 <script type="text/javascript">
-	var stompClient = null;
-	var _message = $("#msg");
-	var _roomId = $("#roomId");
-	var _writer = $("#name");
+    var stompClient = null;
+    var _message = $("#msg");
+    var _roomId = $("#roomId");
+    var _writer = $("#name");
 
-	function connect() {
-	    try {
+    function connect() {
+        try {
             var sock = new SockJS("http://127.0.0.1:8083/lozm-chat");
             stompClient = Stomp.over(sock);
 
@@ -81,66 +81,66 @@
                 console.log('Connected: '+frame);
 
                 stompClient.subscribe('/topic/' + _roomId.val(), function (chat) {
-                // stompClient.subscribe('http://127.0.0.1:8083/tozpic/test', function (chat) {
+                    // stompClient.subscribe('http://127.0.0.1:8083/tozpic/test', function (chat) {
                     console.log(chat);
                     var content = JSON.parse(chat.body);
                     showChatMsg(content);
                 });
             });
         } catch (e) {
-	        debugger;
+            debugger;
             console.log(e);
         }
-	}
+    }
 
-	function setConnected(connected) {
-	    $("#connect").prop("disabled", connected);
-	    $("#disconnect").prop("disabled", !connected);
-	    if (connected) {
-	        $("#conversation").show();
-	        $("area_send").show();
-	    }	
-	    else {
-	        $("#conversation").hide();
-	        $("area_send").hide();
-	    }
-	    $("#chatMsg").html("");
-	}
+    function setConnected(connected) {
+        $("#connect").prop("disabled", connected);
+        $("#disconnect").prop("disabled", !connected);
+        if (connected) {
+            $("#conversation").show();
+            $("area_send").show();
+        }
+        else {
+            $("#conversation").hide();
+            $("area_send").hide();
+        }
+        $("#chatMsg").html("");
+    }
 
-	function disconnect() {
-	    if (stompClient !== null) {
-	        stompClient.disconnect();
-	    }
+    function disconnect() {
+        if (stompClient !== null) {
+            stompClient.disconnect();
+        }
 
-	    setConnected(false);
-	    console.log("Disconnected");
-	}
+        setConnected(false);
+        console.log("Disconnected");
+    }
 
-	function showChatMsg(result) {
-	    console.log("recv message: "+result);
-	    $("#chatMsg").append("<tr><td>" + result.writer + " : " + result.message + "</td></tr>");
-	}
+    function showChatMsg(result) {
+        console.log("recv message: "+result);
+        $("#chatMsg").append("<tr><td>" + result.writer + " : " + result.message + "</td></tr>");
+    }
 
-	$(document).ready(function() {
-	    $("form").on('submit', function (e) {
-	        e.preventDefault();
-	    });
+    $(document).ready(function() {
+        $("form").on('submit', function (e) {
+            e.preventDefault();
+        });
 
-	    $("#connect").click(function() { connect(); });
-	    $("#disconnect").click(function() { disconnect(); });
-	    $("#send").click(function() {
-			// stompClient.send('http://127.0.0.1:8083/app/message'
-			stompClient.send('/app/message'
-				, {}
-				, JSON.stringify({
-					topicId: _roomId.val()
-					, message: _message.val()
-					, writer: _writer.val()
-				})
-			);
+        $("#connect").click(function() { connect(); });
+        $("#disconnect").click(function() { disconnect(); });
+        $("#send").click(function() {
+            // stompClient.send('http://127.0.0.1:8083/app/message'
+            stompClient.send('/app/message'
+                , {}
+                , JSON.stringify({
+                    topicId: _roomId.val()
+                    , message: _message.val()
+                    , writer: _writer.val()
+                })
+            );
 
             _message.val("");
-	    });
-	    
-	});
+        });
+
+    });
 </script>

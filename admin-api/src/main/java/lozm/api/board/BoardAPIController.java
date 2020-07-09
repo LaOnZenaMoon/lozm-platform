@@ -60,6 +60,8 @@ public class BoardAPIController {
     public ApiResponseDto putBoard(@RequestBody @Valid PutBoardDto.Request reqDto) throws Exception {
         BoardVo boardVo = BoardVo.builder()
                 .id(reqDto.getId())
+                .boardType(reqDto.getBoardType())
+                .contentType(reqDto.getContentType())
                 .title(reqDto.getTitle())
                 .content(reqDto.getContent())
                 .modifiedBy(reqDto.getModifiedBy())
@@ -75,7 +77,6 @@ public class BoardAPIController {
         for(DeleteBoardDto dto : reqDto.getList()) {
             BoardVo boardVo = BoardVo.builder()
                     .id(dto.getId())
-
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 

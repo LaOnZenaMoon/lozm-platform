@@ -140,31 +140,6 @@
 			</div>
 		</div>
 
-		<div class="modal fade" id="put_comment">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form id="put_commentForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="put_commentQuantity">Quantity</label>
-								<input type="number" class="form-control" id="put_commentQuantity" name="commentQuantity">
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
 		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
 		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
@@ -178,52 +153,6 @@
 			$("#put_boardForm").validate({
 				submitHandler: function(form) {
 					board.put();
-				},
-				rules: {
-					name: {
-						required: true
-					},
-					contents: {
-						required: true
-					},
-					type: {
-						required: true
-					},
-					amount: {
-						required: true
-					},
-					quantity: {
-						required: true
-					},
-					startDt: {
-						required: true
-					},
-					endDt: {
-						required: true
-					},
-				},
-				message: {
-					name: {
-						required: "Name is required.",
-					},
-					contents: {
-						required: "identifier is required.",
-					},
-					type: {
-						required: "password is required."
-					},
-					amount: {
-						required: "type is required."
-					},
-					quantity: {
-						required: "type is required."
-					},
-					startDt: {
-						required: "type is required."
-					},
-					endDt: {
-						required: "type is required."
-					},
 				},
 			});
 
@@ -266,13 +195,10 @@
 					url: /*[[ @{/board} ]]*/ "",
 					data: {
 						id: $("#put_board_id").val(),
-						name: $("#put_board_name").val(),
-						contents: $("#put_board_contents").val(),
-						type: $("#put_board_type").val(),
-						amount: $("#put_board_amount").val(),
-						quantity: $("#put_board_quantity").val(),
-						startDt: $("#put_board_startDt > input").val(),
-						endDt: $("#put_board_endDt > input").val()
+						boardType: $("#put_board_type").val(),
+						contentType: $("#put_content_type").val(),
+						title: $("#put_title").val(),
+						content: $("#put_content").val()
 					},
 					callback: {
 						success: function (result) {
@@ -295,9 +221,7 @@
 					url: "/board/" + $("#put_board_id").val(),
 					callback: {
 						success: function (result) {
-
 							if(result.success) {
-								debugger;
 								lozm.func.setDetail("put_board_", result.data);
 							}
 						},

@@ -39,6 +39,8 @@ public class RouteController {
 
     @GetMapping(value = "/manage/board")
     public String manageBoard(ModelMap modelMap) {
+        setBoardInfo(modelMap);
+
         return "pages/board/board";
     }
 
@@ -50,11 +52,7 @@ public class RouteController {
         GetCommentDto.Response commentList = boardAPIService.getComment(boardId);
         modelMap.addAttribute("commentList", commentList.getList());
 
-        List<BoardType> boardTypeList = Arrays.asList(BoardType.values());
-        modelMap.addAttribute("boardTypeList", boardTypeList);
-
-        List<ContentType> contentTypeList = Arrays.asList(ContentType.values());
-        modelMap.addAttribute("contentTypeList", contentTypeList);
+        setBoardInfo(modelMap);
 
         return "pages/board/boardDetail";
     }
@@ -132,6 +130,14 @@ public class RouteController {
 //        httpSession.removeAttribute(PREV_PAGE.name());
 
         return this.signIn(modelMap);
+    }
+
+    private void setBoardInfo(ModelMap modelMap) {
+        List<BoardType> boardTypeList = Arrays.asList(BoardType.values());
+        modelMap.addAttribute("boardTypeList", boardTypeList);
+
+        List<ContentType> contentTypeList = Arrays.asList(ContentType.values());
+        modelMap.addAttribute("contentTypeList", contentTypeList);
     }
 
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lozm.api.board.BoardService;
 import lozm.api.user.UserService;
+import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
 import lozm.object.dto.board.GetBoardDto;
 import lozm.object.dto.board.PostCommentDto;
@@ -43,19 +44,28 @@ public class CommentBulkInsert {
 
     @Test
     public void setComment() throws Exception {
-        String[] boardTypeArr = {"NEWS", "DIARY", "FREE CONTENTS", "BASKETBALL", "SOCCER"};
+        String[] boardTypeArr = {
+                BoardType.NEWS.name(), BoardType.MAGAZINE.name(),
+                BoardType.DIARY.name(), BoardType.FREE_CONTENTS.name(),
+                BoardType.SPORTS.name()
+        };
 
         List<GetUserDto> userList = userService.getUserList();
         List<GetBoardDto> newsList = boardService.getBoardList(boardTypeArr[0]);
-        List<GetBoardDto> diaryList = boardService.getBoardList(boardTypeArr[1]);
-        List<GetBoardDto> freeContentsList = boardService.getBoardList(boardTypeArr[2]);
-        List<GetBoardDto> basketballList = boardService.getBoardList(boardTypeArr[3]);
-        List<GetBoardDto> soccerList = boardService.getBoardList(boardTypeArr[4]);
+        List<GetBoardDto> magazineList = boardService.getBoardList(boardTypeArr[1]);
+        List<GetBoardDto> diaryList = boardService.getBoardList(boardTypeArr[2]);
+        List<GetBoardDto> freeContentsList = boardService.getBoardList(boardTypeArr[3]);
+        List<GetBoardDto> sportsList = boardService.getBoardList(boardTypeArr[4]);
 
         try {
             for (int i = 0; i <newsList.size() ; i++) {
                 GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                 postComment(getUser, newsList.get(i));
+            }
+
+            for (int i = 0; i <magazineList.size() ; i++) {
+                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                postComment(getUser, magazineList.get(i));
             }
 
             for (int i = 0; i <diaryList.size() ; i++) {
@@ -68,14 +78,9 @@ public class CommentBulkInsert {
                 postComment(getUser, freeContentsList.get(i));
             }
 
-            for (int i = 0; i <basketballList.size() ; i++) {
+            for (int i = 0; i <sportsList.size() ; i++) {
                 GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
-                postComment(getUser, basketballList.get(i));
-            }
-
-            for (int i = 0; i <soccerList.size() ; i++) {
-                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
-                postComment(getUser, soccerList.get(i));
+                postComment(getUser, sportsList.get(i));
             }
         } catch (Exception e) {
             e.printStackTrace();

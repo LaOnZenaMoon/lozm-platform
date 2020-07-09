@@ -36,6 +36,7 @@ public class OrdersItem extends BaseEntity {
         this.quantity = quantity;
         this.orders = orders;
         this.item = item;
+        this.setBaseEntity(null, null , 1);
     }
 
 }

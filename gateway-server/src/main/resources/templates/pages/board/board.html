@@ -246,9 +246,7 @@
 									return;
 								}
 
-								lozm.func.setDetail("put_", _selectedRows[0]);
-
-								$("#put_board").modal("show");
+								location.href = "/manage/board/" + _selectedRows[0].id;
 							},
 						},
 						{

@@ -46,7 +46,7 @@ public class User extends BaseEntity {
         this.identifier = userVo.getIdentifier();
         this.password = userVo.getPassword();
         this.type = UsersType.valueOf(userVo.getType());
-        this.setBaseEntity(userVo.getCreatedBy(), null, userVo.getFlag());
+        this.setBaseEntity(userVo.getCreatedBy(), null, 1);
     }
 
     public void updateUser(UserVo userVo) {
@@ -56,7 +56,7 @@ public class User extends BaseEntity {
             this.password = userVo.getPassword();
         }
         this.type = StringUtils.isEmpty(userVo.getType()) ? null : UsersType.valueOf(userVo.getType());
-        this.setBaseEntity(null, userVo.getModifiedBy(), userVo.getFlag());
+        this.setBaseEntity(null, userVo.getModifiedBy(), 1);
     }
 
     public void deleteUser(UserVo userVo) {

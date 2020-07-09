@@ -2,6 +2,11 @@ package lozm.api.route;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lozm.api.board.BoardAPIService;
+import lozm.api.board.BoardController;
+import lozm.object.dto.ApiResponseDto;
+import lozm.object.dto.board.GetBoardDto;
+import lozm.object.dto.board.GetCommentDto;
 import lozm.object.dto.coupon.GetCouponDto;
 import lozm.object.dto.coupon.GetCouponUserDto;
 import lozm.object.dto.item.GetClothingDto;
@@ -22,6 +27,7 @@ public class RouteController {
 
     private final HttpSession httpSession;
     private final RouteService routeService;
+    private final BoardAPIService boardAPIService;
 
 
     @GetMapping(value = "/home")
@@ -34,6 +40,17 @@ public class RouteController {
         return "pages/board/board";
     }
 
+    @GetMapping(value = "/manage/board/{boardId}")
+    public String manageBoardDetail(ModelMap modelMap, @PathVariable(value = "boardId") Long boardId) throws Exception {
+        GetBoardDto.Response boardDetail = boardAPIService.getBoardDetail(boardId);
+        modelMap.addAttribute("boardDetail", boardDetail);
+
+        GetCommentDto.Response commentList = boardAPIService.getComment(boardId);
+        modelMap.addAttribute("commentList", commentList);
+
+        return "pages/board/boardDetail";
+    }
+
     @GetMapping(value = "/manage/store")
     public String manageStore(ModelMap modelMap) {
         return "pages/store/store";
@@ -41,8 +58,6 @@ public class RouteController {
 
     @GetMapping(value = "/manage/store/{storeId}")
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
-        log.debug("Store ID: "+storeId);
-
         GetStoreDto getStoreDetail = routeService.getStoreDetail(storeId);
         modelMap.addAttribute("storeDetail", getStoreDetail);
 

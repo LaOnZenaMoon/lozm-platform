@@ -3,6 +3,7 @@ package lozm.bulkInsertTestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lozm.api.user.UserService;
+import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
 import lozm.object.dto.board.PostBoardDto;
 import lozm.object.dto.user.GetUserDto;
@@ -41,7 +42,7 @@ public class BoardBulkInsert {
         List<GetUserDto> userList = userService.getUserList();
 
         try {
-            for (int i = 0; i <100 ; i++) {
+            for (int i = 0; i <1 ; i++) {
                 GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                 postBoard(getUser);
             }
@@ -52,11 +53,16 @@ public class BoardBulkInsert {
 
     private void postBoard(GetUserDto getUser) throws Exception {
         Faker faker = new Faker();
-        String[] boardTypeArr = {"NEWS", "DIARY", "FREE CONTENTS", "BASKETBALL", "SOCCER"};
-        String[] contentTypeArr = {ContentType.GENERAL.name(), ContentType.NOTICE.name(), ContentType.EVENT.name()};
-
+        String[] boardTypeArr = {
+                BoardType.NEWS.name(), BoardType.MAGAZINE.name(),
+                BoardType.DIARY.name(), BoardType.FREE_CONTENTS.name(),
+                BoardType.SPORTS.name()
+        };
         String boardType = boardTypeArr[ThreadLocalRandom.current().nextInt(0, 4)];
+
+        String[] contentTypeArr = {ContentType.GENERAL.name(), ContentType.NOTICE.name(), ContentType.EVENT.name()};
         String contentType = contentTypeArr[ThreadLocalRandom.current().nextInt(0, 2)];
+
         PostBoardDto.Request reqDto = PostBoardDto.Request.setRequestTestData(
                 boardType,
                 contentType,

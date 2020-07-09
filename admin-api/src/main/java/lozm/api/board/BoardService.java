@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lozm.entity.board.Board;
 import lozm.entity.board.Comment;
 import lozm.global.exception.ServiceException;
+import lozm.object.code.BoardType;
 import lozm.object.dto.board.GetBoardDto;
 import lozm.object.dto.board.GetCommentDto;
 import lozm.object.vo.board.BoardVo;
@@ -27,7 +28,14 @@ public class BoardService {
 
 
     public List<GetBoardDto> getBoardList(String boardType) {
-        List<Board> boardList = boardRepository.selectBoardListByBoardType(boardType);
+        List<Board> boardList = new ArrayList<>();
+
+        if(String.valueOf(BoardType.ALL).equals(boardType)) {
+            boardList = boardRepository.selectBoardList();
+        } else {
+            boardList = boardRepository.selectBoardListByBoardType(boardType);
+        }
+
         List<GetBoardDto> rtnList = new ArrayList<>();
         for (Board board : boardList) {
             GetBoardDto dto = GetBoardDto.builder()

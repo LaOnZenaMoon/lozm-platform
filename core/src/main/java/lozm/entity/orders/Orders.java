@@ -42,12 +42,12 @@ public class Orders extends BaseEntity {
         this.status = OrderStatus.PREPARATION;
         this.user = user;
         this.delivery = delivery;
-        this.setBaseEntity(ordersVo.getCreatedBy(), null, ordersVo.getFlag());
+        this.setBaseEntity(ordersVo.getCreatedBy(), null, 1);
     }
 
     public void updateOrders(OrdersVo ordersVo) {
         this.status = OrderStatus.valueOf(ordersVo.getStatus());
-        this.setBaseEntity(null,ordersVo.getModifiedBy(), ordersVo.getFlag());
+        this.setBaseEntity(null,ordersVo.getModifiedBy(), 1);
     }
 
     public void deleteOrders(OrdersVo ordersVo) {

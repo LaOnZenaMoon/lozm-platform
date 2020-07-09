@@ -36,7 +36,7 @@ public class Delivery extends BaseEntity {
         );
 
         this.status = StringUtils.isEmpty(deliveryVo.getStatus()) ? DeliveryStatus.PREPARATION : DeliveryStatus.valueOf(deliveryVo.getStatus());
-        this.setBaseEntity(deliveryVo.getCreatedBy(), null, deliveryVo.getFlag());
+        this.setBaseEntity(deliveryVo.getCreatedBy(), null, 1);
     }
 
     public void updateDelivery(DeliveryVo deliveryVo) {
@@ -48,7 +48,7 @@ public class Delivery extends BaseEntity {
                 deliveryVo.getEtc()
         );
         this.status = DeliveryStatus.valueOf(deliveryVo.getStatus());
-        this.setBaseEntity(null, deliveryVo.getModifiedBy(), deliveryVo.getFlag());
+        this.setBaseEntity(null, deliveryVo.getModifiedBy(), 1);
     }
 
     public void deleteDelivery(DeliveryVo deliveryVo) {

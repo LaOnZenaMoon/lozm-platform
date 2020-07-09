@@ -40,14 +40,14 @@ public class Item extends BaseEntity {
         this.price = itemVo.getPrice();
         this.quantity = itemVo.getQuantity();
         this.store = store;
-        this.setBaseEntity(itemVo.getCreatedBy(), null, itemVo.getFlag());
+        this.setBaseEntity(itemVo.getCreatedBy(), null, 1);
     }
 
     public void updateItem(ItemVo itemVo) {
         this.name = itemVo.getName();
         this.price = itemVo.getPrice();
         this.quantity = itemVo.getQuantity();
-        this.setBaseEntity(null, itemVo.getModifiedBy(), itemVo.getFlag());
+        this.setBaseEntity(null, itemVo.getModifiedBy(), 1);
     }
 
     public void deleteItem(ItemVo itemVo) {

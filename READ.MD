@@ -5,7 +5,8 @@
 => 이후 B2C 페이지에서 CRUD 가능하도록 개발.
 
 ## 채팅 모듈 만들기
-=> chatting-api 모듈 > RabbitMQ + STOMP 프로토콜 활용하여, 서버 개발
+=> 우선, Spring Boot Web Socket + STOMP 포로토콜 활용하여 개발. 이후 RabbitMQ 이용하여 활성화.
+=> RabbitMQ + STOMP 프로토콜 활용하여, 서버 개발
 
 ## Entity 추가
 => Image 추가.
@@ -22,16 +23,11 @@
 
 ## API 날짜 및 번호 리턴 포맷 맞춤 처리
 
-## 등록일. 수정일. 등록자. 수정자. 공통 처리
-=> Spring Data JPA > Auditing Entity 기능 + Spring Security 기능 활용하여, 로그인 세션 정보 담기.
-=> 공통화 방안 고려해서, 모두 처리하기.
-
 ## API 통신구간 암호화
 
 ## Kibana + elastic search + Spring boot + Sleuth 개발 관련.
 => “114_cloud_infra” + “114_basic_project” 프로젝트 참조.
 => 현재 마켓컬리에서 사용중.
-
 
 
 # Database script

@@ -37,7 +37,6 @@ public class DateUtils {
 
     public static boolean isNotValid(String date) {
         try {
-
             parseDateTime(date);
             return false;
         } catch (Exception e) {

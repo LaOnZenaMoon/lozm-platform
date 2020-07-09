@@ -1,7 +1,5 @@
 <th:block th:fragment="chatting()" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/script/bootstrap.min.css}"/>-->
-    <script th:src="@{/script/jquery.min.js}"></script>
     <script th:src="@{/script/sockjs.min.js}"></script>
     <script th:src="@{/script/stomp.min.js}"></script>
 
@@ -9,55 +7,52 @@
         var chatting = {
             stomp: null,
             messageArea: null,
-            connect: function (topicId, messageArea) {
+            connect: function (_messageArea, _topic) {
                 chatting.stomp = Stomp.over(new SockJS("http://127.0.0.1:8083/lozm-chat"));
-                chatting.stomp.connect({}, function (frame) {
-                    chatting.setConnected(messageArea);
-                    console.log('Connected: '+frame);
-                    chatting.stomp.subscribe('/topic/' + $(topicId).val(), function (chat) {
-                        chatting.displayMessage(JSON.parse(chat.body));
+                chatting.stomp.connect({}, function (_frame) {
+                    chatting.setConnected(_messageArea);
+                    chatting.stomp.subscribe('/topic/' + _topic, function (_chat) {
+                        chatting.displayMessage(JSON.parse(_chat.body));
                     });
                 });
             },
-            disconnect: function (messageArea) {
+            disconnect: function (_messageArea) {
                 if (chatting.stomp !== null) {
                     chatting.stomp.disconnect();
                 }
-
-                chatting.setConnected(messageArea);
-                console.log("Disconnected");
+                chatting.setConnected(_messageArea);
             },
-            displayMessage: function (result) {
+            displayMessage: function (_result) {
                 $(chatting.messageArea).append(
                     "<li class='list-group-item'>" +
                     "  <a href='javaScript:void();'>" +
                     "    <div class='media'>" +
                     "      <div class='avatar'><img class='align-self-start mr-3' src='https://via.placeholder.com/110x110' alt='user avatar'></div>" +
                     "      <div class='media-body'>" +
-                    "        <h6 class='mt-0 msg-title'>"+result.writer+"</h6>" +
-                    "        <p class='msg-info'>"+result.message+"</p>" +
-                    "        <small>Yesterday, 8:30 AM</small>" +
+                    "        <h6 class='mt-0 msg-title'>"+_result.writer+"</h6>" +
+                    "        <p class='msg-info'>"+_result.message+"</p>" +
+                    "        <small>"+_result.sendDateTime+"</small>" +
                     "       </div>" +
                     "     </div>" +
                     "  </a>" +
                     "</li>"
                 );
             },
-            setConnected: function (messageArea) {
-                $(messageArea).html("");
-                chatting.messageArea = messageArea;
+            setConnected: function (_messageArea) {
+                $(_messageArea).html("");
+                chatting.messageArea = _messageArea;
             },
-            sendMessage: function (topicId, writer, message) {
-                chatting.stomp.send('/app/message'
+            sendMessage: function (_topic, _writer, _messageId) {
+                chatting.stomp.send('/publish/chat/message'
                     , {}
                     , JSON.stringify({
-                        topicId: $(topicId).val()
-                        , writer: writer
-                        , message: $(message).val()
+                        topic: _topic
+                        , writer: _writer
+                        , message: $(_messageId).val()
                     })
                 );
 
-                $(message).val("");
+                $(_messageId).val("");
             },
         };
 

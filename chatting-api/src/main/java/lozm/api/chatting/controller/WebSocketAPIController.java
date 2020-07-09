@@ -15,10 +15,10 @@ public class WebSocketAPIController {
 
 	private final SimpMessagingTemplate template;
 
-    @MessageMapping("/message")
+
+    @MessageMapping("/chat/message")
     public void sendMessageToTopic(MessageDto messageDto) {
-        log.debug("Writer: " + messageDto.getWriter() +", Message: "+messageDto.getMessage());
-		template.convertAndSend("/topic/"+messageDto.getTopicId(), messageDto);
+		template.convertAndSend("/topic/"+messageDto.getTopic(), messageDto);
     }
 
 }

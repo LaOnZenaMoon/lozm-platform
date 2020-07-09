@@ -59,28 +59,43 @@ public class CommentBulkInsert {
 
         try {
             for (int i = 0; i <newsList.size() ; i++) {
-                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
-                postComment(getUser, newsList.get(i));
+                int size = ThreadLocalRandom.current().nextInt(0, 10);
+                for (int j = 0; j <size; j++) {
+                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    postComment(getUser, newsList.get(i));
+                }
             }
 
             for (int i = 0; i <magazineList.size() ; i++) {
-                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
-                postComment(getUser, magazineList.get(i));
+                int size = ThreadLocalRandom.current().nextInt(0, 10);
+                for (int j = 0; j <size; j++) {
+                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    postComment(getUser, magazineList.get(i));
+                }
             }
 
             for (int i = 0; i <diaryList.size() ; i++) {
-                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
-                postComment(getUser, diaryList.get(i));
+                int size = ThreadLocalRandom.current().nextInt(0, 10);
+                for (int j = 0; j <size; j++) {
+                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    postComment(getUser, diaryList.get(i));
+                }
             }
 
             for (int i = 0; i <freeContentsList.size() ; i++) {
-                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
-                postComment(getUser, freeContentsList.get(i));
+                int size = ThreadLocalRandom.current().nextInt(0, 10);
+                for (int j = 0; j <size; j++) {
+                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    postComment(getUser, freeContentsList.get(i));
+                }
             }
 
             for (int i = 0; i <sportsList.size() ; i++) {
-                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
-                postComment(getUser, sportsList.get(i));
+                int size = ThreadLocalRandom.current().nextInt(0, 10);
+                for (int j = 0; j <size; j++) {
+                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    postComment(getUser, sportsList.get(i));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

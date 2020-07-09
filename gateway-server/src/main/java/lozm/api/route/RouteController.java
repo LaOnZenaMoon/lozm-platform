@@ -3,8 +3,8 @@ package lozm.api.route;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lozm.api.board.BoardAPIService;
-import lozm.api.board.BoardController;
-import lozm.object.dto.ApiResponseDto;
+import lozm.object.code.BoardType;
+import lozm.object.code.ContentType;
 import lozm.object.dto.board.GetBoardDto;
 import lozm.object.dto.board.GetCommentDto;
 import lozm.object.dto.coupon.GetCouponDto;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.List;
 
 import static lozm.object.code.SessionType.USER;
 
@@ -42,11 +44,17 @@ public class RouteController {
 
     @GetMapping(value = "/manage/board/{boardId}")
     public String manageBoardDetail(ModelMap modelMap, @PathVariable(value = "boardId") Long boardId) throws Exception {
-        GetBoardDto.Response boardDetail = boardAPIService.getBoardDetail(boardId);
+        GetBoardDto boardDetail = boardAPIService.getBoardDetail(boardId);
         modelMap.addAttribute("boardDetail", boardDetail);
 
         GetCommentDto.Response commentList = boardAPIService.getComment(boardId);
-        modelMap.addAttribute("commentList", commentList);
+        modelMap.addAttribute("commentList", commentList.getList());
+
+        List<BoardType> boardTypeList = Arrays.asList(BoardType.values());
+        modelMap.addAttribute("boardTypeList", boardTypeList);
+
+        List<ContentType> contentTypeList = Arrays.asList(ContentType.values());
+        modelMap.addAttribute("contentTypeList", contentTypeList);
 
         return "pages/board/boardDetail";
     }

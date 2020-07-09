@@ -33,12 +33,12 @@ public class BoardAPIService {
         return responseBody.getData();
     }
 
-    public GetBoardDto.Response getBoardDetail(Long boardId) {
-        ApiResponseDto<GetBoardDto.Response> responseBody = restTemplate.exchange(
+    public GetBoardDto getBoardDetail(Long boardId) {
+        ApiResponseDto<GetBoardDto> responseBody = restTemplate.exchange(
                 adminApiProps.getBoardUrl() + "/" + boardId,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<ApiResponseDto<GetBoardDto.Response>>() {}
+                new ParameterizedTypeReference<ApiResponseDto<GetBoardDto>>() {}
         ).getBody();
 
         BaseService.checkResponseBody(responseBody, "Failed to interface getBoardDetail API.");

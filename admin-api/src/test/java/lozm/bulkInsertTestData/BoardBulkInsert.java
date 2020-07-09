@@ -42,7 +42,7 @@ public class BoardBulkInsert {
         List<GetUserDto> userList = userService.getUserList();
 
         try {
-            for (int i = 0; i <1 ; i++) {
+            for (int i = 0; i <2000 ; i++) {
                 GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                 postBoard(getUser);
             }

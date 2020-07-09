@@ -133,7 +133,7 @@
                                     <div class="avatar"><img class="align-self-start mr-3" th:src="@{/images/agent.png}" alt="user avatar"></div>
                                     <div class="media-body">
                                         <h6 class="mt-2 user-title" th:if="${session.USER != null}" th:text="${session.USER.name}">Administrator</h6>
-                                        <p class="user-subtitle" th:if="${session.USER != null}" th:text="${session.USER.identifier}">Administrator</p>
+                                        <p class="user-subtitle" th:if="${session.USER != null}" th:text="${session.USER.identifier}" id="sessionUserId">Administrator</p>
                                     </div>
                                 </div>
                             </a>
@@ -163,7 +163,7 @@
             });
 
             $("#chattingSend").click(function () {
-                chatting.sendMessage("#chattingTopic", "test", "#chattingMessage");
+                chatting.sendMessage("#chattingTopic", $("#sessionUserId").text(), "#chattingMessage");
             });
         });
     </script>

@@ -1,8 +1,8 @@
 # TODO List
 ## NBAMANIA 같은 관리자 - B2C 사이트 만들기.
-=> Board, Comment Entity 추가 개발.
-=> 우선 Admin 에서 관리가능하도록 개발.
-=> 이후 B2C 페이지에서 CRUD 가능하도록 개발.
+## B2C 페이지 개발
+=> B2C 페이지에서 CRUD 가능하도록 개발.
+=> B2C 페이지는 Vue.js 또는 React.js 로 만들어보기.
 
 ## 채팅 모듈 만들기
 => 우선, Spring Boot Web Socket + STOMP 포로토콜 활용하여 개발. 이후 RabbitMQ 이용하여 활성화.
@@ -18,8 +18,6 @@
 ## (JPQL -> Querydsl) 로 변환 처리
 
 ## fetch join 으로 JPA 수정
-
-## B2C 페이지 개발
 
 ## API 날짜 및 번호 리턴 포맷 맞춤 처리
 

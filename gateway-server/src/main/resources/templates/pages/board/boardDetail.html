@@ -27,15 +27,15 @@
 									</div>
 
 									<div class="form-group">
-										<label for="put_board_type">Board type</label>
-										<select class="form-control single-select" id="put_board_type" name="board_type">
+										<label for="put_boardType">Board type</label>
+										<select class="form-control single-select" id="put_boardType" name="boardType">
 											<option th:each="item : ${boardTypeList}" th:value="${item}" th:text="${item}"></option>
 										</select>
 									</div>
 
 									<div class="form-group">
-										<label for="put_content_type">Content type</label>
-										<select class="form-control single-select" id="put_content_type" name="content_type">
+										<label for="put_contentType">Content type</label>
+										<select class="form-control single-select" id="put_contentType" name="contentType">
 											<option th:each="item : ${contentTypeList}" th:value="${item}" th:text="${item}"></option>
 										</select>
 									</div>
@@ -112,23 +112,15 @@
 					<form id="post_commentForm">
 						<div class="modal-body">
 							<div class="form-group">
-								<label for="post_commentQuantity">Quantity</label>
-								<input type="number" class="form-control" id="post_commentQuantity" name="commentQuantity">
+								<label for="post_comment_type">Comment type</label>
+								<select class="form-control single-select" id="post_comment_type" name="comment_type">
+									<option th:each="item : ${commentTypeList}" th:value="${item}" th:text="${item}"></option>
+								</select>
 							</div>
 
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="card">
-										<div class="card-header">
-											<i class="fa fa-table"></i> User
-										</div>
-										<div class="card-body">
-											<div class="table-responsive">
-												<table id="userGrid" class="table table-bordered display modal-grid"></table>
-											</div>
-										</div>
-									</div>
-								</div>
+							<div class="form-group">
+								<label for="post_content">Content</label>
+								<textarea rows="10" class="form-control" id="post_content" name="content"></textarea>
 							</div>
 						</div>
 
@@ -148,11 +140,27 @@
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
+			lozm.func.setDetail("put_", board.detail);
+
 			comment.initGrid();
 
 			$("#put_boardForm").validate({
 				submitHandler: function(form) {
 					board.put();
+				},
+				rules: {
+					boardType: {
+						required: true
+					},
+					contentType: {
+						required: true
+					},
+					title: {
+						required: true
+					},
+					content: {
+						required: true
+					},
 				},
 			});
 
@@ -161,42 +169,25 @@
 					comment.post();
 				},
 				rules: {
-					commentQuantity: {
+					commentType: {
 						required: true
 					},
-				},
-				message: {
-					commentQuantity: {
-						required: "Name is required.",
-					},
-				},
-			});
-
-			$("#put_commentForm").validate({
-				submitHandler: function(form) {
-					comment.put(comment.selectedRows);
-				},
-				rules: {
-					commentQuantity: {
+					content: {
 						required: true
-					},
-				},
-				message: {
-					commentQuantity: {
-						required: "Name is required.",
 					},
 				},
 			});
 		});
 
 		var board = {
+			detail: /*[[ ${boardDetail} ]]*/ "",
 			put: function () {
 				lozm.func.requestPut({
 					url: /*[[ @{/board} ]]*/ "",
 					data: {
 						id: $("#put_board_id").val(),
-						boardType: $("#put_board_type").val(),
-						contentType: $("#put_content_type").val(),
+						boardType: $("#put_boardType").val(),
+						contentType: $("#put_contentType").val(),
 						title: $("#put_title").val(),
 						content: $("#put_content").val()
 					},
@@ -246,8 +237,9 @@
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',       		data: 'id',         		visible: false},
-						{title: 'Comment type', 	data: 'commentType',   		width: "40%"},
-						{title: 'Content',    		data: 'content',     		width: "40%"},
+						{title: 'Comment type', 	data: 'commentType',   		width: "20%"},
+						{title: 'Flag', 			data: 'flag',   			width: "10%"},
+						{title: 'Content',    		data: 'content',     		width: "70%"},
 					],
 					data: /*[[ ${commentList} ]]*/ "",
 					select: {
@@ -265,7 +257,6 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								user.getGridData();
 								$("#post_comment").modal("show");
 							},
 						},
@@ -295,10 +286,9 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: "/board/" + $("#put_board_id").val() + "/user",
+					url: "/board/" + $("#put_board_id").val() + "/comment",
 					callback: {
 						success: function (result) {
-
 							if(result.success) {
 								board.getDetail();
 								comment.gridTarget().clear().draw();
@@ -315,11 +305,11 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/board/user} ]]*/ "",
+					url: /*[[ @{/board/comment} ]]*/ "",
 					data: {
 						boardId: $("#put_board_id").val(),
-						userList: user.getSelectedRows(),
-						commentQuantity: $("#post_commentQuantity").val()
+						commentType: $("#post_comment_type").val(),
+						content: $("#post_content").val()
 					},
 					callback: {
 						success: function (result) {
@@ -341,7 +331,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/board/user} ]]*/ "",
+					url: /*[[ @{/board/comment} ]]*/ "",
 					data: {
 						list: list
 					},

@@ -14,6 +14,7 @@ public class GetCommentDto {
 
     private Long id;
     private String commentType;
+    private int flag;
     private String content;
 
     @Getter

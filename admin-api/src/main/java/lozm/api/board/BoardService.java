@@ -91,6 +91,7 @@ public class BoardService {
             GetCommentDto dto = GetCommentDto.builder()
                     .id(comment.getId())
                     .commentType(comment.getCommentType())
+                    .flag(comment.getFlag())
                     .content(comment.getContent())
                     .build();
 

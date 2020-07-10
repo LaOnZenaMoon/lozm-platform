@@ -54,6 +54,9 @@ public class RouteController {
 
         setBoardInfo(modelMap);
 
+        List<ContentType> commentTypeList = Arrays.asList(ContentType.values());
+        modelMap.addAttribute("commentTypeList", commentTypeList);
+
         return "pages/board/boardDetail";
     }
 

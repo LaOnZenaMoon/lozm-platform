@@ -119,7 +119,7 @@ public class BoardAPIService {
 
     public ApiResponseDto deleteComment(DeleteCommentDto.Request reqDto) {
         ApiResponseDto responseBody = restTemplate.exchange(
-                adminApiProps.getBoardUrl() + "/user",
+                adminApiProps.getBoardUrl() + "/comment",
                 HttpMethod.DELETE,
                 new HttpEntity<>(reqDto),
                 new ParameterizedTypeReference<ApiResponseDto>() {}

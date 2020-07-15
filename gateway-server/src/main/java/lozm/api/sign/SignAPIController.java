@@ -8,12 +8,16 @@ import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.sign.PostSignDto;
 import lozm.object.vo.sign.SignVo;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -28,11 +32,14 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 public class SignAPIController {
 
     private final JwtAuthenticationService jwtAuthenticationService;
-    private final HttpSession httpSession;
 
 
     @PostMapping(value = "/in")
-    public ApiResponseDto signIn(@RequestBody @Valid PostSignDto.Request reqDto) throws Exception {
+    public ApiResponseDto signIn(
+            @RequestBody @Valid PostSignDto.Request reqDto,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws Exception {
         SignVo signVo = SignVo.builder()
                 .identifier(reqDto.getIdentifier())
                 .password(reqDto.getPassword())
@@ -41,22 +48,15 @@ public class SignAPIController {
         SignVo jwt = jwtAuthenticationService.getToken(signVo);
         PostSignDto.Response resDto = new PostSignDto.Response();
         resDto.setToken(jwt.getToken());
-        resDto.setPreviousPage(setSessionInfo(jwt));
+
+//        RequestCache requestCache = new HttpSessionRequestCache();
+//        String redirectUrl = requestCache.getRequest(request, response)
+//                .getRedirectUrl();
+//        redirectUrl = isEmpty(redirectUrl) ? "/home" : redirectUrl;
+        String redirectUrl = "/pages/home";
+        resDto.setPreviousPage(redirectUrl);
 
         return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
-    }
-
-    private String setSessionInfo(SignVo SignVo) throws Exception {
-        httpSession.setAttribute(USER.name(), SignVo);
-
-        Object attribute = httpSession.getAttribute(PREV_PAGE.name());
-        String previousPage = isEmpty(attribute) ? "" : attribute.toString();
-
-        if( StringUtils.isEmpty(previousPage) || "/".equals(previousPage)) {
-            return "/home";
-        }
-
-        return previousPage;
     }
 
 }

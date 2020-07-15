@@ -59,9 +59,15 @@
         ajaxDefault();
     };
 
+    lozm.func.movePage = function(url) {
+        if(checkJwt()) {
+
+        }
+    };
+
     var ajaxDefault = function(options) {
         if(checkJwt(options)) {
-            location.href = "/sign/out";
+            location.href = "/sign/in";
             return;
         }
 
@@ -233,9 +239,9 @@
         });
     }
 
-    var checkJwt = lozm.func.checkJwt = function (_options) {
+    var checkJwt = lozm.func.checkJwt = function (_url) {
         try {
-            if(_options === undefined || _options.url === "/api/sign/in") {
+            if(_url === undefined || _url === "/api/sign/in") {
                 return false;
             }
             const _jwtToken = window.localStorage.getItem(JWT_TOKEN)
@@ -258,6 +264,10 @@
         var _jwtToken = window.localStorage.getItem(JWT_TOKEN);
         return _jwtToken == null ? null : "Bearer " + _jwtToken;
     }
+
+    lozm.func.getUserInfoFromJwt = function() {
+        return jwt_decode(getJwt());
+    };
 
     //Insert JWT
     lozm.func.insertJwt = function(_token) {

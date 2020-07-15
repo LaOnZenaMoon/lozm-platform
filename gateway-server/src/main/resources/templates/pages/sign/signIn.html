@@ -18,15 +18,12 @@
                 <div class="card mb-0 ">
                     <div class="card-body">
                         <div class="card-content p-3">
-<!--                            <div class="text-center">-->
-<!--                                <img th:src="@{/libs/dashtreme/vertical-layout/assets/images/logo-icon.png}" alt="logo icon">-->
-<!--                            </div>-->
                             <div class="card-title text-uppercase text-center py-3">Sign In</div>
-                            <form id="post_signForm">
+                            <form id="post_signForm" method="POST" action="/api/sign/in">
                                 <div class="form-group">
                                     <div class="position-relative has-icon-left">
-                                        <label for="post_identifier" class="sr-only">Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" id="post_identifier" name="identifier">
+                                        <label for="identifier" class="sr-only">Username</label>
+                                        <input type="text" class="form-control" placeholder="ID" id="identifier" name="identifier">
                                         <div class="form-control-position">
                                             <i class="icon-user"></i>
                                         </div>
@@ -34,34 +31,34 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="position-relative has-icon-left">
-                                        <label for="post_password" class="sr-only">Password</label>
-                                        <input type="password" class="form-control" placeholder="Password" id="post_password" name="password">
+                                        <label for="password" class="sr-only">Password</label>
+                                        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                                         <div class="form-control-position">
                                             <i class="icon-lock"></i>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
 
-                            <div class="form-row mr-0 ml-0">
-                                <div class="form-group col-6">
-                                    <div class="icheck-material-white">
-                                        <input type="checkbox" id="user-checkbox" checked="" />
-                                        <label for="user-checkbox">Remember me</label>
+                                <div class="form-row mr-0 ml-0">
+                                    <div class="form-group col-6">
+                                        <div class="icheck-material-white">
+<!--                                            <input type="checkbox" id="user-checkbox" checked="" />-->
+<!--                                            <label for="user-checkbox">Remember me</label>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6 text-right">
+<!--                                        <a href="authentication-reset-password2.html">Reset Password</a>-->
                                     </div>
                                 </div>
-                                <div class="form-group col-6 text-right">
-                                    <a href="authentication-reset-password2.html">Reset Password</a>
-                                </div>
-                            </div>
 
-                            <button type="button" class="btn btn-light btn-block waves-effect waves-light" onclick="sign.submit()">Sign In</button>
+                                <button type="submit" class="btn btn-light btn-block waves-effect waves-light">Sign In</button>
+                            </form>
                             <div class="text-center pt-3">
 
                                 <div class="form-row mt-4">
                                 </div>
 
-                                <hr>
+<!--                                <hr>-->
                             </div>
                         </div>
                     </div>
@@ -80,20 +77,16 @@
     <script th:inline="javascript" type="text/javascript">
         $(document).ready(function () {
             $("#post_signForm").validate({
+                submitHandler: function(form) {
+                    console.log(form);
+                    sign.submit();
+                },
                 rules: {
                     identifier: {
                         required: true,
                     },
                     password: {
                         required: true,
-                    },
-                },
-                message: {
-                    identifier: {
-                        required: "Identifier is required.",
-                    },
-                    password: {
-                        required: "Password is required.",
                     },
                 },
             });
@@ -104,8 +97,8 @@
                 lozm.func.requestPost({
                     url: /*[[ @{/api/sign/in} ]]*/ ""
                     , data: {
-                        identifier: $("#post_identifier").val(),
-                        password: $("#post_password").val()
+                        identifier: $("#identifier").val(),
+                        password: $("#password").val()
                     }
                     , callback: {
                         success: function (result) {
@@ -122,7 +115,7 @@
                         }
                     }
                 });
-            }
+            },
         };
     </script>
 </th:block>

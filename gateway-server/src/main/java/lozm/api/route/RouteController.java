@@ -128,14 +128,6 @@ public class RouteController {
         return "pages/sign/signIn";
     }
 
-    @GetMapping(value = "/sign/out")
-    public String signOut(ModelMap modelMap) {
-        httpSession.removeAttribute(USER.name());
-//        httpSession.removeAttribute(PREV_PAGE.name());
-
-        return this.signIn(modelMap);
-    }
-
     private void setBoardInfo(ModelMap modelMap) {
         List<BoardType> boardTypeList = Arrays.asList(BoardType.values());
         modelMap.addAttribute("boardTypeList", boardTypeList);

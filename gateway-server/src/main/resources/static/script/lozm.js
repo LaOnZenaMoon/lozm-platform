@@ -59,16 +59,19 @@
         ajaxDefault();
     };
 
-    lozm.func.movePage = function(url) {
-        if(checkJwt()) {
-
+    var movePage = lozm.func.movePage = function(_url) {
+        if(isEmpty(_url) || checkJwtIsNotValid()) {
+            deleteJwt();
+            location.href = "/pages/sign/in";
+            return;
         }
+
+        location.href = _url;
     };
 
     var ajaxDefault = function(options) {
-        if(checkJwt(options)) {
-            location.href = "/sign/in";
-            return;
+        if(options !== undefined && options.url !== "/api/sign/in") {
+            if(checkJwtIsNotValid()) movePage();
         }
 
         var ajaxOptions = $.extend({
@@ -239,11 +242,8 @@
         });
     }
 
-    var checkJwt = lozm.func.checkJwt = function (_url) {
+    var checkJwtIsNotValid = lozm.func.checkJwtIsNotValid = function () {
         try {
-            if(_url === undefined || _url === "/api/sign/in") {
-                return false;
-            }
             const _jwtToken = window.localStorage.getItem(JWT_TOKEN)
             const _decodedToken = jwt_decode(_jwtToken)
             const _now = Date.now().valueOf() / 1000
@@ -266,6 +266,8 @@
     }
 
     lozm.func.getUserInfoFromJwt = function() {
+        if(checkJwtIsNotValid()) movePage();
+
         return jwt_decode(getJwt());
     };
 
@@ -293,7 +295,7 @@
 
     lozm.func.signOut = function () {
         deleteJwt();
-        location.href = "/sign/out";
+        location.href = "/sign/in";
     }
 
     init.prototype = lozm.func;

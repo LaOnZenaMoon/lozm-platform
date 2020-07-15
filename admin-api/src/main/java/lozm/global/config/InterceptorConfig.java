@@ -17,28 +17,6 @@ public class InterceptorConfig extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession httpSession = request.getSession();
 
-        String reqUri = request.getRequestURI();
-        if (
-                reqUri.contains("/api")
-                || reqUri.contains("/images")
-                || reqUri.contains("/libs")
-                || reqUri.contains("/script")
-                || reqUri.contains("/layout")
-                || reqUri.contains("/error")
-                || reqUri.contains("/sign")
-                || reqUri.contains("/download")
-        ) {
-            return super.preHandle(request, response, handler);
-        }
-
-        SignVo userSession = (SignVo) httpSession.getAttribute(USER.name());
-        if (userSession == null) {
-            httpSession.setAttribute(PREV_PAGE.name(), reqUri);
-            response.sendRedirect("/sign/out");
-
-            return false;
-        }
-
         return super.preHandle(request, response, handler);
     }
 

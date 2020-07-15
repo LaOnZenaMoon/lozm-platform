@@ -12,14 +12,14 @@
                 <div class="avatar"><img class="mr-3 side-user-img" src="https://via.placeholder.com/110x110" th:src="@{/images/agent.png}"
                                          alt="user avatar"></div>
                 <div class="media-body">
-                    <h6 class="side-user-name" th:if="${session.USER != null}" th:text="${session.USER.name}">Administrator</h6>
+                    <h6 class="side-user-name" id="leftUserName">Administrator</h6>
                 </div>
             </div>
             <div id="user-dropdown" class="collapse">
                 <ul class="user-setting-menu">
                     <li><a href="javaScript:void();"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="javaScript:void();"><i class="icon-settings"></i>Setting</a></li>
-                    <li><a href="/sign/out"><i class="icon-power"></i>Logout</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage()"><i class="icon-power"></i>Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -32,7 +32,7 @@
                         class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                    <li><a href="/manage/board">Board</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage('/pages/manage/board')">Board</a></li>
                 </ul>
             </li>
 
@@ -41,11 +41,11 @@
                     <i class="zmdi zmdi-view-dashboard"></i><span>Shop management</span><i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                    <li><a href="/manage/store">Store</a></li>
-                    <li><a href="/manage/item">Item</a></li>
-                    <li><a href="/manage/coupon">Coupon</a></li>
-                    <li><a href="/manage/delivery">Delivery</a></li>
-                    <li><a href="/manage/orders">Orders</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage('/pages/manage/store')">Store</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage('/pages/manage/item')">Item</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage('/pages/manage/coupon')">Coupon</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage('/pages/manage/delivery')">Delivery</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage('/pages/manage/orders')">Orders</a></li>
                 </ul>
             </li>
 
@@ -55,13 +55,19 @@
                         class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                    <li><a href="/setting/user">User</a></li>
+                    <li><a href="#" onclick="lozm.func.movePage('/pages/setting/user')">User</a></li>
                 </ul>
             </li>
 
         </ul>
 
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#leftUserName").text(lozm.func.getUserInfoFromJwt().name);
+        });
+    </script>
 
 </th:block>
 

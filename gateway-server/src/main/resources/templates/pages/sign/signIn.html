@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <div class="card-content p-3">
                             <div class="card-title text-uppercase text-center py-3">Sign In</div>
-                            <form id="post_signForm" method="POST" action="/api/sign/in">
+                            <form id="post_signForm">
                                 <div class="form-group">
                                     <div class="position-relative has-icon-left">
                                         <label for="identifier" class="sr-only">Username</label>
@@ -78,7 +78,6 @@
         $(document).ready(function () {
             $("#post_signForm").validate({
                 submitHandler: function(form) {
-                    console.log(form);
                     sign.submit();
                 },
                 rules: {
@@ -104,7 +103,7 @@
                         success: function (result) {
                             if(result.success) {
                                 lozm.func.insertJwt(result.data.token);
-                                location.href = result.data.previousPage;
+                                lozm.func.movePage(result.data.previousPage);
                             } else {
                                 lozm.func.alertFail();
                             }

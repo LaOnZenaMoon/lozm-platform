@@ -33,19 +33,19 @@ public class RouteController {
     private final BoardAPIService boardAPIService;
 
 
-    @GetMapping(value = "/home")
+    @GetMapping("/home")
     public String home(ModelMap modelMap) {
         return "pages/home";
     }
 
-    @GetMapping(value = "/manage/board")
+    @GetMapping("/manage/board")
     public String manageBoard(ModelMap modelMap) {
         setBoardInfo(modelMap);
 
         return "pages/board/board";
     }
 
-    @GetMapping(value = "/manage/board/{boardId}")
+    @GetMapping("/manage/board/{boardId}")
     public String manageBoardDetail(ModelMap modelMap, @PathVariable(value = "boardId") Long boardId) throws Exception {
         GetBoardDto boardDetail = boardAPIService.getBoardDetail(boardId);
         modelMap.addAttribute("boardDetail", boardDetail);
@@ -61,12 +61,12 @@ public class RouteController {
         return "pages/board/boardDetail";
     }
 
-    @GetMapping(value = "/manage/store")
+    @GetMapping("/manage/store")
     public String manageStore(ModelMap modelMap) {
         return "pages/store/store";
     }
 
-    @GetMapping(value = "/manage/store/{storeId}")
+    @GetMapping("/manage/store/{storeId}")
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
         GetStoreDto getStoreDetail = routeService.getStoreDetail(storeId);
         modelMap.addAttribute("storeDetail", getStoreDetail);
@@ -86,17 +86,17 @@ public class RouteController {
         return "pages/store/storeDetail";
     }
 
-    @GetMapping(value = "/manage/item")
+    @GetMapping("/manage/item")
     public String manageItem(ModelMap modelMap) {
         return "pages/item/item";
     }
 
-    @GetMapping(value = "/manage/coupon")
+    @GetMapping("/manage/coupon")
     public String manageCoupon(ModelMap modelMap) {
         return "pages/coupon/coupon";
     }
 
-    @GetMapping(value = "/manage/coupon/{couponId}")
+    @GetMapping("/manage/coupon/{couponId}")
     public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) throws Exception {
 
         GetCouponDto getCouponDetail = routeService.getCouponDetail(couponId);
@@ -108,22 +108,22 @@ public class RouteController {
         return "pages/coupon/couponDetail";
     }
 
-    @GetMapping(value = "/manage/delivery")
+    @GetMapping("/manage/delivery")
     public String manageDelivery(ModelMap modelMap) {
         return "pages/delivery/delivery";
     }
 
-    @GetMapping(value = "/manage/orders")
+    @GetMapping("/manage/orders")
     public String manageOrders(ModelMap modelMap) {
         return "pages/orders/orders";
     }
 
-    @GetMapping(value = "/setting/user")
+    @GetMapping("/setting/user")
     public String settingUser(ModelMap modelMap) {
         return "pages/user/user";
     }
 
-    @GetMapping(value = "/sign/in")
+    @GetMapping("/sign/in")
     public String signIn(ModelMap modelMap) {
         return "pages/sign/signIn";
     }

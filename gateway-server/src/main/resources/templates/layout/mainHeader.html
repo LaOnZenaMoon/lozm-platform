@@ -154,12 +154,9 @@
                 chatting.sendMessage($("#chattingTopic").val(), $("#sessionUserId").text(), "#chattingMessage");
             });
 
-
             $("#userName").text(lozm.func.getUserInfoFromJwt().name);
             $("#userId").text(lozm.func.getUserInfoFromJwt().sub);
         });
-
-
     </script>
 
 </th:block>

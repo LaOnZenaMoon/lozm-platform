@@ -10,7 +10,7 @@ import lozm.entity.coupon.CouponUser;
 import lozm.entity.auth.Account;
 import lozm.repository.coupon.CouponRepository;
 import lozm.repository.coupon.CouponUserRepository;
-import lozm.repository.user.UserRepository;
+import lozm.repository.auth.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +24,7 @@ import java.util.Optional;
 public class CouponService {
 
     private final CouponRepository couponRepository;
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
     private final CouponUserRepository couponUserRepository;
 
 
@@ -109,7 +109,7 @@ public class CouponService {
         Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "USER_SAVE_NO_COUPON");
 
         //Find the user
-        Optional<Account> findUser = userRepository.findById(couponVo.getUserId());
+        Optional<Account> findUser = accountRepository.findById(couponVo.getUserId());
         findUser.orElseThrow(() -> {
             throw new ServiceException("USER_0002", "User doesn't exist.");
         });

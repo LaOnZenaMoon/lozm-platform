@@ -5,7 +5,7 @@ import lozm.entity.auth.Account;
 import lozm.global.exception.ServiceException;
 import lozm.object.dto.user.GetUserDto;
 import lozm.object.vo.user.UserVo;
-import lozm.repository.user.UserRepository;
+import lozm.repository.auth.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +18,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
 
 
     public List<GetUserDto> getUserList() throws Exception {
-        List<Account> accountList = userRepository.selectUserList();
+        List<Account> accountList = accountRepository.selectUserList();
         List<GetUserDto> rtnList = new ArrayList<>();
         for (Account account : accountList) {
             GetUserDto dto = GetUserDto.builder()
@@ -45,10 +45,10 @@ public class UserService {
         account.insertUser(userVo);
 
         //1. check ID duplicated
-        List<Account> findUsersIdDuplicated = userRepository.findByIdentifier(account.getIdentifier());
+        List<Account> findUsersIdDuplicated = accountRepository.findByIdentifier(account.getIdentifier());
         if(findUsersIdDuplicated.size() > 0) throw new ServiceException("USER_0001", "User Identifier is duplicated.");
 
-        userRepository.save(account);
+        accountRepository.save(account);
     }
 
     @Transactional
@@ -64,7 +64,7 @@ public class UserService {
     }
 
     private Optional<Account> findUser(Long userId) {
-        Optional<Account> findUser = userRepository.findById(userId);
+        Optional<Account> findUser = accountRepository.findById(userId);
         findUser.orElseThrow(() -> {
             throw new ServiceException("USER_0002", "User doesn't exist.");
         });

@@ -16,7 +16,7 @@ import lozm.repository.coupon.CouponRepository;
 import lozm.repository.item.ItemRepository;
 import lozm.repository.orders.OrdersRepository;
 import lozm.repository.orders.OrdersItemRepository;
-import lozm.repository.user.UserRepository;
+import lozm.repository.auth.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +31,7 @@ public class OrdersService {
 
     private final OrdersRepository ordersRepository;
     private final ItemRepository itemRepository;
-    private final UserRepository userRepository;
+    private final AccountRepository accountRepository;
     private final OrdersItemRepository ordersItemRepository;
     private final CouponRepository couponRepository;
     private final RepositorySupport repositorySupport;
@@ -138,7 +138,7 @@ public class OrdersService {
     }
 
     private Optional<Account> findUser(Long userId) {
-        Optional<Account> findUser = userRepository.findById(userId);
+        Optional<Account> findUser = accountRepository.findById(userId);
         findUser.orElseThrow(() -> {
             throw new ServiceException("ORDERS_SAVE_USER", "User doesn't exist.");
         });

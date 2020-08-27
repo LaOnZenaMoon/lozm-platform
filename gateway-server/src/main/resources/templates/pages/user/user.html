@@ -132,12 +132,12 @@
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
-			user.initGrid();
-			user.getGridData();
+			account.initGrid();
+			account.getGridData();
 
 			$("#post_userForm").validate({
 				submitHandler: function(form) {
-					user.post();
+					account.post();
 				},
 				rules: {
 					name: {
@@ -172,7 +172,7 @@
 
 			$("#put_userForm").validate({
 				submitHandler: function(form) {
-					user.put();
+					account.put();
 				},
 				rules: {
 					name: {
@@ -200,13 +200,13 @@
 
 		});
 
-		var user = {
+		var account = {
 			gridId: "userGrid",
 			gridTarget: function () {
-				return $("#" + user.gridId).DataTable();
+				return $("#" + account.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+user.gridId).DataTable({
+				$("#"+account.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',               	data: 'id',             	visible: false},
@@ -223,9 +223,9 @@
 						{
 							text: '<i class="fa fa-check-square"></i>',
 							action: function () {
-								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) user.gridTarget().rows().deselect();
-								else user.gridTarget().rows().select();
+								var _selectedRows = account.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) account.gridTarget().rows().deselect();
+								else account.gridTarget().rows().select();
 							}
 						},
 						{
@@ -237,7 +237,7 @@
 						{
 							text: '<i class="fa fa-edit"></i>',
 							action: function () {
-								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = account.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									lozm.func.alertRowIsSelected();
 									return;
@@ -254,13 +254,13 @@
 						{
 							text: '<i class="fa fa-minus"></i>',
 							action: function () {
-								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
+								var _selectedRows = account.gridTarget().rows({selected: true}).data().toArray();
 								if(_selectedRows.length < 1) {
 									lozm.func.alertRowIsSelected();
 									return;
 								}
 
-								if(confirm("Are you sure to delete the data?")) user.delete(_selectedRows);
+								if(confirm("Are you sure to delete the data?")) account.delete(_selectedRows);
 							},
 						},
 						{
@@ -278,13 +278,13 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/user} ]]*/ "",
+					url: /*[[ @{/account} ]]*/ "",
 					callback: {
 						success: function (result) {
 
 							if(result.success) {
-								user.gridTarget().clear().draw();
-								user.gridTarget().rows.add(result.data.list).draw();
+								account.gridTarget().clear().draw();
+								account.gridTarget().rows.add(result.data.list).draw();
 							}
 						},
 						error: function (xhr, status, error) {
@@ -297,7 +297,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/user} ]]*/ "",
+					url: /*[[ @{/account} ]]*/ "",
 					data: {
 						name: $("#post_name").val(),
 						identifier: $("#post_identifier").val(),
@@ -308,7 +308,7 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
-								user.getGridData();
+								account.getGridData();
 							} else {
 								lozm.func.alertFail();
 							}
@@ -323,7 +323,7 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/user} ]]*/ "",
+					url: /*[[ @{/account} ]]*/ "",
 					data: {
 						id: $("#put_id").val(),
 						name: $("#put_name").val(),
@@ -335,7 +335,7 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
-								user.getGridData();
+								account.getGridData();
 							} else {
 								lozm.func.alertFail();
 							}
@@ -350,7 +350,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/user} ]]*/ "",
+					url: /*[[ @{/account} ]]*/ "",
 					data: {
 						list: list
 					},
@@ -358,7 +358,7 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
-								user.getGridData();
+								account.getGridData();
 							} else {
 								lozm.func.alertFail();
 							}

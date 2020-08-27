@@ -198,7 +198,7 @@
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
 			couponUser.initGrid();
-			user.initGrid();
+			account.initGrid();
 
 			lozm.func.datetimepicker("put_startDt");
 			lozm.func.datetimepicker("put_endDt");
@@ -373,7 +373,7 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								user.getGridData();
+								account.getGridData();
 								$("#post_couponUser").modal("show");
 							},
 						},
@@ -417,7 +417,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: "/coupon/" + $("#put_coupon_id").val() + "/user",
+					url: "/coupon/" + $("#put_coupon_id").val() + "/account",
 					callback: {
 						success: function (result) {
 
@@ -437,10 +437,10 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/coupon/user} ]]*/ "",
+					url: /*[[ @{/coupon/account} ]]*/ "",
 					data: {
 						couponId: $("#put_coupon_id").val(),
-						userList: user.getSelectedRows(),
+						accountList: account.getSelectedRows(),
 						couponUserQuantity: $("#post_couponUserQuantity").val()
 					},
 					callback: {
@@ -463,7 +463,7 @@
 			},
 			put: function (list) {
 				lozm.func.requestPut({
-					url: /*[[ @{/coupon/user} ]]*/ "",
+					url: /*[[ @{/coupon/account} ]]*/ "",
 					data: {
 						list: list,
 						couponUserQuantity: $("#put_couponUserQuantity").val()
@@ -488,7 +488,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/coupon/user} ]]*/ "",
+					url: /*[[ @{/coupon/account} ]]*/ "",
 					data: {
 						list: list
 					},
@@ -512,13 +512,13 @@
 			},
 		};
 
-		var user = {
+		var account = {
 			gridId: "userGrid",
 			gridTarget: function () {
-				return $("#" + user.gridId).DataTable();
+				return $("#" + account.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+user.gridId).DataTable({
+				$("#"+account.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',               	data: 'id',             	visible: false},
@@ -535,9 +535,9 @@
 						{
 							text: '<i class="fa fa-check-square"></i>',
 							action: function () {
-								var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
-								if(_selectedRows.length > 0) user.gridTarget().rows().deselect();
-								else user.gridTarget().rows().select();
+								var _selectedRows = account.gridTarget().rows({selected: true}).data().toArray();
+								if(_selectedRows.length > 0) account.gridTarget().rows().deselect();
+								else account.gridTarget().rows().select();
 							}
 						},
 						{
@@ -555,13 +555,13 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/user} ]]*/ "",
+					url: /*[[ @{/account} ]]*/ "",
 					callback: {
 						success: function (result) {
 
 							if(result.success) {
-								user.gridTarget().clear().draw();
-								user.gridTarget().rows.add(result.data.list).draw();
+								account.gridTarget().clear().draw();
+								account.gridTarget().rows.add(result.data.list).draw();
 							}
 						},
 						error: function (xhr, status, error) {
@@ -573,7 +573,7 @@
 				});
 			},
 			getSelectedRows: function () {
-				return user.gridTarget().rows({selected: true}).data().toArray();
+				return account.gridTarget().rows({selected: true}).data().toArray();
 			},
 		};
 

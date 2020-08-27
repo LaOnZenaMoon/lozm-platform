@@ -7,7 +7,7 @@ import lozm.object.dto.coupon.GetCouponUserDto;
 import lozm.object.vo.coupon.CouponVo;
 import lozm.entity.coupon.Coupon;
 import lozm.entity.coupon.CouponUser;
-import lozm.entity.user.User;
+import lozm.entity.auth.Account;
 import lozm.repository.coupon.CouponRepository;
 import lozm.repository.coupon.CouponUserRepository;
 import lozm.repository.user.UserRepository;
@@ -17,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @Transactional(readOnly = true)
@@ -93,11 +91,11 @@ public class CouponService {
             GetCouponUserDto dto = GetCouponUserDto.builder()
                     .id(couponUser.getId())
                     .quantity(couponUser.getQuantity())
-                    .userId(couponUser.getUser().getId())
+                    .userId(couponUser.getAccount().getId())
                     .couponId(couponUser.getCoupon().getId())
-                    .userName(couponUser.getUser().getName())
-                    .userIdentifier(couponUser.getUser().getIdentifier())
-                    .userType(couponUser.getUser().getType())
+                    .userName(couponUser.getAccount().getName())
+                    .userIdentifier(couponUser.getAccount().getIdentifier())
+                    .userType(couponUser.getAccount().getType())
                     .build();
             rtnList.add(dto);
         }
@@ -111,7 +109,7 @@ public class CouponService {
         Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "USER_SAVE_NO_COUPON");
 
         //Find the user
-        Optional<User> findUser = userRepository.findById(couponVo.getUserId());
+        Optional<Account> findUser = userRepository.findById(couponVo.getUserId());
         findUser.orElseThrow(() -> {
             throw new ServiceException("USER_0002", "User doesn't exist.");
         });

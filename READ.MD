@@ -41,10 +41,10 @@ sudo docker run -d --name rabbitmq -p 5672:5672 -p 8085:15672 --restart=unless-s
 ## 관리 화면 개발
 => orders
   => orders > 신규(modal)
-    => user 선택
-      => n 명의 user 에게 item 을 order 할 수 있도록? 그러면 n 명의 user 에게 delivery 는 어떻게 할당? 각 user 에게 delivery 가 종속되도록?
-      => 우선 n 명의 user 에게 1 개의 item 이 order 가능하도록 개발
-      => ** user 1 - item 1 - coupon 1 - delivery 1 로 order 가능하도록 개발
+    => account 선택
+      => n 명의 account 에게 item 을 order 할 수 있도록? 그러면 n 명의 account 에게 delivery 는 어떻게 할당? 각 account 에게 delivery 가 종속되도록?
+      => 우선 n 명의 account 에게 1 개의 item 이 order 가능하도록 개발
+      => ** account 1 - item 1 - coupon 1 - delivery 1 로 order 가능하도록 개발
     => store 선택 
     => ** 해당 store 에 대한 item 선택(store detail 에 있는 것처럼 탭으로 분리할 것인지?)
     => coupon 선택
@@ -57,4 +57,4 @@ sudo docker run -d --name rabbitmq -p 5672:5672 -p 8085:15672 --restart=unless-s
   => 현재, 엔티티 관계가 (delivery 1 : orders 1) 로 설정되어있는데, 이것이 맞는 것인지?
   
 ## coupon 관계 정의
-=> 특정 user 가 소유하고 있는 coupon 을 특정 item 에만 사용가능하도록
+=> 특정 account 가 소유하고 있는 coupon 을 특정 item 에만 사용가능하도록

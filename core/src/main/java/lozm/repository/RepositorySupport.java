@@ -3,6 +3,7 @@ package lozm.repository;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lozm.entity.auth.Account;
 import lozm.global.exception.ServiceException;
 import lozm.object.code.ItemType;
 import lozm.entity.delivery.Delivery;
@@ -12,7 +13,6 @@ import lozm.entity.inheritance.Shoes;
 import lozm.entity.inheritance.Top;
 import lozm.entity.item.Item;
 import lozm.entity.orders.Orders;
-import lozm.entity.user.User;
 import lozm.object.vo.item.ItemVo;
 import lozm.object.vo.sign.SignVo;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
@@ -37,15 +37,15 @@ public class RepositorySupport extends QuerydslRepositorySupport {
     private final JPAQueryFactory jpaQueryFactory;
 
     public RepositorySupport(JPAQueryFactory jpaQueryFactory) {
-        super(User.class);
+        super(Account.class);
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
 
-    public List<User> selectUserDetail(SignVo signVo) throws Exception {
+    public List<Account> selectUserDetail(SignVo signVo) throws Exception {
         return jpaQueryFactory
                 .select(Projections.fields(
-                    User.class,
+                    Account.class,
                         user.id,
                         user.name,
                         user.identifier,
@@ -193,10 +193,10 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-    public List<User> selectUserInfoForJwt(SignVo signVo) {
+    public List<Account> selectUserInfoForJwt(SignVo signVo) {
         return jpaQueryFactory
                 .select(Projections.fields(
-                        User.class,
+                        Account.class,
                         user.id,
                         user.name,
                         user.identifier,

@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 @ActiveProfiles("local")
-public class UserBulkInsert {
+public class AccountBulkInsert {
 
     @Autowired
     private MockMvc mockMvc;

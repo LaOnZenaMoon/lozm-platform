@@ -1,10 +1,10 @@
 package lozm.entity.orders;
 
 import lombok.Getter;
+import lozm.entity.auth.Account;
 import lozm.object.code.OrderStatus;
 import lozm.entity.BaseEntity;
 import lozm.entity.delivery.Delivery;
-import lozm.entity.user.User;
 import lozm.object.vo.orders.OrdersVo;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ public class Orders extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    private User user;
+    private Account account;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
     private List<OrdersItem> ordersItems;
@@ -37,10 +37,10 @@ public class Orders extends BaseEntity {
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
-    public void insertOrders(OrdersVo ordersVo, User user, Delivery delivery) {
+    public void insertOrders(OrdersVo ordersVo, Account account, Delivery delivery) {
         this.orderDt = LocalDateTime.now();
         this.status = OrderStatus.PREPARATION;
-        this.user = user;
+        this.account = account;
         this.delivery = delivery;
         this.setBaseEntity(ordersVo.getCreatedBy(), null, 1);
     }

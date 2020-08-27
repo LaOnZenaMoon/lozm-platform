@@ -1,6 +1,7 @@
 package lozm.api.orders;
 
 import lombok.RequiredArgsConstructor;
+import lozm.entity.auth.Account;
 import lozm.global.exception.ServiceException;
 import lozm.object.dto.orders.GetOrdersDto;
 import lozm.entity.delivery.Delivery;
@@ -11,7 +12,6 @@ import lozm.entity.coupon.Coupon;
 import lozm.entity.item.Item;
 import lozm.entity.orders.Orders;
 import lozm.entity.orders.OrdersItem;
-import lozm.entity.user.User;
 import lozm.repository.coupon.CouponRepository;
 import lozm.repository.item.ItemRepository;
 import lozm.repository.orders.OrdersRepository;
@@ -52,10 +52,10 @@ public class OrdersService {
                     .deliveryCity(o.getDelivery().getAddress().getCity())
                     .deliveryStreet(o.getDelivery().getAddress().getStreet())
                     .deliveryEtc(o.getDelivery().getAddress().getEtc())
-                    .userId(o.getUser().getId())
-                    .userName(o.getUser().getName())
-                    .identifier(o.getUser().getIdentifier())
-                    .userType(o.getUser().getType())
+                    .userId(o.getAccount().getId())
+                    .userName(o.getAccount().getName())
+                    .identifier(o.getAccount().getIdentifier())
+                    .userType(o.getAccount().getType())
                     .build();
 
             rtnList.add(dto);
@@ -66,7 +66,7 @@ public class OrdersService {
 
     @Transactional
     public void save(OrdersVo ordersVo) throws Exception {
-        Optional<User> findUser = findUser(ordersVo.getUserId());
+        Optional<Account> findUser = findUser(ordersVo.getUserId());
         Optional<Item> findItem = findItem(ordersVo.getItemId());
         Optional<Delivery> findDelivery = findDelivery(ordersVo.getDeliveryId());
 
@@ -137,8 +137,8 @@ public class OrdersService {
         return findItem;
     }
 
-    private Optional<User> findUser(Long userId) {
-        Optional<User> findUser = userRepository.findById(userId);
+    private Optional<Account> findUser(Long userId) {
+        Optional<Account> findUser = userRepository.findById(userId);
         findUser.orElseThrow(() -> {
             throw new ServiceException("ORDERS_SAVE_USER", "User doesn't exist.");
         });

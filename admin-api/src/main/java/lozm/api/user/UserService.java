@@ -1,7 +1,7 @@
 package lozm.api.user;
 
 import lombok.RequiredArgsConstructor;
-import lozm.entity.user.User;
+import lozm.entity.auth.Account;
 import lozm.global.exception.ServiceException;
 import lozm.object.dto.user.GetUserDto;
 import lozm.object.vo.user.UserVo;
@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -23,15 +22,15 @@ public class UserService {
 
 
     public List<GetUserDto> getUserList() throws Exception {
-        List<User> userList = userRepository.selectUserList();
+        List<Account> accountList = userRepository.selectUserList();
         List<GetUserDto> rtnList = new ArrayList<>();
-        for (User user : userList) {
+        for (Account account : accountList) {
             GetUserDto dto = GetUserDto.builder()
-                    .id(user.getId())
-                    .name(user.getName())
-                    .identifier(user.getIdentifier())
+                    .id(account.getId())
+                    .name(account.getName())
+                    .identifier(account.getIdentifier())
                     .password(null)
-                    .type(user.getType())
+                    .type(account.getType())
                     .build();
 
             rtnList.add(dto);
@@ -42,30 +41,30 @@ public class UserService {
 
     @Transactional
     public void save(UserVo userVo) throws Exception {
-        User user = new User();
-        user.insertUser(userVo);
+        Account account = new Account();
+        account.insertUser(userVo);
 
         //1. check ID duplicated
-        List<User> findUsersIdDuplicated = userRepository.findByIdentifier(user.getIdentifier());
+        List<Account> findUsersIdDuplicated = userRepository.findByIdentifier(account.getIdentifier());
         if(findUsersIdDuplicated.size() > 0) throw new ServiceException("USER_0001", "User Identifier is duplicated.");
 
-        userRepository.save(user);
+        userRepository.save(account);
     }
 
     @Transactional
     public void update(UserVo userVo) throws Exception {
-        Optional<User> findUser = findUser(userVo.getId());
+        Optional<Account> findUser = findUser(userVo.getId());
         findUser.get().updateUser(userVo);
     }
 
     @Transactional
     public void delete(UserVo userVo) throws Exception {
-        Optional<User> findUser = findUser(userVo.getId());
+        Optional<Account> findUser = findUser(userVo.getId());
         findUser.get().deleteUser(userVo);
     }
 
-    private Optional<User> findUser(Long userId) {
-        Optional<User> findUser = userRepository.findById(userId);
+    private Optional<Account> findUser(Long userId) {
+        Optional<Account> findUser = userRepository.findById(userId);
         findUser.orElseThrow(() -> {
             throw new ServiceException("USER_0002", "User doesn't exist.");
         });

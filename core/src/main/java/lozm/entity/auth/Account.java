@@ -1,4 +1,4 @@
-package lozm.entity.user;
+package lozm.entity.auth;
 
 import lombok.Getter;
 import lozm.entity.orders.Orders;
@@ -14,12 +14,12 @@ import java.util.List;
 
 
 @Entity
-@Table(schema = "LOZM", name = "USERS")
+@Table(schema = "LOZM", name = "ACCOUNT")
 @Getter
-public class User extends BaseEntity {
+public class Account extends BaseEntity {
 
     @Id @GeneratedValue
-    @Column(name = "USER_ID")
+    @Column(name = "ACCOUNT_ID")
     private Long id;
 
     @Column(name = "NAME")
@@ -39,6 +39,12 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<CouponUser> couponUsers;
+
+
+//    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+//    @JoinTable(name = "account_roles", joinColumns = { @JoinColumn(name = "account_id") }, inverseJoinColumns = {
+//            @JoinColumn(name = "role_id") })
+//    private Set<Role> userRoles = new HashSet<>();
 
 
     public void insertUser(UserVo userVo) {

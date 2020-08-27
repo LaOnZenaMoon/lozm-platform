@@ -2,7 +2,7 @@ package lozm.entity.coupon;
 
 import lombok.Getter;
 import lozm.entity.BaseEntity;
-import lozm.entity.user.User;
+import lozm.entity.auth.Account;
 import lozm.object.vo.coupon.CouponVo;
 
 import javax.persistence.*;
@@ -26,13 +26,13 @@ public class CouponUser extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
-    private User user;
+    private Account account;
 
-    public void insertCouponUser(Long couponQuantity, Coupon coupon, User user) {
+    public void insertCouponUser(Long couponQuantity, Coupon coupon, Account account) {
         this.quantity = couponQuantity;
         this.coupon = coupon;
-        this.user = user;
-        this.setBaseEntity(user.getId(), null, 1);
+        this.account = account;
+        this.setBaseEntity(account.getId(), null, 1);
     }
 
     public void updateCouponUser(CouponVo couponVo) {

@@ -50,7 +50,7 @@
 
 								<label for="post_user">User</label>
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_user" readonly name="user">
+									<input type="text" class="form-control" id="post_user" readonly name="account">
 									<div class="input-group-append">
 										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>
 									</div>
@@ -147,7 +147,7 @@
 
 <!--								<label for="put_user">User</label>-->
 <!--								<div class="input-group mb-3">-->
-<!--									<input type="text" class="form-control" id="put_user" readonly name="user">-->
+<!--									<input type="text" class="form-control" id="put_user" readonly name="account">-->
 <!--									<div class="input-group-append">-->
 <!--										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>-->
 <!--									</div>-->
@@ -244,7 +244,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="user.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
+						<button type="submit" class="btn btn-success" onclick="account.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
 					</div>
 
 				</div>
@@ -307,7 +307,7 @@
 												<a class="nav-link active" data-toggle="tab" href="#outer" onclick="item.getGridData(item.type.outer)"><i class="icon-home"></i> <span class="hidden-xs">Outer</span></a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" data-toggle="tab" href="#top" onclick="item.getGridData(item.type.top)"><i class="icon-user"></i> <span class="hidden-xs">Top</span></a>
+												<a class="nav-link" data-toggle="tab" href="#top" onclick="item.getGridData(item.type.top)"><i class="icon-account"></i> <span class="hidden-xs">Top</span></a>
 											</li>
 											<li class="nav-item">
 												<a class="nav-link" data-toggle="tab" href="#bottom" onclick="item.getGridData(item.type.bottom)"><i class="icon-envelope-open"></i> <span class="hidden-xs">Bottom</span></a>
@@ -491,8 +491,8 @@
 			orders.initGrid();
 			orders.getGridData();
 
-			user.initGrid();
-			user.getGridData();
+			account.initGrid();
+			account.getGridData();
 
 			store.initGrid();
 			store.getGridData();
@@ -513,7 +513,7 @@
 					orders.post();
 				},
 				rules: {
-					user: {
+					account: {
 						required: true
 					},
 					store: {
@@ -539,7 +539,7 @@
 					orders.put();
 				},
 				rules: {
-					user: {
+					account: {
 						required: true
 					},
 					store: {
@@ -739,13 +739,13 @@
 			},
 		};
 
-		var user = {
+		var account = {
 			gridId: "userGrid",
 			gridTarget: function () {
-				return $("#" + user.gridId).DataTable();
+				return $("#" + account.gridId).DataTable();
 			},
 			initGrid: function () {
-				$("#"+user.gridId).DataTable({
+				$("#"+account.gridId).DataTable({
 					dom: 'Bftrip',
 					columns: [
 						{title: 'id',               	data: 'id',             	visible: false},
@@ -764,12 +764,12 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/user} ]]*/ "",
+					url: /*[[ @{/account} ]]*/ "",
 					callback: {
 						success: function (result) {
 							if(result.success) {
-								user.gridTarget().clear().draw();
-								user.gridTarget().rows.add(result.data.list).draw();
+								account.gridTarget().clear().draw();
+								account.gridTarget().rows.add(result.data.list).draw();
 							}
 						},
 						error: function (xhr, status, error) {
@@ -781,7 +781,7 @@
 				});
 			},
 			setInput: function () {
-				var _selectedRows = user.gridTarget().rows({selected: true}).data().toArray();
+				var _selectedRows = account.gridTarget().rows({selected: true}).data().toArray();
 				var _target = _selectedRows[0];
 
 				$("#post_user_id").val(_target.id);

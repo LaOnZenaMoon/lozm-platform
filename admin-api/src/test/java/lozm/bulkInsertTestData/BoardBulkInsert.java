@@ -2,11 +2,11 @@ package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lozm.api.user.UserService;
+import lozm.api.auth.AuthService;
 import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
 import lozm.object.dto.board.PostBoardDto;
-import lozm.object.dto.user.GetUserDto;
+import lozm.object.dto.auth.AccountGetDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +34,16 @@ public class BoardBulkInsert {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private UserService userService;
+    private AuthService userService;
 
 
     @Test
     public void setBoard() throws Exception {
-        List<GetUserDto> userList = userService.getUserList();
+        List<AccountGetDto> userList = userService.getUserList();
 
         try {
             for (int i = 0; i <2000 ; i++) {
-                GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                AccountGetDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                 postBoard(getUser);
             }
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class BoardBulkInsert {
         }
     }
 
-    private void postBoard(GetUserDto getUser) throws Exception {
+    private void postBoard(AccountGetDto getUser) throws Exception {
         Faker faker = new Faker();
         String[] boardTypeArr = {
                 BoardType.NEWS.name(), BoardType.MAGAZINE.name(),

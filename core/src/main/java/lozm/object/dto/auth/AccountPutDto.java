@@ -1,4 +1,4 @@
-package lozm.object.dto.user;
+package lozm.object.dto.auth;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotNull;
 
-public class PutUserDto {
+public class AccountPutDto {
 
     @Getter
     public static class Request extends BaseUserDto {

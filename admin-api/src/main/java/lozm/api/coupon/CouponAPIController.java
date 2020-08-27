@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.coupon.*;
-import lozm.object.dto.user.GetUserDto;
+import lozm.object.dto.auth.AccountGetDto;
 import lozm.object.vo.coupon.CouponVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -107,7 +107,7 @@ public class CouponAPIController {
 
     @PostMapping(value = "/user")
     public ApiResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) throws Exception {
-        for (GetUserDto dto : reqDto.getUserList()) {
+        for (AccountGetDto dto : reqDto.getUserList()) {
             CouponVo couponVo = CouponVo.builder()
                     .id(reqDto.getCouponId())
                     .userId(dto.getId())

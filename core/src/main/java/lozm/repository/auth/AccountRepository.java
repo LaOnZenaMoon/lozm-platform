@@ -13,6 +13,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
     List<Account> findByIdentifier(@Param("identifier") String identifier);
 
     @Query("SELECT U FROM Account U WHERE U.flag = 1")
-    List<Account> selectUserList();
+    List<Account> selectAccountList();
 
 }

@@ -1,39 +1,39 @@
-package lozm.api.user;
+package lozm.api.auth;
 
 import lombok.RequiredArgsConstructor;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
-import lozm.object.dto.user.DeleteUserDto;
-import lozm.object.dto.user.GetUserDto;
-import lozm.object.dto.user.PostUserDto;
-import lozm.object.dto.user.PutUserDto;
-import lozm.object.vo.user.UserVo;
+import lozm.object.dto.auth.AccountDeleteDto;
+import lozm.object.dto.auth.AccountGetDto;
+import lozm.object.dto.auth.AccountPostDto;
+import lozm.object.dto.auth.AccountPutDto;
+import lozm.object.vo.auth.AccountVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = "/api/auth")
 @RestController
 @RequiredArgsConstructor
-public class UserAPIController {
+public class AuthAPIController {
 
-    private final UserService userService;
+    private final AuthService authService;
 
 
     @GetMapping()
-    public ApiResponseDto getUser() throws Exception {
-        List<GetUserDto> result = userService.getUserList();
+    public ApiResponseDto getAccount() throws Exception {
+        List<AccountGetDto> result = authService.getAccountList();
 
-        GetUserDto.Response resDto = new GetUserDto.Response();
+        AccountGetDto.Response resDto = new AccountGetDto.Response();
         resDto.setList(result);
 
         return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
     @PostMapping
-    public ApiResponseDto postUser(@RequestBody @Valid PostUserDto.Request reqDto) throws Exception {
-        UserVo userVo = UserVo.builder()
+    public ApiResponseDto postAccount(@RequestBody @Valid AccountPostDto.Request reqDto) throws Exception {
+        AccountVo userVo = AccountVo.builder()
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
                 .password(reqDto.getPassword())
@@ -41,14 +41,14 @@ public class UserAPIController {
                 .createdBy(reqDto.getCreatedBy())
                 .build();
 
-        userService.save(userVo);
+        authService.save(userVo);
 
         return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @PutMapping
-    public ApiResponseDto putUser(@RequestBody @Valid PutUserDto.Request reqDto) throws Exception {
-        UserVo userVo = UserVo.builder()
+    public ApiResponseDto putAccount(@RequestBody @Valid AccountPutDto.Request reqDto) throws Exception {
+        AccountVo userVo = AccountVo.builder()
                 .id(reqDto.getId())
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
@@ -57,20 +57,20 @@ public class UserAPIController {
                 .modifiedBy(reqDto.getModifiedBy())
                 .build();
 
-        userService.update(userVo);
+        authService.update(userVo);
 
         return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteUser(@RequestBody @Valid DeleteUserDto.Request reqDto) throws Exception {
-        for(DeleteUserDto dto : reqDto.getList()) {
-            UserVo userVo = UserVo.builder()
+    public ApiResponseDto deleteAccount(@RequestBody @Valid AccountDeleteDto.Request reqDto) throws Exception {
+        for(AccountDeleteDto dto : reqDto.getList()) {
+            AccountVo userVo = AccountVo.builder()
                     .id(dto.getId())
                     .modifiedBy(reqDto.getModifiedBy())
                     .build();
 
-            userService.delete(userVo);
+            authService.delete(userVo);
         }
 
         return ApiResponseDto.createException(ApiResponseCode.OK, null);

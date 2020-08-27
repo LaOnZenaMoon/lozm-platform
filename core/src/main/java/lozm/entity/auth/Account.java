@@ -5,7 +5,7 @@ import lozm.entity.orders.Orders;
 import lozm.object.code.AccountType;
 import lozm.entity.BaseEntity;
 import lozm.entity.coupon.CouponUser;
-import lozm.object.vo.user.UserVo;
+import lozm.object.vo.auth.AccountVo;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -44,26 +44,26 @@ public class Account extends BaseEntity {
     private List<AccountRole> accountRoles;
 
 
-    public void insertUser(UserVo userVo) {
-        this.name = userVo.getName();
-        this.identifier = userVo.getIdentifier();
-        this.password = userVo.getPassword();
-        this.type = AccountType.valueOf(userVo.getType());
-        this.setBaseEntity(userVo.getCreatedBy(), null, 1);
+    public void insertAccount(AccountVo accountVo) {
+        this.name = accountVo.getName();
+        this.identifier = accountVo.getIdentifier();
+        this.password = accountVo.getPassword();
+        this.type = AccountType.valueOf(accountVo.getType());
+        this.setBaseEntity(accountVo.getCreatedBy(), null, 1);
     }
 
-    public void updateUser(UserVo userVo) {
-        this.name = userVo.getName();
-        this.identifier = userVo.getIdentifier();
-        if(!StringUtils.isEmpty(userVo.getPassword())) {
-            this.password = userVo.getPassword();
+    public void updateAccount(AccountVo accountVo) {
+        this.name = accountVo.getName();
+        this.identifier = accountVo.getIdentifier();
+        if(!StringUtils.isEmpty(accountVo.getPassword())) {
+            this.password = accountVo.getPassword();
         }
-        this.type = StringUtils.isEmpty(userVo.getType()) ? null : AccountType.valueOf(userVo.getType());
-        this.setBaseEntity(null, userVo.getModifiedBy(), 1);
+        this.type = StringUtils.isEmpty(accountVo.getType()) ? null : AccountType.valueOf(accountVo.getType());
+        this.setBaseEntity(null, accountVo.getModifiedBy(), 1);
     }
 
-    public void deleteUser(UserVo userVo) {
-        this.setBaseEntity(null, userVo.getModifiedBy(), 0);
+    public void deleteAccount(AccountVo accountVo) {
+        this.setBaseEntity(null, accountVo.getModifiedBy(), 0);
     }
 
 }

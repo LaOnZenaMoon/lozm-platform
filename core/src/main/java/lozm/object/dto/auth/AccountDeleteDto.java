@@ -1,4 +1,4 @@
-package lozm.object.dto.user;
+package lozm.object.dto.auth;
 
 import lombok.Getter;
 import lozm.object.dto.BaseUserDto;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class DeleteUserDto {
+public class AccountDeleteDto {
 
     private Long id;
     private String name;
@@ -20,7 +20,7 @@ public class DeleteUserDto {
     @Getter
     public static class Request extends BaseUserDto {
         @Size(min = 1)
-        private List<DeleteUserDto> list = new ArrayList<>();
+        private List<AccountDeleteDto> list = new ArrayList<>();
     }
 
 }

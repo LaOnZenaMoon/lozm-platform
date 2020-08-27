@@ -1,4 +1,4 @@
-package lozm.object.dto.user;
+package lozm.object.dto.auth;
 
 import lombok.*;
 import lozm.object.code.AccountType;
@@ -6,11 +6,9 @@ import lozm.object.code.AccountType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class GetUserDto {
+@Getter @Builder
+@NoArgsConstructor @AllArgsConstructor
+public class AccountGetDto {
 
     private Long id;
     private String name;
@@ -19,10 +17,9 @@ public class GetUserDto {
     private AccountType type;
 
 
-    @Getter
-    @Setter
+    @Getter @Setter
     public static class Response {
-        List<GetUserDto> list = new ArrayList<>();
+        List<AccountGetDto> list = new ArrayList<>();
     }
 
 }

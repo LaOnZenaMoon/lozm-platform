@@ -1,4 +1,4 @@
-package lozm.object.vo.user;
+package lozm.object.vo.auth;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lozm.object.vo.BaseVo;
 import java.time.LocalDateTime;
 
 @Getter
-public class UserVo extends BaseVo {
+public class AccountVo extends BaseVo {
 
     private Long id;
     private String name;
@@ -18,7 +18,7 @@ public class UserVo extends BaseVo {
 
 
     @Builder
-    public UserVo(LocalDateTime createdDt, LocalDateTime modifiedDt, Long createdBy, Long modifiedBy, int flag, Long id, String name, String identifier, String password, String type, int flag1) {
+    public AccountVo(LocalDateTime createdDt, LocalDateTime modifiedDt, Long createdBy, Long modifiedBy, int flag, Long id, String name, String identifier, String password, String type, int flag1) {
         super(createdDt, modifiedDt, createdBy, modifiedBy, flag);
         this.id = id;
         this.name = name;

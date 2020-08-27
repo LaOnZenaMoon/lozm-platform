@@ -1,4 +1,4 @@
-package lozm.object.dto.user;
+package lozm.object.dto.auth;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import lozm.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 
-public class PostUserDto {
+public class AccountPostDto {
 
     @Getter
     public static class Request extends BaseUserDto {
@@ -24,7 +24,7 @@ public class PostUserDto {
         private String type;
 
         public static Request setRequestTestData(String name, String identifier) {
-            PostUserDto.Request reqDto = new PostUserDto.Request();
+            AccountPostDto.Request reqDto = new AccountPostDto.Request();
             reqDto.name = name;
             reqDto.identifier = identifier;
             reqDto.password = "asdf1234";

@@ -2,5 +2,5 @@ rootProject.name = 'platform'
 include 'admin-api'
 include 'chatting-api'
 include 'core'
-include 'gateway-server'
+include 'authentication-server'
 

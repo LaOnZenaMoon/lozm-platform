@@ -1,4 +1,4 @@
-package lozm.bulkInsertTestData;
+package lozm.bulkInsert;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;

@@ -3,12 +3,12 @@ package lozm.bulkInsertTestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lozm.api.board.BoardService;
-import lozm.api.user.UserService;
+import lozm.api.auth.AuthService;
 import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
 import lozm.object.dto.board.GetBoardDto;
 import lozm.object.dto.board.PostCommentDto;
-import lozm.object.dto.user.GetUserDto;
+import lozm.object.dto.auth.AccountGetDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class CommentBulkInsert {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private UserService userService;
+    private AuthService userService;
 
     @Autowired
     private BoardService boardService;
@@ -50,7 +50,7 @@ public class CommentBulkInsert {
                 BoardType.SPORTS.name()
         };
 
-        List<GetUserDto> userList = userService.getUserList();
+        List<AccountGetDto> userList = userService.getUserList();
         List<GetBoardDto> newsList = boardService.getBoardList(boardTypeArr[0]);
         List<GetBoardDto> magazineList = boardService.getBoardList(boardTypeArr[1]);
         List<GetBoardDto> diaryList = boardService.getBoardList(boardTypeArr[2]);
@@ -61,7 +61,7 @@ public class CommentBulkInsert {
             for (int i = 0; i <newsList.size() ; i++) {
                 int size = ThreadLocalRandom.current().nextInt(0, 10);
                 for (int j = 0; j <size; j++) {
-                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    AccountGetDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                     postComment(getUser, newsList.get(i));
                 }
             }
@@ -69,7 +69,7 @@ public class CommentBulkInsert {
             for (int i = 0; i <magazineList.size() ; i++) {
                 int size = ThreadLocalRandom.current().nextInt(0, 10);
                 for (int j = 0; j <size; j++) {
-                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    AccountGetDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                     postComment(getUser, magazineList.get(i));
                 }
             }
@@ -77,7 +77,7 @@ public class CommentBulkInsert {
             for (int i = 0; i <diaryList.size() ; i++) {
                 int size = ThreadLocalRandom.current().nextInt(0, 10);
                 for (int j = 0; j <size; j++) {
-                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    AccountGetDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                     postComment(getUser, diaryList.get(i));
                 }
             }
@@ -85,7 +85,7 @@ public class CommentBulkInsert {
             for (int i = 0; i <freeContentsList.size() ; i++) {
                 int size = ThreadLocalRandom.current().nextInt(0, 10);
                 for (int j = 0; j <size; j++) {
-                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    AccountGetDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                     postComment(getUser, freeContentsList.get(i));
                 }
             }
@@ -93,7 +93,7 @@ public class CommentBulkInsert {
             for (int i = 0; i <sportsList.size() ; i++) {
                 int size = ThreadLocalRandom.current().nextInt(0, 10);
                 for (int j = 0; j <size; j++) {
-                    GetUserDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
+                    AccountGetDto getUser = userList.get(ThreadLocalRandom.current().nextInt(0, userList.size()));
                     postComment(getUser, sportsList.get(i));
                 }
             }
@@ -102,7 +102,7 @@ public class CommentBulkInsert {
         }
     }
 
-    private void postComment(GetUserDto getUser, GetBoardDto getBoardDto) throws Exception {
+    private void postComment(AccountGetDto getUser, GetBoardDto getBoardDto) throws Exception {
         Faker faker = new Faker();
         String[] contentTypeArr = {ContentType.GENERAL.name(), ContentType.NOTICE.name(), ContentType.EVENT.name()};
         String contentType = contentTypeArr[ThreadLocalRandom.current().nextInt(0, 2)];

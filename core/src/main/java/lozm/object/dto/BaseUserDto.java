@@ -1,7 +1,6 @@
 package lozm.object.dto;
 
 import lombok.Getter;
-import lozm.object.code.UsersType;
 import org.springframework.util.ObjectUtils;
 
 @Getter

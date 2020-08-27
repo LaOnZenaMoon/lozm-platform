@@ -2,7 +2,7 @@ package lozm.object.dto.orders;
 
 import lombok.*;
 import lozm.object.code.OrderStatus;
-import lozm.object.code.UsersType;
+import lozm.object.code.AccountType;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class GetOrdersDto {
     private Long userId;
     private String userName;
     private String identifier;
-    private UsersType userType;
+    private AccountType userType;
 
 
     @Getter

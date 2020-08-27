@@ -1,7 +1,7 @@
 package lozm.object.dto.user;
 
 import lombok.*;
-import lozm.object.code.UsersType;
+import lozm.object.code.AccountType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class GetUserDto {
     private String name;
     private String identifier;
     private String password;
-    private UsersType type;
+    private AccountType type;
 
 
     @Getter

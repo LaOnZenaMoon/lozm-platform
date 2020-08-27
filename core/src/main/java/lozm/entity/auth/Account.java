@@ -2,7 +2,7 @@ package lozm.entity.auth;
 
 import lombok.Getter;
 import lozm.entity.orders.Orders;
-import lozm.object.code.UsersType;
+import lozm.object.code.AccountType;
 import lozm.entity.BaseEntity;
 import lozm.entity.coupon.CouponUser;
 import lozm.object.vo.user.UserVo;
@@ -32,26 +32,23 @@ public class Account extends BaseEntity {
     private String password;
 
     @Column(name = "TYPE")
-    private UsersType type;
+    private AccountType type;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "account")
     private List<Orders> orders;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "account")
     private List<CouponUser> couponUsers;
 
-
-//    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
-//    @JoinTable(name = "account_roles", joinColumns = { @JoinColumn(name = "account_id") }, inverseJoinColumns = {
-//            @JoinColumn(name = "role_id") })
-//    private Set<Role> userRoles = new HashSet<>();
+    @OneToMany(mappedBy = "account")
+    private List<AccountRole> accountRoles;
 
 
     public void insertUser(UserVo userVo) {
         this.name = userVo.getName();
         this.identifier = userVo.getIdentifier();
         this.password = userVo.getPassword();
-        this.type = UsersType.valueOf(userVo.getType());
+        this.type = AccountType.valueOf(userVo.getType());
         this.setBaseEntity(userVo.getCreatedBy(), null, 1);
     }
 
@@ -61,7 +58,7 @@ public class Account extends BaseEntity {
         if(!StringUtils.isEmpty(userVo.getPassword())) {
             this.password = userVo.getPassword();
         }
-        this.type = StringUtils.isEmpty(userVo.getType()) ? null : UsersType.valueOf(userVo.getType());
+        this.type = StringUtils.isEmpty(userVo.getType()) ? null : AccountType.valueOf(userVo.getType());
         this.setBaseEntity(null, userVo.getModifiedBy(), 1);
     }
 

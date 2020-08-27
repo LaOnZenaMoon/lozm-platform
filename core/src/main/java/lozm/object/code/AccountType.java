@@ -1,6 +1,6 @@
 package lozm.object.code;
 
-public enum UsersType {
+public enum AccountType {
     ADMIN
     , USER
     , API_SYSTEM

@@ -1,7 +1,7 @@
 package lozm.object.vo.sign;
 
 import lombok.*;
-import lozm.object.code.UsersType;
+import lozm.object.code.AccountType;
 import lozm.object.vo.BaseVo;
 
 import java.io.Serializable;
@@ -16,12 +16,12 @@ public class SignVo extends BaseVo implements Serializable {
     private String name;
     private String identifier;
     private String password;
-    private UsersType type;
+    private AccountType type;
     @Setter
     private String token;
 
     @Builder
-    public SignVo(LocalDateTime createdDt, LocalDateTime modifiedDt, Long createdBy, Long modifiedBy, int flag, Long id, String name, String identifier, String password, UsersType type, String token) {
+    public SignVo(LocalDateTime createdDt, LocalDateTime modifiedDt, Long createdBy, Long modifiedBy, int flag, Long id, String name, String identifier, String password, AccountType type, String token) {
         super(createdDt, modifiedDt, createdBy, modifiedBy, flag);
         this.id = id;
         this.name = name;

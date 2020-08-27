@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity @Table(schema = "LOZM", name = "ROLE")
 @Getter @Builder
@@ -20,11 +21,10 @@ public class Role implements Serializable {
     @Column(name = "DESC")
     private String description;
 
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roleSet")
-//    @OrderBy("ordernum desc")
-//    private Set<Resources> resourcesSet = new LinkedHashSet<>();
-//
-//    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userRoles")
-//    private Set<Account> accounts = new HashSet<>();
+    @OneToMany(mappedBy = "role")
+    private List<AccountRole> accountRoles;
+
+    @OneToMany(mappedBy = "role")
+    private List<ResourcesRole> resourcesRoles;
 
 }

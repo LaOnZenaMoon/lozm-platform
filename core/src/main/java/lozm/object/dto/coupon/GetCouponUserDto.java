@@ -1,7 +1,7 @@
 package lozm.object.dto.coupon;
 
 import lombok.*;
-import lozm.object.code.UsersType;
+import lozm.object.code.AccountType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class GetCouponUserDto {
     private Long couponId;
     private String userName;
     private String userIdentifier;
-    private UsersType userType;
+    private AccountType userType;
 
 
     @Getter

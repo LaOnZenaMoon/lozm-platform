@@ -25,7 +25,7 @@ public class CouponUser extends BaseEntity {
     private Coupon coupon;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
     public void insertCouponUser(Long couponQuantity, Coupon coupon, Account account) {

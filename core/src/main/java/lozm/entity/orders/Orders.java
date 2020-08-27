@@ -27,7 +27,7 @@ public class Orders extends BaseEntity {
     private OrderStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "ACCOUNT_ID")
     private Account account;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)

@@ -1,12 +1,2 @@
-spring:
-  datasource:
-    driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@//127.0.0.1:1521/XE
-    username: system
-    password: oracle
-    testQuery: "SELECT 1 FROM DUAL"
-    hikari:
-      maximum-pool-size: 5
-
 admin-api:
   url: http://127.0.0.1:8082

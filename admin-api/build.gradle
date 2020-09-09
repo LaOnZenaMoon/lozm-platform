@@ -7,7 +7,7 @@ jar { enabled = true }
 
 dependencies {
     compile project(':core')
-    compile files('../libs/ojdbc6.jar')
+    compile 'mysql:mysql-connector-java'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.hateoas:spring-hateoas'

@@ -1,23 +1,62 @@
+server:
+  port: 8081
+
 spring:
+  application:
+    name: chatting-api
+
   profiles:
     active: local
 
-server:
-  port: 8083
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306
+    username: junlee
+    password: password
+    testQuery: "SELECT 1"
+    hikari:
+      maximum-pool-size: 5
 
-chatting:
-  topic_removal_time: 10
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      #      ddl-auto: create-drop
+      ddl-auto: create
+    #      ddl-auto: update
 
-rabbitmq:
-  setting:
-    url: http://127.0.0.1:8084/lozm-chat
-    relay_host: 127.0.0.1
-    relay_port: 30000
-    client_id: lozm
-    client_password: lozm
-    guest_id: guest
+    properties:
+      hibernate:
+        default_batch_fetch_size: 500
+        jdbc:
+          batch_size: 100
+          order_inserts: true
 
+      format_sql: true
 
-  topic:
-    consultant_list: /topic/consultant/list
-    consultant_status: /topic/consultant/status
+  output:
+    ansi:
+      enabled: always
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 200MB
+      max-request-size: 215MB
+
+  mvc:
+    contentnegotiation:
+      favor-parameter: true
+      media-types:
+        xls: application/vnd.ms-excel
+
+logging:
+  level:
+    root: info
+    lozm: debug
+    org.springframework.web.filter.CommonsRequestLoggingFilter: debug
+
+image:
+  uploadPath: ./image/upload
+  width: 160
+  height: 160
+  defaultUserImage: user2-160x160.jpg

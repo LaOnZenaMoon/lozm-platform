@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(schema = "LOZM", name = "ITEM")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type")
 @Getter
 public class Item extends BaseEntity {

@@ -23,12 +23,10 @@ import java.util.List;
 
 import static lozm.object.code.SessionType.USER;
 
-@RequestMapping("/pages")
-@Controller
+@Controller @RequestMapping("/pages")
 @RequiredArgsConstructor
 public class RouteController {
 
-    private final HttpSession httpSession;
     private final RouteService routeService;
     private final BoardAPIService boardAPIService;
 

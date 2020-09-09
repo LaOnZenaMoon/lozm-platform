@@ -17,29 +17,9 @@
         </encoder>
     </appender>
 
-<!--    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
-<!--        <destination>10.110.50.66:4560</destination>-->
-
-<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />-->
-<!--    </appender>-->
-
-<!--    <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-<!--        <File>${LOG_PATH}/${APPLICATION_LOG_FILE_NAME}-json.log</File>-->
-<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>-->
-<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-<!--            <FileNamePattern>${LOG_PATH}/${APPLICATION_LOG_FILE_NAME}_%d{yyyy-MM-dd}.%i.json</FileNamePattern>-->
-<!--            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
-<!--                <maxFileSize>5MB</maxFileSize>-->
-<!--            </timeBasedFileNamingAndTriggeringPolicy>-->
-<!--            <maxHistory>30</maxHistory>-->
-<!--        </rollingPolicy>-->
-<!--    </appender>-->
-
     <springProfile name="local">
         <root level="${LOG_LEVEL}">
             <appender-ref ref="CONSOLE"/>
-<!--            <appender-ref ref="JSON_FILE"/>-->
-<!--            <appender-ref ref="LOGSTASH"/>-->
         </root>
     </springProfile>
 

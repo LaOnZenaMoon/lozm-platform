@@ -21,7 +21,7 @@ public class AuthAPIController {
     private final AuthService authService;
 
 
-    @GetMapping()
+    @GetMapping("/account")
     public ApiResponseDto getAccount() throws Exception {
         List<AccountGetDto> result = authService.getAccountList();
 
@@ -31,7 +31,7 @@ public class AuthAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }
 
-    @PostMapping
+    @PostMapping("/account")
     public ApiResponseDto postAccount(@RequestBody @Valid AccountPostDto.Request reqDto) throws Exception {
         AccountVo userVo = AccountVo.builder()
                 .name(reqDto.getName())
@@ -46,7 +46,7 @@ public class AuthAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
-    @PutMapping
+    @PutMapping("/account")
     public ApiResponseDto putAccount(@RequestBody @Valid AccountPutDto.Request reqDto) throws Exception {
         AccountVo userVo = AccountVo.builder()
                 .id(reqDto.getId())
@@ -62,7 +62,7 @@ public class AuthAPIController {
         return ApiResponseDto.createException(ApiResponseCode.OK, null);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/account")
     public ApiResponseDto deleteAccount(@RequestBody @Valid AccountDeleteDto.Request reqDto) throws Exception {
         for(AccountDeleteDto dto : reqDto.getList()) {
             AccountVo userVo = AccountVo.builder()

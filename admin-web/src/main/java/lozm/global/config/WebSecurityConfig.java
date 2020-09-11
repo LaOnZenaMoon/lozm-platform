@@ -92,14 +92,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .maximumSessions(1)
                 .maxSessionsPreventsLogin(true)
-                .expiredUrl("/sign/in")
-                ;
-
+                .expiredUrl("/sign/in");
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.authorizeRequests()
-                .antMatchers("/", "/sign/in", "/api/sign/in").permitAll()
+                .antMatchers("/", "/sign/in", "/api/sign/in", "/api/user").permitAll()
                 .antMatchers("/libs/**", "/script/**", "/images/**", "/error/**" ,"/pages/**").permitAll()
                 .anyRequest().authenticated();
 

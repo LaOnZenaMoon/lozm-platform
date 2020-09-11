@@ -13,8 +13,7 @@ import java.util.List;
 
 
 
-@Entity
-@Table(schema = "LOZM", name = "USERS")
+@Entity @Table(schema = "LOZM", name = "USERS")
 @Getter
 public class User extends BaseEntity {
 

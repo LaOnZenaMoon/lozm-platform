@@ -8,10 +8,13 @@ import lozm.object.dto.user.GetUserDto;
 import lozm.object.dto.user.PostUserDto;
 import lozm.object.dto.user.PutUserDto;
 import lozm.object.vo.user.UserVo;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @RequestMapping(value = "/api/user")
 @RestController
@@ -19,6 +22,7 @@ import java.util.List;
 public class UserAPIController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
 
     @GetMapping()
@@ -36,7 +40,7 @@ public class UserAPIController {
         UserVo userVo = UserVo.builder()
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
-                .password(reqDto.getPassword())
+                .password(passwordEncoder.encode(reqDto.getPassword()))
                 .type(reqDto.getType())
                 .createdBy(reqDto.getCreatedBy())
                 .build();
@@ -52,7 +56,7 @@ public class UserAPIController {
                 .id(reqDto.getId())
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
-                .password(reqDto.getPassword())
+                .password(isEmpty(reqDto.getPassword()) ? null : passwordEncoder.encode(reqDto.getPassword()))
                 .type(reqDto.getType())
                 .modifiedBy(reqDto.getModifiedBy())
                 .build();

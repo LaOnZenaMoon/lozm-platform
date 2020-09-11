@@ -98,12 +98,12 @@
 
         ajaxOptions.error = function(xhr, status, error) {
             if (options.callback.error) {
-                alertFail();
                 options.callback.error(xhr, status, error);
             }
         };
 
         ajaxOptions.complete = function() {
+            debugger;
             hideLoadingBar();
 
             if (options.callback.complete) {

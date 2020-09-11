@@ -8,31 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>LOZM Platform - Admin</title>
-    <!-- favicon -->
-<!--    <link rel="icon" type="image/x-icon" href="/images/favicon.ico}"/>-->
 
-    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/bootstrap.min.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/font-awesome/css/font-awesome.css}" />
-
-    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/animate.css}" />
-    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/style.css}" />
-
-    <script th:src="@{/libs/inspinia/js/jquery-3.1.1.min.js}"></script>
-    <script th:src="@{/libs/inspinia/js/plugins/validate/jquery.validate.min.js}"></script>
-    <script th:src="@{/libs/inspinia/js/loading/jquery.loading-indicator.js}"></script>
-
-    <!--Sweet Alerts -->
-    <script th:src="@{/libs/inspinia/js/alertSweet/sweetalert.min.js}"></script>
-
-    <!-- lozm common custom Script js -->
-    <script th:src="@{/libs/inspinia/js/lozm.js}"></script>
-    <!-- JWT-decode -->
-    <script th:src="@{/libs/inspinia/js/jwt-decode.min.js}"></script>
+    <th:block th:replace="@{layout/default.html} :: default"></th:block>
 </head>
 
 <body class="gray-bg">
-
-<div class="loginColumns animated fadeInDown">
+    <div class="loginColumns animated fadeInDown">
     <div class="row">
 
         <div class="col-md-6">
@@ -92,7 +73,7 @@
     </div>
 </div>
 
-<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
 </body>
 
 <script th:inline="javascript" type="text/javascript">

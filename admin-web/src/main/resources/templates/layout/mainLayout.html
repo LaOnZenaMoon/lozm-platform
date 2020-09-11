@@ -1,30 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-        <title>LOZM Platform - Admin</title>
-        <!-- favicon -->
-        <link rel="icon" type="image/x-icon" th:href="@{/libs/dashtreme/vertical-layout/assets/images/favicon.ico}"/>
-        <!-- Vector CSS -->
-        <link rel="stylesheet" type="text/css" th:href="@{/libs/dashtreme/vertical-layout/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css}"/>
-        <!-- lozm common custom CSS -->
-        <link rel="stylesheet" type="text/css" th:href="@{/script/lozm.css}"/>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
+    <title>LOZM Platform - Admin</title>
 
-        <!-- lozm common custom Script js -->
-        <script th:src="@{/script/lozm.js}"></script>
-        <!--JWT-decode-->
-        <script th:src="@{/script/jwt-decode.min.js}"></script>
+    <th:block th:replace="@{layout/default.html} :: default"></th:block>
+</head>
 
-    </head>
-
-    <body class="bg-theme bg-theme9">
-        <th:block layout:fragment="content"></th:block>
-        <th:block layout:fragment="customScript"></th:block>
-    </body>
+<body class="bg-theme bg-theme9">
+    <th:block layout:fragment="content"></th:block>
+    <th:block layout:fragment="customScript"></th:block>
+</body>
 
 </html>

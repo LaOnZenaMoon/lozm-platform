@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8881
 
 spring:
   application:
@@ -21,9 +21,9 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: create-drop
+#      ddl-auto: create-drop
 #      ddl-auto: create
-#      ddl-auto: update
+      ddl-auto: update
 
     properties:
       hibernate:
@@ -33,7 +33,6 @@ spring:
           order_inserts: true
         discriminator:
           ignore_explicit_for_joined: true
-
       format_sql: true
 
   output:

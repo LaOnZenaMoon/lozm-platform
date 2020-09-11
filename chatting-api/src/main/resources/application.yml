@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8883
 
 spring:
   application:
@@ -18,11 +18,10 @@ spring:
       maximum-pool-size: 5
 
   jpa:
+    database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      #      ddl-auto: create-drop
-      ddl-auto: create
-    #      ddl-auto: update
+      ddl-auto: update
 
     properties:
       hibernate:
@@ -30,33 +29,14 @@ spring:
         jdbc:
           batch_size: 100
           order_inserts: true
-
       format_sql: true
 
   output:
     ansi:
       enabled: always
 
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 200MB
-      max-request-size: 215MB
-
-  mvc:
-    contentnegotiation:
-      favor-parameter: true
-      media-types:
-        xls: application/vnd.ms-excel
-
 logging:
   level:
     root: info
     lozm: debug
     org.springframework.web.filter.CommonsRequestLoggingFilter: debug
-
-image:
-  uploadPath: ./image/upload
-  width: 160
-  height: 160
-  defaultUserImage: user2-160x160.jpg

@@ -10,7 +10,7 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306
+    url: jdbc:mysql://localhost:3306/lozm
     username: junlee
     password: password
     testQuery: "SELECT 1"
@@ -31,8 +31,8 @@ spring:
         jdbc:
           batch_size: 100
           order_inserts: true
-        discriminator:
-          ignore_explicit_for_joined: true
+#        discriminator:
+#          ignore_explicit_for_joined: true
       format_sql: true
 
   output:

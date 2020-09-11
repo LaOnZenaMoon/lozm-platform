@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 //@EnableJpaAuditing
-public class AdminApiApplication {
+public class PlatformApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminApiApplication.class, args);
+        SpringApplication.run(PlatformApiApplication.class, args);
     }
 
 }

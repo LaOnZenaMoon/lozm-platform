@@ -1,6 +1,5 @@
 rootProject.name = 'platform'
-include 'platform-api'
+include 'admin-web'
 include 'chatting-api'
 include 'core'
-include 'admin-web'
-
+include 'platform-api'

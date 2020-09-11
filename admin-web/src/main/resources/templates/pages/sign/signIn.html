@@ -18,15 +18,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/style.css}" />
 
 
-
-    <!-- lozm common custom CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/script/lozm.css}"/>
-
+    <script th:src="@{/libs/inspinia/js/jquery-3.1.1.min.js}"></script>
     <!-- lozm common custom Script js -->
-    <script th:src="@{/script/lozm.js}"></script>
-    <!--JWT-decode-->
-    <script th:src="@{/script/jwt-decode.min.js}"></script>
-
+    <script th:src="@{/libs/inspinia/js/lozm.js}"></script>
+    <!-- JWT-decode -->
+    <script th:src="@{/libs/inspinia/js/jwt-decode.min.js}"></script>
 </head>
 
 <body class="gray-bg">
@@ -108,19 +104,19 @@
                 password: {
                     required: true,
                 },
-            },
+            }
         });
     });
 
     var sign = {
         submit: function () {
             lozm.func.requestPost({
-                url: /*[[ @{/api/sign/in} ]]*/ ""
-                , data: {
+                url: /*[[ @{/api/sign/in} ]]*/ "",
+                data: {
                     identifier: $("#identifier").val(),
                     password: $("#password").val()
-                }
-                , callback: {
+                },
+                callback: {
                     success: function (result) {
                         if(result.success) {
                             lozm.func.insertJwt(result.data.token);
@@ -128,13 +124,14 @@
                         } else {
                             lozm.func.alertFail(result.message);
                         }
-                    }, error: function (xhr, status, error) {
+                    },
+                    error: function (xhr, status, error) {
                         console.log(xhr);
                         console.log(status);
                         console.log(error);
                     }
                 }
             });
-        },
+        }
     };
 </script>

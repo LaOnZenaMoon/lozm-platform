@@ -1,122 +1,140 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
+      xmlns:layout="http://www.w3.org/1999/xhtml">
 
-<th:block layout:fragment="content">
-    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <div id="wrapper">
+    <title>LOZM Platform - Admin</title>
+    <!-- favicon -->
+<!--    <link rel="icon" type="image/x-icon" href="/images/favicon.ico}"/>-->
 
-        <div class="card-authentication2 mx-auto my-5">
-            <div class="card-group">
-                <div class="card mb-0" th:style="'background-image:url(' + @{/images/contract.jpg} + '); background-repeat: no-repeat; background-size: cover; background-position: center; height: 600px;'">
-                    <div class="card-img-overlay rounded-left my-5">
+    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/font-awesome/css/font-awesome.css}" />
 
+    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/animate.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/style.css}" />
+
+
+
+    <!-- lozm common custom CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/script/lozm.css}"/>
+
+    <!-- lozm common custom Script js -->
+    <script th:src="@{/script/lozm.js}"></script>
+    <!--JWT-decode-->
+    <script th:src="@{/script/jwt-decode.min.js}"></script>
+
+</head>
+
+<body class="gray-bg">
+
+<div class="loginColumns animated fadeInDown">
+    <div class="row">
+
+        <div class="col-md-6">
+            <h2 class="font-bold">Welcome to IN+</h2>
+
+            <p>
+                Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+            </p>
+
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+            </p>
+
+            <p>
+                When an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+
+            <p>
+                <small>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</small>
+            </p>
+
+        </div>
+        <div class="col-md-6">
+            <div class="ibox-content">
+                <form class="m-t" role="form" action="index.html">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="identifier" required="" id="identifier">
                     </div>
-                </div>
-
-                <div class="card mb-0 ">
-                    <div class="card-body">
-                        <div class="card-content p-3">
-                            <div class="card-title text-uppercase text-center py-3">Sign In</div>
-                            <form id="post_signForm">
-                                <div class="form-group">
-                                    <div class="position-relative has-icon-left">
-                                        <label for="identifier" class="sr-only">Username</label>
-                                        <input type="text" class="form-control" placeholder="ID" id="identifier" name="identifier">
-                                        <div class="form-control-position">
-                                            <i class="icon-user"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="position-relative has-icon-left">
-                                        <label for="password" class="sr-only">Password</label>
-                                        <input type="password" class="form-control" placeholder="Password" id="password" name="password">
-                                        <div class="form-control-position">
-                                            <i class="icon-lock"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row mr-0 ml-0">
-                                    <div class="form-group col-6">
-                                        <div class="icheck-material-white">
-<!--                                            <input type="checkbox" id="user-checkbox" checked="" />-->
-<!--                                            <label for="user-checkbox">Remember me</label>-->
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-6 text-right">
-<!--                                        <a href="authentication-reset-password2.html">Reset Password</a>-->
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="btn btn-light btn-block waves-effect waves-light">Sign In</button>
-                            </form>
-                            <div class="text-center pt-3">
-
-                                <div class="form-row mt-4">
-                                </div>
-
-<!--                                <hr>-->
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" required="" id="password">
                     </div>
-                </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                    <a href="#">
+                        <small>Forgot password?</small>
+                    </a>
+
+                    <p class="text-muted text-center">
+                        <small>Do not have an account?</small>
+                    </p>
+                    <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+                </form>
+                <p class="m-t">
+                    <small>LaOnZenaMoon Platform &copy; 2020</small>
+                </p>
             </div>
         </div>
-
-        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-
-        <th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
     </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-6">
+            Copyright LaOnZenaMoon
+        </div>
+        <div class="col-md-6 text-right">
+            <small>© 2020-</small>
+        </div>
+    </div>
+</div>
 
-</th:block>
-
-<th:block layout:fragment="customScript">
-    <script th:inline="javascript" type="text/javascript">
-        $(document).ready(function () {
-            $("#post_signForm").validate({
-                submitHandler: function(form) {
-                    sign.submit();
-                },
-                rules: {
-                    identifier: {
-                        required: true,
-                    },
-                    password: {
-                        required: true,
-                    },
-                },
-            });
-        });
-
-        var sign = {
-            submit: function () {
-                lozm.func.requestPost({
-                    url: /*[[ @{/api/sign/in} ]]*/ ""
-                    , data: {
-                        identifier: $("#identifier").val(),
-                        password: $("#password").val()
-                    }
-                    , callback: {
-                        success: function (result) {
-                            if(result.success) {
-                                lozm.func.insertJwt(result.data.token);
-                                lozm.func.movePage(result.data.previousPage);
-                            } else {
-                                lozm.func.alertFail();
-                            }
-                        }, error: function (xhr, status, error) {
-                            console.log(xhr);
-                            console.log(status);
-                            console.log(error);
-                        }
-                    }
-                });
-            },
-        };
-    </script>
-</th:block>
+</body>
 
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#post_signForm").validate({
+            submitHandler: function(form) {
+                sign.submit();
+            },
+            rules: {
+                identifier: {
+                    required: true,
+                },
+                password: {
+                    required: true,
+                },
+            },
+        });
+    });
+
+    var sign = {
+        submit: function () {
+            lozm.func.requestPost({
+                url: /*[[ @{/api/sign/in} ]]*/ ""
+                , data: {
+                    identifier: $("#identifier").val(),
+                    password: $("#password").val()
+                }
+                , callback: {
+                    success: function (result) {
+                        if(result.success) {
+                            lozm.func.insertJwt(result.data.token);
+                            lozm.func.movePage(result.data.previousPage);
+                        } else {
+                            lozm.func.alertFail(result.message);
+                        }
+                    }, error: function (xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                    }
+                }
+            });
+        },
+    };
+</script>

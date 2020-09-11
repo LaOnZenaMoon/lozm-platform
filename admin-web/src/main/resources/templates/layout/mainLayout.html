@@ -12,9 +12,24 @@
     <th:block th:replace="@{layout/default.html} :: default"></th:block>
 </head>
 
-<body class="bg-theme bg-theme9">
-    <th:block layout:fragment="content"></th:block>
-    <th:block layout:fragment="customScript"></th:block>
+<body class="">
+    <div id="wrapper">
+        <th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content">
+            <th:block layout:fragment="content"></th:block>
+        </div>
+
+        <th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
+    </div>
 </body>
+
+<th:block layout:fragment="customScript"></th:block>
 
 </html>

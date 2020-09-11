@@ -48,13 +48,7 @@ public class SignAPIController {
         SignVo jwt = jwtAuthenticationService.getToken(signVo);
         PostSignDto.Response resDto = new PostSignDto.Response();
         resDto.setToken(jwt.getToken());
-
-//        RequestCache requestCache = new HttpSessionRequestCache();
-//        String redirectUrl = requestCache.getRequest(request, response)
-//                .getRedirectUrl();
-//        redirectUrl = isEmpty(redirectUrl) ? "/home" : redirectUrl;
-        String redirectUrl = "/pages/home";
-        resDto.setPreviousPage(redirectUrl);
+        resDto.setPreviousPage("/pages/home");
 
         return ApiResponseDto.createException(ApiResponseCode.OK, resDto);
     }

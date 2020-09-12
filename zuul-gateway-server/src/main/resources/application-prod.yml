@@ -1,0 +1,46 @@
+spring:
+  profiles: prod
+
+zuul:
+  igoredServices: '*'
+  routes:
+    sample-api1:
+      path: /sample-api1/**
+      serviceId: sample-api1
+      stripPrefix: true
+    sample-api2:
+      path: /sample-api2/**
+      serviceId: sample-api2
+      stripPrefix: true
+  retryable: true
+  ribbon-isolation-strategy: thread
+  thread-pool:
+    use-separate-thread-pools: true
+    thread-pool-key-prefix: zuul-
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    non-secure-port: ${server.port}
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://eurekaIp1:8761/eureka/, http://eurekaIp1:8761/eureka/
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000
+
+ribbon:
+  MaxAutoRetries: 2
+  MaxAutoRetriesNextServer: 3
+  OkToRetryOnAllOperations: true
+  ReadTimeout: 5000
+  ConnectTimeout: 1000
+  MaxTotalConnections: 300
+  MaxConnectionsPerHost: 100
+  retryableStatusCodes: 500

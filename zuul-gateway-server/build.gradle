@@ -2,6 +2,9 @@ bootJar { enabled = true }
 jar { enabled = true }
 
 dependencies {
+    compile project(':core')
+    compile 'mysql:mysql-connector-java'
+
     compile('org.springframework.retry:spring-retry')
     compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')

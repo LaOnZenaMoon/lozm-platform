@@ -1,3 +1,13 @@
+spring
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lozm
+    username: junlee
+    password: password
+    testQuery: "SELECT 1"
+    hikari:
+      maximum-pool-size: 5
+
 # actuator 전부 오픈
 management:
   endpoints:

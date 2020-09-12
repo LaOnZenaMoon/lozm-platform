@@ -27,4 +27,8 @@ dependencies {
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    // Eureka
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 }

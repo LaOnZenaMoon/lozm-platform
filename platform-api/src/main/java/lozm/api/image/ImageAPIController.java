@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@RequestMapping(value = "/api/image")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/image")
 @RequiredArgsConstructor
 public class ImageAPIController {
 

@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@RequestMapping(value = "/api/file")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/file")
 @RequiredArgsConstructor
 public class FileAPIController {
 

@@ -12,8 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@RequestMapping(value = "/api/excel")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/excel")
 @RequiredArgsConstructor
 public class ExcelAPIController {
 

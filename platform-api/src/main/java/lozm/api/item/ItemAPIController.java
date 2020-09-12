@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/api/item")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/item")
 @RequiredArgsConstructor
 public class ItemAPIController {
 

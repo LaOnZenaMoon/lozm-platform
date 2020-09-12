@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/api/board")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/board")
 @RequiredArgsConstructor
 public class BoardAPIController {
 

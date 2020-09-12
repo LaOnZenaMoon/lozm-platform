@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/api/delivery")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/delivery")
 @RequiredArgsConstructor
 public class DeliveryAPIController {
 

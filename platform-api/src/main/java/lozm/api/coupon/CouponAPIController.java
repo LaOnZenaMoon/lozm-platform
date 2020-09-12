@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/api/coupon")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/coupon")
 @RequiredArgsConstructor
 public class CouponAPIController {
 

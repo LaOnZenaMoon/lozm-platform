@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/api/orders")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/orders")
 @RequiredArgsConstructor
 public class OrdersAPIController {
 

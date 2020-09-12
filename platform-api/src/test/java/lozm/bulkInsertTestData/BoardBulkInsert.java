@@ -2,9 +2,9 @@ package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
-import lozm.api.user.UserService;
 import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
+import lozm.object.code.UsersType;
 import lozm.object.dto.board.PostBoardDto;
 import lozm.object.dto.user.GetUserDto;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -33,13 +34,20 @@ public class BoardBulkInsert {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
 
     @Test
     public void setBoard() throws Exception {
-        List<GetUserDto> userList = userService.getUserList();
+        List<GetUserDto> userList = new ArrayList<>();
+
+        userList.add(GetUserDto.builder()
+                .id(2L)
+                .name("JUN LEE")
+                .identifier("junlee")
+                .type(UsersType.USER)
+                .build());
 
         try {
             for (int i = 0; i <2000 ; i++) {

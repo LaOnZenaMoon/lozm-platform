@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lozm.api.coupon.CouponService;
 import lozm.api.delivery.DeliveryService;
 import lozm.api.item.ItemService;
-import lozm.api.user.UserService;
 import lozm.object.dto.coupon.GetCouponDto;
 import lozm.object.dto.delivery.GetDeliveryDto;
 import lozm.object.dto.item.GetItemDto;
@@ -39,8 +38,8 @@ public class OrdersBulkInsert {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
     @Autowired
     private ItemService itemService;
@@ -56,7 +55,8 @@ public class OrdersBulkInsert {
     public void setOrders() throws Exception {
         try {
             //Get user
-            List<GetUserDto> userList = userService.getUserList();
+//            List<GetUserDto> userList = userService.getUserList();
+            List<GetUserDto> userList = new ArrayList<>();
             List<Long> userIdList = new ArrayList<>();
             for (GetUserDto userDto : userList) {
                 userIdList.add(userDto.getId());

@@ -103,7 +103,6 @@
         };
 
         ajaxOptions.complete = function() {
-            debugger;
             hideLoadingBar();
 
             if (options.callback.complete) {

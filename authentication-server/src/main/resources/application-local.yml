@@ -22,23 +22,12 @@ spring:
             order_inserts: true
         format_sql: true
 
-zuul:
-  igoredServices: '*'
-  routes:
-    platform-api:
-      path: /platorm-api/**
-      serviceId: platform-api
-      stripPrefix: true
-#    sample-api:
-#      path: /sample-api/**
-#      serviceId: sample-api
-#      stripPrefix: true
-
-  retryable: true
-  ribbon-isolation-strategy: thread
-  thread-pool:
-    use-separate-thread-pools: true
-    thread-pool-key-prefix: zuul-gateway-server
+# actuator 전부 오픈
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 eureka:
   instance:

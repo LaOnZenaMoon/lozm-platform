@@ -6,15 +6,13 @@ import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.sign.PostSignDto;
 import lozm.object.vo.sign.SignVo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+@CrossOrigin("*")
 @RestController @RequestMapping(value = "/api/sign")
 @RequiredArgsConstructor
 public class SignAPIController {

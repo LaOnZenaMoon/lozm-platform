@@ -33,7 +33,11 @@ public class ZuulGatewayApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(ZuulGatewayApplication.class, args);
+		try {
+			SpringApplication.run(ZuulGatewayApplication.class, args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

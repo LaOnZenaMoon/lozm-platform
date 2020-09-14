@@ -10,12 +10,6 @@ zuul:
 #      serviceId: sample-api
 #      stripPrefix: true
 
-  retryable: true
-  ribbon-isolation-strategy: thread
-  thread-pool:
-    use-separate-thread-pools: true
-    thread-pool-key-prefix: zuul-gateway-server
-
 eureka:
   instance:
     instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

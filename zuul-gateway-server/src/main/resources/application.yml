@@ -12,3 +12,24 @@ logging:
   level:
     root: info
     lozm: debug
+
+zuul:
+  igoredServices: '*'
+  routes:
+    platform-api:
+      path: /platorm-api/**
+      serviceId: platform-api
+      stripPrefix: true
+    authentication-server:
+      path: /authentication-server/**
+      serviceId: authentication-server
+      stripPrefix: true
+#    sample-api:
+#      path: /sample-api/**
+#      serviceId: sample-api
+#      stripPrefix: true
+  retryable: true
+  ribbon-isolation-strategy: thread
+  thread-pool:
+    use-separate-thread-pools: true
+    thread-pool-key-prefix: zuul-gateway-server

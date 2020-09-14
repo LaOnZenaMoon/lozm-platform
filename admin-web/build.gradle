@@ -6,15 +6,11 @@ dependencies {
     compile 'mysql:mysql-connector-java'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.hateoas:spring-hateoas'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 
     // Thymeleaf
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
-
-    // httpclient
-    implementation 'org.apache.httpcomponents:httpclient:4.5.10'
 
     // log4jdbc
     runtime 'net.logstash.logback:logstash-logback-encoder:6.3'

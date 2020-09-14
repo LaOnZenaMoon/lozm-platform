@@ -275,41 +275,31 @@ public class ItemService {
 
     private Optional<Item> findItem(Long itemId) {
         Optional<Item> findItem = itemRepository.findById(itemId);
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-        });
+        findItem.orElseThrow(() -> new ServiceException("ITEM_0002", "Item doesn't exist."));
         return findItem;
     }
 
     private Optional<Shoes> findShoes(Long itemId) {
         Optional<Shoes> findItem = shoesRepository.findById(itemId);
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-        });
+        findItem.orElseThrow(() -> new ServiceException("ITEM_0002", "Item doesn't exist."));
         return findItem;
     }
 
     private Optional<Bottom> findBottom(Long itemId) {
         Optional<Bottom> findItem = bottomRepository.findById(itemId);
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-        });
+        findItem.orElseThrow(() -> new ServiceException("ITEM_0002", "Item doesn't exist."));
         return findItem;
     }
 
     private Optional<Top> findTop(Long itemId) {
         Optional<Top> findItem = topRepository.findById(itemId);
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-        });
+        findItem.orElseThrow(() -> new ServiceException("ITEM_0002", "Item doesn't exist."));
         return findItem;
     }
 
     private Optional<Outer> findOuter(Long itemId) {
         Optional<Outer> findItem = outerRepository.findById(itemId);
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ITEM_0002", "Item doesn't exist.");
-        });
+        findItem.orElseThrow(() -> new ServiceException("ITEM_0002", "Item doesn't exist."));
         return findItem;
     }
 

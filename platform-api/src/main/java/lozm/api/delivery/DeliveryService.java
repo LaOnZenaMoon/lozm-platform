@@ -15,9 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
 import static net.logstash.logback.encoder.org.apache.commons.lang3.ObjectUtils.isEmpty;
-//import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Service
 @Transactional(readOnly = true)
@@ -70,9 +68,7 @@ public class DeliveryService {
 
     private Optional<Delivery> findDelivery(Long deliveryId) {
         Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryId);
-        findDelivery.orElseThrow(() -> {
-            throw new ServiceException("DELIVERY_0002", "Delivery doesn't exist.");
-        });
+        findDelivery.orElseThrow(() -> new ServiceException("DELIVERY_0002", "Delivery doesn't exist."));
         return findDelivery;
     }
 

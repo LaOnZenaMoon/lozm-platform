@@ -112,9 +112,7 @@ public class CouponService {
 
         //Find the user
         Optional<User> findUser = userRepository.findById(couponVo.getUserId());
-        findUser.orElseThrow(() -> {
-            throw new ServiceException("USER_0002", "User doesn't exist.");
-        });
+        findUser.orElseThrow(() -> new ServiceException("USER_0002", "User doesn't exist."));
 
         //Find the coupon user
         List<CouponUser> findCouponUserList = couponUserRepository.selectCouponUserByUserIdAndCouponId(couponVo.getUserId(), couponVo.getId());
@@ -169,17 +167,13 @@ public class CouponService {
 
     private Optional<Coupon> findCoupon(Long couponId, String exceptionCode) {
         Optional<Coupon> findCoupon = couponRepository.findById(couponId);
-        findCoupon.orElseThrow(() -> {
-            throw new ServiceException(exceptionCode, "Coupon doesn't exist.");
-        });
+        findCoupon.orElseThrow(() -> new ServiceException(exceptionCode, "Coupon doesn't exist."));
         return findCoupon;
     }
 
     private Optional<CouponUser> findCouponUser(Long couponId) {
         Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponId);
-        findCouponUser.orElseThrow(() -> {
-            throw new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist.");
-        });
+        findCouponUser.orElseThrow(() -> new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist."));
         return findCouponUser;
     }
 

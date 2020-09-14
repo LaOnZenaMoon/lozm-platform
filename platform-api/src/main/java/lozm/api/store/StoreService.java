@@ -69,9 +69,7 @@ public class StoreService {
 
     private Optional<Store> findStore(Long storeId) {
         Optional<Store> findStore = storeRepository.findById(storeId);
-        findStore.orElseThrow(() -> {
-            throw new ServiceException("STORE_0002", "The store doesn't exist.");
-        });
+        findStore.orElseThrow(() -> new ServiceException("STORE_0002", "The store doesn't exist."));
         return findStore;
     }
 

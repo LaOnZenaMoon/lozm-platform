@@ -22,7 +22,7 @@ import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 public class UserAPIController {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
 
     @GetMapping()
@@ -40,7 +40,8 @@ public class UserAPIController {
         UserVo userVo = UserVo.builder()
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
-                .password(passwordEncoder.encode(reqDto.getPassword()))
+                .password(reqDto.getPassword())
+//                .password(passwordEncoder.encode(reqDto.getPassword()))
                 .type(reqDto.getType())
                 .createdBy(reqDto.getCreatedBy())
                 .build();
@@ -56,7 +57,7 @@ public class UserAPIController {
                 .id(reqDto.getId())
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
-                .password(isEmpty(reqDto.getPassword()) ? null : passwordEncoder.encode(reqDto.getPassword()))
+//                .password(isEmpty(reqDto.getPassword()) ? null : passwordEncoder.encode(reqDto.getPassword()))
                 .type(reqDto.getType())
                 .modifiedBy(reqDto.getModifiedBy())
                 .build();

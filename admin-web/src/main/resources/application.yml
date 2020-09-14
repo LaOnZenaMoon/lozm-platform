@@ -8,15 +8,6 @@ spring:
   profiles:
     active: local
 
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lozm
-    username: junlee
-    password: password
-    testQuery: "SELECT 1"
-    hikari:
-      maximum-pool-size: 5
-
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -31,8 +22,6 @@ spring:
         jdbc:
           batch_size: 100
           order_inserts: true
-#        discriminator:
-#          ignore_explicit_for_joined: true
       format_sql: true
 
   output:
@@ -65,19 +54,3 @@ image:
 
 file:
   uploadPath: ./file/upload
-
-admin-api:
-  store: /api/store
-  coupon: /api/coupon
-  item: /api/item
-  delivery: /api/delivery
-  orders: /api/orders
-  user: /api/user
-  board: /api/board
-  comment: /api/comment
-
-jwt:
-  secret: hashing-jwt-token-secret-key-test
-  expiration-time: 1800
-  token-prefix: Bearer
-  header-string: Authorization

@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AdminWebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminWebApplication.class, args);
+        try {
+            SpringApplication.run(AdminWebApplication.class, args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

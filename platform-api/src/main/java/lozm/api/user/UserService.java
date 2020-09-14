@@ -65,9 +65,7 @@ public class UserService {
 
     private Optional<User> findUser(Long userId) {
         Optional<User> findUser = userRepository.findById(userId);
-        findUser.orElseThrow(() -> {
-            throw new ServiceException("USER_0002", "User doesn't exist.");
-        });
+        findUser.orElseThrow(() -> new ServiceException("USER_0002", "User doesn't exist."));
         return findUser;
     }
 

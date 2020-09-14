@@ -106,42 +106,31 @@ public class OrdersService {
 
     private Optional<Orders> findOrders(Long ordersId) {
         Optional<Orders> findOrders = ordersRepository.findById(ordersId);
-        findOrders.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_0002", "Order doesn't exist.");
-        });
+        findOrders.orElseThrow(() -> new ServiceException("ORDERS_0002", "Order doesn't exist."));
         return findOrders;
     }
 
     private Optional<Coupon> findCoupon(Long couponId) {
-        Optional<Coupon> findCoupon;
-        findCoupon = couponRepository.findById(couponId);
-        findCoupon.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_SAVE_COUPON", "Coupon doesn't exist.");
-        });
+        Optional<Coupon> findCoupon = couponRepository.findById(couponId);
+        findCoupon.orElseThrow(() -> new ServiceException("ORDERS_SAVE_COUPON", "Coupon doesn't exist."));
         return findCoupon;
     }
 
     private Optional<Delivery> findDelivery(Long deliveryId) {
         Optional<Delivery> findDelivery = deliveryRepository.findById(deliveryId);
-        findDelivery.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_SAVE_DELIVERY", "Delivery doesn't exist.");
-        });
+        findDelivery.orElseThrow(() -> new ServiceException("ORDERS_SAVE_DELIVERY", "Delivery doesn't exist."));
         return findDelivery;
     }
 
     private Optional<Item> findItem(Long itemId) {
         Optional<Item> findItem = itemRepository.findById(itemId);
-        findItem.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_SAVE_ITEM", "Item doesn't exist.");
-        });
+        findItem.orElseThrow(() -> new ServiceException("ORDERS_SAVE_ITEM", "Item doesn't exist."));
         return findItem;
     }
 
     private Optional<User> findUser(Long userId) {
         Optional<User> findUser = userRepository.findById(userId);
-        findUser.orElseThrow(() -> {
-            throw new ServiceException("ORDERS_SAVE_USER", "User doesn't exist.");
-        });
+        findUser.orElseThrow(() -> new ServiceException("ORDERS_SAVE_USER", "User doesn't exist."));
         return findUser;
     }
 

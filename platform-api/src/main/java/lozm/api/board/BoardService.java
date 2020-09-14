@@ -125,17 +125,17 @@ public class BoardService {
 
     private Optional<Board> findBoard(Long boardId) {
         Optional<Board> findBoard = boardRepository.findById(boardId);
-        findBoard.orElseThrow(() -> {
-            throw new ServiceException("BOARD_0002", "Board doesn't exist.");
-        });
+//        findBoard.orElseThrow(() -> {
+//            throw new ServiceException("BOARD_0002", "Board doesn't exist.");
+//        });
         return findBoard;
     }
 
     private Optional<Comment> findComment(Long commentId) {
         Optional<Comment> findComment = commentRepository.findById(commentId);
-        findComment.orElseThrow(() -> {
-            throw new ServiceException("COMMENT_0002", "Comment doesn't exist.");
-        });
+//        findComment.orElseThrow(() -> {
+//            throw new ServiceException("COMMENT_0002", "Comment doesn't exist.");
+//        });
         return findComment;
     }
 

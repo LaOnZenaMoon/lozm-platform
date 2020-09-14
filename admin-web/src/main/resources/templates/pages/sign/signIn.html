@@ -94,12 +94,12 @@
     var sign = {
         submit: function () {
             lozm.func.requestPost({
-                // url: /*[[ @{/api/sign/in} ]]*/ "",
                 url: "http://localhost:8880/authentication-server/api/sign/in",
                 data: {
                     identifier: $("#identifier").val(),
                     password: $("#password").val()
                 },
+                // async: false,
                 callback: {
                     success: function (result) {
                         if(result.success) {

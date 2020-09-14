@@ -70,7 +70,7 @@
     };
 
     var ajaxDefault = function(options) {
-        if(options !== undefined && options.url !== "/api/sign/in") {
+        if(options !== undefined && !options.url.includes("/api/sign/in")) {
             if(checkJwtIsNotValid()) movePage();
         }
 

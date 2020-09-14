@@ -4,4 +4,5 @@ include 'chatting-api'
 include 'core'
 include 'platform-api'
 include 'zuul-gateway-server'
+include 'authentication-server'
 

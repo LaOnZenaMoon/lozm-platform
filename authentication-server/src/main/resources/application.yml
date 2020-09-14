@@ -1,0 +1,21 @@
+server:
+  port: 8880
+
+spring:
+  application:
+    name: authentication-server
+
+  profiles:
+    active: local
+
+logging:
+  level:
+    root: info
+    lozm: debug
+    org.springframework.web.filter.CommonsRequestLoggingFilter: debug
+
+jwt:
+  secret: hashing-jwt-token-secret-key-test
+  expiration-time: 1800
+  token-prefix: Bearer
+  header-string: Authorization

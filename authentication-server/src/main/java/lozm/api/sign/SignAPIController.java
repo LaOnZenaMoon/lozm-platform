@@ -2,15 +2,10 @@ package lozm.api.sign;
 
 import lombok.RequiredArgsConstructor;
 import lozm.global.jwt.JwtAuthenticationService;
-import lozm.global.jwt.SignInfo;
 import lozm.object.dto.ApiResponseCode;
 import lozm.object.dto.ApiResponseDto;
 import lozm.object.dto.sign.PostSignDto;
 import lozm.object.vo.sign.SignVo;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
-import org.springframework.security.web.savedrequest.RequestCache;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,16 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
 
-import static lozm.object.code.SessionType.PREV_PAGE;
-import static lozm.object.code.SessionType.USER;
-import static org.springframework.util.ObjectUtils.isEmpty;
-
-@RequestMapping(value = "/api/sign")
-@RestController
+@RestController @RequestMapping(value = "/api/sign")
 @RequiredArgsConstructor
 public class SignAPIController {
 

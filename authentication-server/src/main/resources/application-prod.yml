@@ -1,20 +1,22 @@
+spring:
+  profiles: prod
+
 zuul:
   igoredServices: '*'
   routes:
-    platform-api:
-      path: /platorm-api/**
-      serviceId: platform-api
+    sample-api1:
+      path: /sample-api1/**
+      serviceId: sample-api1
       stripPrefix: true
-#    sample-api:
-#      path: /sample-api/**
-#      serviceId: sample-api
-#      stripPrefix: true
-
+    sample-api2:
+      path: /sample-api2/**
+      serviceId: sample-api2
+      stripPrefix: true
   retryable: true
   ribbon-isolation-strategy: thread
   thread-pool:
     use-separate-thread-pools: true
-    thread-pool-key-prefix: zuul-gateway-server
+    thread-pool-key-prefix: zuul-
 
 eureka:
   instance:
@@ -23,7 +25,7 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eurekaIp1:8761/eureka/, http://eurekaIp1:8761/eureka/
 
 hystrix:
   command:

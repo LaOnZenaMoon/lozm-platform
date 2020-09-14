@@ -11,9 +11,4 @@ spring:
 logging:
   level:
     root: info
-
-jwt:
-  secret: hashing-jwt-token-secret-key-test
-  expiration-time: 1800
-  token-prefix: Bearer
-  header-string: Authorization
+    lozm: debug

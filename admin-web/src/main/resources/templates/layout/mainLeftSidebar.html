@@ -21,64 +21,30 @@
                 </li>
 
                 <li class="menu-title">
-                    <a href="#"><i class="fa fa-database"></i> <span class="nav-label">통계데이터 관리 </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse sidebar-submenu">
-                        <li><a href="/pages/statistics/voc/five">VOC 5등급</a></li>
-
-                        <li>
-                            <a href="#">허수콜 유발자 <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level sidebar-submenu">
-                                <li><a href="/pages/statistics/emergency/shutDown">긴급 종료</a></li>
-                                <li><a href="/pages/statistics/fake/call/block">이용 차단</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="/pages/statistics/kt/daily/result">KT 내부 매월 중점 관리</a></li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Board management</span> <span
+                            class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        <li><a href="#" onclick="lozm.func.movePage('/pages/manage/board')">Board</a></li>
                     </ul>
                 </li>
 
                 <li class="menu-title">
-                    <a href="#"><i class="fa fa-tasks"></i> <span class="nav-label">IVR 관리 </span><span class="fa arrow"></span></a>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Shop management</span> <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="/pages/ivr/default/config">기본 설정</a></li>
-                        <li><a href="/pages/vvb/register/ment">멘트 등록</a></li>
-                        <li><a href="/pages/vvb/set/ment">멘트 설정</a></li>
-
-                        <li>
-                            <a href="">인사말 멘트 설정 <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
-                                <li><a href="/pages/default/agent/greeting">기본 설정</a></li>
-                                <li><a href="/pages/agent/greeting">상담사별 설정</a></li>
-                            </ul>
-                        </li>
-
-                        <li><a href="/pages/schedule/ment">멘트 스케줄 관리</a></li>
+                        <li><a href="#" onclick="lozm.func.movePage('/pages/manage/store')">Store</a></li>
+                        <li><a href="#" onclick="lozm.func.movePage('/pages/manage/item')">Item</a></li>
+                        <li><a href="#" onclick="lozm.func.movePage('/pages/manage/coupon')">Coupon</a></li>
+                        <li><a href="#" onclick="lozm.func.movePage('/pages/manage/delivery')">Delivery</a></li>
+                        <li><a href="#" onclick="lozm.func.movePage('/pages/manage/orders')">Orders</a></li>
                     </ul>
                 </li>
 
                 <li class="menu-title">
-                    <a href="#"><i class="fa fa-phone"></i> <span class="nav-label">차단번호 관리 </span><span class="fa arrow"></span></a>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Setting</span> <span
+                            class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
-                        <li><a href="/pages/block/customer">발신번호 차단</a></li>
-                        <li><a href="/pages/block/promotion">홍보멘트 차단</a></li>
-                        <li><a href="/pages/block/additional/service">부가서비스 차단</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-title">
-                    <a href="#"><i class="fa fa-phone"></i> <span class="nav-label">안내번호 관리 </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="/pages/emergency/telNumber">긴급번호</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-title">
-                    <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label">시스템 관리 </span><span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
-                        <li><a href="/pages/manage/menu/code">화면 메뉴코드</a></li>
-                        <li><a href="/pages/manage/common/code">공통코드</a></li>
-                        <li><a href="/pages/manage/skill/telNumber">발신번호 큐 설정</a></li>
-                        <li><a href="/pages/manage/admin">로그인 계정</a></li>
+                        <li><a href="#" onclick="lozm.func.movePage('/pages/setting/user')">User</a></li>
                     </ul>
                 </li>
             </ul>

@@ -43,11 +43,10 @@
 
     //Gateway Address
     //Local
-    lozm.OOF_GATEWAY_SERVER = "http://127.0.0.1:8782";
-    lozm.INS_GATEWAY_SERVER = "http://10.110.60.12:8084";
+    lozm.GATEWAY_SERVER = "http://127.0.0.1:8782";
 
     //Prod
-    // lozm.OOF_GATEWAY_SERVER = "http://10.110.60.12:8782";
+    // lozm.GATEWAY_SERVER = "http://10.110.60.12:8782";
 
     var isEmpty = lozm.func.isEmpty = function isEmpty(value) {
         return value === "" || value === null || value === undefined || typeof value === "undefined" || (typeof value === "object" && !Object.keys(value).length) || (value != null && typeof value === "object" && value.length === 0);

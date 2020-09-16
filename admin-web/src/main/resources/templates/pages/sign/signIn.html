@@ -20,7 +20,7 @@
             <div th:style="'background-image:url(' + @{/images/contract.jpg} + '); background-repeat: no-repeat; background-size: cover; background-position: center; height: 500px;'"></div>
         </div>
         <div class="col-md-6">
-            <div class="ibox-content">
+            <div class="ibox-content" style="height: 500px;">
                 <form class="m-t" id="post_signForm">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="identifier" id="identifier">
@@ -77,7 +77,7 @@
     var sign = {
         submit: function () {
             lozm.func.requestPost({
-                url: lozm.OOF_GATEWAY_SERVER + "/authentication-server/api/sign/in",
+                url: lozm.GATEWAY_SERVER + "/authentication-server/api/sign/in",
                 data: {
                     identifier: $("#identifier").val(),
                     password: $("#password").val()
@@ -93,6 +93,7 @@
                         }
                     },
                     error: function (xhr, status, error) {
+                        lozm.func.alertWarning();
                         console.log(xhr);
                         console.log(status);
                         console.log(error);

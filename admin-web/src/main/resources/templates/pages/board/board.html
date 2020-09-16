@@ -13,7 +13,7 @@
 			<div class="col-lg-12">
 				<div class="ibox ">
 					<div class="ibox-title">
-						<h5>Basic Data Tables example with responsive plugin</h5>
+						<h5>Board</h5>
 						<div class="ibox-tools">
 							<a class="collapse-link">
 								<i class="fa fa-chevron-up"></i>
@@ -56,18 +56,10 @@
 					board.post();
 				},
 				rules: {
-					name: {
-						required: true
-					},
-					identifier: {
-						required: true
-					},
-					password: {
-						required: true
-					},
-					type: {
-						required: true
-					},
+					name: {required: true},
+					identifier: {required: true},
+					password: {required: true},
+					type: {required: true},
 				},
 			});
 
@@ -77,18 +69,11 @@
 					board.put();
 				},
 				rules: {
-					name: {
-						required: true
-					},
-					identifier: {
-						required: true
-					},
-					type: {
-						required: true
-					},
+					name: {	required: true},
+					identifier: {required: true},
+					type: {required: true},
 				},
 			});
-
 		});
 
 		var board = {
@@ -168,8 +153,7 @@
 
 			getGridData: function () {
 				lozm.func.requestGet({
-					// url: /*[[ @{/board/boardType/ALL} ]]*/ "",
-					url: "http://127.0.0.1:8880/platform-api/api/board/boardType/ALL" ,
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board/boardType/ALL",
 					callback: {
 						success: function (result) {
 
@@ -188,7 +172,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/board} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board",
 					data: {
 						boardType: $("#post_board_type").val(),
 						contentType: $("#post_content_type").val(),
@@ -214,7 +198,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/board} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board",
 					data: {
 						list: list
 					},

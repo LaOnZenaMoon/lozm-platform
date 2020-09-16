@@ -32,7 +32,7 @@
 					<div class="ibox-content">
 
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered table-hover" id="boardGrid">
+							<table class="table table-bordered table-hover" id="boardGrid">
 
 							</table>
 						</div>
@@ -43,6 +43,8 @@
 		</div>
 
 	</div>
+
+
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -122,7 +124,7 @@
 									return;
 								}
 
-								lozm.func.movePage("/manage/board/" + _selectedRows[0].id);
+								lozm.func.movePage("/pages/manage/board/" + _selectedRows[0].id);
 							},
 						},
 						{

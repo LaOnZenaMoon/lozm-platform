@@ -45,16 +45,16 @@ public class RouteController {
 
     @GetMapping("/manage/board/{boardId}")
     public String manageBoardDetail(ModelMap modelMap, @PathVariable(value = "boardId") Long boardId) throws Exception {
-        GetBoardDto boardDetail = boardAPIService.getBoardDetail(boardId);
-        modelMap.addAttribute("boardDetail", boardDetail);
-
-        GetCommentDto.Response commentList = boardAPIService.getComment(boardId);
-        modelMap.addAttribute("commentList", commentList.getList());
-
-        setBoardInfo(modelMap);
-
-        List<ContentType> commentTypeList = Arrays.asList(ContentType.values());
-        modelMap.addAttribute("commentTypeList", commentTypeList);
+//        GetBoardDto boardDetail = boardAPIService.getBoardDetail(boardId);
+//        modelMap.addAttribute("boardDetail", boardDetail);
+//
+//        GetCommentDto.Response commentList = boardAPIService.getComment(boardId);
+//        modelMap.addAttribute("commentList", commentList.getList());
+//
+//        setBoardInfo(modelMap);
+//
+//        List<ContentType> commentTypeList = Arrays.asList(ContentType.values());
+//        modelMap.addAttribute("commentTypeList", commentTypeList);
 
         return "pages/board/boardDetail";
     }

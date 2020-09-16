@@ -1,6 +1,6 @@
 <th:block th:fragment="default" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <!-- favicon -->
-    <!--    <link rel="icon" type="image/x-icon" href="/images/favicon.ico}"/>-->
+    <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}"/>
 
     <!--========================== CSS ==========================-->
     <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/bootstrap.min.css}" />
@@ -11,6 +11,9 @@
 
     <!-- Custom Style-->
     <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/loading/app-style.css}"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/libs/inspinia/css/plugins/iCheck/custom.css}" >
     <!--========================== CSS ==========================-->
 
 
@@ -27,7 +30,7 @@
     <script th:src="@{/libs/inspinia/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
     <script th:src="@{/libs/inspinia/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
 
-    <!-- loading -->
+    <!-- loading and etc -->
     <script th:src="@{/libs/inspinia/js/loading/app-script.js}"></script>
 
     <!-- lozm common custom Script js -->
@@ -38,6 +41,8 @@
 
     <!-- JWT decode -->
     <script th:src="@{/libs/inspinia/js/jwt-decode.min.js}"></script>
+
+    <script th:src="@{/libs/inspinia/js/plugins/iCheck/icheck.min.js}"></script>
     <!--========================== JS ==========================-->
 
     <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>

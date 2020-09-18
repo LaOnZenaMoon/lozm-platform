@@ -24,14 +24,14 @@
 							<div class="form-group">
 								<label for="put_boardType">Board type</label>
 								<select class="form-control single-select" id="put_boardType" name="boardType">
-<!--									<option th:each="item : ${boardTypeList}" th:value="${item}" th:text="${item}"></option>-->
+									<option th:each="item : ${boardTypeList}" th:value="${item}" th:text="${item}"></option>
 								</select>
 							</div>
 
 							<div class="form-group">
 								<label for="put_contentType">Content type</label>
 								<select class="form-control single-select" id="put_contentType" name="contentType">
-<!--									<option th:each="item : ${contentTypeList}" th:value="${item}" th:text="${item}"></option>-->
+									<option th:each="item : ${contentTypeList}" th:value="${item}" th:text="${item}"></option>
 								</select>
 							</div>
 
@@ -46,7 +46,7 @@
 							</div>
 
 							<div class="form-group">
-								<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
+								<button type="submit" class="btn btn-primary" >Save</button>
 							</div>
 
 						</form>
@@ -63,8 +63,7 @@
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
-			lozm.func.setDetail("put_", board.detail);
-
+			board.detail();
 			comment.initGrid();
 
 			$("#put_boardForm").validate({
@@ -72,18 +71,10 @@
 					board.put();
 				},
 				rules: {
-					boardType: {
-						required: true
-					},
-					contentType: {
-						required: true
-					},
-					title: {
-						required: true
-					},
-					content: {
-						required: true
-					},
+					boardType: {required: true},
+					contentType: {required: true},
+					title: {required: true},
+					content: {required: true},
 				},
 			});
 
@@ -92,18 +83,33 @@
 					comment.post();
 				},
 				rules: {
-					commentType: {
-						required: true
-					},
-					content: {
-						required: true
-					},
+					commentType: {required: true},
+					content: {required: true},
 				},
 			});
 		});
 
 		var board = {
-			detail: /*[[ ${boardDetail} ]]*/ "",
+			detail: function() {
+				lozm.func.requestGet({
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board/" + window.location.pathname.split("/board/")[1],
+					callback: {
+						success: function (result) {
+							if(result.success) {
+								lozm.func.setDetail("put_", result.data);
+							} else {
+								lozm.func.alertFail(result.message);
+							}
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr);
+							console.log(status);
+							console.log(error);
+							lozm.func.alertFail();
+						}
+					}
+				});
+			},
 			put: function () {
 				lozm.func.requestPut({
 					url: /*[[ @{/board} ]]*/ "",

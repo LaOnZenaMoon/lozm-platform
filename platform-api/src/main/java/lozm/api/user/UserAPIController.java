@@ -16,8 +16,8 @@ import java.util.List;
 
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
-@RequestMapping(value = "/api/user")
-@RestController
+@CrossOrigin("*")
+@RestController @RequestMapping(value = "/api/user")
 @RequiredArgsConstructor
 public class UserAPIController {
 

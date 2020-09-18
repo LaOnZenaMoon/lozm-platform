@@ -20,8 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RouteController {
 
-    private final RouteService routeService;
-
 
     @GetMapping("/home")
     public String home(ModelMap modelMap) {
@@ -60,21 +58,6 @@ public class RouteController {
 
     @GetMapping("/manage/store/{storeId}")
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
-//        GetStoreDto getStoreDetail = routeService.getStoreDetail(storeId);
-//        modelMap.addAttribute("storeDetail", getStoreDetail);
-//
-//        GetClothingDto.Response getOuter = routeService.getStoreClothing(storeId, "OUTER");
-//        modelMap.addAttribute("outerList", getOuter.getList());
-//
-//        GetClothingDto.Response getTop = routeService.getStoreClothing(storeId, "TOP");
-//        modelMap.addAttribute("topList", getTop.getList());
-//
-//        GetClothingDto.Response getBottom = routeService.getStoreClothing(storeId, "BOTTOM");
-//        modelMap.addAttribute("bottomList", getBottom.getList());
-//
-//        GetClothingDto.Response getShoes = routeService.getStoreClothing(storeId, "SHOES");
-//        modelMap.addAttribute("shoesList", getShoes.getList());
-
         return "pages/store/storeDetail";
     }
 

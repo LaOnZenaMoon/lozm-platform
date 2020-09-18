@@ -1,48 +1,50 @@
-<!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+    <th:block
+            th:replace="@{layout/contentHeader.html} :: contentHeader('Item','Shop management','','','')"></th:block>
 
-    <div id="wrapper">
-        <th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
-        <th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-        <th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+    <th:block th:replace="@{layout/dataTable.html} :: dataTable"></th:block>
 
-        <div class="clearfix"></div>
+    <div class="wrapper wrapper-content">
 
-        <div class="content-wrapper">
-            <div class="container-fluid">
-
-                <th:block
-                        th:replace="@{layout/contentHeader.html} :: contentHeader('Item','Shop management','','','')"></th:block>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <i class="fa fa-table"></i> Item
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="default-datatable" class="table table-bordered display"></table>
-                                </div>
-                            </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Board</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" class="dropdown-item">Config option 1</a>
+                                </li>
+                                <li><a href="#" class="dropdown-item">Config option 2</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="itemGrid">
+
+                            </table>
+                        </div>
+
+                    </div>
                 </div>
-
-                <div class="overlay toggle-menu"></div>
             </div>
-
         </div>
 
-        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-
-        <th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-        <th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
     </div>
+
+
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -53,7 +55,7 @@
         });
 
         var item = {
-            gridId: "default-datatable",
+            gridId: "itemGrid",
             gridTarget: function () {
                 return $("#" + item.gridId).DataTable();
             },
@@ -88,7 +90,7 @@
             },
             getGridData: function () {
                 lozm.func.requestGet({
-                    url: "/item",
+                    url: lozm.GATEWAY_SERVER + "/platform-api/api/item",
                     callback: {
                         success: function(result) {
 

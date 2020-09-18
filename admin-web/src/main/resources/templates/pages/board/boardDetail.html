@@ -16,11 +16,6 @@
 						<div class="card-title">Board > Detail</div>
 						<hr>
 						<form id="put_boardForm">
-
-							<div class="form-group">
-								<input type="hidden" id="put_board_id" name="id">
-							</div>
-
 							<div class="form-group">
 								<label for="put_boardType">Board type</label>
 								<select class="form-control single-select" id="put_boardType" name="boardType">
@@ -55,16 +50,80 @@
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="tabs-container">
+					<ul class="nav nav-tabs" role="tablist">
+						<li><a class="nav-link active" data-toggle="tab" href="#tab-1"> Comment</a></li>
+<!--						<li><a class="nav-link" data-toggle="tab" href="#tab-2">This is second tab</a></li>-->
+					</ul>
+					<div class="tab-content">
+						<div role="tabpanel" id="tab-1" class="tab-pane active">
+							<div class="panel-body">
+								<div class="card">
+									<div class="card-header">
+										<i class="fa fa-table"></i> Board > Comment
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="commentGrid" class="table table-bordered display modal-grid"></table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+<!--						<div role="tabpanel" id="tab-2" class="tab-pane">-->
+<!--							<div class="panel-body">-->
+<!--							</div>-->
+<!--						</div>-->
+					</div>
 
+
+				</div>
+			</div>
+		</div>
 
 	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog"  aria-hidden="true" id="post_comment" >
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="post_commentForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="post_comment_type">Comment type</label>
+							<select class="form-control single-select" id="post_comment_type" name="comment_type">
+								<option th:each="item : ${commentTypeList}" th:value="${item}" th:text="${item}"></option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="post_content">Content</label>
+							<textarea rows="10" class="form-control" id="post_content" name="content"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
 </th:block>
 
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
-			board.detail();
+			board.getDetail();
 			comment.initGrid();
+			comment.getGridData();
 
 			$("#put_boardForm").validate({
 				submitHandler: function(form) {
@@ -90,9 +149,10 @@
 		});
 
 		var board = {
-			detail: function() {
+			id: window.location.pathname.split("/board/")[1],
+			getDetail: function() {
 				lozm.func.requestGet({
-					url: lozm.GATEWAY_SERVER + "/platform-api/api/board/" + window.location.pathname.split("/board/")[1],
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board/" + board.id,
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -112,9 +172,9 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/board} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board",
 					data: {
-						id: $("#put_board_id").val(),
+						id: board.id,
 						boardType: $("#put_boardType").val(),
 						contentType: $("#put_contentType").val(),
 						title: $("#put_title").val(),
@@ -126,23 +186,6 @@
 								lozm.func.alertSuccess();
 							} else {
 								lozm.func.alertFail();
-							}
-						},
-						error: function (xhr, status, error) {
-							console.log(xhr);
-							console.log(status);
-							console.log(error);
-						}
-					}
-				});
-			},
-			getDetail: function () {
-				lozm.func.requestGet({
-					url: "/board/" + $("#put_board_id").val(),
-					callback: {
-						success: function (result) {
-							if(result.success) {
-								lozm.func.setDetail("put_board_", result.data);
 							}
 						},
 						error: function (xhr, status, error) {
@@ -170,7 +213,7 @@
 						{title: 'Flag', 			data: 'flag',   			width: "10%"},
 						{title: 'Content',    		data: 'content',     		width: "70%"},
 					],
-					data: /*[[ ${commentList} ]]*/ "",
+					data: [],
 					select: {
 						style: 'multi',
 					},
@@ -215,11 +258,10 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: "/board/" + $("#put_board_id").val() + "/comment",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board/" + board.id + "/comment",
 					callback: {
 						success: function (result) {
 							if(result.success) {
-								board.getDetail();
 								comment.gridTarget().clear().draw();
 								comment.gridTarget().rows.add(result.data.list).draw();
 							}
@@ -234,9 +276,9 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/board/comment} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board/comment",
 					data: {
-						boardId: $("#put_board_id").val(),
+						boardId: board.id,
 						commentType: $("#post_comment_type").val(),
 						content: $("#post_content").val()
 					},
@@ -244,7 +286,6 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
-								board.getDetail();
 								comment.getGridData();
 							} else {
 								lozm.func.alertFail();
@@ -260,7 +301,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/board/comment} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/board/comment",
 					data: {
 						list: list
 					},
@@ -268,7 +309,6 @@
 						success: function (result) {
 							if(result.success) {
 								lozm.func.alertSuccess();
-								board.getDetail();
 								comment.getGridData();
 							} else {
 								lozm.func.alertFail();

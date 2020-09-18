@@ -1,12 +1,8 @@
 package lozm.api.route;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import lozm.api.board.BoardAPIService;
 import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
-import lozm.object.dto.board.GetBoardDto;
-import lozm.object.dto.board.GetCommentDto;
 import lozm.object.dto.coupon.GetCouponDto;
 import lozm.object.dto.coupon.GetCouponUserDto;
 import lozm.object.dto.item.GetClothingDto;
@@ -17,18 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
-
-import static lozm.object.code.SessionType.USER;
 
 @Controller @RequestMapping("/pages")
 @RequiredArgsConstructor
 public class RouteController {
 
     private final RouteService routeService;
-    private final BoardAPIService boardAPIService;
 
 
     @GetMapping("/home")
@@ -46,13 +38,9 @@ public class RouteController {
     @GetMapping("/manage/board/{boardId}")
     public String manageBoardDetail(ModelMap modelMap, @PathVariable(value = "boardId") Long boardId) throws Exception {
         setBoardInfo(modelMap);
-//        GetCommentDto.Response commentList = boardAPIService.getComment(boardId);
-//        modelMap.addAttribute("commentList", commentList.getList());
-//
 
-//
-//        List<ContentType> commentTypeList = Arrays.asList(ContentType.values());
-//        modelMap.addAttribute("commentTypeList", commentTypeList);
+        List<ContentType> commentTypeList = Arrays.asList(ContentType.values());
+        modelMap.addAttribute("commentTypeList", commentTypeList);
 
         return "pages/board/boardDetail";
     }

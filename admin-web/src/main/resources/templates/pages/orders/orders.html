@@ -1,488 +1,519 @@
-<!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+	<th:block
+			th:replace="@{layout/contentHeader.html} :: contentHeader('Orders','Shop management','','','')"></th:block>
 
-	<div id="wrapper">
-		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
-		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+	<th:block th:replace="@{layout/dataTable.html} :: dataTable"></th:block>
 
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Orders','Shop management','','','')"></th:block>
+	<div class="wrapper wrapper-content">
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header">
-								<i class="fa fa-table"></i> Orders
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="ordersGrid" class="table table-bordered display">
-
-									</table>
-								</div>
-							</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>Orders</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#" class="dropdown-item">Config option 1</a>
+								</li>
+								<li><a href="#" class="dropdown-item">Config option 2</a>
+								</li>
+							</ul>
 						</div>
 					</div>
-				</div>
+					<div class="ibox-content">
 
-			</div>
-		</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover" id="ordersGrid">
 
-		<div class="modal fade" id="post_orders">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+							</table>
+						</div>
+
 					</div>
-					<form id="post_ordersForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<input type="hidden" id="post_user_id">
-
-								<label for="post_user">User</label>
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_user" readonly name="user">
-									<div class="input-group-append">
-										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<input type="hidden" id="post_store_id">
-
-								<label for="post_store">Store</label>
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_store" readonly name="store">
-									<div class="input-group-append">
-										<span class="input-group-text" onclick='$("#get_store").modal("show")'><i class="fa fa-search"></i></span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<input type="hidden" id="post_item_id">
-
-								<label for="post_item">Item</label>
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_item" readonly name="item">
-									<div class="input-group-append">
-										<span class="input-group-text" onclick="item.showModal()"><i class="fa fa-search"></i></span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="post_item_quantity">Item quantity</label>
-								<input type="number" class="form-control" id="post_item_quantity" name="item_quantity" value="1">
-							</div>
-
-							<div class="form-group">
-								<input type="hidden" id="post_coupon_id">
-
-								<label for="post_coupon">Coupon</label>
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_coupon" readonly name="coupon">
-									<div class="input-group-append">
-										<span class="input-group-text" onclick='$("#get_coupon").modal("show")'><i class="fa fa-search"></i></span>
-									</div>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<input type="hidden" id="post_delivery_id">
-
-								<label for="post_delivery">Delivery</label>
-								<div class="input-group mb-3">
-									<input type="text" class="form-control" id="post_delivery" readonly name="delivery">
-									<div class="input-group-append">
-										<span class="input-group-text" onclick='$("#get_delivery").modal("show")'><i class="fa fa-search"></i></span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
 
-		<div class="modal fade" id="put_orders">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form id="put_ordersForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<input type="hidden" id="put_ordersId">
-							</div>
-
-							<div class="form-group">
-								<label for="put_ordersStatus">Status</label>
-								<select class="form-control single-select" id="put_ordersStatus" name="ordersStatus">
-									<option value="PREPARATION">Preparation</option>
-									<option value="PROGRESS">Progress</option>
-									<option value="COMPLETE">Complete</option>
-								</select>
-							</div>
-<!--							<div class="form-group">-->
-<!--								<input type="hidden" id="put_user_id">-->
-
-<!--								<label for="put_user">User</label>-->
-<!--								<div class="input-group mb-3">-->
-<!--									<input type="text" class="form-control" id="put_user" readonly name="user">-->
-<!--									<div class="input-group-append">-->
-<!--										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-
-<!--							<div class="form-group">-->
-<!--								<input type="hidden" id="put_store_id">-->
-
-<!--								<label for="put_store">Store</label>-->
-<!--								<div class="input-group mb-3">-->
-<!--									<input type="text" class="form-control" id="put_store" readonly name="store">-->
-<!--									<div class="input-group-append">-->
-<!--										<span class="input-group-text" onclick='$("#get_store").modal("show")'><i class="fa fa-search"></i></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-
-<!--							<div class="form-group">-->
-<!--								<input type="hidden" id="put_item_id">-->
-
-<!--								<label for="put_item">Item</label>-->
-<!--								<div class="input-group mb-3">-->
-<!--									<input type="text" class="form-control" id="put_item" readonly name="item">-->
-<!--									<div class="input-group-append">-->
-<!--										<span class="input-group-text" onclick="item.showModal()"><i class="fa fa-search"></i></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-
-<!--							<div class="form-group">-->
-<!--								<label for="put_item_quantity">Item quantity</label>-->
-<!--								<input type="number" class="form-control" id="put_item_quantity" name="item_quantity" value="1">-->
-<!--							</div>-->
-
-<!--							<div class="form-group">-->
-<!--								<input type="hidden" id="put_coupon_id">-->
-
-<!--								<label for="put_coupon">Coupon</label>-->
-<!--								<div class="input-group mb-3">-->
-<!--									<input type="text" class="form-control" id="put_coupon" readonly name="coupon">-->
-<!--									<div class="input-group-append">-->
-<!--										<span class="input-group-text" onclick='$("#get_coupon").modal("show")'><i class="fa fa-search"></i></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-
-<!--							<div class="form-group">-->
-<!--								<input type="hidden" id="put_delivery_id">-->
-
-<!--								<label for="put_delivery">Delivery</label>-->
-<!--								<div class="input-group mb-3">-->
-<!--									<input type="text" class="form-control" id="put_delivery" readonly name="delivery">-->
-<!--									<div class="input-group-append">-->
-<!--										<span class="input-group-text" onclick='$("#get_delivery").modal("show")'><i class="fa fa-search"></i></span>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="get_user">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-header">
-										<i class="fa fa-table"></i> User
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table id="userGrid" class="table table-bordered display modal-grid"></table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="user.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="get_store">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-header">
-										<i class="fa fa-table"></i> Store
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table id="storeGrid" class="table table-bordered display modal-grid"></table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="store.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="get_item">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body">
-
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-body">
-										<ul class="nav nav-tabs nav-tabs-info nav-justified">
-											<li class="nav-item">
-												<a class="nav-link active" data-toggle="tab" href="#outer" onclick="item.getGridData(item.type.outer)"><i class="icon-home"></i> <span class="hidden-xs">Outer</span></a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" data-toggle="tab" href="#top" onclick="item.getGridData(item.type.top)"><i class="icon-user"></i> <span class="hidden-xs">Top</span></a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" data-toggle="tab" href="#bottom" onclick="item.getGridData(item.type.bottom)"><i class="icon-envelope-open"></i> <span class="hidden-xs">Bottom</span></a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" data-toggle="tab" href="#shoes" onclick="item.getGridData(item.type.shoes)"><i class="icon-envelope-open"></i> <span class="hidden-xs">Shoes</span></a>
-											</li>
-
-										</ul>
-
-										<!-- Tab panes -->
-										<div class="tab-content">
-											<div id="outer" class="container tab-pane active">
-
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="card">
-															<div class="card-header">
-																<i class="fa fa-table"></i> Item > Outer
-															</div>
-															<div class="card-body">
-																<div class="table-responsive">
-																	<table id="outerGrid" class="table table-bordered display modal-grid"></table>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-
-											<div id="top" class="container tab-pane fade">
-
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="card">
-															<div class="card-header">
-																<i class="fa fa-table"></i> Item > Top
-															</div>
-															<div class="card-body">
-																<div class="table-responsive">
-																	<table id="topGrid" class="table table-bordered display modal-grid"></table>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-											<div id="bottom" class="container tab-pane fade">
-
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="card">
-															<div class="card-header">
-																<i class="fa fa-table"></i> Item > Bottom
-															</div>
-															<div class="card-body">
-																<div class="table-responsive">
-																	<table id="bottomGrid" class="table table-bordered display modal-grid"></table>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-											<div id="shoes" class="container tab-pane fade">
-
-												<div class="row">
-													<div class="col-lg-12">
-														<div class="card">
-															<div class="card-header">
-																<i class="fa fa-table"></i> Item > Shoes
-															</div>
-															<div class="card-body">
-																<div class="table-responsive">
-																	<table id="shoesGrid" class="table table-bordered display modal-grid"></table>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-					</div>
-
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="item.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="get_coupon">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-header">
-										<i class="fa fa-table"></i> Coupon
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table id="couponGrid" class="table table-bordered display modal-grid"></table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="coupon.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="get_delivery">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card">
-									<div class="card-header">
-										<i class="fa fa-table"></i> Delivery
-									</div>
-									<div class="card-body">
-										<div class="table-responsive">
-											<table id="deliveryGrid" class="table table-bordered display modal-grid"></table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success" onclick="delivery.setInput()"><i class="fa fa-check-square-o"></i>Select</button>
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="post_orders">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="post_ordersForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="hidden" id="post_user_id">
+
+							<label for="post_user">User</label>
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" id="post_user" readonly name="user">
+								<div class="input-group-append">
+									<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<input type="hidden" id="post_store_id">
+
+							<label for="post_store">Store</label>
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" id="post_store" readonly name="store">
+								<div class="input-group-append">
+									<span class="input-group-text" onclick='$("#get_store").modal("show")'><i class="fa fa-search"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<input type="hidden" id="post_item_id">
+
+							<label for="post_item">Item</label>
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" id="post_item" readonly name="item">
+								<div class="input-group-append">
+									<span class="input-group-text" onclick="item.showModal()"><i class="fa fa-search"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="post_item_quantity">Item quantity</label>
+							<input type="number" class="form-control" id="post_item_quantity" name="item_quantity" value="1">
+						</div>
+
+						<div class="form-group">
+							<input type="hidden" id="post_coupon_id">
+
+							<label for="post_coupon">Coupon</label>
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" id="post_coupon" readonly name="coupon">
+								<div class="input-group-append">
+									<span class="input-group-text" onclick='$("#get_coupon").modal("show")'><i class="fa fa-search"></i></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<input type="hidden" id="post_delivery_id">
+
+							<label for="post_delivery">Delivery</label>
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" id="post_delivery" readonly name="delivery">
+								<div class="input-group-append">
+									<span class="input-group-text" onclick='$("#get_delivery").modal("show")'><i class="fa fa-search"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="put_orders">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="put_ordersForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="hidden" id="put_ordersId">
+						</div>
+
+						<div class="form-group">
+							<label for="put_ordersStatus">Status</label>
+							<select class="form-control single-select" id="put_ordersStatus" name="ordersStatus">
+								<option value="PREPARATION">Preparation</option>
+								<option value="PROGRESS">Progress</option>
+								<option value="COMPLETE">Complete</option>
+							</select>
+						</div>
+						<!--							<div class="form-group">-->
+						<!--								<input type="hidden" id="put_user_id">-->
+
+						<!--								<label for="put_user">User</label>-->
+						<!--								<div class="input-group mb-3">-->
+						<!--									<input type="text" class="form-control" id="put_user" readonly name="user">-->
+						<!--									<div class="input-group-append">-->
+						<!--										<span class="input-group-text" onclick='$("#get_user").modal("show")'><i class="fa fa-search"></i></span>-->
+						<!--									</div>-->
+						<!--								</div>-->
+						<!--							</div>-->
+
+						<!--							<div class="form-group">-->
+						<!--								<input type="hidden" id="put_store_id">-->
+
+						<!--								<label for="put_store">Store</label>-->
+						<!--								<div class="input-group mb-3">-->
+						<!--									<input type="text" class="form-control" id="put_store" readonly name="store">-->
+						<!--									<div class="input-group-append">-->
+						<!--										<span class="input-group-text" onclick='$("#get_store").modal("show")'><i class="fa fa-search"></i></span>-->
+						<!--									</div>-->
+						<!--								</div>-->
+						<!--							</div>-->
+
+						<!--							<div class="form-group">-->
+						<!--								<input type="hidden" id="put_item_id">-->
+
+						<!--								<label for="put_item">Item</label>-->
+						<!--								<div class="input-group mb-3">-->
+						<!--									<input type="text" class="form-control" id="put_item" readonly name="item">-->
+						<!--									<div class="input-group-append">-->
+						<!--										<span class="input-group-text" onclick="item.showModal()"><i class="fa fa-search"></i></span>-->
+						<!--									</div>-->
+						<!--								</div>-->
+						<!--							</div>-->
+
+						<!--							<div class="form-group">-->
+						<!--								<label for="put_item_quantity">Item quantity</label>-->
+						<!--								<input type="number" class="form-control" id="put_item_quantity" name="item_quantity" value="1">-->
+						<!--							</div>-->
+
+						<!--							<div class="form-group">-->
+						<!--								<input type="hidden" id="put_coupon_id">-->
+
+						<!--								<label for="put_coupon">Coupon</label>-->
+						<!--								<div class="input-group mb-3">-->
+						<!--									<input type="text" class="form-control" id="put_coupon" readonly name="coupon">-->
+						<!--									<div class="input-group-append">-->
+						<!--										<span class="input-group-text" onclick='$("#get_coupon").modal("show")'><i class="fa fa-search"></i></span>-->
+						<!--									</div>-->
+						<!--								</div>-->
+						<!--							</div>-->
+
+						<!--							<div class="form-group">-->
+						<!--								<input type="hidden" id="put_delivery_id">-->
+
+						<!--								<label for="put_delivery">Delivery</label>-->
+						<!--								<div class="input-group mb-3">-->
+						<!--									<input type="text" class="form-control" id="put_delivery" readonly name="delivery">-->
+						<!--									<div class="input-group-append">-->
+						<!--										<span class="input-group-text" onclick='$("#get_delivery").modal("show")'><i class="fa fa-search"></i></span>-->
+						<!--									</div>-->
+						<!--								</div>-->
+						<!--							</div>-->
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- sub modal -->
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="get_user">
+		<div class="modal-dialog" style="max-width: 80% !important;">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="ibox ">
+								<div class="ibox-title">
+									<h5>User</h5>
+									<div class="ibox-tools">
+										<a class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</a>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											<i class="fa fa-wrench"></i>
+										</a>
+										<ul class="dropdown-menu dropdown-user">
+											<li><a href="#" class="dropdown-item">Config option 1</a>
+											</li>
+											<li><a href="#" class="dropdown-item">Config option 2</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="ibox-content">
+
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover" id="userGrid" style="width: 100%;">
+
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" onclick="user.setInput()">Select</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="get_store">
+		<div class="modal-dialog" style="max-width: 80% !important;">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="ibox ">
+								<div class="ibox-title">
+									<h5>Store</h5>
+									<div class="ibox-tools">
+										<a class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</a>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											<i class="fa fa-wrench"></i>
+										</a>
+										<ul class="dropdown-menu dropdown-user">
+											<li><a href="#" class="dropdown-item">Config option 1</a>
+											</li>
+											<li><a href="#" class="dropdown-item">Config option 2</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="ibox-content">
+
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover" id="storeGrid" style="width: 100%;">
+
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" onclick="store.setInput()">Select</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="get_item">
+		<div class="modal-dialog" style="max-width: 80% !important;">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="tabs-container">
+								<ul class="nav nav-tabs" role="tablist">
+									<li><a class="nav-link active" data-toggle="tab" href="#outer">Outer</a></li>
+									<li><a class="nav-link" data-toggle="tab" href="#top">Top</a></li>
+									<li><a class="nav-link" data-toggle="tab" href="#bottom">Bottom</a></li>
+									<li><a class="nav-link" data-toggle="tab" href="#shoes">Shoes</a></li>
+								</ul>
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="outer">
+										<div class="panel-body">
+
+											<div class="card">
+												<div class="card-header">
+													<i class="fa fa-table"></i> Store > Outer
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<table id="outerGrid" class="table table-bordered display modal-grid" style="width: 100%;"></table>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane" id="top">
+										<div class="panel-body">
+
+											<div class="card">
+												<div class="card-header">
+													<i class="fa fa-table"></i> Store > Top
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<table id="topGrid" class="table table-bordered display modal-grid" style="width: 100%;"></table>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane" id="bottom">
+										<div class="panel-body">
+
+											<div class="card">
+												<div class="card-header">
+													<i class="fa fa-table"></i> Store > Bottom
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<table id="bottomGrid" class="table table-bordered display modal-grid" style="width: 100%;"></table>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+
+									<div role="tabpanel" class="tab-pane" id="shoes">
+										<div class="panel-body">
+
+											<div class="card">
+												<div class="card-header">
+													<i class="fa fa-table"></i> Store > Shoes
+												</div>
+												<div class="card-body">
+													<div class="table-responsive">
+														<table id="shoesGrid" class="table table-bordered display modal-grid" style="width: 100%;"></table>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" onclick="item.setInput()">Select</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="get_coupon">
+		<div class="modal-dialog" style="max-width: 80% !important;">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="ibox ">
+								<div class="ibox-title">
+									<h5>Coupon</h5>
+									<div class="ibox-tools">
+										<a class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</a>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											<i class="fa fa-wrench"></i>
+										</a>
+										<ul class="dropdown-menu dropdown-user">
+											<li><a href="#" class="dropdown-item">Config option 1</a>
+											</li>
+											<li><a href="#" class="dropdown-item">Config option 2</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="ibox-content">
+
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover" id="couponGrid" style="width: 100%;">
+
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" onclick="coupon.setInput()">Select</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="get_delivery">
+		<div class="modal-dialog" style="max-width: 80% !important;">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="ibox ">
+								<div class="ibox-title">
+									<h5>Delivery</h5>
+									<div class="ibox-tools">
+										<a class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</a>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											<i class="fa fa-wrench"></i>
+										</a>
+										<ul class="dropdown-menu dropdown-user">
+											<li><a href="#" class="dropdown-item">Config option 1</a>
+											</li>
+											<li><a href="#" class="dropdown-item">Config option 2</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="ibox-content">
+
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover" id="deliveryGrid" style="width: 100%;">
+
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" onclick="delivery.setInput()">Select</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- sub modal -->
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -513,24 +544,12 @@
 					orders.post();
 				},
 				rules: {
-					user: {
-						required: true
-					},
-					store: {
-						required: true
-					},
-					item: {
-						required: true
-					},
-					item_quantity: {
-						required: true
-					},
-					coupon: {
-						required: true
-					},
-					delivery: {
-						required: true
-					},
+					user: {required: true},
+					store: {required: true},
+					item: {required: true},
+					item_quantity: {required: true},
+					coupon: {required: true},
+					delivery: {required: true},
 				},
 			});
 
@@ -539,24 +558,12 @@
 					orders.put();
 				},
 				rules: {
-					user: {
-						required: true
-					},
-					store: {
-						required: true
-					},
-					item: {
-						required: true
-					},
-					item_quantity: {
-						required: true
-					},
-					coupon: {
-						required: true
-					},
-					delivery: {
-						required: true
-					},
+					user: {required: true},
+					store: {required: true},
+					item: {required: true},
+					item_quantity: {required: true},
+					coupon: {required: true},
+					delivery: {required: true},
 				},
 			});
 		});
@@ -647,7 +654,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/orders} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/orders",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -665,7 +672,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/orders} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/orders",
 					data: {
 						userId: $("#post_user_id").val(),
 						itemId: $("#post_item_id").val(),
@@ -692,7 +699,7 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/orders} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/orders",
 					data: {
 						id: $("#put_ordersId").val(),
 						status: $("#put_ordersStatus").val()
@@ -716,7 +723,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/orders} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/orders",
 					data: {
 						list: list
 					},
@@ -764,7 +771,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/user} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/user",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -814,7 +821,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/store} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/store",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -849,7 +856,7 @@
 			},
 			getGridData: function (itemType) {
 				lozm.func.requestGet({
-					url: "/store/" + $("#post_store_id").val() + "/clothing/" + itemType,
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/store/" + $("#post_store_id").val() + "/clothing/" + itemType,
 					callback: {
 						success: function(result) {
 
@@ -1250,7 +1257,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/coupon} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/coupon",
 					callback: {
 						success: function (result) {
 
@@ -1314,7 +1321,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/delivery} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/delivery",
 					callback: {
 						success: function (result) {
 

@@ -147,7 +147,7 @@ public class CouponService {
 
     @Transactional
     public void deleteCouponUser(CouponVo couponVo) throws Exception {
-        Optional<CouponUser> findCouponUser = findCouponUser(couponVo.getId());
+        Optional<CouponUser> findCouponUser = findCouponUser(couponVo.getCouponUserId());
         findCouponUser.get().deleteCouponUser(couponVo);
 
         //Find and check the coupon

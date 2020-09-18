@@ -192,7 +192,10 @@
 			coupon.getDetail();
 
 			couponUser.initGrid();
+			couponUser.getGridData();
+
 			user.initGrid();
+			user.getGridData();
 
 			$("#put_couponForm").validate({
 				submitHandler: function(form) {
@@ -312,7 +315,6 @@
 						{
 							text: '<i class="fa fa-plus"></i>',
 							action: function () {
-								user.getGridData();
 								$("#post_couponUser").modal("show");
 							},
 						},
@@ -433,9 +435,9 @@
 					},
 					callback: {
 						success: function (result) {
+							console.log(result);
 							if(result.success) {
 								lozm.func.alertSuccess();
-
 								coupon.getDetail();
 								couponUser.getGridData();
 							} else {

@@ -73,12 +73,6 @@ public class RouteController {
 
     @GetMapping("/manage/coupon/{couponId}")
     public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) throws Exception {
-//        GetCouponDto getCouponDetail = routeService.getCouponDetail(couponId);
-//        modelMap.addAttribute("couponDetail", getCouponDetail);
-//
-//        GetCouponUserDto.Response getCouponUser = routeService.getCouponUser(couponId);
-//        modelMap.addAttribute("couponUserList", getCouponUser.getList());
-
         return "pages/coupon/couponDetail";
     }
 

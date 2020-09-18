@@ -1,154 +1,157 @@
-<!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+	<th:block
+			th:replace="@{layout/contentHeader.html} :: contentHeader('Delivery','Setting','','','')"></th:block>
 
-	<div id="wrapper">
-		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
-		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+	<th:block th:replace="@{layout/dataTable.html} :: dataTable"></th:block>
 
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Delivery','Setting','','','')"></th:block>
+	<div class="wrapper wrapper-content">
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header">
-								<i class="fa fa-table"></i> Delivery
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="deliveryGrid" class="table table-bordered display">
-
-									</table>
-								</div>
-							</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>Delivery</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#" class="dropdown-item">Config option 1</a>
+								</li>
+								<li><a href="#" class="dropdown-item">Config option 2</a>
+								</li>
+							</ul>
 						</div>
 					</div>
-				</div>
+					<div class="ibox-content">
 
-			</div>
-		</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover" id="deliveryGrid">
 
-		<div class="modal fade" id="post_delivery">
-			<div class="modal-dialog">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+							</table>
+						</div>
+
 					</div>
-					<form id="post_deliveryForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="post_country">Country</label>
-								<input type="text" class="form-control" id="post_country" name="country">
-							</div>
-
-							<div class="form-group">
-								<label for="post_zipCode">ZipCode</label>
-								<input type="text" class="form-control" id="post_zipCode" name="zipCode">
-							</div>
-
-							<div class="form-group">
-								<label for="post_city">City</label>
-								<input type="text" class="form-control" id="post_city" name="city">
-							</div>
-
-							<div class="form-group">
-								<label for="post_street">Street</label>
-								<input type="text" class="form-control" id="post_street" name="street">
-							</div>
-
-							<div class="form-group">
-								<label for="post_etc">etc</label>
-								<input type="text" class="form-control" id="post_etc" name="etc">
-							</div>
-
-							<div class="form-group">
-								<label for="post_status">Status</label>
-								<select class="form-control single-select" id="post_status" name="status">
-									<option value="PREPARATION">Preparation</option>
-									<option value="PROGRESS">Progress</option>
-									<option value="COMPLETE">Complete</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
 
-		<div class="modal fade" id="put_delivery">
-			<div class="modal-dialog">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form id="put_deliveryForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<input type="hidden" id="put_id">
-							</div>
-
-							<div class="form-group">
-								<label for="put_country">Country</label>
-								<input type="text" class="form-control" id="put_country" name="country">
-							</div>
-
-							<div class="form-group">
-								<label for="put_zipCode">ZipCode</label>
-								<input type="text" class="form-control" id="put_zipCode" name="zipCode">
-							</div>
-
-							<div class="form-group">
-								<label for="put_city">City</label>
-								<input type="text" class="form-control" id="put_city" name="city">
-							</div>
-
-							<div class="form-group">
-								<label for="put_street">Street</label>
-								<input type="text" class="form-control" id="put_street" name="street">
-							</div>
-
-							<div class="form-group">
-								<label for="put_etc">etc</label>
-								<input type="text" class="form-control" id="put_etc" name="etc">
-							</div>
-
-							<div class="form-group">
-								<label for="put_status">Status</label>
-								<select class="form-control single-select" id="put_status" name="status">
-									<option value="PREPARATION">Preparation</option>
-									<option value="PROGRESS">Progress</option>
-									<option value="COMPLETE">Complete</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="post_delivery">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="post_deliveryForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="post_country">Country</label>
+							<input type="text" class="form-control" id="post_country" name="country">
+						</div>
+
+						<div class="form-group">
+							<label for="post_zipCode">ZipCode</label>
+							<input type="text" class="form-control" id="post_zipCode" name="zipCode">
+						</div>
+
+						<div class="form-group">
+							<label for="post_city">City</label>
+							<input type="text" class="form-control" id="post_city" name="city">
+						</div>
+
+						<div class="form-group">
+							<label for="post_street">Street</label>
+							<input type="text" class="form-control" id="post_street" name="street">
+						</div>
+
+						<div class="form-group">
+							<label for="post_etc">etc</label>
+							<input type="text" class="form-control" id="post_etc" name="etc">
+						</div>
+
+						<div class="form-group">
+							<label for="post_status">Status</label>
+							<select class="form-control single-select" id="post_status" name="status">
+								<option value="PREPARATION">Preparation</option>
+								<option value="PROGRESS">Progress</option>
+								<option value="COMPLETE">Complete</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="put_delivery">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="put_deliveryForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="hidden" id="put_id">
+						</div>
+
+						<div class="form-group">
+							<label for="put_country">Country</label>
+							<input type="text" class="form-control" id="put_country" name="country">
+						</div>
+
+						<div class="form-group">
+							<label for="put_zipCode">ZipCode</label>
+							<input type="text" class="form-control" id="put_zipCode" name="zipCode">
+						</div>
+
+						<div class="form-group">
+							<label for="put_city">City</label>
+							<input type="text" class="form-control" id="put_city" name="city">
+						</div>
+
+						<div class="form-group">
+							<label for="put_street">Street</label>
+							<input type="text" class="form-control" id="put_street" name="street">
+						</div>
+
+						<div class="form-group">
+							<label for="put_etc">etc</label>
+							<input type="text" class="form-control" id="put_etc" name="etc">
+						</div>
+
+						<div class="form-group">
+							<label for="put_status">Status</label>
+							<select class="form-control single-select" id="put_status" name="status">
+								<option value="PREPARATION">Preparation</option>
+								<option value="PROGRESS">Progress</option>
+								<option value="COMPLETE">Complete</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -162,32 +165,10 @@
 					delivery.post();
 				},
 				rules: {
-					country: {
-						required: true
-					},
-					zipCode: {
-						required: true
-					},
-					city: {
-						required: true
-					},
-					street: {
-						required: true
-					},
-				},
-				message: {
-					country: {
-						required: "Name is required.",
-					},
-					zipCode: {
-						required: "identifier is required.",
-					},
-					city: {
-						required: "password is required."
-					},
-					street: {
-						required: "type is required."
-					},
+					country: {required: true},
+					zipCode: {required: true},
+					city: {required: true},
+					street: {required: true},
 				},
 			});
 
@@ -197,35 +178,11 @@
 					delivery.put();
 				},
 				rules: {
-					id: {
-						required: true
-					},
-					country: {
-						required: true
-					},
-					zipCode: {
-						required: true
-					},
-					city: {
-						required: true
-					},
-					street: {
-						required: true
-					},
-				},
-				message: {
-					country: {
-						required: "Name is required.",
-					},
-					zipCode: {
-						required: "identifier is required.",
-					},
-					city: {
-						required: "password is required."
-					},
-					street: {
-						required: "type is required."
-					},
+					id: {required: true},
+					country: {required: true},
+					zipCode: {required: true},
+					city: {required: true},
+					street: {required: true},
 				},
 			});
 		});
@@ -310,7 +267,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/delivery} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/delivery",
 					callback: {
 						success: function (result) {
 
@@ -329,7 +286,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/delivery} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/delivery",
 					data: {
 						country: $("#post_country").val(),
 						zipCode: $("#post_zipCode").val(),
@@ -357,7 +314,7 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/delivery} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/delivery",
 					data: {
 						id: $("#put_id").val(),
 						country: $("#put_country").val(),
@@ -386,7 +343,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/delivery} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/delivery",
 					data: {
 						list: list
 					},

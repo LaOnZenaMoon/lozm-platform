@@ -1,111 +1,117 @@
-<!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+	<th:block
+			th:replace="@{layout/contentHeader.html} :: contentHeader('Coupon','Shop management','','','')"></th:block>
 
-	<div id="wrapper">
-		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
-		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+	<th:block th:replace="@{layout/dataTable.html} :: dataTable"></th:block>
 
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Coupon','Shop management','','','')"></th:block>
+	<th:block th:replace="@{layout/datePicker.html} :: datePicker"></th:block>
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header">
-								<i class="fa fa-table"></i> Coupon
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="couponGrid" class="table table-bordered display">
+	<div class="wrapper wrapper-content">
 
-									</table>
-								</div>
-							</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>Board</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#" class="dropdown-item">Config option 1</a>
+								</li>
+								<li><a href="#" class="dropdown-item">Config option 2</a>
+								</li>
+							</ul>
 						</div>
 					</div>
-				</div>
+					<div class="ibox-content">
 
-			</div>
-		</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover" id="couponGrid">
 
-		<div class="modal fade" id="post_coupon">
-			<div class="modal-dialog">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+							</table>
+						</div>
+
 					</div>
-					<form id="post_couponForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="post_name">Name</label>
-								<input type="text" class="form-control" id="post_name" name="name">
-							</div>
-
-							<div class="form-group">
-								<label for="post_type">Type</label>
-								<select class="form-control single-select" id="post_type" name="type">
-									<option value="RATIO">Ratio</option>
-									<option value="PRICE">Price</option>
-								</select>
-							</div>
-
-							<div class="form-group">
-								<label for="post_amount">Amount</label>
-								<input type="number" class="form-control" id="post_amount" name="amount">
-							</div>
-
-							<div class="form-group">
-								<label for="post_quantity">Quantity</label>
-								<input type="number" class="form-control" id="post_quantity" name="quantity">
-							</div>
-
-							<div class="form-group">
-								<label for="post_startDt">Start dateTime</label>
-								<div class='input-group date' id='post_startDt'>
-									<input type='text' class="form-control" name="startDt"/>
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="post_endDt">End dateTime</label>
-								<div class='input-group date' id='post_endDt'>
-									<input type='text' class="form-control" name="endDt"/>
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label for="post_contents">Contents</label>
-								<textarea rows="4" class="form-control" id="post_contents" name="contents"></textarea>
-							</div>
-
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
 
-		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="post_coupon">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="post_couponForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="post_name">Name</label>
+							<input type="text" class="form-control" id="post_name" name="name">
+						</div>
+
+						<div class="form-group">
+							<label for="post_type">Type</label>
+							<select class="form-control single-select" id="post_type" name="type">
+								<option value="RATIO">Ratio</option>
+								<option value="PRICE">Price</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="post_amount">Amount</label>
+							<input type="number" class="form-control" id="post_amount" name="amount">
+						</div>
+
+						<div class="form-group">
+							<label for="post_quantity">Quantity</label>
+							<input type="number" class="form-control" id="post_quantity" name="quantity">
+						</div>
+
+						<div class="form-group">
+							<label for="post_startDt">Start dateTime</label>
+							<div class='input-group date' id='post_startDt'>
+								<input type='text' class="form-control" name="startDt"/>
+								<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="post_endDt">End dateTime</label>
+							<div class='input-group date' id='post_endDt'>
+								<input type='text' class="form-control" name="endDt"/>
+								<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="post_contents">Contents</label>
+							<textarea rows="4" class="form-control" id="post_contents" name="contents"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -122,50 +128,13 @@
 					coupon.post();
 				},
 				rules: {
-					name: {
-						required: true
-					},
-					contents: {
-						required: true
-					},
-					type: {
-						required: true
-					},
-					amount: {
-						required: true
-					},
-					quantity: {
-						required: true
-					},
-					startDt: {
-						required: true
-					},
-					endDt: {
-						required: true
-					},
-				},
-				message: {
-					name: {
-						required: "Name is required.",
-					},
-					contents: {
-						required: "identifier is required.",
-					},
-					type: {
-						required: "password is required."
-					},
-					amount: {
-						required: "type is required."
-					},
-					quantity: {
-						required: "type is required."
-					},
-					startDt: {
-						required: "type is required."
-					},
-					endDt: {
-						required: "type is required."
-					},
+					name: {required: true},
+					contents: {required: true},
+					type: {required: true},
+					amount: {required: true},
+					quantity: {required: true},
+					startDt: {required: true},
+					endDt: {required: true},
 				},
 			});
 
@@ -250,7 +219,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/coupon} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/coupon",
 					callback: {
 						success: function (result) {
 
@@ -269,7 +238,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/coupon} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/coupon",
 					data: {
 						name: $("#post_name").val(),
 						contents: $("#post_contents").val(),
@@ -298,7 +267,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/coupon} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/coupon",
 					data: {
 						list: list
 					},

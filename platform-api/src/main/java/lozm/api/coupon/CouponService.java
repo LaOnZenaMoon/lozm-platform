@@ -173,7 +173,7 @@ public class CouponService {
 
     private Optional<CouponUser> findCouponUser(Long couponId) {
         Optional<CouponUser> findCouponUser = couponUserRepository.findById(couponId);
-        findCouponUser.orElseThrow(() -> new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist."));
+        findCouponUser. orElseThrow(() -> new ServiceException("COUPON_USER_0002", "Coupon user doesn't exist."));
         return findCouponUser;
     }
 

@@ -2,6 +2,7 @@ package lozm.bulkInsertTestData;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import lozm.api.user.UserService;
 import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
 import lozm.object.code.UsersType;
@@ -34,13 +35,13 @@ public class BoardBulkInsert {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
 
 
     @Test
     public void setBoard() throws Exception {
-        List<GetUserDto> userList = new ArrayList<>();
+        List<GetUserDto> userList = userService.getUserList();
 
         userList.add(GetUserDto.builder()
                 .id(2L)

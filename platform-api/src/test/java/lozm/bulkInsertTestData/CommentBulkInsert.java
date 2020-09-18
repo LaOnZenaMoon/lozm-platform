@@ -3,6 +3,7 @@ package lozm.bulkInsertTestData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lozm.api.board.BoardService;
+import lozm.api.user.UserService;
 import lozm.object.code.BoardType;
 import lozm.object.code.ContentType;
 import lozm.object.dto.board.GetBoardDto;
@@ -35,8 +36,8 @@ public class CommentBulkInsert {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private BoardService boardService;
@@ -50,8 +51,7 @@ public class CommentBulkInsert {
                 BoardType.SPORTS.name()
         };
 
-//        List<GetUserDto> userList = userService.getUserList();
-        List<GetUserDto> userList = new ArrayList<>();
+        List<GetUserDto> userList = userService.getUserList();
         List<GetBoardDto> newsList = boardService.getBoardList(boardTypeArr[0]);
         List<GetBoardDto> magazineList = boardService.getBoardList(boardTypeArr[1]);
         List<GetBoardDto> diaryList = boardService.getBoardList(boardTypeArr[2]);

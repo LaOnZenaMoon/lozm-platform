@@ -1,76 +1,80 @@
-<!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+	<th:block
+			th:replace="@{layout/contentHeader.html} :: contentHeader('Store','Shop management','','','')"></th:block>
 
-	<div id="wrapper">
-		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
-		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+	<th:block th:replace="@{layout/dataTable.html} :: dataTable"></th:block>
 
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('Store','Shop management','','','')"></th:block>
+	<div class="wrapper wrapper-content">
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header">
-								<i class="fa fa-table"></i> Store
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="storeGrid" class="table table-bordered display">
-
-									</table>
-								</div>
-							</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>Board</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#" class="dropdown-item">Config option 1</a>
+								</li>
+								<li><a href="#" class="dropdown-item">Config option 2</a>
+								</li>
+							</ul>
 						</div>
 					</div>
-				</div>
+					<div class="ibox-content">
 
-			</div>
-		</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover" id="storeGrid">
 
-		<div class="modal fade" id="post_store">
-			<div class="modal-dialog modal-custom">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+							</table>
+						</div>
+
 					</div>
-					<form id="post_storeForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="post_name">Store name</label>
-								<input type="text" class="form-control" id="post_name" name="name">
-							</div>
-
-							<div class="form-group">
-								<label for="post_telNumber">Telephone number</label>
-								<input type="text" class="form-control" id="post_telNumber" name="telNumber">
-							</div>
-
-							<div class="form-group">
-								<label for="post_info">Information</label>
-								<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
 
-		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog"  aria-hidden="true" id="post_store" >
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="post_storeForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="post_name">Store name</label>
+							<input type="text" class="form-control" id="post_name" name="name">
+						</div>
+
+						<div class="form-group">
+							<label for="post_telNumber">Telephone number</label>
+							<input type="text" class="form-control" id="post_telNumber" name="telNumber">
+						</div>
+
+						<div class="form-group">
+							<label for="post_info">Information</label>
+							<textarea rows="4" class="form-control" id="post_info" name="info"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </th:block>
 
@@ -85,28 +89,9 @@
 					store.post();
 				},
 				rules: {
-					name: {
-						required: true
-					},
-					telNumber: {
-						required: true,
-						minlength: 9
-					},
-					info: {
-						required: true
-					}
-				},
-				message: {
-					name: {
-						required: "Name is required.",
-					},
-					telNumber: {
-						required: "TelNumber is required.",
-						minlength: "TelNumber min length is 9."
-					},
-					info: {
-						required: "Info is required."
-					},
+					name: {required: true},
+					telNumber: {required: true, minlength: 9},
+					info: {required: true}
 				},
 			});
 
@@ -158,7 +143,7 @@
 									return;
 								}
 
-								lozm.func.movePage("/manage/store/" + _selectedRows[0].id);
+								lozm.func.movePage("/pages/manage/store/" + _selectedRows[0].id);
 							},
 						},
 						{
@@ -188,7 +173,7 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/store} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/store",
 					callback: {
 						success: function (result) {
 							if(result.success) {
@@ -206,7 +191,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/store} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/store",
 					data: {
 						name: $("#post_name").val(),
 						telNumber: $("#post_telNumber").val(),
@@ -232,7 +217,7 @@
 
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/store} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/store",
 					data: {
 						list: list
 					},

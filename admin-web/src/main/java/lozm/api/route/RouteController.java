@@ -45,6 +45,14 @@ public class RouteController {
         return "pages/board/boardDetail";
     }
 
+    private void setBoardInfo(ModelMap modelMap) {
+        List<BoardType> boardTypeList = Arrays.asList(BoardType.values());
+        modelMap.addAttribute("boardTypeList", boardTypeList);
+
+        List<ContentType> contentTypeList = Arrays.asList(ContentType.values());
+        modelMap.addAttribute("contentTypeList", contentTypeList);
+    }
+
     @GetMapping("/manage/store")
     public String manageStore(ModelMap modelMap) {
         return "pages/store/store";
@@ -52,20 +60,20 @@ public class RouteController {
 
     @GetMapping("/manage/store/{storeId}")
     public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
-        GetStoreDto getStoreDetail = routeService.getStoreDetail(storeId);
-        modelMap.addAttribute("storeDetail", getStoreDetail);
-
-        GetClothingDto.Response getOuter = routeService.getStoreClothing(storeId, "OUTER");
-        modelMap.addAttribute("outerList", getOuter.getList());
-
-        GetClothingDto.Response getTop = routeService.getStoreClothing(storeId, "TOP");
-        modelMap.addAttribute("topList", getTop.getList());
-
-        GetClothingDto.Response getBottom = routeService.getStoreClothing(storeId, "BOTTOM");
-        modelMap.addAttribute("bottomList", getBottom.getList());
-
-        GetClothingDto.Response getShoes = routeService.getStoreClothing(storeId, "SHOES");
-        modelMap.addAttribute("shoesList", getShoes.getList());
+//        GetStoreDto getStoreDetail = routeService.getStoreDetail(storeId);
+//        modelMap.addAttribute("storeDetail", getStoreDetail);
+//
+//        GetClothingDto.Response getOuter = routeService.getStoreClothing(storeId, "OUTER");
+//        modelMap.addAttribute("outerList", getOuter.getList());
+//
+//        GetClothingDto.Response getTop = routeService.getStoreClothing(storeId, "TOP");
+//        modelMap.addAttribute("topList", getTop.getList());
+//
+//        GetClothingDto.Response getBottom = routeService.getStoreClothing(storeId, "BOTTOM");
+//        modelMap.addAttribute("bottomList", getBottom.getList());
+//
+//        GetClothingDto.Response getShoes = routeService.getStoreClothing(storeId, "SHOES");
+//        modelMap.addAttribute("shoesList", getShoes.getList());
 
         return "pages/store/storeDetail";
     }
@@ -82,12 +90,11 @@ public class RouteController {
 
     @GetMapping("/manage/coupon/{couponId}")
     public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) throws Exception {
-
-        GetCouponDto getCouponDetail = routeService.getCouponDetail(couponId);
-        modelMap.addAttribute("couponDetail", getCouponDetail);
-
-        GetCouponUserDto.Response getCouponUser = routeService.getCouponUser(couponId);
-        modelMap.addAttribute("couponUserList", getCouponUser.getList());
+//        GetCouponDto getCouponDetail = routeService.getCouponDetail(couponId);
+//        modelMap.addAttribute("couponDetail", getCouponDetail);
+//
+//        GetCouponUserDto.Response getCouponUser = routeService.getCouponUser(couponId);
+//        modelMap.addAttribute("couponUserList", getCouponUser.getList());
 
         return "pages/coupon/couponDetail";
     }
@@ -110,14 +117,6 @@ public class RouteController {
     @GetMapping("/sign/in")
     public String signIn(ModelMap modelMap) {
         return "pages/sign/signIn";
-    }
-
-    private void setBoardInfo(ModelMap modelMap) {
-        List<BoardType> boardTypeList = Arrays.asList(BoardType.values());
-        modelMap.addAttribute("boardTypeList", boardTypeList);
-
-        List<ContentType> contentTypeList = Arrays.asList(ContentType.values());
-        modelMap.addAttribute("contentTypeList", contentTypeList);
     }
 
 }

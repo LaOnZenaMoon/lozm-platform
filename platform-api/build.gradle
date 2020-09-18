@@ -48,6 +48,9 @@ dependencies {
     // Eureka
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+
+    // for PasswordEncoder & BCryptPasswordEncoder
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
 // asciidoctor -- start

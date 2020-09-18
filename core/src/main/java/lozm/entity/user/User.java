@@ -6,6 +6,7 @@ import lozm.object.code.UsersType;
 import lozm.entity.BaseEntity;
 import lozm.entity.coupon.CouponUser;
 import lozm.object.vo.user.UserVo;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -51,7 +52,7 @@ public class User extends BaseEntity {
     public void updateUser(UserVo userVo) {
         this.name = userVo.getName();
         this.identifier = userVo.getIdentifier();
-        if(!StringUtils.isEmpty(userVo.getPassword())) {
+        if(!ObjectUtils.isEmpty(userVo.getPassword())) {
             this.password = userVo.getPassword();
         }
         this.type = StringUtils.isEmpty(userVo.getType()) ? null : UsersType.valueOf(userVo.getType());

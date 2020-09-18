@@ -1,132 +1,135 @@
-<!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
 
 <th:block layout:fragment="content">
-	<th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+	<th:block
+			th:replace="@{layout/contentHeader.html} :: contentHeader('User','Setting','','','')"></th:block>
 
-	<div id="wrapper">
-		<th:block th:replace="@{layout/mainHeader.html} :: header"></th:block>
-		<th:block th:replace="@{layout/mainLeftSidebar.html} :: sidebar"></th:block>
-		<th:block th:replace="@{layout/contentDataTable.html} :: dataTable"></th:block>
+	<th:block th:replace="@{layout/dataTable.html} :: dataTable"></th:block>
 
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<th:block th:replace="@{layout/contentHeader.html} :: contentHeader('User','Setting','','','')"></th:block>
+	<div class="wrapper wrapper-content">
 
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="card">
-							<div class="card-header">
-								<i class="fa fa-table"></i> User
-							</div>
-							<div class="card-body">
-								<div class="table-responsive">
-									<table id="userGrid" class="table table-bordered display">
-
-									</table>
-								</div>
-							</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>User</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link">
+								<i class="fa fa-chevron-up"></i>
+							</a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#" class="dropdown-item">Config option 1</a>
+								</li>
+								<li><a href="#" class="dropdown-item">Config option 2</a>
+								</li>
+							</ul>
 						</div>
 					</div>
-				</div>
+					<div class="ibox-content">
 
-			</div>
-		</div>
+						<div class="table-responsive">
+							<table class="table table-bordered table-hover" id="userGrid">
 
-		<div class="modal fade" id="post_user">
-			<div class="modal-dialog">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+							</table>
+						</div>
+
 					</div>
-					<form id="post_userForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<label for="post_name">Name</label>
-								<input type="text" class="form-control" id="post_name" name="name">
-							</div>
-
-							<div class="form-group">
-								<label for="post_identifier">Identifier</label>
-								<input type="text" class="form-control" id="post_identifier" name="identifier">
-							</div>
-
-							<div class="form-group">
-								<label for="post_password">Password</label>
-								<input type="password" class="form-control" id="post_password" name="password">
-							</div>
-
-							<div class="form-group">
-								<label for="post_type">Type</label>
-								<select class="form-control single-select" id="post_type" name="type">
-									<option value="ADMIN">Admin</option>
-									<option value="USER">User</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
 
-		<div class="modal fade" id="put_user">
-			<div class="modal-dialog">
-				<div class="modal-content slideInUp">
-					<div class="modal-header">
-						<h5 class="modal-title"></h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form id="put_userForm">
-						<div class="modal-body">
-							<div class="form-group">
-								<input type="hidden" id="put_id">
-							</div>
-
-							<div class="form-group">
-								<label for="put_name">Name</label>
-								<input type="text" class="form-control" id="put_name" name="name">
-							</div>
-
-							<div class="form-group">
-								<label for="put_identifier">Identifier</label>
-								<input type="text" class="form-control" id="put_identifier" name="identifier">
-							</div>
-
-							<div class="form-group">
-								<label for="put_password">Password</label>
-								<input type="password" class="form-control" id="put_password" name="password">
-							</div>
-
-							<div class="form-group">
-								<label for="put_type">Type</label>
-								<select class="form-control single-select" id="put_type" name="type">
-									<option value="ADMIN">Admin</option>
-									<option value="USER">User</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success" ><i class="fa fa-check-square-o"></i>Save</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<th:block th:replace="@{layout/mainFooter.html} :: footer"></th:block>
-		<th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
 	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="post_user">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="post_userForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="post_name">Name</label>
+							<input type="text" class="form-control" id="post_name" name="name">
+						</div>
+
+						<div class="form-group">
+							<label for="post_identifier">Identifier</label>
+							<input type="text" class="form-control" id="post_identifier" name="identifier">
+						</div>
+
+						<div class="form-group">
+							<label for="post_password">Password</label>
+							<input type="password" class="form-control" id="post_password" name="password">
+						</div>
+
+						<div class="form-group">
+							<label for="post_type">Type</label>
+							<select class="form-control single-select" id="post_type" name="type">
+								<option value="ADMIN">Admin</option>
+								<option value="USER">User</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="put_user">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="put_userForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="hidden" id="put_id">
+						</div>
+
+						<div class="form-group">
+							<label for="put_name">Name</label>
+							<input type="text" class="form-control" id="put_name" name="name">
+						</div>
+
+						<div class="form-group">
+							<label for="put_identifier">Identifier</label>
+							<input type="text" class="form-control" id="put_identifier" name="identifier">
+						</div>
+
+						<div class="form-group">
+							<label for="put_password">Password</label>
+							<input type="password" class="form-control" id="put_password" name="password">
+						</div>
+
+						<div class="form-group">
+							<label for="put_type">Type</label>
+							<select class="form-control single-select" id="put_type" name="type">
+								<option value="ADMIN">Admin</option>
+								<option value="USER">User</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 </th:block>
 
 <th:block layout:fragment="customScript">
@@ -140,32 +143,10 @@
 					user.post();
 				},
 				rules: {
-					name: {
-						required: true
-					},
-					identifier: {
-						required: true
-					},
-					password: {
-						required: true
-					},
-					type: {
-						required: true
-					},
-				},
-				message: {
-					name: {
-						required: "Name is required.",
-					},
-					identifier: {
-						required: "identifier is required.",
-					},
-					password: {
-						required: "password is required."
-					},
-					type: {
-						required: "type is required."
-					},
+					name: {required: true},
+					identifier: {required: true},
+					password: {required: true},
+					type: {required: true},
 				},
 			});
 
@@ -175,26 +156,9 @@
 					user.put();
 				},
 				rules: {
-					name: {
-						required: true
-					},
-					identifier: {
-						required: true
-					},
-					type: {
-						required: true
-					},
-				},
-				message: {
-					name: {
-						required: "Name is required.",
-					},
-					identifier: {
-						required: "identifier is required.",
-					},
-					type: {
-						required: "type is required."
-					},
+					name: {required: true},
+					identifier: {required: true},
+					type: {required: true},
 				},
 			});
 
@@ -278,10 +242,9 @@
 			},
 			getGridData: function () {
 				lozm.func.requestGet({
-					url: /*[[ @{/user} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/user",
 					callback: {
 						success: function (result) {
-
 							if(result.success) {
 								user.gridTarget().clear().draw();
 								user.gridTarget().rows.add(result.data.list).draw();
@@ -297,7 +260,7 @@
 			},
 			post: function () {
 				lozm.func.requestPost({
-					url: /*[[ @{/user} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/user",
 					data: {
 						name: $("#post_name").val(),
 						identifier: $("#post_identifier").val(),
@@ -323,7 +286,7 @@
 			},
 			put: function () {
 				lozm.func.requestPut({
-					url: /*[[ @{/user} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/user",
 					data: {
 						id: $("#put_id").val(),
 						name: $("#put_name").val(),
@@ -350,7 +313,7 @@
 			},
 			delete: function (list) {
 				lozm.func.requestDelete({
-					url: /*[[ @{/user} ]]*/ "",
+					url: lozm.GATEWAY_SERVER + "/platform-api/api/user",
 					data: {
 						list: list
 					},

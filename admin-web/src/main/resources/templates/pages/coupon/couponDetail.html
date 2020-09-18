@@ -3,9 +3,11 @@
 
 <th:block layout:fragment="content">
 	<th:block
-			th:replace="@{layout/contentHeader.html} :: contentHeader('Home','','','','')"></th:block>
+			th:replace="@{layout/contentHeader.html} :: contentHeader('Detail','Shop management','Coupon','','')"></th:block>
 
 	<th:block th:replace="@{layout/dataTable.html} :: dataTable"></th:block>
+
+	<th:block th:replace="@{layout/datePicker.html} :: datePicker"></th:block>
 
 	<div class="wrapper wrapper-content">
 
@@ -24,8 +26,8 @@
 							<div class="form-group">
 								<label for="put_coupon_type">Type</label>
 								<select class="form-control single-select" id="put_coupon_type" name="type">
-<!--									<option value="RATIO" th:selected="${couponDetail.type}">Ratio</option>-->
-<!--									<option value="PRICE" th:selected="${couponDetail.type}">Price</option>-->
+									<option value="RATIO">Ratio</option>
+									<option value="PRICE">Price</option>
 								</select>
 							</div>
 
@@ -41,21 +43,12 @@
 
 							<div class="form-group">
 								<label for="put_coupon_startDt">Start dateTime</label>
-								<div class='input-group date' id='put_coupon_startDt'>
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
+								<input type="text" class="form-control" id="put_coupon_startDt" name="startDt">
 							</div>
 
 							<div class="form-group">
 								<label for="put_coupon_endDt">End dateTime</label>
-								<div class='input-group date' id='put_coupon_endDt'>
-									<input type='text' class="form-control" name="endDt"/>
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
+								<input type="text" class="form-control" id="put_coupon_endDt" name="endDt">
 							</div>
 
 							<div class="form-group">
@@ -64,7 +57,7 @@
 							</div>
 
 							<div class="form-group">
-								<button type="submit" class="btn btn-primary" ><i class="fa fa-check-square-o"></i>Save</button>
+								<button type="submit" class="btn btn-primary">Save</button>
 							</div>
 
 						</form>
@@ -73,22 +66,133 @@
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="tabs-container">
+					<ul class="nav nav-tabs" role="tablist">
+						<li><a class="nav-link active" data-toggle="tab" href="#couponUser">User's coupon</a></li>
+					</ul>
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="couponUser">
+							<div class="panel-body">
+
+								<div class="card">
+									<div class="card-header">
+										<i class="fa fa-table"></i> Coupon > User
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="couponUserGrid" class="table table-bordered display modal-grid" style="width: 100%;"></table>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 	</div>
 
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="post_couponUser">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
 
+				<form id="post_couponUserForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="post_couponUserQuantity">Quantity</label>
+							<input type="number" class="form-control" id="post_couponUserQuantity" name="couponUserQuantity">
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="ibox ">
+									<div class="ibox-title">
+										<h5>Board</h5>
+										<div class="ibox-tools">
+											<a class="collapse-link">
+												<i class="fa fa-chevron-up"></i>
+											</a>
+											<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+												<i class="fa fa-wrench"></i>
+											</a>
+											<ul class="dropdown-menu dropdown-user">
+												<li><a href="#" class="dropdown-item">Config option 1</a>
+												</li>
+												<li><a href="#" class="dropdown-item">Config option 2</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="ibox-content">
+
+										<div class="table-responsive">
+											<table class="table table-bordered table-hover" id="userGrid">
+
+											</table>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="put_couponUser">
+		<div class="modal-dialog">
+			<div class="modal-content animated fadeIn">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<i class="fa fa-check-square-o modal-icon"></i>
+				</div>
+
+				<form id="put_couponUserForm">
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="put_item_id">
+						</div>
+
+						<div class="form-group">
+							<label for="put_couponUserQuantity">Quantity</label>
+							<input type="number" class="form-control" id="put_couponUserQuantity" name="couponUserQuantity">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 </th:block>
 
 <th:block layout:fragment="customScript">
 	<script th:inline="javascript" type="text/javascript">
 		$(document).ready(function () {
+			lozm.func.datetimepicker("put_coupon_startDt");
+			lozm.func.datetimepicker("put_coupon_endDt");
+
 			coupon.getDetail();
 
 			couponUser.initGrid();
 			user.initGrid();
-
-			lozm.func.datetimepicker("put_startDt");
-			lozm.func.datetimepicker("put_endDt");
 
 			$("#put_couponForm").validate({
 				submitHandler: function(form) {
@@ -136,8 +240,8 @@
 						type: $("#put_coupon_type").val(),
 						amount: $("#put_coupon_amount").val(),
 						quantity: $("#put_coupon_quantity").val(),
-						startDt: $("#put_coupon_startDt > input").val(),
-						endDt: $("#put_coupon_endDt > input").val()
+						startDt: $("#put_coupon_startDt").val(),
+						endDt: $("#put_coupon_endDt").val()
 					},
 					callback: {
 						success: function (result) {

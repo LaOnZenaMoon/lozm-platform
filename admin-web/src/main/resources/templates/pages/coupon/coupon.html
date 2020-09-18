@@ -81,22 +81,12 @@
 
 						<div class="form-group">
 							<label for="post_startDt">Start dateTime</label>
-							<div class='input-group date' id='post_startDt'>
-								<input type='text' class="form-control" name="startDt"/>
-								<span class="input-group-addon">
-											<span class="glyphicon glyphicon-calendar"></span>
-										</span>
-							</div>
+							<input type="text" class="form-control" id="post_startDt" name="startDt">
 						</div>
 
 						<div class="form-group">
 							<label for="post_endDt">End dateTime</label>
-							<div class='input-group date' id='post_endDt'>
-								<input type='text' class="form-control" name="endDt"/>
-								<span class="input-group-addon">
-											<span class="glyphicon glyphicon-calendar"></span>
-										</span>
-							</div>
+							<input type="text" class="form-control" id="post_endDt" name="endDt">
 						</div>
 
 						<div class="form-group">
@@ -189,7 +179,7 @@
 									return;
 								}
 
-								lozm.func.movePage("/manage/coupon/" + _selectedRows[0].id);
+								lozm.func.movePage("/pages/manage/coupon/" + _selectedRows[0].id);
 							},
 						},
 						{
@@ -245,8 +235,8 @@
 						type: $("#post_type").val(),
 						amount: $("#post_amount").val(),
 						quantity: $("#post_quantity").val(),
-						startDt: $("#post_startDt > input").val(),
-						endDt: $("#post_endDt > input").val()
+						startDt: $("#post_startDt").val(),
+						endDt: $("#post_endDt").val()
 					},
 					callback: {
 						success: function (result) {

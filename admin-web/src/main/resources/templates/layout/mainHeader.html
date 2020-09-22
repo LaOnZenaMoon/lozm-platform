@@ -37,18 +37,16 @@
                         <i class="fa fa-check-square-o modal-icon"></i>
                     </div>
 
-                    <form id="chatting_name_form">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="chatroom_name">Chatroom name</label>
-                                <input type="text" class="form-control" id="chatroom_name" name="chatroom_name">
-                            </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="chatroom_name">Chatroom name</label>
+                            <input type="text" class="form-control" id="chatroom_name" name="chatroom_name">
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Connect</button>
-                            <button type="submit" class="btn btn-primary" onclick="chatting.disconnect('chattingArea')">Disconnect</button>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" onclick="chatting.connect('#chattingArea', $('#chatroom_name').val())">Connect</button>
+                        <button type="submit" class="btn btn-primary" onclick="chatting.disconnect('#chattingArea')">Disconnect</button>
+                    </div>
 
                     <div class="modal-body" id="chattingArea">
 
@@ -73,18 +71,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#chatting_name_form").validate({
-                submitHandler: function(form) {
-                    chatting.connect('#chattingArea', $('#chatroom_name').val());
-                },
-                rules: {
-                    chatting_name: {required: true},
-                },
-            });
-
             $("#chatting_contents_form").validate({
                 submitHandler: function(form) {
-                    chatting.sendMessage(lozm.func.getUserInfoFromJwt().name, '#chatroom_contents')
+                    chatting.sendMessage('#chatroom_contents')
                 },
                 rules: {
                     chatroom_contents: {required: true},

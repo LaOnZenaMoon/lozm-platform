@@ -15,22 +15,23 @@
                     chatting.stomp.subscribe('/topic/' + chatting.topic, function (_chat) {
                         chatting.displayMessage(JSON.parse(_chat.body));
                     });
+                    chatting.chatIn();
                 });
             },
             disconnect: function (_displayArea) {
-                chatting.sendMessage();
+                chatting.chatOut();
                 if (chatting.stomp !== null) {
                     chatting.stomp.disconnect();
                 }
-                chatting.setConnected(_displayArea);
+                chatting.clearDisplayArea();
             },
             displayMessage: function (_result) {
                 $(chatting.displayArea).append(
                     "<li>" +
                     "  <div class='dropdown-messages-box'>" +
-                    "    <a class='dropdown-item float-left'>" +
-                    "      <img class='rounded-circle' th:src='@{/images/agent.png}'/>" +
-                    "    </a>" +
+                    // "    <a class='dropdown-item float-left'>" +
+                    // "      <img class='rounded-circle' th:src='@{/images/agent.png}'/>" +
+                    // "    </a>" +
                     "    <div class='media-body'>" +
                     "      <div class='media-body'>" +
                     "        <small class='float-right text-navy'>"+_result.sendDateTime+"</small>" +
@@ -44,29 +45,46 @@
                 );
             },
             setConnected: function (_displayArea, _topic) {
-                $(_displayArea).html("");
+                chatting.clearDisplayArea();
                 chatting.displayArea = _displayArea;
                 chatting.topic = _topic;
             },
-            sendMessage: function (_writer, _messageArea) {
-                chatting.stomp.send('/publish/chat/message'
-                    , {}
-                    , JSON.stringify({
-                        topic: chatting.topic
-                        , writer: _writer
-                        , message: $(_messageArea).val()
+            sendMessage: function (_messageArea) {
+                chatting.stomp.send('/publish/chat/message',
+                    {},
+                    JSON.stringify({
+                        topic: chatting.topic,
+                        writer: lozm.func.getUserInfoFromJwt().name,
+                        message: $(_messageArea).val()
                     })
                 );
 
                 $(_messageArea).val("");
             },
+            chatIn: function () {
+                chatting.stomp.send('/publish/chat/in',
+                    {},
+                    JSON.stringify({
+                        topic: chatting.topic,
+                        writer: lozm.func.getUserInfoFromJwt().name,
+                        message: ""
+                    })
+                );
+            },
+            chatOut: function () {
+                chatting.stomp.send('/publish/chat/out',
+                    {},
+                    JSON.stringify({
+                        topic: chatting.topic,
+                        writer: lozm.func.getUserInfoFromJwt().name,
+                        message: ""
+                    })
+                );
+            },
+            clearDisplayArea: function () {
+                $(chatting.displayArea).html("");
+            },
         };
-
-        // $(document).ready(function() {
-        //     $("form").on('submit', function (e) {
-        //         e.preventDefault();
-        //     });
-        // });
     </script>
 
 </th:block>

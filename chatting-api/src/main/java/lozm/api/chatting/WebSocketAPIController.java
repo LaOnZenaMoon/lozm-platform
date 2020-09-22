@@ -26,12 +26,14 @@ import java.util.Map;
 public class WebSocketAPIController {
 
     private Map<String, TopicDto> topicMap = new HashMap<>();
-
 	private final SimpMessagingTemplate template;
+
 
     @MessageMapping("/chat/in")
     public void chatIn(MessageDto messageDto) {
         checkTopicMap(messageDto.getTopic(), messageDto.getWriter());
+
+        messageDto.setMessage("ID["+messageDto.getWriter()+"] has entered the chat room.");
 
         template.convertAndSend("/topic/"+messageDto.getTopic(), messageDto);
     }
@@ -39,6 +41,8 @@ public class WebSocketAPIController {
     @MessageMapping("/chat/out")
     public void chatOut(MessageDto messageDto) {
         checkTopicMap(messageDto.getTopic(), messageDto.getWriter());
+
+        messageDto.setMessage("ID["+messageDto.getWriter()+"] has left the chat room.");
 
         template.convertAndSend("/topic/"+messageDto.getTopic(), messageDto);
     }

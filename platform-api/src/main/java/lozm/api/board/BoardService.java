@@ -80,7 +80,8 @@ public class BoardService {
     }
 
     public List<GetCommentDto> getCommentList(Long boardId) {
-        return commentRepository.selectCommentListByBoardId(boardId).stream()
+        return commentRepository.selectCommentListByBoardId(boardId)
+                .stream()
                 .map(comment -> GetCommentDto.builder()
                         .id(comment.getId())
                         .commentType(comment.getCommentType())

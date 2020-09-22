@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static net.logstash.logback.encoder.org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -27,23 +28,18 @@ public class DeliveryService {
 
 
     public List<GetDeliveryDto> getDeliveryList() {
-        List<Delivery> deliveryList = repositorySupport.selectDeliveryList();
-        List<GetDeliveryDto> rtnList = new ArrayList<>();
-        for (Delivery delivery : deliveryList) {
-            GetDeliveryDto dto = GetDeliveryDto.builder()
-                    .id(delivery.getId())
-                    .status(delivery.getStatus())
-                    .country(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getCountry())
-                    .zipCode(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getZipCode())
-                    .city(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getCity())
-                    .street(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getStreet())
-                    .etc(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getEtc())
-                    .build();
-
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return repositorySupport.selectDeliveryList()
+                .stream()
+                .map(delivery -> GetDeliveryDto.builder()
+                        .id(delivery.getId())
+                        .status(delivery.getStatus())
+                        .country(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getCountry())
+                        .zipCode(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getZipCode())
+                        .city(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getCity())
+                        .street(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getStreet())
+                        .etc(isEmpty(delivery.getAddress()) ? null : delivery.getAddress().getEtc())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Transactional

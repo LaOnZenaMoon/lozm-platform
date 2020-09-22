@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -31,24 +32,19 @@ public class CouponService {
 
 
     public List<GetCouponDto> getCouponList() {
-        List<Coupon> couponList = couponRepository.selectCouponList();
-        List<GetCouponDto> rtnList = new ArrayList<>();
-        for (Coupon coupon : couponList) {
-            GetCouponDto dto = GetCouponDto.builder()
-                    .id(coupon.getId())
-                    .name(coupon.getName())
-                    .contents(coupon.getContents())
-                    .type(String.valueOf(coupon.getType()))
-                    .amount(coupon.getAmount())
-                    .quantity(coupon.getQuantity())
-                    .startDt(coupon.getStartDt())
-                    .endDt(coupon.getEndDt())
-                    .build();
-
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return couponRepository.selectCouponList()
+                .stream()
+                .map(coupon -> GetCouponDto.builder()
+                        .id(coupon.getId())
+                        .name(coupon.getName())
+                        .contents(coupon.getContents())
+                        .type(String.valueOf(coupon.getType()))
+                        .amount(coupon.getAmount())
+                        .quantity(coupon.getQuantity())
+                        .startDt(coupon.getStartDt())
+                        .endDt(coupon.getEndDt())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public GetCouponDto getCouponDetail(CouponVo couponVo) {
@@ -87,22 +83,18 @@ public class CouponService {
     }
 
     public List<GetCouponUserDto> getCouponUserList(CouponVo couponVo) {
-        List<CouponUser> couponUserList = couponUserRepository.selectCouponUserList(couponVo.getId());
-        List<GetCouponUserDto> rtnList = new ArrayList<>();
-        for (CouponUser couponUser : couponUserList) {
-            GetCouponUserDto dto = GetCouponUserDto.builder()
-                    .id(couponUser.getId())
-                    .quantity(couponUser.getQuantity())
-                    .userId(couponUser.getUser().getId())
-                    .couponId(couponUser.getCoupon().getId())
-                    .userName(couponUser.getUser().getName())
-                    .userIdentifier(couponUser.getUser().getIdentifier())
-                    .userType(couponUser.getUser().getType())
-                    .build();
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return couponUserRepository.selectCouponUserList(couponVo.getId())
+                .stream()
+                .map(couponUser -> GetCouponUserDto.builder()
+                        .id(couponUser.getId())
+                        .quantity(couponUser.getQuantity())
+                        .userId(couponUser.getUser().getId())
+                        .couponId(couponUser.getCoupon().getId())
+                        .userName(couponUser.getUser().getName())
+                        .userIdentifier(couponUser.getUser().getIdentifier())
+                        .userType(couponUser.getUser().getType())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Transactional

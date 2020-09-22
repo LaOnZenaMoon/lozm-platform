@@ -5,8 +5,7 @@ import lombok.Getter;
 
 import java.util.HashMap;
 
-@Getter
-@Builder
+@Getter @Builder
 public class WebSocketData {
 
     private long topicRemovalTime;

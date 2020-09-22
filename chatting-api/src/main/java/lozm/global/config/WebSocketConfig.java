@@ -29,14 +29,14 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final RabbitMqTopicProps rabbitMqTopicProps;
 
 
-    @Bean
-    public WebSocketData webSocketSettingData() {
-        return WebSocketData.builder()
-                .topicRemovalTime(chattingProps.getTopicRemovalTime())
-                .filteringMessage(new HashMap<>())
-                .systemMessage(new HashMap<>())
-                .build();
-    }
+//    @Bean
+//    public WebSocketData webSocketSettingData() {
+//        return WebSocketData.builder()
+//                .topicRemovalTime(chattingProps.getTopicRemovalTime())
+//                .filteringMessage(new HashMap<>())
+//                .systemMessage(new HashMap<>())
+//                .build();
+//    }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {

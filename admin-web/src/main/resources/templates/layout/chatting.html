@@ -1,14 +1,14 @@
 <th:block th:fragment="chatting()" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-    <script th:src="@{/script/sockjs.min.js}"></script>
-    <script th:src="@{/script/stomp.min.js}"></script>
+    <script th:src="@{/libs/inspinia/js/socket/sockjs.min.js}"></script>
+    <script th:src="@{/libs/inspinia/js/socket/stomp.min.js}"></script>
 
     <script type="text/javascript">
         var chatting = {
             stomp: null,
             messageArea: null,
             connect: function (_messageArea, _topic) {
-                chatting.stomp = Stomp.over(new SockJS("http://127.0.0.1:8083/lozm-chat"));
+                chatting.stomp = Stomp.over(new SockJS("http://127.0.0.1:8888/lozm-chat"));
                 chatting.stomp.connect({}, function (_frame) {
                     chatting.setConnected(_messageArea);
                     chatting.stomp.subscribe('/topic/' + _topic, function (_chat) {
@@ -24,18 +24,21 @@
             },
             displayMessage: function (_result) {
                 $(chatting.messageArea).append(
-                    "<li class='list-group-item'>" +
-                    "  <a href='javaScript:void();'>" +
-                    "    <div class='media'>" +
-                    "      <div class='avatar'><img class='align-self-start mr-3' src='https://via.placeholder.com/110x110' alt='user avatar'></div>" +
+                    "<li>" +
+                    "  <div class='dropdown-messages-box'>" +
+                    "    <a class='dropdown-item float-left'>" +
+                    "      <img class='rounded-circle' th:src='@{/images/agent.png}'/>" +
+                    "    </a>" +
+                    "    <div class='media-body'>" +
                     "      <div class='media-body'>" +
-                    "        <h6 class='mt-0 msg-title'>"+_result.writer+"</h6>" +
-                    "        <p class='msg-info'>"+_result.message+"</p>" +
-                    "        <small>"+_result.sendDateTime+"</small>" +
-                    "       </div>" +
-                    "     </div>" +
-                    "  </a>" +
-                    "</li>"
+                    "        <small class='float-right text-navy'>"+_result.sendDateTime+"</small>" +
+                    "        <strong>"+_result.writer+"</strong><br>" +
+                    "        <small class='text-muted'>"+_result.message+"</small>" +
+                    "      </div>" +
+                    "    </div>" +
+                    "  </div>" +
+                    "</li>" +
+                    "<li class='dropdown-divider'></li>"
                 );
             },
             setConnected: function (_messageArea) {

@@ -16,6 +16,12 @@
                 <span class="m-r-sm text-muted welcome-message">Welcome to Administrator.</span>
             </li>
 
+            <li class="dropdown">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" onclick="$('#chatting_modal').modal('show')">
+                    <i class="fa fa-envelope"></i>  <span class="label label-warning">Chat</span>
+                </a>
+            </li>
+
             <li>
                 <a href="#" onclick="lozm.func.signOut()">
                     <i class="fa fa-power-off"></i>
@@ -23,11 +29,67 @@
             </li>
         </ul>
 
+        <div class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true" id="chatting_modal">
+            <div class="modal-dialog">
+                <div class="modal-content animated fadeIn">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-check-square-o modal-icon"></i>
+                    </div>
+
+                    <form id="chatting_name_form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="chatroom_name">Chatroom name</label>
+                                <input type="text" class="form-control" id="chatroom_name" name="chatroom_name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Connect</button>
+                            <button type="submit" class="btn btn-primary" onclick="chatting.disconnect('chattingArea')">Disconnect</button>
+                        </div>
+                    </form>
+
+                    <div class="modal-body" id="chattingArea">
+
+                    </div>
+
+                    <form id="chatting_contents_form">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="chatroom_contents">Contents</label>
+                                <input type="text" class="form-control" id="chatroom_contents" name="chatroom_contents">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" onclick="">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </nav>
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#chatting_name_form").validate({
+                submitHandler: function(form) {
+                    chatting.connect('#chattingArea', $('#chatroom_name').val());
+                },
+                rules: {
+                    chatting_name: {required: true},
+                },
+            });
 
+            $("#chatting_contents_form").validate({
+                submitHandler: function(form) {
+                    chatting.sendMessage($('#chatroom_name').val(), lozm.func.getUserInfoFromJwt().name, '#chatroom_contents')
+                },
+                rules: {
+                    chatroom_contents: {required: true},
+                },
+            });
         });
     </script>
 

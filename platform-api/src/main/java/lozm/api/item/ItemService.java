@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -256,21 +257,17 @@ public class ItemService {
     }
 
     private List<GetItemDto> getItemDtoList(List<Item> itemList) {
-        List<GetItemDto> rtnList = new ArrayList<>();
-        for (Item item : itemList) {
-            GetItemDto dto = GetItemDto.builder()
-                    .id(item.getId())
-                    .name(item.getName())
-                    .price(item.getPrice())
-                    .quantity(item.getQuantity())
-                    .type(item.getType())
-                    .storeId(item.getStore().getId())
-                    .storeName(item.getStore().getName())
-                    .build();
-
-            rtnList.add(dto);
-        }
-        return rtnList;
+        return itemList.stream()
+                .map(item -> GetItemDto.builder()
+                        .id(item.getId())
+                        .name(item.getName())
+                        .price(item.getPrice())
+                        .quantity(item.getQuantity())
+                        .type(item.getType())
+                        .storeId(item.getStore().getId())
+                        .storeName(item.getStore().getName())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private Optional<Item> findItem(Long itemId) {

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -24,20 +25,15 @@ public class StoreService {
 
 
     public List<GetStoreDto> getStoreList() {
-        List<Store> storeList = storeRepository.selectStoreList();
-        List<GetStoreDto> rtnList = new ArrayList<>();
-        for (Store store : storeList) {
-            GetStoreDto dto = GetStoreDto.builder()
-                    .id(store.getId())
-                    .name(store.getName())
-                    .telNumber(store.getTelNumber())
-                    .info(store.getInfo())
-                    .build();
-
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return storeRepository.selectStoreList()
+                .stream()
+                .map(store -> GetStoreDto.builder()
+                        .id(store.getId())
+                        .name(store.getName())
+                        .telNumber(store.getTelNumber())
+                        .info(store.getInfo())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public Store findById(StoreVo storeVo) {

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,21 +23,16 @@ public class UserService {
 
 
     public List<GetUserDto> getUserList() throws Exception {
-        List<User> userList = userRepository.selectUserList();
-        List<GetUserDto> rtnList = new ArrayList<>();
-        for (User user : userList) {
-            GetUserDto dto = GetUserDto.builder()
-                    .id(user.getId())
-                    .name(user.getName())
-                    .identifier(user.getIdentifier())
-                    .password(null)
-                    .type(user.getType())
-                    .build();
-
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return userRepository.selectUserList()
+                .stream()
+                .map(user -> GetUserDto.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .identifier(user.getIdentifier())
+                        .password(null)
+                        .type(user.getType())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Transactional

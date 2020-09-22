@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: api-gateway-zuul
+    name: zuul-gateway-server
 
   profiles:
     active: local
@@ -24,7 +24,17 @@ zuul:
       path: /authentication-server/**
       serviceId: authentication-server
       stripPrefix: true
-#    sample-api:
+    chatting-api:
+      path: /chatting-api/**
+      serviceId: chatting-api
+      stripPrefix: true
+  ws:
+    brokerages:
+      hello:
+        end-points: /lozm-chat
+        brokers:  /topic
+        destination-prefixes: /publish
+  #    sample-api:
 #      path: /sample-api/**
 #      serviceId: sample-api
 #      stripPrefix: true

@@ -9,4 +9,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //Enable Web Socket
+    implementation 'com.github.mthizo247:spring-cloud-netflix-zuul-websocket:1.0.0-RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }

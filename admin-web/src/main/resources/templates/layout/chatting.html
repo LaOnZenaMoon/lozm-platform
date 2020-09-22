@@ -9,7 +9,7 @@
             displayArea: null,
             topic: null,
             connect: function (_displayArea, _topic) {
-                chatting.stomp = Stomp.over(new SockJS("http://127.0.0.1:8888/lozm-chat"));
+                chatting.stomp = Stomp.over(new SockJS(lozm.GATEWAY_SERVER + "/chatting-api/lozm-chat"));
                 chatting.stomp.connect({}, function (_frame) {
                     chatting.setConnected(_displayArea, _topic);
                     chatting.stomp.subscribe('/topic/' + chatting.topic, function (_chat) {
@@ -84,6 +84,21 @@
             clearDisplayArea: function () {
                 $(chatting.displayArea).html("");
             },
+            getTopicList: function () {
+                lozm.func.requestGet({
+                    url: lozm.GATEWAY_SERVER + "/chatting-api/api/topic",
+                    callback: {
+                        success: function (result) {
+                            console.log(result);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr);
+                            console.log(status);
+                            console.log(error);
+                        }
+                    }
+                });
+            }
         };
     </script>
 

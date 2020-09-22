@@ -1,31 +1,23 @@
-#spring:
-#  datasource:
-#    driverClassName: oracle.jdbc.driver.OracleDriver
-#    url: jdbc:oracle:thin:@//127.0.0.1:1521/XE
-#    username: system
-#    password: oracle
-#    testQuery: "SELECT 1 FROM DUAL"
-#    hikari:
-#      maximum-pool-size: 5
-#  jpa:
-#    database-platform: org.hibernate.dialect.Oracle10gDialect
-#    hibernate:
-#      #            ddl-auto: create-drop
-#      #            ddl-auto: create
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        default_batch_fetch_size: 500
-#        jdbc:
-#          batch_size: 100
-#          order_inserts: true
-#      format_sql: true
-#  #        show-sql: true
-#  #        generate-ddl: true
-#  output:
-#    ansi:
-#      enabled: always
-#
-#logging.level:
-#  org.hibernate.SQL: debug
-##    org.hibernate.type: trace
+# actuator 전부 오픈
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+    non-secure-port: ${server.port}
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

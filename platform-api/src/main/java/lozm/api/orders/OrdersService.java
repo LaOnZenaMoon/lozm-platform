@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -39,29 +40,24 @@ public class OrdersService {
 
 
     public List<GetOrdersDto> getOrdersList() {
-        List<Orders> ordersList = repositorySupport.selectOrdersList();
-        List<GetOrdersDto> rtnList = new ArrayList<>();
-        for (Orders o : ordersList) {
-            GetOrdersDto dto = GetOrdersDto.builder()
-                    .ordersId(o.getId())
-                    .orderDt(o.getOrderDt())
-                    .ordersStatus(o.getStatus())
-                    .deliveryId(o.getDelivery().getId())
-                    .deliveryCountry(o.getDelivery().getAddress().getCountry())
-                    .deliveryZipCode(o.getDelivery().getAddress().getZipCode())
-                    .deliveryCity(o.getDelivery().getAddress().getCity())
-                    .deliveryStreet(o.getDelivery().getAddress().getStreet())
-                    .deliveryEtc(o.getDelivery().getAddress().getEtc())
-                    .userId(o.getUser().getId())
-                    .userName(o.getUser().getName())
-                    .identifier(o.getUser().getIdentifier())
-                    .userType(o.getUser().getType())
-                    .build();
-
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return repositorySupport.selectOrdersList()
+                .stream()
+                .map(o -> GetOrdersDto.builder()
+                        .ordersId(o.getId())
+                        .orderDt(o.getOrderDt())
+                        .ordersStatus(o.getStatus())
+                        .deliveryId(o.getDelivery().getId())
+                        .deliveryCountry(o.getDelivery().getAddress().getCountry())
+                        .deliveryZipCode(o.getDelivery().getAddress().getZipCode())
+                        .deliveryCity(o.getDelivery().getAddress().getCity())
+                        .deliveryStreet(o.getDelivery().getAddress().getStreet())
+                        .deliveryEtc(o.getDelivery().getAddress().getEtc())
+                        .userId(o.getUser().getId())
+                        .userName(o.getUser().getName())
+                        .identifier(o.getUser().getIdentifier())
+                        .userType(o.getUser().getType())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Transactional

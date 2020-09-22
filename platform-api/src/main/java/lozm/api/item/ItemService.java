@@ -128,73 +128,55 @@ public class ItemService {
         List<GetClothingDto> rtnList = new ArrayList<>();
 
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
-            List<Outer> itemList = repositorySupport.selectOuterList(itemVo);
-            for (Outer outer : itemList) {
-                GetClothingDto dto = GetClothingDto.builder()
-                        .id(outer.getId())
-                        .name(outer.getName())
-                        .price(outer.getPrice())
-                        .quantity(outer.getQuantity())
-                        .contents(outer.getClothing().getContents())
-                        .size(outer.getClothing().getSizes())
-                        .build();
 
-                rtnList.add(dto);
-            }
-
-            return rtnList;
-            
+            return repositorySupport.selectOuterList(itemVo)
+                    .stream()
+                    .map(outer -> GetClothingDto.builder()
+                            .id(outer.getId())
+                            .name(outer.getName())
+                            .price(outer.getPrice())
+                            .quantity(outer.getQuantity())
+                            .contents(outer.getClothing().getContents())
+                            .size(outer.getClothing().getSizes())
+                            .build())
+                    .collect(Collectors.toList());
         } else if(ItemType.TOP.toString().equals(itemVo.getType())) {
-            List<Top> itemList = repositorySupport.selectTopList(itemVo);
-            for (Top top : itemList) {
-                GetClothingDto dto = GetClothingDto.builder()
-                        .id(top.getId())
-                        .name(top.getName())
-                        .price(top.getPrice())
-                        .quantity(top.getQuantity())
-                        .contents(top.getClothing().getContents())
-                        .size(top.getClothing().getSizes())
-                        .build();
 
-                rtnList.add(dto);
-            }
-
-            return rtnList;
-            
+            return repositorySupport.selectTopList(itemVo)
+                    .stream()
+                    .map(top -> GetClothingDto.builder()
+                            .id(top.getId())
+                            .name(top.getName())
+                            .price(top.getPrice())
+                            .quantity(top.getQuantity())
+                            .contents(top.getClothing().getContents())
+                            .size(top.getClothing().getSizes())
+                            .build())
+                    .collect(Collectors.toList());
         } else if(ItemType.BOTTOM.toString().equals(itemVo.getType())) {
-            List<Bottom> itemList = repositorySupport.selectBottomList(itemVo);
-            for (Bottom bottom : itemList) {
-                GetClothingDto dto = GetClothingDto.builder()
-                        .id(bottom.getId())
-                        .name(bottom.getName())
-                        .price(bottom.getPrice())
-                        .quantity(bottom.getQuantity())
-                        .contents(bottom.getClothing().getContents())
-                        .size(bottom.getClothing().getSizes())
-                        .build();
 
-                rtnList.add(dto);
-            }
-
-            return rtnList;
-            
+            return repositorySupport.selectBottomList(itemVo).stream()
+                    .map(bottom -> GetClothingDto.builder()
+                            .id(bottom.getId())
+                            .name(bottom.getName())
+                            .price(bottom.getPrice())
+                            .quantity(bottom.getQuantity())
+                            .contents(bottom.getClothing().getContents())
+                            .size(bottom.getClothing().getSizes())
+                            .build())
+                    .collect(Collectors.toList());
         } else if(ItemType.SHOES.toString().equals(itemVo.getType())) {
-            List<Shoes> itemList = repositorySupport.selectShoesList(itemVo);
-            for (Shoes shoes : itemList) {
-                GetClothingDto dto = GetClothingDto.builder()
-                        .id(shoes.getId())
-                        .name(shoes.getName())
-                        .price(shoes.getPrice())
-                        .quantity(shoes.getQuantity())
-                        .contents(shoes.getClothing().getContents())
-                        .size(shoes.getClothing().getSizes())
-                        .build();
 
-                rtnList.add(dto);
-            }
-
-            return rtnList;
-
+            return repositorySupport.selectShoesList(itemVo).stream()
+                    .map(shoes -> GetClothingDto.builder()
+                            .id(shoes.getId())
+                            .name(shoes.getName())
+                            .price(shoes.getPrice())
+                            .quantity(shoes.getQuantity())
+                            .contents(shoes.getClothing().getContents())
+                            .size(shoes.getClothing().getSizes())
+                            .build())
+                    .collect(Collectors.toList());
         } else {
             throw new ServiceException("ITEM_SAVE_NO_ITEM_TYPE", "ItemType doesn't exist.");
         }

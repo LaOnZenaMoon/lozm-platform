@@ -14,4 +14,8 @@ public class TopicDto {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
+    //TODO
+    private String title; //채팅방 제목
+    private String password; //채팅방 비밀번호
+
 }

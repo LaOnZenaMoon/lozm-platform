@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,28 +29,22 @@ public class BoardService {
 
 
     public List<GetBoardDto> getBoardList(String boardType) {
-        List<Board> boardList = new ArrayList<>();
-
+        List<Board> boardList = null;
         if(String.valueOf(BoardType.ALL).equals(boardType)) {
             boardList = boardRepository.selectBoardList();
         } else {
             boardList = boardRepository.selectBoardListByBoardType(boardType);
         }
 
-        List<GetBoardDto> rtnList = new ArrayList<>();
-        for (Board board : boardList) {
-            GetBoardDto dto = GetBoardDto.builder()
-                    .id(board.getId())
-                    .boardType(board.getBoardType())
-                    .contentType(board.getContentType())
-                    .title(board.getTitle())
-                    .content(board.getContent())
-                    .build();
-
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return boardList.stream()
+                .map(board -> GetBoardDto.builder()
+                        .id(board.getId())
+                        .boardType(board.getBoardType())
+                        .contentType(board.getContentType())
+                        .title(board.getTitle())
+                        .content(board.getContent())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public GetBoardDto getBoardDetail(BoardVo boardVo) {
@@ -85,20 +80,14 @@ public class BoardService {
     }
 
     public List<GetCommentDto> getCommentList(Long boardId) {
-        List<Comment> commentList = commentRepository.selectCommentListByBoardId(boardId);
-        List<GetCommentDto> rtnList = new ArrayList<>();
-        for (Comment comment : commentList) {
-            GetCommentDto dto = GetCommentDto.builder()
-                    .id(comment.getId())
-                    .commentType(comment.getCommentType())
-                    .flag(comment.getFlag())
-                    .content(comment.getContent())
-                    .build();
-
-            rtnList.add(dto);
-        }
-
-        return rtnList;
+        return commentRepository.selectCommentListByBoardId(boardId).stream()
+                .map(comment -> GetCommentDto.builder()
+                        .id(comment.getId())
+                        .commentType(comment.getCommentType())
+                        .flag(comment.getFlag())
+                        .content(comment.getContent())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -125,17 +114,13 @@ public class BoardService {
 
     private Optional<Board> findBoard(Long boardId) {
         Optional<Board> findBoard = boardRepository.findById(boardId);
-//        findBoard.orElseThrow(() -> {
-//            throw new ServiceException("BOARD_0002", "Board doesn't exist.");
-//        });
+        findBoard.orElseThrow(() -> new ServiceException("BOARD_0002", "Board doesn't exist."));
         return findBoard;
     }
 
     private Optional<Comment> findComment(Long commentId) {
         Optional<Comment> findComment = commentRepository.findById(commentId);
-//        findComment.orElseThrow(() -> {
-//            throw new ServiceException("COMMENT_0002", "Comment doesn't exist.");
-//        });
+        findComment.orElseThrow(() -> new ServiceException("COMMENT_0002", "Comment doesn't exist."));
         return findComment;
     }
 

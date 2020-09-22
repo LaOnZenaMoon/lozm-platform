@@ -84,7 +84,7 @@
 
             $("#chatting_contents_form").validate({
                 submitHandler: function(form) {
-                    chatting.sendMessage($('#chatroom_name').val(), lozm.func.getUserInfoFromJwt().name, '#chatroom_contents')
+                    chatting.sendMessage(lozm.func.getUserInfoFromJwt().name, '#chatroom_contents')
                 },
                 rules: {
                     chatroom_contents: {required: true},

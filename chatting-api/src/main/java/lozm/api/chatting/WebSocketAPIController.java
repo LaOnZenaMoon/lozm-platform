@@ -29,6 +29,19 @@ public class WebSocketAPIController {
 
 	private final SimpMessagingTemplate template;
 
+    @MessageMapping("/chat/in")
+    public void chatIn(MessageDto messageDto) {
+        checkTopicMap(messageDto.getTopic(), messageDto.getWriter());
+
+        template.convertAndSend("/topic/"+messageDto.getTopic(), messageDto);
+    }
+
+    @MessageMapping("/chat/out")
+    public void chatOut(MessageDto messageDto) {
+        checkTopicMap(messageDto.getTopic(), messageDto.getWriter());
+
+        template.convertAndSend("/topic/"+messageDto.getTopic(), messageDto);
+    }
 
     @MessageMapping("/chat/message")
     public void sendMessageToTopic(MessageDto messageDto) {

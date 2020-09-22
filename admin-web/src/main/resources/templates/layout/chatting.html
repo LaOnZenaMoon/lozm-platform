@@ -6,24 +6,26 @@
     <script type="text/javascript">
         var chatting = {
             stomp: null,
-            messageArea: null,
-            connect: function (_messageArea, _topic) {
+            displayArea: null,
+            topic: null,
+            connect: function (_displayArea, _topic) {
                 chatting.stomp = Stomp.over(new SockJS("http://127.0.0.1:8888/lozm-chat"));
                 chatting.stomp.connect({}, function (_frame) {
-                    chatting.setConnected(_messageArea);
-                    chatting.stomp.subscribe('/topic/' + _topic, function (_chat) {
+                    chatting.setConnected(_displayArea, _topic);
+                    chatting.stomp.subscribe('/topic/' + chatting.topic, function (_chat) {
                         chatting.displayMessage(JSON.parse(_chat.body));
                     });
                 });
             },
-            disconnect: function (_messageArea) {
+            disconnect: function (_displayArea) {
+                chatting.sendMessage();
                 if (chatting.stomp !== null) {
                     chatting.stomp.disconnect();
                 }
-                chatting.setConnected(_messageArea);
+                chatting.setConnected(_displayArea);
             },
             displayMessage: function (_result) {
-                $(chatting.messageArea).append(
+                $(chatting.displayArea).append(
                     "<li>" +
                     "  <div class='dropdown-messages-box'>" +
                     "    <a class='dropdown-item float-left'>" +
@@ -41,21 +43,22 @@
                     "<li class='dropdown-divider'></li>"
                 );
             },
-            setConnected: function (_messageArea) {
-                $(_messageArea).html("");
-                chatting.messageArea = _messageArea;
+            setConnected: function (_displayArea, _topic) {
+                $(_displayArea).html("");
+                chatting.displayArea = _displayArea;
+                chatting.topic = _topic;
             },
-            sendMessage: function (_topic, _writer, _messageId) {
+            sendMessage: function (_writer, _messageArea) {
                 chatting.stomp.send('/publish/chat/message'
                     , {}
                     , JSON.stringify({
-                        topic: _topic
+                        topic: chatting.topic
                         , writer: _writer
-                        , message: $(_messageId).val()
+                        , message: $(_messageArea).val()
                     })
                 );
 
-                $(_messageId).val("");
+                $(_messageArea).val("");
             },
         };
 

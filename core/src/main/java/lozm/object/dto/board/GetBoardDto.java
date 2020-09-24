@@ -6,10 +6,8 @@ import lozm.entity.board.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Builder
+@NoArgsConstructor @AllArgsConstructor
 public class GetBoardDto {
 
     private Long id;

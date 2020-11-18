@@ -13,5 +13,4 @@ dependencies {
     //Enable Web Socket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     compile group: 'com.github.mthizo247', name: 'spring-cloud-netflix-zuul-websocket', version: '1.0.7.RELEASE'
-
 }

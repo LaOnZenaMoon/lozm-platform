@@ -24,17 +24,12 @@ zuul:
       path: /authentication-server/**
       serviceId: authentication-server
       stripPrefix: true
-#    chatting-api:
-#      path: /chatting-api/**
-#      serviceId: chatting-api
-#      stripPrefix: true
   ws:
     brokerages:
       chatting-api:
         end-points: /lozm-chat
         brokers:  /topic
         destination-prefixes: /publish
-
   retryable: true
   ribbon-isolation-strategy: thread
   thread-pool:

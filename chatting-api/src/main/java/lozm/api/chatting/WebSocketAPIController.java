@@ -52,7 +52,7 @@ public class WebSocketAPIController {
     }
 
     @GetMapping("/api/topic")
-    public ApiResponseDto getTopicList() throws Exception {
+    public ApiResponseDto getTopicList() {
         return ApiResponseDto.createException(ApiResponseCode.OK, topicMap);
     }
 

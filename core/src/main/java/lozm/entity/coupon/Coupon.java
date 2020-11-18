@@ -64,7 +64,7 @@ public class Coupon extends BaseEntity {
         this.setBaseEntity(null, couponVo.getModifiedBy(), 1);
     }
 
-    public Long calculateOrderedPrice(Long orderedPrice) throws Exception {
+    public Long calculateOrderedPrice(Long orderedPrice) {
         Long rtnVal = -1L;
 
         LocalDateTime sysdateTime = LocalDateTime.now();

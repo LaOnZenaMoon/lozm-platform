@@ -54,7 +54,7 @@ public class Item extends BaseEntity {
         this.setBaseEntity(null, itemVo.getModifiedBy(), 0);
     }
 
-    public void decreaseItemQuantity(Long quantity) throws Exception {
+    public void decreaseItemQuantity(Long quantity) {
         this.quantity -= quantity;
         if(this.quantity < 0) throw new ServiceException("ORDERS_SAVE_ITEM_NO_QUANTITY", "Item quantity is insufficient.");
     }

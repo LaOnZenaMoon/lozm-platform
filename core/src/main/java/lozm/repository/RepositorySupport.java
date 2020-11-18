@@ -42,7 +42,7 @@ public class RepositorySupport extends QuerydslRepositorySupport {
     }
 
 
-    public List<User> selectUserDetail(SignVo signVo) throws Exception {
+    public List<User> selectUserDetail(SignVo signVo) {
         return jpaQueryFactory
                 .select(Projections.fields(
                     User.class,
@@ -60,7 +60,7 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-    public List<Outer> selectOuterList(ItemVo itemVo) throws Exception {
+    public List<Outer> selectOuterList(ItemVo itemVo) {
         return jpaQueryFactory
                 .select(Projections.fields(
                         Outer.class,
@@ -81,7 +81,7 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-    public List<Top> selectTopList(ItemVo itemVo) throws Exception {
+    public List<Top> selectTopList(ItemVo itemVo) {
         return jpaQueryFactory
                 .select(Projections.fields(
                         Top.class,
@@ -102,7 +102,7 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-    public List<Bottom> selectBottomList(ItemVo itemVo) throws Exception {
+    public List<Bottom> selectBottomList(ItemVo itemVo) {
         return jpaQueryFactory
                 .select(Projections.fields(
                         Bottom.class,
@@ -123,7 +123,7 @@ public class RepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-    public List<Shoes> selectShoesList(ItemVo itemVo) throws Exception {
+    public List<Shoes> selectShoesList(ItemVo itemVo) {
         return jpaQueryFactory
                 .select(Projections.fields(
                         Shoes.class,

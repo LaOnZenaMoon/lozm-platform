@@ -18,7 +18,7 @@ public class JwtAuthenticationController {
 
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody PostSignDto.Request reqDto) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody PostSignDto.Request reqDto) {
         PostSignDto.Response resDto = new PostSignDto.Response();
 
         try {

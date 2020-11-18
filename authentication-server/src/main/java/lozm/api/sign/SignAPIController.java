@@ -21,7 +21,7 @@ public class SignAPIController {
 
 
     @PostMapping(value = "/in")
-    public ApiResponseDto signIn(@RequestBody @Valid PostSignDto.Request reqDto, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ApiResponseDto signIn(@RequestBody @Valid PostSignDto.Request reqDto) {
         SignVo signVo = SignVo.builder()
                 .identifier(reqDto.getIdentifier())
                 .password(reqDto.getPassword())

@@ -34,7 +34,7 @@ public class RouteController {
     }
 
     @GetMapping("/manage/board/{boardId}")
-    public String manageBoardDetail(ModelMap modelMap, @PathVariable(value = "boardId") Long boardId) throws Exception {
+    public String manageBoardDetail(ModelMap modelMap, @PathVariable(value = "boardId") Long boardId) {
         setBoardInfo(modelMap);
 
         List<ContentType> commentTypeList = Arrays.asList(ContentType.values());
@@ -57,7 +57,7 @@ public class RouteController {
     }
 
     @GetMapping("/manage/store/{storeId}")
-    public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) throws Exception {
+    public String manageItem(ModelMap modelMap, @PathVariable(value = "storeId") Long storeId) {
         return "pages/store/storeDetail";
     }
 
@@ -72,7 +72,7 @@ public class RouteController {
     }
 
     @GetMapping("/manage/coupon/{couponId}")
-    public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) throws Exception {
+    public String manageCoupon(ModelMap modelMap, @PathVariable(value = "couponId") Long couponId) {
         return "pages/coupon/couponDetail";
     }
 

@@ -61,7 +61,7 @@ public class OrdersService {
     }
 
     @Transactional
-    public void save(OrdersVo ordersVo) throws Exception {
+    public void save(OrdersVo ordersVo) {
         Optional<User> findUser = findUser(ordersVo.getUserId());
         Optional<Item> findItem = findItem(ordersVo.getItemId());
         Optional<Delivery> findDelivery = findDelivery(ordersVo.getDeliveryId());
@@ -89,7 +89,7 @@ public class OrdersService {
     }
 
     @Transactional
-    public void update(OrdersVo ordersVo) throws Exception {
+    public void update(OrdersVo ordersVo) {
         Optional<Orders> findOrders = findOrders(ordersVo.getId());
         findOrders.get().updateOrders(ordersVo);
     }

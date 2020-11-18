@@ -23,7 +23,7 @@ public class DeliveryAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getDelivery() throws Exception {
+    public ApiResponseDto getDelivery() {
         List<GetDeliveryDto> result = deliveryService.getDeliveryList();
 
         GetDeliveryDto.Response resDto = new GetDeliveryDto.Response();
@@ -33,7 +33,7 @@ public class DeliveryAPIController {
     }
 
     @PostMapping
-    public ApiResponseDto postDelivery(@RequestBody @Valid PostDeliveryDto.Request reqDto) throws Exception {
+    public ApiResponseDto postDelivery(@RequestBody @Valid PostDeliveryDto.Request reqDto) {
         DeliveryVo deliveryVo = DeliveryVo.builder()
                 .country(reqDto.getCountry())
                 .zipCode(reqDto.getZipCode())
@@ -50,7 +50,7 @@ public class DeliveryAPIController {
     }
 
     @PutMapping
-    public ApiResponseDto putDelivery(@RequestBody @Valid PutDeliveryDto.Request reqDto) throws Exception {
+    public ApiResponseDto putDelivery(@RequestBody @Valid PutDeliveryDto.Request reqDto) {
         DeliveryVo deliveryVo = DeliveryVo.builder()
                 .id(reqDto.getId())
                 .country(reqDto.getCountry())
@@ -68,7 +68,7 @@ public class DeliveryAPIController {
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteDelivery(@RequestBody @Valid DeleteDeliveryDto.Request reqDto) {
         for (DeleteDeliveryDto dto : reqDto.getList()) {
             DeliveryVo deliveryVo = DeliveryVo.builder()
                     .id(dto.getId())

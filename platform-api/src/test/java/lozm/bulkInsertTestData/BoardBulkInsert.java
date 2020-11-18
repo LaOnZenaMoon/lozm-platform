@@ -1,5 +1,6 @@
 package lozm.bulkInsertTestData;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
 import lozm.api.user.UserService;
@@ -40,7 +41,7 @@ public class BoardBulkInsert {
 
 
     @Test
-    public void setBoard() throws Exception {
+    public void setBoard() {
         List<GetUserDto> userList = userService.getUserList();
 
         userList.add(GetUserDto.builder()

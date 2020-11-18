@@ -44,7 +44,7 @@ public class UserBulkInsert {
         }
     }
 
-    public void postUser(PostUserDto.Request reqDto) throws Exception {
+    public void postUser(PostUserDto.Request reqDto) {
         ResultActions result = mockMvc.perform(
                 post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON)

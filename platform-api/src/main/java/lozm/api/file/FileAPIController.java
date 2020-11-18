@@ -63,7 +63,7 @@ public class FileAPIController {
     }
 
     @PostMapping(value = "/upload/multi")
-    public List<ApiResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) throws Exception {
+    public List<ApiResponseDto> uploadMultipleFile(@RequestParam("files") MultipartFile[] files) {
         return Arrays.asList(files)
             .stream()
             .map(file -> uploadSingleFile(file))
@@ -71,7 +71,7 @@ public class FileAPIController {
     }
 
     @GetMapping(value = "/download/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         Resource resource = null;
         String contentType = null;
 

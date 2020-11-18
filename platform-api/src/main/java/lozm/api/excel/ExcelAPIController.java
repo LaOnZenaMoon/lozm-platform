@@ -23,12 +23,12 @@ public class ExcelAPIController {
 
 
     @GetMapping(value = "/download", produces = "application/vnd.ms-excel")
-    public ModelAndView downloadExcel() throws Exception {
+    public ModelAndView downloadExcel() {
         return new ModelAndView("excelView");
     }
 
     @PostMapping(value = "/upload")
-    public ApiResponseDto uploadExcel(@RequestParam("file") MultipartFile file) throws Exception {
+    public ApiResponseDto uploadExcel(@RequestParam("file") MultipartFile file) {
         FileVo fileVo = FileVo.builder()
                 .name(file.getOriginalFilename())
                 .path(fileProps.getUploadPath())

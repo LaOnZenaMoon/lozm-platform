@@ -21,7 +21,7 @@ public class BoardAPIController {
 
 
     @GetMapping("/boardType/{boardType}")
-    public ApiResponseDto getBoard(@PathVariable(value = "boardType") String boardType) throws Exception {
+    public ApiResponseDto getBoard(@PathVariable(value = "boardType") String boardType) {
         List<GetBoardDto> result = boardService.getBoardList(boardType);
 
         GetBoardDto.Response resDto = new GetBoardDto.Response();
@@ -31,7 +31,7 @@ public class BoardAPIController {
     }
 
     @GetMapping("/{boardId}")
-    public ApiResponseDto getBoardDetail(@PathVariable(value = "boardId") Long boardId) throws Exception {
+    public ApiResponseDto getBoardDetail(@PathVariable(value = "boardId") Long boardId) {
         BoardVo boardVo = BoardVo.builder()
                 .id(boardId)
                 .build();
@@ -42,7 +42,7 @@ public class BoardAPIController {
     }
 
     @PostMapping
-    public ApiResponseDto postBoard(@RequestBody @Valid PostBoardDto.Request reqDto) throws Exception {
+    public ApiResponseDto postBoard(@RequestBody @Valid PostBoardDto.Request reqDto) {
         BoardVo boardVo = BoardVo.builder()
                 .boardType(reqDto.getBoardType())
                 .contentType(reqDto.getContentType())
@@ -57,7 +57,7 @@ public class BoardAPIController {
     }
 
     @PutMapping
-    public ApiResponseDto putBoard(@RequestBody @Valid PutBoardDto.Request reqDto) throws Exception {
+    public ApiResponseDto putBoard(@RequestBody @Valid PutBoardDto.Request reqDto) {
         BoardVo boardVo = BoardVo.builder()
                 .id(reqDto.getId())
                 .boardType(reqDto.getBoardType())
@@ -73,7 +73,7 @@ public class BoardAPIController {
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteBoard(@RequestBody @Valid DeleteBoardDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteBoard(@RequestBody @Valid DeleteBoardDto.Request reqDto) {
         for(DeleteBoardDto dto : reqDto.getList()) {
             BoardVo boardVo = BoardVo.builder()
                     .id(dto.getId())
@@ -87,7 +87,7 @@ public class BoardAPIController {
     }
 
     @GetMapping("/{boardId}/comment")
-    public ApiResponseDto getComment(@PathVariable(value = "boardId") Long boardId) throws Exception {
+    public ApiResponseDto getComment(@PathVariable(value = "boardId") Long boardId) {
         List<GetCommentDto> result = boardService.getCommentList(boardId);
 
         GetCommentDto.Response resDto = new GetCommentDto.Response();
@@ -97,7 +97,7 @@ public class BoardAPIController {
     }
 
     @PostMapping("/comment")
-    public ApiResponseDto postComment(@RequestBody @Valid PostCommentDto.Request reqDto) throws Exception {
+    public ApiResponseDto postComment(@RequestBody @Valid PostCommentDto.Request reqDto) {
         CommentVo commentVo = CommentVo.builder()
                 .boardId(reqDto.getBoardId())
                 .commentType(reqDto.getCommentType())
@@ -111,7 +111,7 @@ public class BoardAPIController {
     }
 
     @PutMapping("/comment")
-    public ApiResponseDto putComment(@RequestBody @Valid PutCommentDto.Request reqDto) throws Exception {
+    public ApiResponseDto putComment(@RequestBody @Valid PutCommentDto.Request reqDto) {
         CommentVo commentVo = CommentVo.builder()
                 .id(reqDto.getId())
                 .commentType(reqDto.getCommentType())
@@ -125,7 +125,7 @@ public class BoardAPIController {
     }
 
     @DeleteMapping("/comment")
-    public ApiResponseDto deleteComment(@RequestBody @Valid DeleteCommentDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteComment(@RequestBody @Valid DeleteCommentDto.Request reqDto) {
         for(DeleteCommentDto dto : reqDto.getList()) {
             CommentVo commentVo = CommentVo.builder()
                     .id(dto.getId())

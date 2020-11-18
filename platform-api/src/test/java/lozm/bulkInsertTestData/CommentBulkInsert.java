@@ -44,7 +44,7 @@ public class CommentBulkInsert {
 
 
     @Test
-    public void setComment() throws Exception {
+    public void setComment() {
         String[] boardTypeArr = {
                 BoardType.NEWS.name(), BoardType.MAGAZINE.name(),
                 BoardType.DIARY.name(), BoardType.FREE_CONTENTS.name(),
@@ -103,7 +103,7 @@ public class CommentBulkInsert {
         }
     }
 
-    private void postComment(GetUserDto getUser, GetBoardDto getBoardDto) throws Exception {
+    private void postComment(GetUserDto getUser, GetBoardDto getBoardDto) {
         Faker faker = new Faker();
         String[] contentTypeArr = {ContentType.GENERAL.name(), ContentType.NOTICE.name(), ContentType.EVENT.name()};
         String contentType = contentTypeArr[ThreadLocalRandom.current().nextInt(0, 2)];

@@ -49,7 +49,7 @@ public class ItemService {
         return getItemDtoList(itemList);
     }
 
-    public GetItemDto getItemDetail(ItemVo itemVo) throws Exception {
+    public GetItemDto getItemDetail(ItemVo itemVo) {
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
             Optional<Outer> findItem = findOuter(itemVo.getId());
             Outer item = findItem.get();
@@ -124,7 +124,7 @@ public class ItemService {
         return getItemDtoList(itemList);
     }
 
-    public List<GetClothingDto> getClothingList(ItemVo itemVo) throws Exception {
+    public List<GetClothingDto> getClothingList(ItemVo itemVo) {
         List<GetClothingDto> rtnList = new ArrayList<>();
 
         if(ItemType.OUTER.toString().equals(itemVo.getType())) {
@@ -183,7 +183,7 @@ public class ItemService {
     }
 
     @Transactional
-    public void save(ItemVo itemVo) throws Exception {
+    public void save(ItemVo itemVo) {
         StoreVo storeVo = StoreVo.builder()
                 .id(itemVo.getStoreId())
                 .build();
@@ -213,7 +213,7 @@ public class ItemService {
     }
 
     @Transactional
-    public void update(ItemVo itemVo) throws Exception {
+    public void update(ItemVo itemVo) {
         Optional<Item> findItem = findItem(itemVo.getId());
         String itemType = findItem.get().getType();
 
@@ -233,7 +233,7 @@ public class ItemService {
     }
 
     @Transactional
-    public void delete(ItemVo itemVo) throws Exception {
+    public void delete(ItemVo itemVo) {
         Optional<Item> findItem = findItem(itemVo.getId());
         findItem.get().deleteItem(itemVo);
     }

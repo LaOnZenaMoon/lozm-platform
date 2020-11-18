@@ -25,7 +25,7 @@ public class FileService {
     private final FileProps fileProps;
 
 
-    public String saveFile(MultipartFile file, FileVo fileVo) throws Exception {
+    public String saveFile(MultipartFile file, FileVo fileVo) {
 //        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         String fileName = fileVo.getName();
         String filePath = fileVo.getPath();
@@ -51,7 +51,7 @@ public class FileService {
         }
     }
 
-    public Resource downloadFile(FileVo fileVo) throws Exception {
+    public Resource downloadFile(FileVo fileVo) {
         String fileName = fileVo.getName();
         String filePath = fileVo.getPath();
 

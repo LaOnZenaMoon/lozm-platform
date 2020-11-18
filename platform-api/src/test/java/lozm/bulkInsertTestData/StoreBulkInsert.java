@@ -44,7 +44,7 @@ public class StoreBulkInsert {
         }
     }
 
-    public void postStore(PostStoreDto.Request reqDto) throws Exception {
+    public void postStore(PostStoreDto.Request reqDto) {
         ResultActions result = mockMvc.perform(
                 post("/api/store")
                 .contentType(MediaType.APPLICATION_JSON)

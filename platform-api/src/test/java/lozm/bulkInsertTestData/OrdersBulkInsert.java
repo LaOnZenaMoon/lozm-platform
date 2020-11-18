@@ -53,7 +53,7 @@ public class OrdersBulkInsert {
 
 
     @Test
-    public void setOrders() throws Exception {
+    public void setOrders() {
         try {
             //Get user
             List<GetUserDto> userList = userService.getUserList();

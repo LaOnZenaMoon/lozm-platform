@@ -84,7 +84,7 @@ public class ItemBulkInsert {
         }
     }
 
-    public void postItem(PostItemDto.Request reqDto) throws Exception {
+    public void postItem(PostItemDto.Request reqDto) {
         ResultActions result = mockMvc.perform(
                 post("/api/item")
                 .contentType(MediaType.APPLICATION_JSON)

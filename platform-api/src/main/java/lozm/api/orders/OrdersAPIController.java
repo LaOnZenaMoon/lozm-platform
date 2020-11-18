@@ -22,7 +22,7 @@ public class OrdersAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getOrders() throws Exception {
+    public ApiResponseDto getOrders() {
         List<GetOrdersDto> result = ordersService.getOrdersList();
 
         GetOrdersDto.Response resDto = new GetOrdersDto.Response();
@@ -32,7 +32,7 @@ public class OrdersAPIController {
     }
 
     @PostMapping
-    public ApiResponseDto postOrders(@RequestBody @Valid PostOrdersDto.Request reqDto) throws Exception {
+    public ApiResponseDto postOrders(@RequestBody @Valid PostOrdersDto.Request reqDto) {
         OrdersVo ordersVo = OrdersVo.builder()
                 .quantity(reqDto.getQuantity())
                 .userId(reqDto.getUserId())
@@ -48,7 +48,7 @@ public class OrdersAPIController {
     }
 
     @PutMapping
-    public ApiResponseDto putOrders(@RequestBody @Valid PutOrdersDto.Request reqDto) throws Exception {
+    public ApiResponseDto putOrders(@RequestBody @Valid PutOrdersDto.Request reqDto) {
         OrdersVo ordersVo = OrdersVo.builder()
                 .id(reqDto.getId())
                 .status(reqDto.getStatus())
@@ -61,7 +61,7 @@ public class OrdersAPIController {
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteOrders(@RequestBody @Valid DeleteOrdersDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteOrders(@RequestBody @Valid DeleteOrdersDto.Request reqDto) {
         for (DeleteOrdersDto dto : reqDto.getList()) {
             OrdersVo ordersVo = OrdersVo.builder()
                     .id(dto.getOrdersId())

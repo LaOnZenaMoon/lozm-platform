@@ -26,7 +26,7 @@ public class UserAPIController {
 
 
     @GetMapping()
-    public ApiResponseDto getUser() throws Exception {
+    public ApiResponseDto getUser() {
         List<GetUserDto> result = userService.getUserList();
 
         GetUserDto.Response resDto = new GetUserDto.Response();
@@ -36,7 +36,7 @@ public class UserAPIController {
     }
 
     @PostMapping
-    public ApiResponseDto postUser(@RequestBody @Valid PostUserDto.Request reqDto) throws Exception {
+    public ApiResponseDto postUser(@RequestBody @Valid PostUserDto.Request reqDto) {
         UserVo userVo = UserVo.builder()
                 .name(reqDto.getName())
                 .identifier(reqDto.getIdentifier())
@@ -51,7 +51,7 @@ public class UserAPIController {
     }
 
     @PutMapping
-    public ApiResponseDto putUser(@RequestBody @Valid PutUserDto.Request reqDto) throws Exception {
+    public ApiResponseDto putUser(@RequestBody @Valid PutUserDto.Request reqDto) {
         UserVo userVo = UserVo.builder()
                 .id(reqDto.getId())
                 .name(reqDto.getName())
@@ -67,7 +67,7 @@ public class UserAPIController {
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteUser(@RequestBody @Valid DeleteUserDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteUser(@RequestBody @Valid DeleteUserDto.Request reqDto) {
         for(DeleteUserDto dto : reqDto.getList()) {
             UserVo userVo = UserVo.builder()
                     .id(dto.getId())

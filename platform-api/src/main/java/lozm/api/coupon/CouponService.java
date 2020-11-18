@@ -63,7 +63,7 @@ public class CouponService {
     }
 
     @Transactional
-    public void save(CouponVo couponVo) throws Exception {
+    public void save(CouponVo couponVo) {
         Coupon coupon = new Coupon();
         coupon.insertCoupon(couponVo);
 
@@ -71,13 +71,13 @@ public class CouponService {
     }
 
     @Transactional
-    public void update(CouponVo couponVo) throws Exception {
+    public void update(CouponVo couponVo) {
         Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "COUPON_0002");
         findCoupon.get().updateCoupon(couponVo);
     }
 
     @Transactional
-    public void delete(CouponVo couponVo) throws Exception {
+    public void delete(CouponVo couponVo) {
         Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "COUPON_0002");
         findCoupon.get().deleteCoupon(couponVo);
     }
@@ -98,7 +98,7 @@ public class CouponService {
     }
 
     @Transactional
-    public void postCouponUser(CouponVo couponVo) throws Exception {
+    public void postCouponUser(CouponVo couponVo) {
         //Find and check the coupon
         Optional<Coupon> findCoupon = findCoupon(couponVo.getId(), "USER_SAVE_NO_COUPON");
 
@@ -131,14 +131,14 @@ public class CouponService {
     }
 
     @Transactional
-    public void putCouponUser(CouponVo couponVo) throws Exception {
+    public void putCouponUser(CouponVo couponVo) {
         Optional<CouponUser> findCouponUser = findCouponUser(couponVo.getId());
         calculateCouponQuantity(couponVo, findCouponUser.get().getCoupon(), findCouponUser.get());
         findCouponUser.get().updateCouponUser(couponVo);
     }
 
     @Transactional
-    public void deleteCouponUser(CouponVo couponVo) throws Exception {
+    public void deleteCouponUser(CouponVo couponVo) {
         Optional<CouponUser> findCouponUser = findCouponUser(couponVo.getCouponUserId());
         findCouponUser.get().deleteCouponUser(couponVo);
 

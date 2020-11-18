@@ -20,7 +20,7 @@ public class CouponAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getCoupon() throws Exception {
+    public ApiResponseDto getCoupon() {
         List<GetCouponDto> result = couponService.getCouponList();
 
         GetCouponDto.Response resDto = new GetCouponDto.Response();
@@ -30,7 +30,7 @@ public class CouponAPIController {
     }
 
     @GetMapping("/{couponId}")
-    public ApiResponseDto getCouponDetail(@PathVariable(value = "couponId") Long couponId) throws Exception {
+    public ApiResponseDto getCouponDetail(@PathVariable(value = "couponId") Long couponId) {
         CouponVo couponVo = CouponVo.builder()
                 .id(couponId)
                 .build();
@@ -41,7 +41,7 @@ public class CouponAPIController {
     }
 
     @PostMapping
-    public ApiResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) throws Exception {
+    public ApiResponseDto postCoupon(@RequestBody @Valid PostCouponDto.Request reqDto) {
         CouponVo couponVo = CouponVo.builder()
                 .name(reqDto.getName())
                 .contents(reqDto.getContents())
@@ -59,7 +59,7 @@ public class CouponAPIController {
     }
 
     @PutMapping
-    public ApiResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) throws Exception {
+    public ApiResponseDto putCoupon(@RequestBody @Valid PutCouponDto.Request reqDto) {
         CouponVo couponVo = CouponVo.builder()
                 .id(reqDto.getId())
                 .name(reqDto.getName())
@@ -78,7 +78,7 @@ public class CouponAPIController {
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteCoupon(@RequestBody @Valid DeleteCouponDto.Request reqDto) {
         for(DeleteCouponDto dto : reqDto.getList()) {
             CouponVo couponVo = CouponVo.builder()
                     .id(dto.getId())
@@ -92,7 +92,7 @@ public class CouponAPIController {
     }
 
     @GetMapping(value = "/{couponId}/user")
-    public ApiResponseDto getCouponUser(@PathVariable(value = "couponId") Long couponId) throws Exception {
+    public ApiResponseDto getCouponUser(@PathVariable(value = "couponId") Long couponId) {
         CouponVo couponVo = CouponVo.builder()
                 .id(couponId)
                 .build();
@@ -106,7 +106,7 @@ public class CouponAPIController {
     }
 
     @PostMapping(value = "/user")
-    public ApiResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) throws Exception {
+    public ApiResponseDto postCouponUser(@RequestBody @Valid PostCouponUserDto.Request reqDto) {
         for (GetUserDto dto : reqDto.getUserList()) {
             CouponVo couponVo = CouponVo.builder()
                     .id(reqDto.getCouponId())
@@ -122,7 +122,7 @@ public class CouponAPIController {
     }
 
     @PutMapping(value = "/user")
-    public ApiResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) throws Exception {
+    public ApiResponseDto putCouponUser(@RequestBody @Valid PutCouponUserDto.Request reqDto) {
         for (GetCouponUserDto dto : reqDto.getList()) {
             CouponVo couponVo = CouponVo.builder()
                     .couponUserId(dto.getId())
@@ -138,7 +138,7 @@ public class CouponAPIController {
     }
 
     @DeleteMapping(value = "/user")
-    public ApiResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteCouponUser(@RequestBody @Valid DeleteCouponUserDto.Request reqDto) {
         for (GetCouponUserDto dto : reqDto.getList()) {
             CouponVo couponVo = CouponVo.builder()
                     .couponUserId(dto.getId())

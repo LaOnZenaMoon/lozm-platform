@@ -16,7 +16,7 @@ public class ExcelView extends AbstractXlsxView {
     private final ExcelService excelService;
 
     @Override
-    protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader("Content-Disposition", "attachment; filename=\"sample.xlsx\"");
         CellStyle numberCellStyle = workbook.createCellStyle();
         DataFormat numberDataFormat = workbook.createDataFormat();

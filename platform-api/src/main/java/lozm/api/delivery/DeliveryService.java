@@ -43,7 +43,7 @@ public class DeliveryService {
     }
 
     @Transactional
-    public void save(DeliveryVo deliveryVo) throws Exception {
+    public void save(DeliveryVo deliveryVo) {
         Delivery delivery = new Delivery();
         delivery.insertDelivery(deliveryVo);
 
@@ -51,7 +51,7 @@ public class DeliveryService {
     }
 
     @Transactional
-    public void update(DeliveryVo deliveryVo) throws Exception {
+    public void update(DeliveryVo deliveryVo) {
         Optional<Delivery> findDelivery = findDelivery(deliveryVo.getId());
         findDelivery.get().updateDelivery(deliveryVo);
     }

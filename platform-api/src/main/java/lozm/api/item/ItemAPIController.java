@@ -19,7 +19,7 @@ public class ItemAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getItemList() throws Exception {
+    public ApiResponseDto getItemList() {
         List<GetItemDto> itemList = itemService.getItemList();
 
         GetItemDto.Response resDto = new GetItemDto.Response();
@@ -29,7 +29,7 @@ public class ItemAPIController {
     }
 
     @GetMapping(value = "/{itemId}")
-    public ApiResponseDto getItemDetail(@PathVariable(value = "itemId") Long itemId) throws Exception {
+    public ApiResponseDto getItemDetail(@PathVariable(value = "itemId") Long itemId) {
         ItemVo itemVo = ItemVo.builder()
                 .id(itemId)
                 .build();
@@ -40,7 +40,7 @@ public class ItemAPIController {
     }
 
     @GetMapping(value = "/clothing/{itemType}")
-    public ApiResponseDto getClothing(@PathVariable(value = "itemType") String itemType) throws Exception {
+    public ApiResponseDto getClothing(@PathVariable(value = "itemType") String itemType) {
         ItemVo itemVo = ItemVo.builder()
                 .type(itemType)
                 .build();
@@ -53,7 +53,7 @@ public class ItemAPIController {
     }
 
     @PostMapping
-    public ApiResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) throws Exception {
+    public ApiResponseDto postItem(@RequestBody @Valid PostItemDto.Request reqDto) {
         ItemVo itemVo = ItemVo.builder()
                 .name(reqDto.getName())
                 .price(reqDto.getPrice())
@@ -71,7 +71,7 @@ public class ItemAPIController {
     }
 
     @PutMapping
-    public ApiResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) throws Exception {
+    public ApiResponseDto putItem(@RequestBody @Valid PutItemDto.Request reqDto) {
         ItemVo itemVo = ItemVo.builder()
                 .id(reqDto.getId())
                 .name(reqDto.getName())
@@ -88,7 +88,7 @@ public class ItemAPIController {
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteItem(@RequestBody @Valid DeleteItemDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteItem(@RequestBody @Valid DeleteItemDto.Request reqDto) {
         for(DeleteItemDto dto : reqDto.getList()) {
             ItemVo itemVo = ItemVo.builder()
                     .id(dto.getId())

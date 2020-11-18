@@ -35,7 +35,7 @@ public class ExcelService {
 
 
     @Transactional
-    public Sheet getSampleList(Workbook workbook) throws Exception {
+    public Sheet getSampleList(Workbook workbook) {
         //Get the list
         List<GetOrdersDto> ordersList = ordersService.getOrdersList();
 

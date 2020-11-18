@@ -72,7 +72,7 @@ public class CouponBulkInsert {
         }
     }
 
-    public void postCoupon(PostCouponDto.Request reqDto) throws Exception {
+    public void postCoupon(PostCouponDto.Request reqDto) {
         ResultActions result = mockMvc.perform(
                 post("/api/coupon")
                 .contentType(MediaType.APPLICATION_JSON)

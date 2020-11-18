@@ -58,7 +58,7 @@ public class DeliveryBulkInsert {
         }
     }
 
-    public void postDelivery(PostDeliveryDto.Request reqDto) throws Exception {
+    public void postDelivery(PostDeliveryDto.Request reqDto) {
         ResultActions result = mockMvc.perform(
                 post("/api/delivery")
                 .contentType(MediaType.APPLICATION_JSON)

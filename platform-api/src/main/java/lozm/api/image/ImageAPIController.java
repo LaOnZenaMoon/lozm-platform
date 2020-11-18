@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.HashMap;
@@ -57,7 +58,7 @@ public class ImageAPIController {
     }
 
     @PostMapping(value = "/upload")
-    public ApiResponseDto uploadSingleImage(@RequestBody ImageDto.Request reqDto) throws Exception {
+    public ApiResponseDto uploadSingleImage(@RequestBody ImageDto.Request reqDto) throws IOException {
         ImageVo imageVo = ImageVo.builder()
                 .imageName(reqDto.getImageName())
                 .imageSize(reqDto.getImageSize())

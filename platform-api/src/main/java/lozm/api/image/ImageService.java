@@ -6,6 +6,7 @@ import lozm.object.vo.image.ImageVo;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 
 import static lozm.util.ImageUtils.*;
@@ -17,7 +18,7 @@ public class ImageService {
     private final ImageProps imageProps;
 
 
-    public ImageVo getImage(ImageVo imageVo) throws Exception {
+    public ImageVo getImage(ImageVo imageVo) {
         imageVo = checkImageFileExisted(imageVo);
 
         String imageFilePath = imageProps.getSourcePath(imageProps.getUploadPath())
@@ -30,7 +31,7 @@ public class ImageService {
         return imageVo;
     }
 
-    public ImageVo uploadSingleImage(ImageVo imageVo) throws Exception {
+    public ImageVo uploadSingleImage(ImageVo imageVo) throws IOException {
         // 1. 기존 이미지 체크
         //TODO 이미지 테이블 조회
         imageVo = checkImageFileExisted(imageVo);

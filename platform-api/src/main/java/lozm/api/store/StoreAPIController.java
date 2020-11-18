@@ -28,7 +28,7 @@ public class StoreAPIController {
 
 
     @GetMapping
-    public ApiResponseDto getStore() throws Exception {
+    public ApiResponseDto getStore() {
         List<GetStoreDto> storeList = storeService.getStoreList();
 
         GetStoreDto.Response resDto = new GetStoreDto.Response();
@@ -38,7 +38,7 @@ public class StoreAPIController {
     }
 
     @GetMapping(value = "/{storeId}")
-    public ApiResponseDto getStoreDetail(@PathVariable(value = "storeId") Long storeId) throws Exception {
+    public ApiResponseDto getStoreDetail(@PathVariable(value = "storeId") Long storeId) {
         StoreVo storeVo = StoreVo.builder()
                 .id(storeId)
                 .build();
@@ -53,7 +53,7 @@ public class StoreAPIController {
     public ApiResponseDto getStoreClothing(
             @PathVariable(value = "storeId") Long storeId,
             @PathVariable(value = "itemType") String itemType
-    ) throws Exception {
+    ) {
         ItemVo itemVo = ItemVo.builder()
                 .storeId(storeId)
                 .type(itemType)
@@ -68,7 +68,7 @@ public class StoreAPIController {
     }
 
     @PostMapping
-    public ApiResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) throws Exception {
+    public ApiResponseDto postStore(@RequestBody @Valid PostStoreDto.Request reqDto) {
         StoreVo storeVo = StoreVo.builder()
                 .name(reqDto.getName())
                 .telNumber(reqDto.getTelNumber())
@@ -82,7 +82,7 @@ public class StoreAPIController {
     }
 
     @PutMapping
-    public ApiResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) throws Exception {
+    public ApiResponseDto putStore(@RequestBody @Valid PutStoreDto.Request reqDto) {
         StoreVo storeVo = StoreVo.builder()
                 .id(reqDto.getId())
                 .name(reqDto.getName())
@@ -97,7 +97,7 @@ public class StoreAPIController {
     }
 
     @DeleteMapping
-    public ApiResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) throws Exception {
+    public ApiResponseDto deleteStore(@RequestBody @Valid DeleteStoreDto.Request reqDto) {
         for(DeleteStoreDto dto : reqDto.getList()) {
             StoreVo storeVo = StoreVo.builder()
                 .id(dto.getId())

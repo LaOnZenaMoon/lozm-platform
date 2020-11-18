@@ -22,7 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public List<GetUserDto> getUserList() throws Exception {
+    public List<GetUserDto> getUserList() {
         return userRepository.selectUserList()
                 .stream()
                 .map(user -> GetUserDto.builder()
@@ -36,7 +36,7 @@ public class UserService {
     }
 
     @Transactional
-    public void save(UserVo userVo) throws Exception {
+    public void save(UserVo userVo) {
         User user = new User();
         user.insertUser(userVo);
 
@@ -48,13 +48,13 @@ public class UserService {
     }
 
     @Transactional
-    public void update(UserVo userVo) throws Exception {
+    public void update(UserVo userVo) {
         Optional<User> findUser = findUser(userVo.getId());
         findUser.get().updateUser(userVo);
     }
 
     @Transactional
-    public void delete(UserVo userVo) throws Exception {
+    public void delete(UserVo userVo) {
         Optional<User> findUser = findUser(userVo.getId());
         findUser.get().deleteUser(userVo);
     }

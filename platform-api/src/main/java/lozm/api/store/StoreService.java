@@ -41,7 +41,7 @@ public class StoreService {
     }
 
     @Transactional
-    public void save(StoreVo storeVo) throws Exception {
+    public void save(StoreVo storeVo) {
         Store store = new Store();
         store.insertStore(storeVo);
 
@@ -52,7 +52,7 @@ public class StoreService {
     }
 
     @Transactional
-    public void update(StoreVo storeVo) throws Exception {
+    public void update(StoreVo storeVo) {
         Optional<Store> findStore = findStore(storeVo.getId());
         findStore.get().updateStore(storeVo);
     }
